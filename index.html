@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAASE — Department of Astronomy, Astrophysics & Space Engineering | IIT Indore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   VARIABLES
+============================================================ */
+:root {
+  --navy:        #0f2d60;
+  --navy-dark:   #091f45;
+  --navy-mid:    #1a3f7a;
+  --navy-light:  #e8eef8;
+  --gold:        #b5862a;
+  --gold-light:  #f0c84a;
+  --gold-bg:     #fdf6e3;
+  --gold-border: #e0c068;
+  --white:       #ffffff;
+  --bg:          #f5f6f8;
+  --bg-alt:      #eef0f5;
+  --text-primary:#0d1b2e;
+  --text-body:   #2d3a4a;
+  --text-muted:  #5a6a7e;
+  --text-light:  #8898aa;
+  --border:      #dce3ed;
+  --border-dark: #bbc8da;
+  --shadow-sm:   0 1px 4px rgba(15,45,96,0.08);
+  --shadow-md:   0 4px 16px rgba(15,45,96,0.10);
+  --shadow-lg:   0 8px 32px rgba(15,45,96,0.13);
+  --nav-h:       72px;
+  --r:           6px;
+  --r-sm:        4px;
+  --ease:        cubic-bezier(0.4,0,0.2,1);
+  --ease-out:    cubic-bezier(0,0,0.2,1);
+  --tr:          all 0.25s var(--ease);
+}
+
+/* ============================================================
+   RESET & BASE
+============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:18px;}
+body{
+  font-family:'Source Sans 3',system-ui,sans-serif;
+  background:var(--white);
+  color:var(--text-body);
+  line-height:1.75;
+  overflow-x:hidden;
+  overflow-y:hidden;
+  height:100vh;
+}
+a{color:var(--navy-mid);text-decoration:none;transition:var(--tr);}
+a:hover{color:var(--navy);}
+img{max-width:100%;display:block;}
+ul{list-style:none;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border-dark);border-radius:3px;}
+
+/* ============================================================
+   SECTION ENGINE — SPA
+============================================================ */
+.page-section{
+  position:fixed;
+  top:var(--nav-h);left:0;right:0;bottom:0;
+  overflow-y:auto;overflow-x:hidden;
+  opacity:0;pointer-events:none;
+  transform:translateY(14px);
+  transition:opacity 0.28s var(--ease-out),transform 0.28s var(--ease-out);
+  z-index:1;
+  will-change:opacity,transform;
+  background:var(--white);
+}
+.page-section.active{
+  opacity:1;pointer-events:all;transform:translateY(0);
+  transition:opacity 0.28s var(--ease-out),transform 0.28s var(--ease-out);
+}
+.page-section.exit{
+  opacity:0;transform:translateY(-8px);pointer-events:none;
+  transition:opacity 0.16s var(--ease),transform 0.16s var(--ease);
+}
+.section-inner{max-width:1240px;margin:0 auto;padding:56px 40px 72px;}
+
+/* ============================================================
+   ANIMATIONS
+============================================================ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes slideRight{from{opacity:0;transform:translateX(-24px);}to{opacity:1;transform:translateX(0);}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(24px);}to{opacity:1;transform:translateX(0);}}
+@keyframes countUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shimmer{0%{background-position:-200px 0;}100%{background-position:calc(200px + 100%) 0;}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(0.9);opacity:0.6;}}
+@keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+@keyframes borderGrow{from{width:0;}to{width:48px;}}
+
+.anim-fadeup{animation:fadeUp 0.5s var(--ease-out) both;}
+.anim-fadein{animation:fadeIn 0.5s var(--ease-out) both;}
+.anim-right{animation:slideRight 0.5s var(--ease-out) both;}
+.anim-left{animation:slideLeft 0.5s var(--ease-out) both;}
+
+/* stagger delays */
+.d1{animation-delay:0.06s;} .d2{animation-delay:0.12s;} .d3{animation-delay:0.18s;}
+.d4{animation-delay:0.23s;} .d5{animation-delay:0.28s;} .d6{animation-delay:0.32s;}
+.d7{animation-delay:0.36s;} .d8{animation-delay:0.39s;}
+.dn{animation-delay:0.40s;}
+
+/* ============================================================
+   NAVIGATION
+============================================================ */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  z-index:1000;height:var(--nav-h);
+  display:flex;align-items:center;padding:0 32px;
+  background:var(--white);
+  border-bottom:2px solid var(--navy);
+  box-shadow:var(--shadow-sm);
+}
+.nav-logos{display:flex;align-items:center;gap:10px;margin-right:20px;flex-shrink:0;}
+.nav-logo-img{height:44px;width:auto;object-fit:contain;}
+.logo-placeholder{
+  height:40px;width:40px;border-radius:var(--r-sm);
+  background:var(--navy);display:flex;align-items:center;justify-content:center;
+  font-family:'Merriweather',serif;font-size:10px;font-weight:700;color:#fff;
+  flex-shrink:0;letter-spacing:0.03em;
+}
+.nav-divider{width:1px;height:28px;background:var(--border);}
+.nav-brand{flex:1;min-width:0;}
+.nav-brand-main{
+  font-family:'Merriweather',serif;font-size:14.5px;font-weight:700;
+  color:var(--navy);letter-spacing:0.04em;line-height:1.2;white-space:nowrap;
+}
+.nav-brand-sub{font-size:11px;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;}
+.nav-links{display:flex;align-items:center;gap:1px;}
+.nav-links button{
+  font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:600;
+  letter-spacing:0.05em;text-transform:uppercase;color:var(--text-muted);
+  padding:6px 10px;border:none;background:none;cursor:pointer;
+  transition:var(--tr);border-radius:var(--r-sm);white-space:nowrap;
+  border-bottom:2px solid transparent;
+}
+.nav-links button:hover{color:var(--navy);background:var(--navy-light);}
+.nav-links button.active{color:var(--navy);background:var(--navy-light);border-bottom-color:var(--navy);}
+.nav-cta-btn{
+  margin-left:8px !important;background:var(--navy) !important;color:#fff !important;
+  padding:6px 16px !important;border-radius:var(--r-sm) !important;border-bottom:none !important;
+}
+.nav-cta-btn:hover{background:var(--navy-dark) !important;color:#fff !important;}
+.nav-cta-btn.active{background:var(--navy-dark) !important;border-bottom:none !important;}
+/* Dropdown */
+.nav-dropdown{position:relative;}
+.nav-dropdown-trigger{
+  font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:600;
+  letter-spacing:0.05em;text-transform:uppercase;color:var(--text-muted);
+  padding:6px 10px;border:none;background:none;cursor:pointer;transition:var(--tr);
+  border-radius:var(--r-sm);display:flex;align-items:center;gap:4px;
+}
+.nav-dropdown-trigger:hover{color:var(--navy);background:var(--navy-light);}
+.nav-dropdown-menu{
+  position:absolute;top:calc(100% + 6px);right:0;min-width:210px;
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r);
+  padding:6px;display:none;z-index:1100;box-shadow:var(--shadow-lg);
+  animation:fadeUp 0.18s var(--ease-out) both;
+}
+.nav-dropdown:hover .nav-dropdown-menu{display:block;}
+.nav-dropdown-menu a{
+  display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--r-sm);
+  font-size:14px;color:var(--text-body);transition:var(--tr);
+}
+.nav-dropdown-menu a:hover{background:var(--navy-light);color:var(--navy);}
+/* Hamburger */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;margin-left:8px;}
+.hamburger span{width:22px;height:2px;background:var(--navy);border-radius:1px;transition:var(--tr);}
+.mobile-menu{
+  position:fixed;top:var(--nav-h);left:0;right:0;background:var(--white);
+  border-bottom:1px solid var(--border);padding:12px;z-index:999;
+  display:none;flex-direction:column;gap:3px;max-height:calc(100vh - var(--nav-h));overflow-y:auto;
+  box-shadow:var(--shadow-md);
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu button,.mobile-menu a{
+  font-family:'Source Sans 3',sans-serif;color:var(--text-body);font-size:15px;
+  font-weight:600;letter-spacing:0.05em;text-transform:uppercase;padding:10px 12px;
+  border-radius:var(--r-sm);transition:var(--tr);background:none;border:none;cursor:pointer;text-align:left;
+}
+.mobile-menu button:hover,.mobile-menu a:hover{color:var(--navy);background:var(--navy-light);}
+.mobile-menu button.active{color:var(--navy);background:var(--navy-light);}
+
+/* ============================================================
+   SHARED COMPONENTS
+============================================================ */
+.section-header{text-align:center;margin-bottom:48px;animation:fadeUp 0.5s var(--ease-out) 0.04s both;}
+.section-eyebrow{
+  font-family:'Source Sans 3',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:10px;display:block;
+}
+.section-title{
+  font-family:'Merriweather',serif;font-size:clamp(30px,3.8vw,44px);
+  font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:10px;
+}
+.section-title span{color:var(--gold);}
+.section-desc{
+  font-size:17px;color:var(--text-muted);max-width:600px;
+  margin:0 auto;font-weight:300;line-height:1.8;
+}
+.title-bar{
+  width:48px;height:3px;background:var(--navy);
+  margin:14px auto 0;border-radius:2px;
+  animation:borderGrow 0.6s var(--ease-out) 0.3s both;
+}
+/* Cards */
+.card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r);transition:var(--tr);
+  box-shadow:var(--shadow-sm);
+}
+.card:hover{border-color:var(--border-dark);box-shadow:var(--shadow-md);transform:translateY(-3px);}
+/* Buttons */
+.btn-primary{
+  background:var(--navy);color:#fff;padding:11px 28px;border-radius:var(--r-sm);
+  font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:14px;
+  letter-spacing:0.08em;text-transform:uppercase;border:none;cursor:pointer;
+  transition:var(--tr);display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{background:var(--navy-dark);color:#fff;transform:translateY(-1px);box-shadow:var(--shadow-md);}
+.btn-outline{
+  background:transparent;color:var(--navy);padding:10px 26px;border-radius:var(--r-sm);
+  font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:14px;
+  letter-spacing:0.08em;text-transform:uppercase;border:2px solid var(--navy);
+  cursor:pointer;transition:var(--tr);display:inline-flex;align-items:center;gap:8px;
+}
+.btn-outline:hover{background:var(--navy);color:#fff;}
+
+/* ============================================================
+   HERO / HOME
+============================================================ */
+#sec-home{background:var(--white);}
+/* Top banner strip */
+.hero-top-strip{
+  background:var(--navy);color:#fff;
+  padding:10px 0;text-align:center;
+  font-family:'Source Sans 3',sans-serif;font-size:11px;font-weight:600;
+  letter-spacing:0.18em;text-transform:uppercase;
+  animation:fadeIn 0.6s var(--ease-out) both;
+}
+.hero-top-strip span{color:var(--gold-light);}
+.hero-main{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:calc(100vh - var(--nav-h) - 40px);
+  align-items:center;
+}
+.hero-left{
+  padding:60px 52px 60px 40px;
+  border-right:1px solid var(--border);
+  animation:slideRight 0.7s var(--ease-out) 0.1s both;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--gold-bg);border:1px solid var(--gold-border);
+  border-radius:var(--r-sm);padding:5px 14px;
+  font-size:10.5px;font-weight:700;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:24px;
+}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s ease-in-out infinite;}
+.hero-title{
+  font-family:'Merriweather',serif;
+  font-size:clamp(32px,4.8vw,60px);
+  font-weight:900;line-height:1.1;
+  color:var(--navy);margin-bottom:16px;
+}
+.hero-title .accent{color:var(--gold);}
+.hero-subtitle{
+  font-size:15px;font-weight:600;color:var(--text-muted);
+  letter-spacing:0.18em;text-transform:uppercase;margin-bottom:20px;
+}
+.hero-tagline{
+  font-family:'Merriweather',serif;font-size:18px;color:var(--text-body);
+  font-style:italic;font-weight:300;margin-bottom:36px;line-height:1.6;
+  border-left:3px solid var(--gold);padding-left:16px;
+}
+.hero-buttons{display:flex;gap:14px;flex-wrap:wrap;}
+.hero-right{
+  padding:60px 40px 60px 52px;
+  background:var(--bg);
+  display:flex;flex-direction:column;justify-content:center;
+  animation:slideLeft 0.7s var(--ease-out) 0.15s both;
+}
+.hero-stats-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  border:1px solid var(--border);border-radius:var(--r);overflow:hidden;
+  box-shadow:var(--shadow-sm);margin-bottom:32px;
+}
+.hero-stat{
+  background:var(--white);padding:28px 20px;text-align:center;
+  border-right:1px solid var(--border);border-bottom:1px solid var(--border);
+  animation:countUp 0.6s var(--ease-out) both;
+}
+.hero-stat:nth-child(2n){border-right:none;}
+.hero-stat:nth-child(3),.hero-stat:nth-child(4){border-bottom:none;}
+.hero-stat-num{
+  font-family:'Merriweather',serif;font-size:clamp(28px,3vw,42px);
+  font-weight:900;color:var(--navy);display:block;line-height:1;
+}
+.hero-stat-label{
+  font-size:12px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--text-muted);margin-top:8px;display:block;
+}
+.counter{display:inline;}
+.hero-quick-links{display:flex;flex-direction:column;gap:8px;}
+.hero-quick-link{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r-sm);cursor:pointer;transition:var(--tr);
+  font-size:15.5px;font-weight:600;color:var(--navy);
+  box-shadow:var(--shadow-sm);
+}
+.hero-quick-link:hover{background:var(--navy);color:#fff;border-color:var(--navy);transform:translateX(4px);}
+.hero-quick-link span{font-size:16px;transition:var(--tr);}
+.hero-quick-link:hover span{transform:translateX(3px);}
+
+/* ============================================================
+   ABOUT SECTION (inside Home)
+============================================================ */
+.about-strip{background:var(--navy);color:#fff;padding:60px 0;}
+.about-strip-inner{max-width:1240px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.about-strip h2{font-family:'Merriweather',serif;font-size:clamp(26px,3.2vw,38px);font-weight:700;margin-bottom:18px;line-height:1.2;}
+.about-strip h2 span{color:var(--gold-light);}
+.about-strip p{font-size:16.5px;color:rgba(255,255,255,0.82);line-height:1.85;font-weight:300;margin-bottom:14px;}
+.about-highlights-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.about-hl{
+  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+  border-radius:var(--r-sm);padding:14px;transition:var(--tr);
+}
+.about-hl:hover{background:rgba(255,255,255,0.12);}
+.about-hl-icon{font-size:18px;margin-bottom:6px;}
+.about-hl-title{font-family:'Source Sans 3',sans-serif;font-size:13.5px;font-weight:700;color:var(--gold-light);margin-bottom:2px;}
+.about-hl-desc{font-size:13px;color:rgba(255,255,255,0.62);line-height:1.45;}
+/* Timeline */
+.timeline{position:relative;padding-left:24px;}
+.timeline::before{content:'';position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:rgba(255,255,255,0.2);}
+.tl-item{position:relative;margin-bottom:24px;padding-left:16px;}
+.tl-item::before{content:'';position:absolute;left:-19px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--gold-light);border:2px solid var(--navy);}
+.tl-year{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold-light);margin-bottom:2px;}
+.tl-text{font-size:15px;color:#fff;font-weight:600;line-height:1.35;}
+.tl-sub{font-size:13px;color:rgba(255,255,255,0.55);margin-top:2px;font-weight:300;}
+
+/* Programs strip below */
+.programs-strip{background:var(--bg);padding:56px 0;}
+.programs-strip-inner{max-width:1240px;margin:0 auto;padding:0 40px;}
+
+/* ============================================================
+   RESEARCH SECTION
+============================================================ */
+#sec-research{background:var(--white);}
+.research-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;}
+.rc{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r);
+  padding:24px;transition:var(--tr);border-left:4px solid transparent;
+  box-shadow:var(--shadow-sm);
+}
+.rc:hover{border-left-color:var(--navy);box-shadow:var(--shadow-md);transform:translateY(-3px);}
+.rc-icon{
+  width:44px;height:44px;background:var(--navy-light);border-radius:var(--r-sm);
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+  margin-bottom:14px;transition:var(--tr);
+}
+.rc:hover .rc-icon{background:var(--navy);filter:grayscale(0);}
+.rc-title{font-family:'Merriweather',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:8px;line-height:1.3;}
+.rc-desc{font-size:15px;color:var(--text-muted);line-height:1.78;font-weight:400;}
+
+/* ============================================================
+   PROGRAMS SECTION
+============================================================ */
+#sec-programs{background:var(--bg);}
+.programs-tabs{display:flex;justify-content:center;gap:4px;margin-bottom:36px;flex-wrap:wrap;border-bottom:2px solid var(--border);padding-bottom:0;}
+.prog-tab{
+  padding:11px 24px;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;
+  font-family:'Source Sans 3',sans-serif;font-size:14px;font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:var(--tr);
+  color:var(--text-muted);background:transparent;
+}
+.prog-tab:hover{color:var(--navy);}
+.prog-tab.active{color:var(--navy);border-bottom-color:var(--navy);}
+.prog-content{display:none;animation:fadeUp 0.3s var(--ease-out) both;}
+.prog-content.active{display:block;}
+.prog-card{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r);
+  padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;
+  box-shadow:var(--shadow-sm);
+}
+.pc-badge{
+  display:inline-block;background:var(--navy);color:#fff;font-size:11px;
+  font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+  padding:3px 10px;border-radius:var(--r-sm);margin-bottom:12px;
+}
+.pc-title{font-family:'Merriweather',serif;font-size:26px;font-weight:700;color:var(--navy);margin-bottom:14px;line-height:1.2;}
+.pc-desc{font-size:16px;color:var(--text-body);line-height:1.82;font-weight:400;margin-bottom:20px;}
+.pc-detail-list{display:flex;flex-direction:column;gap:9px;}
+.pc-detail{display:flex;align-items:flex-start;gap:10px;font-size:15.5px;color:var(--text-body);}
+.pc-detail-bullet{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:7px;}
+.pc-highlights{display:flex;flex-direction:column;gap:10px;}
+.pc-highlight{
+  background:var(--navy-light);border:1px solid var(--border);border-radius:var(--r-sm);
+  padding:14px 16px;display:flex;align-items:center;gap:14px;transition:var(--tr);
+}
+.pc-highlight:hover{background:var(--navy);border-color:var(--navy);}
+.pc-highlight:hover .pc-highlight-num,.pc-highlight:hover .pc-highlight-text{color:#fff;}
+.pc-highlight-num{font-family:'Merriweather',serif;font-size:30px;font-weight:700;color:var(--navy);line-height:1;flex-shrink:0;transition:var(--tr);}
+.pc-highlight-text{font-size:14px;color:var(--text-muted);line-height:1.4;transition:var(--tr);}
+
+/* ============================================================
+   FACULTY SECTION
+============================================================ */
+#sec-faculty{background:var(--white);}
+.faculty-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(218px,1fr));gap:16px;margin-bottom:12px;align-items:stretch;}
+.faculty-card{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r);
+  overflow:hidden;transition:var(--tr);display:flex;flex-direction:column;text-decoration:none;color:inherit;
+  position:relative;box-shadow:var(--shadow-sm);cursor:pointer;
+  height:100%;
+}
+.faculty-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:var(--navy);}
+.faculty-card:hover .fc-name{color:var(--navy);}
+/* Profile overlay */
+.faculty-card::after{
+  content:'View Profile →';position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(15,45,96,0.95),transparent);
+  color:#fff;font-size:13px;font-weight:700;letter-spacing:0.1em;
+  text-transform:uppercase;text-align:center;
+  padding:22px 12px 11px;opacity:0;transition:var(--tr);
+  font-family:'Source Sans 3',sans-serif;
+}
+.faculty-card:hover::after{opacity:1;}
+.no-link-card::after{display:none;}
+.no-link-card:hover{transform:none;box-shadow:var(--shadow-sm);}
+.hod-card{border-top:4px solid var(--navy) !important;border-color:var(--navy);}
+.fc-photo{
+  width:100%;height:180px;background:var(--navy-light);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;flex-shrink:0;
+}
+.fc-photo img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s var(--ease);}
+.faculty-card:hover .fc-photo img{transform:scale(1.04);}
+.fc-photo-placeholder{
+  font-family:'Merriweather',serif;font-size:40px;font-weight:700;
+  color:rgba(15,45,96,0.25);letter-spacing:-1px;position:absolute;
+}
+.fc-photo-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(15,45,96,0.5) 100%);}
+.fc-designation-badge{
+  position:absolute;bottom:8px;left:8px;
+  background:rgba(255,255,255,0.93);color:var(--navy);
+  border-radius:var(--r-sm);padding:3px 10px;
+  font-size:10.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+}
+.fc-body{padding:14px 14px 16px;flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
+.hod-badge{
+  display:block;background:var(--navy);color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  padding:7px 14px;border-radius:var(--r-sm);margin-bottom:10px;
+  text-align:center;width:100%;
+}
+.fc-name{font-family:'Merriweather',serif;font-size:15.5px;font-weight:700;color:var(--text-primary);margin-bottom:4px;line-height:1.3;transition:var(--tr);}
+.fc-research{font-size:13px;color:var(--text-muted);line-height:1.5;margin-bottom:10px;font-weight:400;flex:1;}
+.fc-email{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--navy-mid);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  display:block;width:100%;max-width:100%;margin-top:auto;padding-top:8px;
+  border-top:1px solid var(--border);}
+.faculty-divider{
+  font-family:'Merriweather',serif;font-size:19px;font-weight:700;color:var(--navy);
+  margin:44px 0 20px;padding-bottom:12px;border-bottom:2px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+}
+.visiting-badge{
+  font-family:'Source Sans 3',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:0.15em;text-transform:uppercase;background:var(--gold-bg);
+  border:1px solid var(--gold-border);color:var(--gold);padding:3px 10px;border-radius:var(--r-sm);
+}
+
+/* ============================================================
+   STUDENTS SECTION
+============================================================ */
+#sec-students{background:var(--bg);}
+.students-tabs{display:flex;justify-content:center;gap:4px;margin-bottom:36px;flex-wrap:wrap;border-bottom:2px solid var(--border);padding-bottom:0;}
+.student-tab{
+  padding:10px 22px;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;
+  font-family:'Source Sans 3',sans-serif;font-size:14px;font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:var(--tr);
+  color:var(--text-muted);background:transparent;
+}
+.student-tab:hover{color:var(--navy);}
+.student-tab.active{color:var(--navy);border-bottom-color:var(--navy);}
+.student-content{display:none;animation:fadeUp 0.3s var(--ease-out) both;}
+.student-content.active{display:block;}
+.batch-section{margin-bottom:44px;}
+.batch-title{
+  font-family:'Merriweather',serif;font-size:17px;font-weight:700;color:var(--navy);
+  margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+}
+.batch-count{
+  font-family:'JetBrains Mono',monospace;font-size:12px;
+  background:var(--navy);color:#fff;border-radius:var(--r-sm);padding:2px 8px;
+}
+.students-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;align-items:stretch;}
+.student-card{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);
+  padding:16px 12px;text-align:center;transition:var(--tr);box-shadow:var(--shadow-sm);
+  display:flex;flex-direction:column;align-items:center;
+}
+.student-card:hover{box-shadow:var(--shadow-md);border-color:var(--navy);transform:translateY(-3px);}
+.sc-avatar{
+  width:52px;height:52px;border-radius:50%;margin:0 auto 9px;
+  background:var(--navy-light);border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Merriweather',serif;font-size:14px;font-weight:700;
+  color:var(--navy);overflow:hidden;transition:var(--tr);
+}
+.student-card:hover .sc-avatar{border-color:var(--navy);}
+.sc-avatar img{width:100%;height:100%;object-fit:cover;}
+.sc-name{font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:2px;line-height:1.3;width:100%;}
+.sc-supervisor{font-size:12px;color:var(--text-light);font-weight:400;margin-bottom:4px;line-height:1.3;width:100%;flex:1;}
+.sc-email{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--navy-mid);display:block;
+  transition:var(--tr);margin-top:auto;padding-top:6px;border-top:1px solid var(--border);
+  width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+a.sc-email:hover{color:var(--navy);}
+
+/* ============================================================
+   FACILITIES SECTION
+============================================================ */
+#sec-facilities{background:var(--white);}
+.facilities-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;}
+.facility-card{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);
+  padding:20px 16px;text-align:center;transition:var(--tr);box-shadow:var(--shadow-sm);
+}
+.facility-card:hover{box-shadow:var(--shadow-md);border-color:var(--navy);transform:translateY(-3px);background:var(--navy-light);}
+.fac-icon{font-size:26px;margin-bottom:9px;}
+.fac-name{font-size:14.5px;font-weight:600;color:var(--text-body);line-height:1.4;}
+
+/* ============================================================
+   EVENTS SECTION
+============================================================ */
+#sec-events{background:var(--bg);}
+.events-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px;}
+.event-card{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r);
+  padding:24px;transition:var(--tr);box-shadow:var(--shadow-sm);
+  border-top:3px solid transparent;
+}
+.event-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);}
+.event-card.upcoming-card{border-top-color:var(--navy);}
+.event-card.past-card{border-top-color:var(--gold);}
+.event-type{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:9.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+  padding:3px 10px;border-radius:var(--r-sm);margin-bottom:12px;
+}
+.event-type.upcoming{background:var(--navy-light);color:var(--navy);border:1px solid var(--border);}
+.event-type.past{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-border);}
+.event-title{font-family:'Merriweather',serif;font-size:19px;font-weight:700;color:var(--navy);margin-bottom:10px;line-height:1.35;}
+.event-date{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:7px;}
+
+/* ============================================================
+   ALUMNI SECTION
+============================================================ */
+#sec-alumni{background:var(--white);}
+.alumni-batches{display:flex;flex-direction:column;gap:8px;}
+.alumni-batch{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-sm);}
+.alumni-batch-header{padding:16px 22px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:var(--tr);}
+.alumni-batch-header:hover{background:var(--navy-light);}
+.alumni-year{font-family:'Merriweather',serif;font-size:19px;font-weight:700;color:var(--navy);}
+.alumni-batch-body{padding:18px 22px;display:none;border-top:1px solid var(--border);background:var(--bg);}
+.alumni-batch-body.open{display:block;animation:fadeUp 0.22s var(--ease-out) both;}
+.alumni-category{margin-bottom:16px;}
+.alumni-cat-title{
+  font-size:11.5px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--navy);margin-bottom:9px;display:flex;align-items:center;gap:10px;
+}
+.alumni-cat-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.alumni-names{display:flex;flex-wrap:wrap;gap:6px;}
+.alumni-name{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);
+  padding:5px 14px;font-size:13.5px;color:var(--text-body);font-weight:400;transition:var(--tr);
+}
+.alumni-name:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+.chevron{color:var(--text-muted);font-size:13px;transition:var(--tr);}
+.chevron.open{transform:rotate(180deg);}
+
+/* ============================================================
+   GALLERY SECTION
+============================================================ */
+#sec-gallery{background:var(--bg);}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:185px;gap:10px;}
+.gallery-item{border-radius:var(--r-sm);overflow:hidden;position:relative;}
+.gallery-item.tall{grid-row:span 2;}
+.gallery-item.wide{grid-column:span 2;}
+.gallery-placeholder{
+  width:100%;height:100%;background:var(--white);border:1px solid var(--border);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;transition:var(--tr);
+}
+.gallery-placeholder:hover{background:var(--navy-light);border-color:var(--navy);}
+.gallery-placeholder span{font-size:28px;opacity:0.55;}
+.gallery-placeholder p{font-size:11.5px;color:var(--text-muted);text-align:center;padding:0 10px;line-height:1.4;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s var(--ease);}
+.gallery-item:hover img{transform:scale(1.05);}
+
+/* ============================================================
+   OPPORTUNITIES SECTION
+============================================================ */
+#sec-opportunities{background:var(--white);}
+.opp-grid{display:grid;grid-template-columns:2fr 1fr;gap:22px;align-items:start;}
+.opp-card{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r);
+  padding:34px;position:relative;overflow:hidden;box-shadow:var(--shadow-sm);
+}
+.opp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--navy);}
+.opp-badge{
+  display:inline-flex;align-items:center;gap:6px;background:var(--navy-light);
+  border:1px solid var(--border);border-radius:var(--r-sm);padding:5px 14px;
+  font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--navy);margin-bottom:15px;
+}
+.opp-title{font-family:'Merriweather',serif;font-size:24px;font-weight:700;color:var(--navy);margin-bottom:12px;line-height:1.3;}
+.opp-desc{font-size:16px;color:var(--text-body);line-height:1.8;font-weight:400;margin-bottom:20px;}
+.opp-deadline{
+  display:flex;align-items:center;gap:10px;background:var(--gold-bg);
+  border:1px solid var(--gold-border);border-radius:var(--r-sm);padding:10px 14px;margin-bottom:18px;
+}
+.opp-deadline-label{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);}
+.opp-deadline-date{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--text-body);font-weight:500;}
+.funding-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:22px;box-shadow:var(--shadow-sm);}
+.funding-title{font-family:'Merriweather',serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:14px;text-align:center;}
+.funder-list{display:flex;flex-direction:column;gap:6px;}
+.funder-item{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);
+  padding:9px 12px;font-size:14px;color:var(--text-body);text-align:center;transition:var(--tr);
+}
+.funder-item:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+/* Contact sub */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;margin-top:56px;}
+.contact-info{display:flex;flex-direction:column;gap:12px;}
+.contact-item{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);
+  padding:16px 18px;display:flex;gap:14px;align-items:flex-start;transition:var(--tr);box-shadow:var(--shadow-sm);
+}
+.contact-item:hover{border-color:var(--navy);box-shadow:var(--shadow-md);}
+.ci-icon{font-size:18px;flex-shrink:0;margin-top:2px;}
+.ci-label{font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.ci-value{font-size:15.5px;color:var(--text-body);line-height:1.65;}
+.ci-value a{color:var(--navy-mid);}
+.ci-value a:hover{color:var(--navy);}
+.map-wrapper{position:relative;border-radius:var(--r);overflow:hidden;height:300px;border:1px solid var(--border);box-shadow:var(--shadow-sm);}
+.map-wrapper iframe{width:100%;height:100%;border:none;display:block;}
+.map-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,45,96,0.88) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:20px;pointer-events:none;}
+.map-overlay-content{text-align:center;pointer-events:all;}
+.map-overlay-title{font-family:'Merriweather',serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;}
+.map-overlay-addr{font-size:11.5px;color:rgba(255,255,255,0.75);margin-bottom:12px;line-height:1.5;}
+.collab-section{margin-top:20px;}
+.collab-title{font-family:'Merriweather',serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:12px;}
+.collab-grid{display:flex;flex-wrap:wrap;gap:6px;}
+.collab-tag{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);
+  padding:6px 15px;font-size:13.5px;color:var(--text-body);font-weight:500;transition:var(--tr);
+}
+.collab-tag:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.section-footer{background:var(--navy);color:#fff;margin-top:60px;padding:32px 0;}
+.footer-inner{max-width:1240px;margin:0 auto;padding:0 40px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;}
+.footer-copyright{font-size:13.5px;color:rgba(255,255,255,0.6);}
+.footer-creator{
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+  border-radius:var(--r-sm);padding:10px 24px;font-size:13.5px;color:rgba(255,255,255,0.65);
+  display:inline-flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:center;
+}
+.footer-creator strong{color:var(--gold-light);font-weight:600;}
+.footer-creator a{color:var(--gold-light);font-family:'JetBrains Mono',monospace;font-size:10.5px;}
+
+
+/* ============================================================
+   SITE LOADER (shown while fetching from Google Sheets)
+============================================================ */
+#site-loader{
+  position:fixed;inset:0;z-index:9999;background:rgba(255,255,255,0.92);
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  backdrop-filter:blur(4px);
+}
+.loader-spinner{
+  width:44px;height:44px;border:4px solid var(--border);
+  border-top-color:var(--navy);border-radius:50%;
+  animation:spin 0.8s linear infinite;
+}
+.loader-text{font-family:'Merriweather',serif;font-size:15px;font-weight:700;color:var(--navy);}
+.loader-sub{font-size:13px;color:var(--text-muted);}
+@keyframes spin{to{transform:rotate(360deg);}}
+.floating-dots{position:absolute;pointer-events:none;opacity:0.06;}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--navy);position:absolute;animation:floatY 4s ease-in-out infinite;}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media(max-width:1100px){
+  .hero-main{grid-template-columns:1fr;}.hero-left{border-right:none;border-bottom:1px solid var(--border);padding:48px 40px;}
+  .hero-right{padding:40px;}.about-strip-inner{grid-template-columns:1fr;gap:40px;}
+  .prog-card{grid-template-columns:1fr;gap:24px;}.opp-grid{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+}
+@media(max-width:900px){
+  .nav-links{display:none;}.hamburger{display:flex;}
+  .hero-stats-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:640px){
+  .section-inner{padding:36px 18px 52px;}.gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery-item.wide{grid-column:span 1;}.gallery-item.tall{grid-row:span 1;}
+  .prog-card{padding:22px 18px;}.opp-card{padding:22px 18px;}
+  nav{padding:0 16px;}.hero-left,.hero-right{padding:32px 18px;}
+}
+
+/* ============================================================
+   PREMIUM UI/UX ENHANCEMENTS
+============================================================ */
+/* Focus-visible accessibility */
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:var(--r-sm);}
+
+/* Enhanced button micro-interactions */
+.btn-primary{position:relative;overflow:hidden;}
+.btn-primary::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.12);transform:scaleX(0);transform-origin:left;transition:transform 0.3s var(--ease-out);}
+.btn-primary:hover::after{transform:scaleX(1);}
+.btn-primary:active{transform:translateY(0) scale(0.98);}
+.btn-outline:active{transform:scale(0.98);}
+
+/* Research cards — richer hover */
+.rc{position:relative;overflow:hidden;}
+.rc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--navy);transform:scaleY(0);transform-origin:bottom;transition:transform 0.3s var(--ease-out);}
+.rc:hover::before{transform:scaleY(1);}
+.rc:hover{padding-left:28px;}
+
+/* HoD card top accent only */
+
+/* Hero stat hover */
+.hero-stat{transition:var(--tr);cursor:default;}
+.hero-stat:hover{background:var(--navy-light);transform:scale(1.02);}
+
+/* Hero quick-link icon animation */
+.hero-quick-link .arrow{display:inline-block;transition:transform 0.25s var(--ease-out);}
+.hero-quick-link:hover .arrow{transform:translateX(6px);}
+
+/* Event cards — left accent bar */
+.event-card{border-left:3px solid transparent;transition:var(--tr);}
+.upcoming-card:hover{border-left-color:var(--navy);}
+.past-card:hover{border-left-color:var(--gold);}
+
+/* Alumni batch header with row number */
+.alumni-batch-header{border-left:3px solid transparent;transition:var(--tr);}
+.alumni-batch-header:hover{border-left-color:var(--navy);}
+.alumni-batch.open-batch .alumni-batch-header{border-left-color:var(--navy);}
+
+/* Nav cta pulse on load */
+@keyframes navCtaPulse{0%,100%{box-shadow:0 0 0 0 rgba(15,45,96,0.3);}50%{box-shadow:0 0 0 8px rgba(15,45,96,0);}}
+.nav-cta-btn{animation:navCtaPulse 3s ease-in-out 1.5s 2;}
+
+/* Smooth underline on fc-name hover */
+.fc-name{position:relative;}
+.fc-name::after{content:'';position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--navy);transition:width 0.3s var(--ease-out);}
+.faculty-card:hover .fc-name::after{width:100%;}
+
+/* Section eyebrow animated dot */
+.section-eyebrow::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);margin-right:8px;animation:pulse 2.5s ease-in-out infinite;}
+
+/* Scroll indicator in hero */
+@keyframes scrollBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+.scroll-hint{display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:32px;color:var(--text-light);font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;animation:fadeIn 1s ease 1.2s both;}
+.scroll-hint::after{content:'↓';font-size:18px;animation:scrollBounce 1.6s ease-in-out infinite;}
+
+/* Section heading left border accent */
+.section-title{position:relative;display:inline-block;}
+
+/* Program tab ripple */
+.prog-tab:active{transform:scale(0.97);}
+
+/* Back-to-top button */
+#back-to-top{
+  position:fixed;bottom:28px;right:28px;z-index:900;
+  width:46px;height:46px;background:var(--navy);color:#fff;border:none;
+  border-radius:50%;cursor:pointer;font-size:18px;font-weight:700;
+  box-shadow:var(--shadow-lg);transition:var(--tr);opacity:0;transform:translateY(20px);
+  pointer-events:none;display:flex;align-items:center;justify-content:center;
+}
+#back-to-top.visible{opacity:1;transform:translateY(0);pointer-events:all;}
+#back-to-top:hover{background:var(--navy-dark);transform:translateY(-3px);}
+
+/* Notification strip link */
+.hero-top-strip a{color:var(--gold-light);text-decoration:underline;text-underline-offset:2px;}
+.hero-top-strip a:hover{color:#fff;}
+
+/* Custom selection colour */
+::selection{background:var(--navy);color:#fff;}
+
+</style>
+</head>
+<body>
+
+<!-- SITE LOADER -->
+<div id="site-loader">
+  <div class="loader-spinner"></div>
+  <div class="loader-text">Loading DAASE Website</div>
+  <div class="loader-sub">Fetching latest data...</div>
+</div>
+
+<!-- ============================================================
+   NAVIGATION
+============================================================ -->
+<nav id="navbar">
+  <div class="nav-logos">
+    <img src="images/logos/iiti-logo.png" alt="IIT Indore" class="nav-logo-img"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="logo-placeholder" style="display:none;">IITI</div>
+    <div class="nav-divider"></div>
+    <img src="images/logos/daase-logo.png" alt="DAASE" class="nav-logo-img"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="logo-placeholder" style="display:none;">DAASE</div>
+  </div>
+  <div class="nav-brand">
+    <div class="nav-brand-main">DAASE — IIT Indore</div>
+    <div class="nav-brand-sub">Dept. of Astronomy, Astrophysics &amp; Space Engineering</div>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <button onclick="showSection('home')" class="active" id="nav-home">Home</button>
+    <button onclick="showSection('research')" id="nav-research">Research</button>
+    <button onclick="showSection('programs')" id="nav-programs">Programs</button>
+    <button onclick="showSection('faculty')" id="nav-faculty">Faculty</button>
+    <button onclick="showSection('students')" id="nav-students">Students</button>
+    <button onclick="showSection('facilities')" id="nav-facilities">Facilities</button>
+    <button onclick="showSection('events')" id="nav-events">Events</button>
+    <button onclick="showSection('alumni')" id="nav-alumni">Alumni</button>
+    <button onclick="showSection('gallery')" id="nav-gallery">Gallery</button>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger">Useful Links ▾</button>
+      <div class="nav-dropdown-menu">
+        <a href="https://www.iiti.ac.in" target="_blank">🏛️ IIT Indore</a>
+        <a href="https://academic.iiti.ac.in" target="_blank">🎓 IIT Indore Academics</a>
+        <a href="https://academic.iiti.ac.in/phdadvt.php" target="_blank">📋 PhD Admissions Portal</a>
+        <a href="mailto:hodaase@iiti.ac.in">📧 Contact HoD</a>
+        <a href="mailto:aase-office@iiti.ac.in">📧 Department Office</a>
+      </div>
+    </div>
+    <button onclick="showSection('opportunities')" class="nav-cta-btn" id="nav-opportunities">Opportunities</button>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button onclick="showSection('home');toggleMobileMenu()">Home</button>
+  <button onclick="showSection('research');toggleMobileMenu()">Research</button>
+  <button onclick="showSection('programs');toggleMobileMenu()">Programs</button>
+  <button onclick="showSection('faculty');toggleMobileMenu()">Faculty</button>
+  <button onclick="showSection('students');toggleMobileMenu()">Students</button>
+  <button onclick="showSection('facilities');toggleMobileMenu()">Facilities</button>
+  <button onclick="showSection('events');toggleMobileMenu()">Events</button>
+  <button onclick="showSection('alumni');toggleMobileMenu()">Alumni</button>
+  <button onclick="showSection('gallery');toggleMobileMenu()">Gallery</button>
+  <button onclick="showSection('opportunities');toggleMobileMenu()">Opportunities</button>
+  <a href="https://www.iiti.ac.in" target="_blank">IIT Indore ↗</a>
+  <a href="https://academic.iiti.ac.in" target="_blank">IIT Indore Academics ↗</a>
+</div>
+
+<!-- ============================================================
+   HOME SECTION
+============================================================ -->
+<div class="page-section active" id="sec-home">
+  <!-- Top strip -->
+  <div class="hero-top-strip">
+    Department of Astronomy, Astrophysics &amp; Space Engineering &nbsp;·&nbsp; <span><a href="https://www.iiti.ac.in" target="_blank">Indian Institute of Technology Indore</a></span> &nbsp;·&nbsp; Est. 2015 &nbsp;·&nbsp; <a href="https://dst.gov.in/scientific-programmes/scientific-engineering-research/fist" target="_blank">DST-FIST Funded</a>
+  </div>
+  <!-- Hero split -->
+  <div class="hero-main">
+    <div class="hero-left">
+      <div class="hero-tag">✦ &nbsp;Est. 2015 &nbsp;·&nbsp; IIT Indore</div>
+      <h1 class="hero-title">
+        Department of<br>
+        <span class="accent">Astronomy, Astrophysics</span><br>
+        &amp; Space Engineering
+      </h1>
+      <p class="hero-subtitle">IIT Indore &nbsp;·&nbsp; DAASE</p>
+      <p class="hero-tagline">"Exploring the Universe, Engineering the Future"</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="showSection('research')">Explore Research <span class="arrow">→</span></button>
+        <button class="btn-outline" onclick="showSection('programs')">View Programs <span class="arrow">→</span></button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stats-grid">
+        <div class="hero-stat d1"><span class="hero-stat-num counter" data-target="7">7</span><span class="hero-stat-label">Research Areas</span></div>
+        <div class="hero-stat d2"><span class="hero-stat-num counter" data-target="5">5</span><span class="hero-stat-label">Degree Programs</span></div>
+        <div class="hero-stat d3"><span class="hero-stat-num counter" data-target="13">13</span><span class="hero-stat-label">Faculty Members</span></div>
+        <div class="hero-stat d4"><span class="hero-stat-num counter" data-target="100">100</span><span class="hero-stat-label">+ Alumni</span></div>
+      </div>
+      <div class="hero-quick-links">
+        <div class="hero-quick-link" onclick="showSection('faculty')">Faculty Directory <span class="arrow">→</span></div>
+        <div class="hero-quick-link" onclick="showSection('students')">Current Students <span class="arrow">→</span></div>
+        <a href="https://academic.iiti.ac.in/phdadvt.php" target="_blank" class="hero-quick-link" style="display:flex;align-items:center;justify-content:space-between;text-decoration:none;">PhD Admissions <span class="arrow">↗</span></a>
+        <div class="hero-quick-link" onclick="showSection('events')">Events &amp; Workshops <span class="arrow">→</span></div>
+      </div>
+    </div>
+  </div>
+  <!-- About dark strip -->
+  <div class="about-strip">
+    <div class="about-strip-inner">
+      <div class="anim-right">
+        <h2>About <span>DAASE</span></h2>
+        <p>The Department of Astronomy, Astrophysics and Space Engineering (DAASE) at IIT Indore is the <strong>only dedicated department of its kind among all IITs</strong>, offering a comprehensive academic ecosystem spanning the cosmos to cutting-edge space engineering.</p>
+        <p>A founding member of the <strong>Square Kilometre Array – India Consortium (SKA-IC)</strong> since 2015, DAASE plays a significant role in global astronomical collaboration, with faculty contributing to major ISRO and NASA missions.</p>
+        <div class="about-highlights-grid" style="margin-top:24px;">
+          <a href="https://dst.gov.in/scientific-programmes/scientific-engineering-research/fist" target="_blank" class="about-hl" style="text-decoration:none;display:block;"><div class="about-hl-icon">🏆</div><div class="about-hl-title">DST-FIST Funded ↗</div><div class="about-hl-desc">Received DST-FIST funding in 2022 for research excellence</div></a>
+          <a href="https://skaindia.ncra.tifr.res.in" target="_blank" class="about-hl" style="text-decoration:none;display:block;"><div class="about-hl-icon">📡</div><div class="about-hl-title">SKA-IC Member ↗</div><div class="about-hl-desc">Founding member since 2015 — global radio telescope consortium</div></a>
+          <a href="https://www.ncpor.res.in/arctica/index_page-175.html" target="_blank" class="about-hl" style="text-decoration:none;display:block;"><div class="about-hl-icon">🧊</div><div class="about-hl-title">Arctic Research ↗</div><div class="about-hl-desc">Atmospheric science at Indian Research Station Himadri since 2022</div></a>
+          <a href="https://www.isro.gov.in" target="_blank" class="about-hl" style="text-decoration:none;display:block;"><div class="about-hl-icon">🚀</div><div class="about-hl-title">ISRO &amp; NASA ↗</div><div class="about-hl-desc">Active faculty contributions to major space missions</div></a>
+        </div>
+      </div>
+      <div class="timeline anim-left">
+        <div class="tl-item"><div class="tl-year">December 2015</div><div class="tl-text">Founded as Centre for Astronomy</div><div class="tl-sub">Ph.D. program launched · Founding SKA-IC member</div></div>
+        <div class="tl-item"><div class="tl-year">May 2018</div><div class="tl-text">Upgraded to Full Department</div><div class="tl-sub">M.Sc. Astronomy launched — first &amp; only in IITs</div></div>
+        <div class="tl-item"><div class="tl-year">2021</div><div class="tl-text">Space Engineering Programs</div><div class="tl-sub">M.Tech. Space Engineering · M.S. (Research) launched</div></div>
+        <div class="tl-item"><div class="tl-year">2022</div><div class="tl-text">B.Tech. in Space Science &amp; Engineering</div><div class="tl-sub">First B.Tech. of its kind in IIT system · DST-FIST · Arctic research</div></div>
+        <div class="tl-item"><div class="tl-year">Present</div><div class="tl-text">100+ Alumni · World-Class Labs</div><div class="tl-sub">Alumni at prestigious institutes &amp; industries globally</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="section-footer"><div class="footer-inner">
+    <div class="footer-copyright">Copyright © 2022–2026 DAASE, IIT Indore. All rights reserved.</div>
+    <div class="footer-creator">✦ &nbsp;<span>Website created by: <strong>Aninda Pratim Roy</strong>, M.Tech Space Engineering, IIT Indore</span><span style="color:rgba(255,255,255,0.3)">|</span><a href="mailto:mt2502121016@iiti.ac.in">mt2502121016@iiti.ac.in</a></div>
+  </div></div>
+</div>
+
+<!-- ============================================================
+   RESEARCH SECTION
+============================================================ -->
+<div class="page-section" id="sec-research">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">✦ Science &amp; Discovery</span>
+      <h2 class="section-title">Research <span>Areas</span></h2>
+      <p class="section-desc">DAASE covers the full spectrum — from Heliophysics to Cosmology, from Earth observations to black holes.</p>
+      <div class="title-bar"></div>
+    </div>
+    <div class="research-grid" id="researchGrid"></div>
+  </div>
+  <div class="section-footer"><div class="footer-inner"><div class="footer-copyright">Copyright © 2022–2026 DAASE, IIT Indore.</div><div class="footer-creator">✦ &nbsp;Website by: <strong>Aninda Pratim Roy</strong>, M.Tech Space Engineering &nbsp;|&nbsp; <a href="mailto:mt2502121016@iiti.ac.in">mt2502121016@iiti.ac.in</a></div></div></div>
+</div>
+
+<!-- ============================================================
+   PROGRAMS SECTION
+============================================================ -->
+<div class="page-section" id="sec-programs">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">✦ Academic Pathways</span>
+      <h2 class="section-title">Degree <span>Programs</span></h2>
+      <p class="section-desc">The only IIT department with M.Sc. Astronomy and the first IIT with B.Tech. in Space Science &amp; Engineering.</p>
+      <div class="title-bar"></div>
+    </div>
+    <div class="programs-tabs">
+      <button class="prog-tab active" onclick="switchProgram('btech',this)">B.Tech.</button>
+      <button class="prog-tab" onclick="switchProgram('msc',this)">M.Sc.</button>
+      <button class="prog-tab" onclick="switchProgram('mtech',this)">M.Tech.</button>
+      <button class="prog-tab" onclick="switchProgram('ms',this)">MS Research</button>
+      <button class="prog-tab" onclick="switchProgram('phd',this)">Ph.D.</button>
+    </div>
+    <div id="prog-btech" class="prog-content active">
+      <div class="prog-card">
+        <div>
+          <div class="pc-badge">Undergraduate · 4 Years</div>
+          <h3 class="pc-title">B.Tech. in Space Science &amp; Engineering</h3>
+          <p class="pc-desc">A pioneering program — the first B.Tech. of its kind in the IIT system (2022). Integrates rigorous space science fundamentals with engineering applications, preparing graduates for careers in Indian and global space sectors.</p>
+          <div class="pc-detail-list">
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Space science fundamentals: orbital mechanics, rocket propulsion, remote sensing</div>
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Engineering applications: instrumentation, satellite systems, RF systems</div>
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Data science, computational methods, and hands-on lab training</div>
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Minor in Astronomy &amp; Space Science available for IIT Indore students</div>
+          </div>
+        </div>
+        <div class="pc-highlights">
+          <div class="pc-highlight"><div class="pc-highlight-num">2022</div><div class="pc-highlight-text">First B.Tech. in Space Science &amp; Engineering across all IITs</div></div>
+          <div class="pc-highlight"><div class="pc-highlight-num">3</div><div class="pc-highlight-text">Active batches (2023, 2024, 2025) currently enrolled</div></div>
+          <div class="pc-highlight"><div class="pc-highlight-num">6+</div><div class="pc-highlight-text">State-of-the-art labs for hands-on learning</div></div>
+        </div>
+      </div>
+    </div>
+    <div id="prog-msc" class="prog-content">
+      <div class="prog-card">
+        <div>
+          <div class="pc-badge">Postgraduate · 2 Years</div>
+          <h3 class="pc-title">M.Sc. in Astronomy</h3>
+          <p class="pc-desc">Launched May 2018 — making DAASE the <strong>first and only IIT department</strong> to offer M.Sc. Astronomy. Rigorous training from classical to modern observational and theoretical astronomy.</p>
+          <div class="pc-detail-list">
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Classical and modern observational astronomy, stellar astrophysics</div>
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Radio astronomy, optical observations, and instrumentation</div>
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Cosmology, galactic dynamics, high-energy astrophysics</div>
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Research project with faculty supervision in final year</div>
+          </div>
+        </div>
+        <div class="pc-highlights">
+          <div class="pc-highlight"><div class="pc-highlight-num">2018</div><div class="pc-highlight-text">First M.Sc. Astronomy program across all IITs</div></div>
+          <div class="pc-highlight"><div class="pc-highlight-num">25+</div><div class="pc-highlight-text">M.Sc. alumni in research &amp; industry</div></div>
+          <div class="pc-highlight"><div class="pc-highlight-num">12+</div><div class="pc-highlight-text">Faculty supervisors across all astronomy domains</div></div>
+        </div>
+      </div>
+    </div>
+    <div id="prog-mtech" class="prog-content">
+      <div class="prog-card">
+        <div>
+          <div class="pc-badge">Postgraduate · 2 Years</div>
+          <h3 class="pc-title">M.Tech. in Space Engineering</h3>
+          <p class="pc-desc">Launched in 2021, bridging advanced space technology with practical engineering — RF systems, remote sensing, satellite instrumentation, and space mission design with research exposure.</p>
+          <div class="pc-detail-list">
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>RF engineering: system design, antenna theory, up to 60 GHz testing</div>
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Satellite systems, CubeSat design, and space mission architecture</div>
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Remote sensing, SAR, hyperspectral imaging, atmospheric sounding</div>
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Thesis-based with strong industry &amp; ISRO linkages</div>
+          </div>
+        </div>
+        <div class="pc-highlights">
+          <div class="pc-highlight"><div class="pc-highlight-num">2021</div><div class="pc-highlight-text">Two specializations: Space Engineering and AOLT</div></div>
+          <div class="pc-highlight"><div class="pc-highlight-num">15+</div><div class="pc-highlight-text">Graduates in ISRO, space startups &amp; research institutes</div></div>
+          <div class="pc-highlight"><div class="pc-highlight-num">10+</div><div class="pc-highlight-text">Specialized lab facilities for hands-on space engineering</div></div>
+        </div>
+      </div>
+    </div>
+    <div id="prog-ms" class="prog-content">
+      <div class="prog-card">
+        <div>
+          <div class="pc-badge">Research Master's · 2 Years</div>
+          <h3 class="pc-title">M.S. (Research) in Space Science &amp; Engineering</h3>
+          <p class="pc-desc">Launched in 2021, designed for students who wish to pursue intensive research before a Ph.D. Students work closely with faculty on cutting-edge projects in space science and engineering.</p>
+          <div class="pc-detail-list">
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Research-intensive: majority of time on original research</div>
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Covers radio astronomy, ionospheric science, atmospheric physics</div>
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Access to all DAASE research facilities and collaborations</div>
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Strong pathway to Ph.D. programs nationally and internationally</div>
+          </div>
+        </div>
+        <div class="pc-highlights">
+          <div class="pc-highlight"><div class="pc-highlight-num">9</div><div class="pc-highlight-text">Current MS Research students (2024 &amp; 2025 batches)</div></div>
+          <div class="pc-highlight"><div class="pc-highlight-num">7+</div><div class="pc-highlight-text">Alumni from MS Research program</div></div>
+          <div class="pc-highlight"><div class="pc-highlight-num">100%</div><div class="pc-highlight-text">Thesis-based; all students assigned faculty supervisors</div></div>
+        </div>
+      </div>
+    </div>
+    <div id="prog-phd" class="prog-content">
+      <div class="prog-card">
+        <div>
+          <div class="pc-badge">Doctoral · 4–6 Years</div>
+          <h3 class="pc-title">Ph.D. in Astronomy &amp; Space Science</h3>
+          <p class="pc-desc">The founding program of DAASE (since 2015) — training researchers across the full spectrum of astronomy, astrophysics, space engineering, remote sensing, and atmospheric science.</p>
+          <div class="pc-detail-list">
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Full spectrum: black holes &amp; cosmology to atmospheric physics</div>
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Access to national and international telescopes, observatories, and data</div>
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>ISRO, SERB, DST, Max Planck-funded positions available</div>
+            <div class="pc-detail"><div class="pc-detail-bullet"></div>Active collaboration with SKA-IC, NASA, ISRO, and global universities</div>
+          </div>
+        </div>
+        <div class="pc-highlights">
+          <div class="pc-highlight"><div class="pc-highlight-num">2015</div><div class="pc-highlight-text">Ph.D. program — the founding program of DAASE</div></div>
+          <div class="pc-highlight"><div class="pc-highlight-num">30+</div><div class="pc-highlight-text">Ph.D. alumni across all batches</div></div>
+          <div class="pc-highlight"><div class="pc-highlight-num">12+</div><div class="pc-highlight-text">National &amp; international funding agencies support research</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-footer"><div class="footer-inner"><div class="footer-copyright">Copyright © 2022–2026 DAASE, IIT Indore.</div><div class="footer-creator">✦ &nbsp;Website by: <strong>Aninda Pratim Roy</strong>, M.Tech Space Engineering &nbsp;|&nbsp; <a href="mailto:mt2502121016@iiti.ac.in">mt2502121016@iiti.ac.in</a></div></div></div>
+</div>
+
+<!-- ============================================================
+   FACULTY SECTION
+============================================================ -->
+<div class="page-section" id="sec-faculty">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">✦ Our Team</span>
+      <h2 class="section-title">Faculty <span>Members</span></h2>
+      <p class="section-desc">World-class researchers and educators leading the frontiers of astronomy, astrophysics, space science, and engineering.</p>
+      <div class="title-bar"></div>
+    </div>
+    <div class="faculty-grid" id="facultyGrid"></div>
+    <div class="faculty-divider">Visiting &amp; Distinguished Faculty <span class="visiting-badge">Visiting Members</span></div>
+    <div class="faculty-grid" id="visitingFacultyGrid"></div>
+  </div>
+  <div class="section-footer"><div class="footer-inner"><div class="footer-copyright">Copyright © 2022–2026 DAASE, IIT Indore.</div><div class="footer-creator">✦ &nbsp;Website by: <strong>Aninda Pratim Roy</strong>, M.Tech Space Engineering &nbsp;|&nbsp; <a href="mailto:mt2502121016@iiti.ac.in">mt2502121016@iiti.ac.in</a></div></div></div>
+</div>
+
+<!-- ============================================================
+   STUDENTS SECTION
+============================================================ -->
+<div class="page-section" id="sec-students">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">✦ Current Students</span>
+      <h2 class="section-title">Our <span>Students</span></h2>
+      <p class="section-desc">Meet our brilliant community of researchers and learners across all programs.</p>
+      <div class="title-bar"></div>
+    </div>
+    <div class="students-tabs">
+      <button class="student-tab active" onclick="switchStudents('pg',this)">Post Graduate</button>
+      <button class="student-tab" onclick="switchStudents('ug',this)">Under Graduate</button>
+    </div>
+    <div id="stu-pg" class="student-content active"></div>
+    <div id="stu-ug" class="student-content"></div>
+  </div>
+  <div class="section-footer"><div class="footer-inner"><div class="footer-copyright">Copyright © 2022–2026 DAASE, IIT Indore.</div><div class="footer-creator">✦ &nbsp;Website by: <strong>Aninda Pratim Roy</strong>, M.Tech Space Engineering &nbsp;|&nbsp; <a href="mailto:mt2502121016@iiti.ac.in">mt2502121016@iiti.ac.in</a></div></div></div>
+</div>
+
+<!-- ============================================================
+   FACILITIES SECTION
+============================================================ -->
+<div class="page-section" id="sec-facilities">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">✦ Infrastructure</span>
+      <h2 class="section-title">Research <span>Facilities</span></h2>
+      <p class="section-desc">State-of-the-art laboratories enabling cutting-edge research, including a facility at the Indian Arctic Research Station Himadri.</p>
+      <div class="title-bar"></div>
+    </div>
+    <div class="facilities-grid" id="facilitiesGrid"></div>
+  </div>
+  <div class="section-footer"><div class="footer-inner"><div class="footer-copyright">Copyright © 2022–2026 DAASE, IIT Indore.</div><div class="footer-creator">✦ &nbsp;Website by: <strong>Aninda Pratim Roy</strong>, M.Tech Space Engineering &nbsp;|&nbsp; <a href="mailto:mt2502121016@iiti.ac.in">mt2502121016@iiti.ac.in</a></div></div></div>
+</div>
+
+<!-- ============================================================
+   EVENTS SECTION
+============================================================ -->
+<div class="page-section" id="sec-events">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">✦ Academic Life</span>
+      <h2 class="section-title">Workshops &amp; <span>Events</span></h2>
+      <div class="title-bar"></div>
+    </div>
+    <div class="events-grid" id="eventsGrid"></div>
+    </div>
+  </div>
+  <div class="section-footer"><div class="footer-inner"><div class="footer-copyright">Copyright © 2022–2026 DAASE, IIT Indore.</div><div class="footer-creator">✦ &nbsp;Website by: <strong>Aninda Pratim Roy</strong>, M.Tech Space Engineering &nbsp;|&nbsp; <a href="mailto:mt2502121016@iiti.ac.in">mt2502121016@iiti.ac.in</a></div></div></div>
+</div>
+
+<!-- ============================================================
+   ALUMNI SECTION
+============================================================ -->
+<div class="page-section" id="sec-alumni">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">✦ Our Legacy</span>
+      <h2 class="section-title">Distinguished <span>Alumni</span></h2>
+      <p class="section-desc">DAASE alumni hold positions at prestigious universities, research institutes, and industries in India and abroad.</p>
+      <div class="title-bar"></div>
+    </div>
+    <div class="alumni-batches" id="alumniBatches"></div>
+  </div>
+  <div class="section-footer"><div class="footer-inner"><div class="footer-copyright">Copyright © 2022–2026 DAASE, IIT Indore.</div><div class="footer-creator">✦ &nbsp;Website by: <strong>Aninda Pratim Roy</strong>, M.Tech Space Engineering &nbsp;|&nbsp; <a href="mailto:mt2502121016@iiti.ac.in">mt2502121016@iiti.ac.in</a></div></div></div>
+</div>
+
+<!-- ============================================================
+   GALLERY SECTION
+============================================================ -->
+<div class="page-section" id="sec-gallery">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">✦ Life at DAASE</span>
+      <h2 class="section-title">Photo <span>Gallery</span></h2>
+      <p class="section-desc">Glimpses of research, events, outreach, and life at DAASE, IIT Indore.</p>
+      <div class="title-bar"></div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item tall anim-fadeup d1"><div class="gallery-placeholder"><span>🔭</span><p>Observatory &amp; Instruments</p></div></div>
+      <div class="gallery-item anim-fadeup d2"><div class="gallery-placeholder"><span>🎓</span><p>Convocation 2024</p></div></div>
+      <div class="gallery-item anim-fadeup d3"><div class="gallery-placeholder"><span>📡</span><p>IITI Radio Interferometer</p></div></div>
+      <div class="gallery-item wide anim-fadeup d4"><div class="gallery-placeholder"><span>🌌</span><p>RETCO-VI Conference 2025</p></div></div>
+      <div class="gallery-item anim-fadeup d5"><div class="gallery-placeholder"><span>🚁</span><p>Drone Lab</p></div></div>
+      <div class="gallery-item anim-fadeup d6"><div class="gallery-placeholder"><span>🧊</span><p>Arctic Research — Himadri</p></div></div>
+      <div class="gallery-item anim-fadeup d7"><div class="gallery-placeholder"><span>🎉</span><p>SKA Summer Training 2025</p></div></div>
+      <div class="gallery-item tall anim-fadeup d8"><div class="gallery-placeholder"><span>💫</span><p>Stargazing Outreach</p></div></div>
+    </div>
+  </div>
+  <div class="section-footer"><div class="footer-inner"><div class="footer-copyright">Copyright © 2022–2026 DAASE, IIT Indore.</div><div class="footer-creator">✦ &nbsp;Website by: <strong>Aninda Pratim Roy</strong>, M.Tech Space Engineering &nbsp;|&nbsp; <a href="mailto:mt2502121016@iiti.ac.in">mt2502121016@iiti.ac.in</a></div></div></div>
+</div>
+
+<!-- ============================================================
+   OPPORTUNITIES SECTION
+============================================================ -->
+<div class="page-section" id="sec-opportunities">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">✦ Join Us</span>
+      <h2 class="section-title">Open <span>Opportunities</span></h2>
+      <div class="title-bar"></div>
+    </div>
+    <div class="opp-grid">
+      <div class="opp-card anim-fadeup d1">
+        <div class="opp-badge">🎓 &nbsp;PhD Admissions Open</div>
+        <h3 class="opp-title">Ph.D. Positions — Open Call</h3>
+        <p class="opp-desc">Applications are invited from highly motivated students for the Ph.D. program at DAASE. We seek passionate individuals with strong backgrounds in physics, mathematics, engineering, or related disciplines who are ready to pursue cutting-edge research.</p>
+        <div class="opp-deadline"><div><div class="opp-deadline-label">Last Date to Apply</div><div class="opp-deadline-date">November 1, 2025</div></div></div>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">Applications through the IIT Indore Academic Portal.</p>
+        <a href="https://academic.iiti.ac.in/phdadvt.php" target="_blank" class="btn-primary">Apply Now <span class="arrow">→</span></a>
+      </div>
+      <div class="funding-card anim-fadeup d2">
+        <div class="funding-title">Funding &amp; Support</div>
+        <div class="funder-list">
+          <a href="https://www.education.gov.in" target="_blank" class="funder-item" style="text-decoration:none;display:block;">Ministry of Education (MoE) ↗</a>
+          <a href="https://www.ugc.gov.in" target="_blank" class="funder-item" style="text-decoration:none;display:block;">UGC ↗</a>
+          <a href="https://anrf.gov.in" target="_blank" class="funder-item" style="text-decoration:none;display:block;">ANRF / SERB ↗</a>
+          <a href="https://dst.gov.in" target="_blank" class="funder-item" style="text-decoration:none;display:block;">DST (DST-FIST) ↗</a>
+          <a href="https://moes.gov.in" target="_blank" class="funder-item" style="text-decoration:none;display:block;">MoES ↗</a>
+          <a href="https://www.csir.res.in" target="_blank" class="funder-item" style="text-decoration:none;display:block;">CSIR ↗</a>
+          <a href="https://sparc.iitkgp.ac.in" target="_blank" class="funder-item" style="text-decoration:none;display:block;">SPARC ↗</a>
+          <a href="https://dae.gov.in" target="_blank" class="funder-item" style="text-decoration:none;display:block;">DAE ↗</a>
+          <a href="https://www.isro.gov.in" target="_blank" class="funder-item" style="text-decoration:none;display:block;">ISRO ↗</a>
+          <a href="https://www.mpg.de" target="_blank" class="funder-item" style="text-decoration:none;display:block;">Max Planck Partner Group ↗</a>
+          <a href="https://www.asemduo.org" target="_blank" class="funder-item" style="text-decoration:none;display:block;">ASEM-DUO ↗</a>
+        </div>
+      </div>
+    </div>
+    <!-- Contact -->
+    <div class="section-header" style="margin-top:60px;margin-bottom:28px;">
+      <span class="section-eyebrow">✦ Get in Touch</span>
+      <h2 class="section-title" style="font-size:clamp(20px,2.8vw,30px);">Contact <span>Us</span></h2>
+      <div class="title-bar"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info anim-fadeup d1">
+        <div class="contact-item"><div class="ci-icon">📍</div><div><div class="ci-label">Campus Address</div><div class="ci-value">Department of Astronomy, Astrophysics and Space Engineering (DAASE),<br>Indian Institute of Technology Indore,<br>Khandwa Road, Simrol, Indore 453552, MP, India</div></div></div>
+        <div class="contact-item"><div class="ci-icon">📧</div><div><div class="ci-label">Email</div><div class="ci-value"><a href="mailto:hodaase@iiti.ac.in">hodaase@iiti.ac.in</a> &nbsp;(Head of Department)<br><a href="mailto:aase-office@iiti.ac.in">aase-office@iiti.ac.in</a> &nbsp;(Department Office)</div></div></div>
+        <div class="contact-item"><div class="ci-icon">🌐</div><div><div class="ci-label">Institute</div><div class="ci-value"><a href="https://www.iiti.ac.in" target="_blank">www.iiti.ac.in</a> &nbsp;|&nbsp; <a href="https://academic.iiti.ac.in" target="_blank">academic.iiti.ac.in</a></div></div></div>
+        <div class="collab-section">
+          <div class="collab-title">Professional Memberships</div>
+          <div class="collab-grid">
+            <a href="https://skaindia.ncra.tifr.res.in" target="_blank" class="collab-tag">SKA-IC</a>
+            <a href="https://www.grss-ieee.org" target="_blank" class="collab-tag">GRSS-IEEE</a>
+            <a href="https://ieeeaps.org" target="_blank" class="collab-tag">APS-IEEE</a>
+            <a href="https://www.astron-soc.in" target="_blank" class="collab-tag">ASI</a>
+            <a href="https://www.iau.org" target="_blank" class="collab-tag">IAU</a>
+            <a href="https://www.isro.gov.in" target="_blank" class="collab-tag">ISRO Missions</a>
+            <a href="https://www.nasa.gov" target="_blank" class="collab-tag">NASA Collaborations</a>
+            <a href="https://www.mpg.de" target="_blank" class="collab-tag">Max Planck Group</a>
+          </div>
+        </div>
+      </div>
+      <div class="anim-fadeup d2">
+        <div class="map-wrapper">
+          <iframe src="https://maps.google.com/maps?q=IIT+Indore+Simrol+Khandwa+Road&t=&z=15&ie=UTF8&iwloc=&output=embed" title="IIT Indore Map" loading="lazy" allowfullscreen></iframe>
+          <div class="map-overlay">
+            <div class="map-overlay-content">
+              <div class="map-overlay-title">IIT Indore — DAASE</div>
+              <div class="map-overlay-addr">Khandwa Road, Simrol, Indore MP 453552</div>
+              <a href="https://maps.google.com/?q=IIT+Indore+Simrol+Khandwa+Road" target="_blank" class="btn-primary" style="font-size:11px;padding:9px 20px;">Open in Google Maps →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-footer"><div class="footer-inner"><div class="footer-copyright">Copyright © 2022–2026 DAASE, IIT Indore. All rights reserved.</div><div class="footer-creator">✦ &nbsp;Website created by: <strong>Aninda Pratim Roy</strong>, M.Tech Space Engineering, IIT Indore &nbsp;|&nbsp; <a href="mailto:mt2502121016@iiti.ac.in">mt2502121016@iiti.ac.in</a></div></div></div>
+</div>
+
+
+<!-- ============================================================
+   JAVASCRIPT
+============================================================ -->
+<script>
+/* =========================================================
+   GOOGLE SHEETS CONFIGURATION
+   ─────────────────────────────────────────────────────────
+   After you deploy the Apps Script (see SETUP-GUIDE.html),
+   paste your Web App URL below between the quotes.
+   Leave it empty ('') to use the built-in fallback data.
+========================================================= */
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzbTSQnAv8MUll88VtPdH5nnMbYUGP6S7BFaZUiGM6vpJKJlUNkq-Apk1T_ewlMhkT0/exec'; // ← Paste your Apps Script URL here
+
+/* =========================================================
+   FALLBACK DATA
+   (used automatically if Sheets not set up yet, or offline)
+========================================================= */
+const FACULTY_FB=[
+  {name:'Dr. Saurabh Das',designation:'Associate Professor & HoD',isHOD:true,research:'Remote Sensing, Atmospheric Physics, Aerosols, Climate Science, LIDAR',email:'saurabh.das',photo:'images/faculty/saurabh_das.jpg',url:'http://people.iiti.ac.in/~saurabh.das/'},
+  {name:'Prof. Abhirup Datta',designation:'Professor',research:'Radio Astronomy, Epoch of Reionization, SKA, Radio Instrumentation',email:'abhirup.datta',photo:'images/faculty/abhirup_datta.jpg',url:'https://sites.google.com/iiti.ac.in/abhirupdatta/'},
+  {name:'Prof. Bhargav Vaidya',designation:'Professor',research:'Computational Astrophysics, MHD, Relativistic Jets, High-Energy Astrophysics',email:'bhargav.vaidya',photo:'images/faculty/bhargav_vaidya.jpg',url:'http://people.iiti.ac.in/~bvaidya/'},
+  {name:'Dr. Narendra Nath Patra',designation:'Associate Professor',research:'HI 21-cm, Epoch of Reionization, Radio Interferometry, IGM',email:'narendranath.patra',photo:'images/faculty/narendra_patra.jpg',url:'http://people.iiti.ac.in/~naren/'},
+  {name:'Dr. Manoneeta Chakraborty',designation:'Assistant Professor',research:'X-ray Astronomy, Compact Objects, Neutron Stars, Black Holes',email:'manoneeta.chakraborty',photo:'images/faculty/manoneeta_chakraborty.jpg',url:'http://people.iiti.ac.in/~manoneeta/'},
+  {name:'Dr. Soumavo Ghosh',designation:'Assistant Professor',research:'Galaxy Evolution, Interstellar Medium, Disk Galaxies, HI Observations',email:'soumavo.ghosh',photo:'images/faculty/soumavo_ghosh.jpg',url:'https://sites.google.com/view/drsoumavoghosh'},
+  {name:'Dr. Prakash Gaikwad',designation:'Assistant Professor',research:'Cosmology, Lyman-alpha Forest, Intergalactic Medium, Reionization',email:'prakash.gaikwad',photo:'images/faculty/prakash_gaikwad.jpg',url:'https://sites.google.com/view/daase/faculty'},
+  {name:'Dr. Suman Majumdar',designation:'Assistant Professor',research:'Cosmological 21-cm Signal, SKA, Reionization, Statistical Methods',email:'suman.majumdar',photo:'images/faculty/suman_majumdar.jpg',url:'http://people.iiti.ac.in/~sumanm/'},
+  {name:'Dr. Deepika Bollimpalli',designation:'Assistant Professor',research:'Accretion Disk Physics, MHD, Black Hole Accretion, Compact Objects',email:'deepika.bollimpalli',photo:'images/faculty/deepika_bollimpalli.jpg',url:'https://sites.google.com/view/daase/faculty'},
+  {name:'Dr. Priyanka Singh',designation:'Assistant Professor',research:'Space Weather, Ionospheric Physics, GNSS, Atmospheric Science',email:'priyanka.singh',photo:'images/faculty/priyanka_singh.jpg',url:'https://psingh220.github.io/pswebpage/home.html'},
+  {name:'Dr. Unmesh Khati',designation:'Assistant Professor',research:'SAR Remote Sensing, GNSS, Earth Observation, Navigation',email:'unmesh.khati',photo:'images/faculty/unmesh_khati.jpg',url:'http://people.iiti.ac.in/~unmesh.khati/'},
+  {name:'Dr. Amit Shukla',designation:'Assistant Professor',research:'RF Engineering, Antenna Design, Microwave Systems, Instrumentation',email:'amit.shukla',photo:'images/faculty/amit_shukla.jpg',url:'https://sites.google.com/iiti.ac.in/welcome/home'},
+  {name:'Dr. Mukul Bhattacharya',designation:'Assistant Professor',research:'Multi-messenger Physics, High Energy Transients',email:'mukulb',photo:'images/faculty/mukul_bhattacharya.jpg',url:'https://sites.google.com/view/daase/faculty'},
+];
+const VISITING_FB=[
+  {name:'Prof. Hari Hablani',designation:'Visiting Distinguished Professor',research:'Spaceflight Vehicles Guidance, Navigation and Control',email:'',photo:'images/faculty/hari_hablani.jpg',url:''},
+  {name:'Prof. V Chandrasekar',designation:'Visiting Distinguished Professor',research:'Radar Meteorology, Radar System Design, DSP Design, RF Communication Systems',email:'',photo:'images/faculty/v_chandrasekar.jpg',url:''},
+  {name:'Prof. Sudhir Kamle',designation:'Visiting Professor',research:'Smart Materials & Structures',email:'kamle',photo:'images/faculty/sudhir_kamle.jpg',url:''},
+  {name:'Dr. Ramesh Bhat',designation:'Visiting Professor',research:'Pulsars, Radio Transients, Radio Astronomy',email:'',photo:'images/faculty/ramesh_bhat.jpg',url:''},
+];
+const PG_FB={
+  'M.Sc. Astronomy — Batch 2025':[{name:'Aman Kumar Jha',email:'msc2503121001'},{name:'Asutosh Kumar Behera',email:'msc2503121002'},{name:'Gayathri M',email:'msc2503121003'},{name:'Jayanti Paul',email:'msc2503121004'},{name:'Kalash D. Thakkar',email:'msc2503121005'},{name:'Kanchan Singh',email:'msc2503121006'},{name:'Purvin S. Bhalekar',email:'msc2503121007'},{name:'Ranjan Yadav',email:'msc2503121008'},{name:'Rohit Raj',email:'msc2503121009'},{name:'Rushikesh A. Sonkusale',email:'msc2503121010'},{name:'Sougata Bhattacharyya',email:'msc2503121011'},{name:'Vibhawari P. Suryawanshi',email:'msc2503121014'},{name:'Yash Mani Tiwari',email:'msc2503121015'}],
+  'M.Sc. Astronomy — Batch 2024':[{name:'Aditya Prakash Sharma',supervisor:'Dr. N. N. Patra',email:'msc2403121001'},{name:'Kaivan Sanjay Shah',supervisor:'Dr. Manoneeta Chakraborty',email:'msc2403121004'},{name:'Kanishka Gautam',supervisor:'Dr. Soumavo Ghosh',email:'msc2403121005'},{name:'Kartik V. Kambhampati',supervisor:'Dr. Prakash Gaikwad',email:'msc2403121006'},{name:'Manpreet Singh',supervisor:'Dr. Prakash Gaikwad',email:'msc2403121007'},{name:'Mayukh Mandal',supervisor:'Dr. Suman Majumdar',email:'msc2403121008'},{name:'Nityananda Padhi',supervisor:'Dr. Manoneeta Chakraborty',email:'msc2403121009'},{name:'Sangeeta',supervisor:'Dr. Soumavo Ghosh',email:'msc2403121011'},{name:'Sangeetha A',supervisor:'Prof. Abhirup Datta',email:'msc2403121012'},{name:'Sayan Maity',supervisor:'Dr. Deepika Bollimpalli',email:'msc2403121013'},{name:'Sucharita Charan',supervisor:'Dr. Priyanka Singh',email:'msc2403121014'},{name:'Vishal Sarkar',supervisor:'Dr. Saurabh Das',email:'msc2403121016'}],
+  'M.Tech. Space Engineering — Batch 2025':[{name:'Aninda Pratim Roy',email:'mt2502121016'},{name:'Ashutosh Kumar',supervisor:'Prof. Abhirup Datta',email:'mt2502121018'},{name:'Atreyee Bhattacharjee',supervisor:'Dr. Amit Shukla',email:'mt2502121019'},{name:'Shubhangi Uikey',supervisor:'Dr. Unmesh Khati',email:'mt2502101017'},{name:'Eshaan Sowale',supervisor:'Dr. N. N. Patra',email:'mt2502121021'},{name:'Karni Rathore',email:'mt2502121022'},{name:'Sanjay Sugunan',email:'mt2502121023'},{name:'Shreya Ojha',supervisor:'Dr. Unmesh Khati',email:'mt2502121024'},{name:'Unnati M. Dhingriya',supervisor:'Dr. Bhargav Vaidya',email:'mt2502121025'}],
+  'M.Tech. AOLT — Batch 2025':[{name:'Akash Patel',email:'mt2502121001'},{name:'Alekh Prasad Behera',email:'mt2502121002'},{name:'Arbaj Khan',email:'mt2302121003'},{name:'Arka Biswas',email:'mt2502121004'},{name:'Shubham Shrivastava',email:'mt2502121006'},{name:'Varad S. Purohit',email:'mt2502121007'},{name:'Anshul Parmar',email:'mt2502121008'},{name:'Navneet Dubey',email:'mt2502121009'},{name:'Pallavisingh',email:'mt2502121010'},{name:'Rashmiranjita Suar',email:'mt2502121011'}],
+  'M.Tech. Space Engineering — Batch 2024':[{name:'Anismita Biswas',supervisor:'Prof. Abhirup Datta',email:'mt2402121001'},{name:'Rasaprolu Lakshya',supervisor:'Dr. Saurabh Das',email:'mt2402121002'},{name:'Eknoor Kaur',supervisor:'Dr. Bhargav Vaidya',email:'mt2402121003'}],
+  'M.S. (Research) — Batch 2025':[{name:'Chanchal',supervisor:'Dr. N. N. Patra',email:'ms2504121001'},{name:'Renuka Mahajan',supervisor:'Dr. Suman Majumdar',email:'ms2504121003'},{name:'Soumya Gupta',supervisor:'Dr. N. N. Patra',email:'ms2504121004'},{name:'Sudhamshu G',supervisor:'Prof. Abhirup Datta',email:'ms2504121005'}],
+  'M.S. (Research) — Batch 2024':[{name:'Yash Raj',supervisor:'Dr. Unmesh Khati',email:'ms2404121001'},{name:'Riddhi Srivastava',supervisor:'Prof. Abhirup Datta',email:'ms2404121002'},{name:'Riya',supervisor:'Prof. Abhirup Datta',email:'ms2404121003'},{name:'Ankur Sinha',supervisor:'Dr. N. N. Patra',email:'ms2404121004'},{name:'Shailendra Dabral',supervisor:'Dr. Unmesh Khati',email:'ms2404121005'}],
+};
+const UG_FB={
+  'B.Tech. Space Science & Engineering — Batch 2025':[{name:'Abhijeet',email:'sse250021001'},{name:'Amaan Ali',email:'sse250021002'},{name:'Aryan Shyam Shinde',email:'sse250021003'},{name:'Ayush R Mishra',email:'sse250021004'},{name:'Fiya',email:'sse250021005'},{name:'Harshdeep Singh',email:'sse250021006'},{name:'Harshit Verma',email:'sse250021007'},{name:'Hetal Saraf',email:'sse250021008'},{name:'Kanoje Yash Shyam',email:'sse250021009'},{name:'Kondamuri Tathwik',email:'sse250021010'},{name:'Mannath Vinay Jain',email:'sse250021012'},{name:'Pranjal I. Waghmare',email:'sse250021013'},{name:'Samyak Patil',email:'sse250021014'},{name:'Shah Het Hardikkumar',email:'sse250021015'},{name:'Shivam Pandey',email:'sse250021016'},{name:'Singampalli Tanooj',email:'sse250021017'},{name:'Somya Mangal',email:'sse250021018'},{name:'Vedant Sahu',email:'sse250021019'},{name:'Vemula Ashritha',email:'sse250021020'}],
+  'B.Tech. Space Science & Engineering — Batch 2024':[{name:'Amadala Sathvik',email:'sse240021001'},{name:'Ananya Shubhangi Sinha',email:'sse240021002'},{name:'Apurva Dinesh Chipte',supervisor:'Dr. Narendra Patra',email:'sse240021003'},{name:'Bhav Makhija',email:'sse240021004'},{name:'Burra Venkata Chakrapani',email:'sse240021005'},{name:'Gujjala Mohit Sasi Chandra',email:'sse240021006'},{name:'Karedla Pavan Kalyan',email:'sse240021007'},{name:'Kartikey Raghav',email:'sse240021008'},{name:'Lathiya Pinak Paresh',email:'sse240021009'},{name:'Manish Kumawat',email:'sse240021010'},{name:'Patel Devki',supervisor:'Dr. Priyanka Singh',email:'sse240021011'},{name:'Pritish Dutta',email:'sse240021012'},{name:'Sabavath Raghavendar',email:'sse240021014'},{name:'Sakshya Singh Kasera',supervisor:'Dr. Priyanka Singh',email:'sse240021015'},{name:'Seelam Chandra Shekar Vinayak',email:'sse240021016'},{name:'Shrey Aggarwal',email:'sse240021017'},{name:'Srujana Patil',email:'sse240021018'}],
+  'B.Tech. Space Science & Engineering — Batch 2023':[{name:'Aman',email:'sse230021001'},{name:'Anjanayae Chaurasia',email:'sse230021002'},{name:'Anuvab Mandal',email:'sse230021003'},{name:'Apoorv Singh',email:'sse230021004'},{name:'Arnav Deshpande',email:'sse230021005'},{name:'Bunga Manoj Kumar',email:'sse230021006'},{name:'Dhriti Jha',email:'sse230021007'},{name:'Dodiya Yashkumar Shailesh',supervisor:'Dr. Unmesh Khati',email:'sse230021008'},{name:'K Hari Balan',email:'sse230021009'},{name:'N. Kaveri',email:'sse230021010'},{name:'Parul Pahurkar',supervisor:'Dr. Bhargav Vaidya',email:'sse230021011'},{name:'Prem Pratik',email:'sse230021012'},{name:'Ramavath Deepak Kumar',email:'sse230021013'},{name:'Rathod Nisarg Bipinbhai',email:'sse230021014'},{name:'Sakshi Sidhe',email:'sse230021015'},{name:'Siddharth Vezzu',email:'sse230021016'},{name:'Srinivas G. C. Nelavalli',email:'sse230021017'},{name:'Sudarsanam S.S.N.S. Kumar',email:'sse230021018'},{name:'Valali Sai Pranav',email:'sse230021019'},{name:'Vandan Nagori',email:'sse230021020'}],
+};
+const ALUMNI_FB=[
+  {year:'Batch 2025',msc:['Annie Chandrika Sattenapalli','Anushka Agarwal','Aryan Bhake','Ashutosh Das','Daisy Rani Boro','Gitaj Singh','Harikrishnan R','Navanit A V','Parth Hitesh Kothari','Prasad Rajesh Posture','Vijay Choudhary'],mtech:['Abhishek Darwai','Aman Dubey','Harsh Kararwal','Katta Rajat','Ranjan Kumar','Souradeep Hazra','Sreya Ghosh','Tejas Rajendra Rajuskar'],ms:['Kumar Sheshank Shekhar','Harshal Raut'],phd:['Sushmita Agarwal','Harsha Avinash Tanti','Chandra Shekhar Murmu','Soumen Datta','Harsha Tanti','Anshuman Tripathi']},
+  {year:'Batch 2024',msc:['Sparsh Arya','A Aditya','Avasarala Praneeth','G Akash','Krishangi Kashyap','Sheetal','Sanjay Kumar Yadav','Kunal Thapar','Ashad Ahmad','Potluri Hemanth','Tiasha Biswas'],mtech:['Sudhanshu Rajesh Gavade','Anjali Patel','Kundan Sahu','Gautam Arora'],ms:['Nitig Singh','Manish Kumar Mawatwal','Chavakula Subhasri','Mohit Jagne','Nikita'],phd:['Parul Janagal','Sarvesh Mangla','Akriti Sinha','Hemapriya R','Swarna Chatterjee','Prateek Mayank']},
+  {year:'Batch 2023',msc:['Alvera Farooqui','Vednarayan Sriram Iyer','Ansh Chopra','Pranjali Sharma','Soumya Manoj Gupta','Avinash Kumar Himanshu','Sayeed Kazim Hussain Nasir','Priyatam Kumar Mahto','Amit Poonia','Saurabh','Sumit Gautam','Keshav Aggarwal'],mtech:['Ankit Bhanu','Shubhanshu U. Bishwash','Narthu Santhosh Kumar','Pushp Ranjan','Archishman Guha'],ms:['Saswata Dasgupta'],phd:['Naga Vijaya Deepthi A','Aishrila Mazumder','Sayan Kundu','Unnati Kashyap','Sriyasriti Acharya','Gourab Giri','Arghyadeep Paul']},
+  {year:'Batch 2022',msc:['Ankit Meena','Gursharanjit Kaur','Jibin V Sunny','Kishlay Singh','Motghare Kunal Manoharrao','Manish Kumar Singh','Pawan Tiwari','Sirsha Nandy','Sohini Dutta'],mtech:[],ms:[],phd:['Madhurima Choudhury','Majidul Rahaman','Althaf A','Mohd Kamran','Sanmoy Bandyopadhyay','Chandrani Chatterjee']},
+  {year:'Batch 2021',msc:['Aadarsh Pathak','Ravi Pratap Dubey','Koyena Das','Hemanth Kumar Reddy Bommireddy','Pranoy Ghosh','Chandan Kumar Das','Anuraag Arya','Saranniya S','Mugatwala Ronish Himanshu','Himanshu','Prattipati Sanjeeva Rao','Maneesh Bazgalia','Vikrant Someshwar Londhe','Vabbani Krishna Kumar'],mtech:[],ms:[],phd:['Sumanjit Chakraborty','Ramij Raja','Arnab Chakraborty']},
+  {year:'Batch 2020',msc:['Anchal Saxena','Biki Ram','Himanshu Tiwari','Indrendra Sisodiya','Nikhil Sanjay Borse','Samanvith A','Sandeep Kumar'],mtech:[],ms:[],phd:[]},
+];
+const FACILITIES_FB=[
+  {icon:'📡',name:'IITI Radio Interferometer Observatory'},{icon:'📻',name:'Radio Frequency Lab (up to 60 GHz)'},{icon:'🔭',name:'Optics Lab'},{icon:'🌐',name:'IoT Lab'},{icon:'🛰️',name:'Remote Sensing Lab'},{icon:'⚡',name:'Plasma Lab'},{icon:'🥽',name:'VR-Based Data Observatory'},{icon:'💡',name:'Electronics Device & Circuit Lab'},{icon:'🚁',name:'Drone Fleet'},{icon:'🌈',name:'Hyperspectral Imaging System'},{icon:'📶',name:'Microwave Optics System'},{icon:'🧲',name:'Helmholtz Cage'},{icon:'🖱️',name:'VLSI System Trainer Kit'},{icon:'🏠',name:'Anechoic Chamber'},{icon:'🌧️',name:'Micro Rain Radar'},{icon:'💧',name:'Laser Precipitation Monitor'},{icon:'📏',name:'LIDAR-Ceilometer'},{icon:'⚡',name:'Electric Field Mill & Lightning Detector'},{icon:'🖥️',name:'PCB Fabrication Tools'},{icon:'🧊',name:'Arctic Research Facility — Himadri'},
+];
+const EVENTS_FB=[
+  {title:'3-Day Workshop on Numerical Techniques for Atmospheric and Space Sciences 2025',date:'December 15–17, 2025',type:'upcoming'},
+  {title:'SKA-India Summer Training Program 2025',date:'July 7–18, 2025',type:'past'},
+  {title:'RETCO-VI: 6th National Conference on Recent Trends in the Study of Compact Objects',date:'March 10–12, 2025',type:'past'},
+  {title:'DAASE Outreach Series — Stargazing Sessions, Space Quizzes & Hackathons',date:'Ongoing · Semester Events',type:'past'},
+];
+const RESEARCH_AREAS=[
+  {icon:'⚫',title:'Compact Objects & Transients',desc:'Studies of black holes, neutron stars, pulsars, and transient phenomena including gamma-ray bursts and fast radio bursts. Combining observational and theoretical approaches across multi-wavelength data.',url:'https://sites.google.com/view/daase/research'},
+  {icon:'🌌',title:'Cosmology',desc:'Probing the early universe, the Epoch of Reionization, observational cosmology, and large-scale structure formation. Using radio interferometry, Lyman-alpha forests, and 21-cm signal analysis.',url:'https://sites.google.com/view/daase/research'},
+  {icon:'🌀',title:'Galaxies & Active Galactic Nuclei',desc:'Formation and evolution of galaxies, interstellar medium physics, AGN feedback, quasar absorption systems, and intergalactic medium studies from early epochs to the present day.',url:'https://sites.google.com/view/daase/research'},
+  {icon:'☀️',title:'Sun & Heliosphere',desc:'Solar physics, heliospheric science, solar wind dynamics, coronal mass ejections, and their propagation through the heliosphere. Contributions to solar monitoring missions.',url:'https://sites.google.com/view/daase/research'},
+  {icon:'🌤️',title:'Space Weather & Atmospheric Science',desc:'Atmospheric modeling, ionospheric physics, climate modeling, space weather prediction, and aeronomy. Facilities at IIT Indore and the Indian Arctic Research Station Himadri.',url:'https://sites.google.com/view/daase/research'},
+  {icon:'📡',title:'Communication, Navigation & Remote Sensing',desc:'RF instrumentation, antenna design, SAR and optical remote sensing, GNSS, CubeSat and drone technologies, radio astronomical instrumentation, and Earth observation.',url:'https://sites.google.com/view/daase/research'},
+  {icon:'🧠',title:'Data Science & ML in Astrophysics',desc:'Machine learning, statistical inference, Bayesian analysis, and computational astrophysics. Developing data-driven tools for large astronomical surveys and signal processing.',url:'https://sites.google.com/view/daase/research'},
+];
+
+/* =========================================================
+   SHEETS DATA LOADER
+   Fetches live data from Google Sheets via Apps Script.
+   Falls back to built-in data automatically if unavailable.
+========================================================= */
+function drivePhotoUrl(raw) {
+  // Converts any Google Drive share link to a direct image URL.
+  // If it's already a direct URL or a local path, returns as-is.
+  if (!raw) return '';
+  const m = raw.match(/\/d\/([a-zA-Z0-9_-]{25,})/);
+  if (m) return 'https://drive.google.com/uc?export=view&id=' + m[1];
+  const m2 = raw.match(/id=([a-zA-Z0-9_-]{25,})/);
+  if (m2) return 'https://drive.google.com/uc?export=view&id=' + m2[1];
+  return raw; // local path or direct URL — use as-is
+}
+
+async function loadData() {
+  if (!SHEETS_URL) {
+    renderAll(null); return;
+  }
+  showSiteLoader(true);
+  try {
+    const res  = await fetch(SHEETS_URL);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    renderAll(data);
+  } catch(e) {
+    console.warn('[DAASE] Sheets load failed, using built-in data:', e.message);
+    renderAll(null);
+  } finally {
+    showSiteLoader(false);
+  }
+}
+
+function showSiteLoader(show) {
+  let el = document.getElementById('site-loader');
+  if (!el) return;
+  el.style.display = show ? 'flex' : 'none';
+}
+
+function renderAll(d) {
+  const fac   = (d && d.faculty   && d.faculty.length)   ? d.faculty.map(f=>({...f,photo:drivePhotoUrl(f.photo)||f.photo}))   : FACULTY_FB;
+  const vis   = (d && d.visiting  && d.visiting.length)  ? d.visiting.map(f=>({...f,photo:drivePhotoUrl(f.photo)||f.photo}))  : VISITING_FB;
+  const pg    = (d && d.pg_students)  ? d.pg_students  : PG_FB;
+  const ug    = (d && d.ug_students)  ? d.ug_students  : UG_FB;
+  const alum  = (d && d.alumni    && d.alumni.length)    ? d.alumni    : ALUMNI_FB;
+  const facs  = (d && d.facilities && d.facilities.length) ? d.facilities : FACILITIES_FB;
+  const evts  = (d && d.events   && d.events.length)    ? d.events    : EVENTS_FB;
+
+  renderResearch();
+  renderFaculty(fac, vis);
+  renderStudents(pg, ug);
+  renderFacilities(facs);
+  renderAlumni(alum);
+  renderEvents(evts);
+}
+
+/* =========================================================
+   SPA ENGINE
+========================================================= */
+let currentSection='home', isAnimating=false;
+
+function showSection(id){
+  if(id===currentSection||isAnimating)return;
+  isAnimating=true;
+  const prev=document.getElementById('sec-'+currentSection);
+  const next=document.getElementById('sec-'+id);
+  document.querySelectorAll('.nav-links button,.mobile-menu button').forEach(b=>b.classList.remove('active'));
+  const nb=document.getElementById('nav-'+id);
+  if(nb)nb.classList.add('active');
+  prev.classList.add('exit');prev.classList.remove('active');
+  setTimeout(()=>{
+    prev.classList.remove('exit');
+    next.scrollTop=0;
+    next.classList.add('active');
+    currentSection=id;isAnimating=false;
+    next.querySelectorAll('.anim-fadeup,.anim-fadein,.anim-right,.anim-left').forEach(el=>{
+      el.style.animationName='none';
+      requestAnimationFrame(()=>{el.style.animationName='';});
+    });
+  },160);
+}
+function toggleMobileMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+
+/* =========================================================
+   COUNTERS
+========================================================= */
+function animCounter(el,target,dur){
+  const s=performance.now();
+  function u(now){
+    const p=Math.min((now-s)/dur,1);
+    const e=1-Math.pow(1-p,3);
+    el.textContent=Math.round(e*target);
+    if(p<1)requestAnimationFrame(u);
+  }
+  requestAnimationFrame(u);
+}
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.querySelectorAll('.counter').forEach(el=>animCounter(el,parseInt(el.dataset.target),1600));
+  },500);
+});
+
+/* =========================================================
+   TABS
+========================================================= */
+function switchProgram(id,btn){
+  document.querySelectorAll('.prog-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.prog-tab').forEach(el=>el.classList.remove('active'));
+  document.getElementById('prog-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function switchStudents(id,btn){
+  document.querySelectorAll('.student-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.student-tab').forEach(el=>el.classList.remove('active'));
+  document.getElementById('stu-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleAlumni(header){
+  const body=header.nextElementSibling;
+  const chev=header.querySelector('.chevron');
+  body.classList.toggle('open');chev.classList.toggle('open');
+}
+
+/* =========================================================
+   HELPERS
+========================================================= */
+function initials(name){return name.replace(/Prof\.|Dr\./,'').trim().split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();}
+
+/* =========================================================
+   RENDER: RESEARCH (static — doesn't change from Sheets)
+========================================================= */
+function renderResearch(){
+  document.getElementById('researchGrid').innerHTML=RESEARCH_AREAS.map((r,i)=>`
+    <div class="rc anim-fadeup" style="animation-delay:${0.06+i*0.05}s">
+      <div class="rc-icon">${r.icon}</div>
+      <h3 class="rc-title">${r.title}</h3>
+      <p class="rc-desc">${r.desc}</p>
+      ${r.url?`<a href="${r.url}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:13px;font-weight:700;color:var(--navy);letter-spacing:0.05em;text-transform:uppercase;border-bottom:1px solid var(--navy);padding-bottom:1px;text-decoration:none;transition:all 0.2s ease;">Learn More ↗</a>`:''}
+    </div>`).join('');
+}
+
+/* =========================================================
+   RENDER: FACULTY
+========================================================= */
+function makeFacCard(f){
+  const ini=initials(f.name);
+  const hasUrl=f.url&&f.url.length>0;
+  const tag=hasUrl?`a href="${f.url}" target="_blank" rel="noopener"`:'div';
+  const close=hasUrl?'a':'div';
+  const noLink=hasUrl?'':' no-link-card';
+  const emailHtml=f.email
+    ?`<div class="fc-email">✉ ${f.email}@iiti.ac.in</div>`
+    :`<div class="fc-email" style="color:var(--text-light)">✉ Contact via Dept. Office</div>`;
+  const photoSrc = f.photo || '';
+  return `<${tag} class="faculty-card${f.isHOD?' hod-card':''}${noLink}">
+    <div class="fc-photo">
+      ${photoSrc ? `<img src="${photoSrc}" alt="${f.name}" onerror="this.style.display='none'">` : ''}
+      <div class="fc-photo-placeholder">${ini}</div>
+      <div class="fc-photo-overlay"></div>
+      <div class="fc-designation-badge">${f.designation}</div>
+    </div>
+    <div class="fc-body">
+      ${f.isHOD?'<div class="hod-badge">Head of Department</div>':''}
+      <div class="fc-name">${f.name}</div>
+      <div class="fc-research">${f.research}</div>
+      ${emailHtml}
+    </div>
+  </${close}>`;
+}
+function renderFaculty(fac, vis){
+  document.getElementById('facultyGrid').innerHTML=(fac||FACULTY_FB).map((f,i)=>`<div class="anim-fadeup" style="animation-delay:${0.06+i*0.04}s">${makeFacCard(f)}</div>`).join('');
+  document.getElementById('visitingFacultyGrid').innerHTML=(vis||VISITING_FB).map((f,i)=>`<div class="anim-fadeup" style="animation-delay:${0.06+i*0.06}s">${makeFacCard(f)}</div>`).join('');
+}
+
+/* =========================================================
+   RENDER: STUDENTS
+========================================================= */
+function renderStudents(pg, ug){
+  const build=obj=>Object.entries(obj).map(([batch,list])=>`
+    <div class="batch-section">
+      <div class="batch-title">${batch} <span class="batch-count">${list.length}</span></div>
+      <div class="students-grid">
+        ${list.map((s,i)=>`<div class="student-card anim-fadeup" style="animation-delay:${0.04+i*0.03}s">
+          <div class="sc-avatar"><img src="${drivePhotoUrl(s.photo)||('images/students/'+s.email+'.jpg')}" alt="${s.name}" onerror="this.style.display='none'">${initials(s.name)}</div>
+          <div class="sc-name">${s.name}</div>
+          ${s.supervisor?`<div class="sc-supervisor">${s.supervisor}</div>`:''}
+          <a href="mailto:${s.email}@iiti.ac.in" class="sc-email">${s.email}@iiti.ac.in</a>
+        </div>`).join('')}
+      </div>
+    </div>`).join('');
+  document.getElementById('stu-pg').innerHTML=build(pg||PG_FB);
+  document.getElementById('stu-ug').innerHTML=build(ug||UG_FB);
+}
+
+/* =========================================================
+   RENDER: FACILITIES
+========================================================= */
+function renderFacilities(facs){
+  document.getElementById('facilitiesGrid').innerHTML=(facs||FACILITIES_FB).map((f,i)=>`
+    <div class="facility-card anim-fadeup" style="animation-delay:${0.04+i*0.03}s">
+      <div class="fac-icon">${f.icon}</div>
+      <div class="fac-name">${f.name}</div>
+    </div>`).join('');
+}
+
+/* =========================================================
+   RENDER: EVENTS (now dynamic from Sheets)
+========================================================= */
+function renderEvents(evts){
+  const container = document.getElementById('eventsGrid');
+  if (!container) return;
+  container.innerHTML=(evts||EVENTS_FB).map((ev,i)=>`
+    <div class="event-card ${ev.type==='upcoming'?'upcoming-card':'past-card'} anim-fadeup" style="animation-delay:${0.06+i*0.07}s">
+      <div class="event-type ${ev.type==='upcoming'?'upcoming':'past'}">${ev.type==='upcoming'?'⬤ &nbsp;Upcoming':'✦ &nbsp;Past Event'}</div>
+      <h3 class="event-title">${ev.title}</h3>
+      <div class="event-date">📅 &nbsp;${ev.date}</div>
+    </div>`).join('');
+}
+
+/* =========================================================
+   RENDER: ALUMNI
+========================================================= */
+function renderAlumni(alum){
+  document.getElementById('alumniBatches').innerHTML=(alum||ALUMNI_FB).map((b,idx)=>{
+    const total=(b.msc||[]).length+(b.mtech||[]).length+(b.ms||[]).length+(b.phd||[]).length;
+    let cats='';
+    if(b.msc?.length)cats+=`<div class="alumni-category"><div class="alumni-cat-title">M.Sc. Astronomy</div><div class="alumni-names">${b.msc.map(n=>`<span class="alumni-name">${n}</span>`).join('')}</div></div>`;
+    if(b.mtech?.length)cats+=`<div class="alumni-category"><div class="alumni-cat-title">M.Tech.</div><div class="alumni-names">${b.mtech.map(n=>`<span class="alumni-name">${n}</span>`).join('')}</div></div>`;
+    if(b.ms?.length)cats+=`<div class="alumni-category"><div class="alumni-cat-title">M.S. (Research)</div><div class="alumni-names">${b.ms.map(n=>`<span class="alumni-name">${n}</span>`).join('')}</div></div>`;
+    if(b.phd?.length)cats+=`<div class="alumni-category"><div class="alumni-cat-title">Ph.D.</div><div class="alumni-names">${b.phd.map(n=>`<span class="alumni-name">${n}</span>`).join('')}</div></div>`;
+    return `<div class="alumni-batch anim-fadeup" style="animation-delay:${0.05+idx*0.06}s">
+      <div class="alumni-batch-header" onclick="toggleAlumni(this)">
+        <div class="alumni-year">${b.year}</div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;color:var(--text-muted)">${total} Graduates</span><span class="chevron ${idx===0?'open':''}">▾</span></div>
+      </div>
+      <div class="alumni-batch-body ${idx===0?'open':''}">${cats}</div>
+    </div>`;
+  }).join('');
+}
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+function checkScroll(){
+  const s=document.getElementById('sec-'+currentSection);
+  const btn=document.getElementById('back-to-top');
+  if(s&&btn){btn.classList.toggle('visible',s.scrollTop>300);}
+}
+document.querySelectorAll('.page-section').forEach(s=>s.addEventListener('scroll',checkScroll));
+
+/* =========================================================
+   INIT
+========================================================= */
+document.addEventListener('DOMContentLoaded',()=>{
+  loadData();
+});
+</script>
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});document.getElementById('sec-'+currentSection).scrollTo({top:0,behavior:'smooth'});" title="Back to top" aria-label="Back to top">↑</button>
+</body>
+</html>
