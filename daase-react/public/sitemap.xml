@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://daase.iiti.ac.in/</loc>
+    <loc>https://daase-demo.vercel.app/</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://daase.iiti.ac.in/#research</loc>
+    <loc>https://daase-demo.vercel.app/#research</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://daase.iiti.ac.in/#faculty</loc>
+    <loc>https://daase-demo.vercel.app/#faculty</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://daase.iiti.ac.in/#programs</loc>
+    <loc>https://daase-demo.vercel.app/#programs</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://daase.iiti.ac.in/#students</loc>
+    <loc>https://daase-demo.vercel.app/#students</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://daase.iiti.ac.in/#facilities</loc>
+    <loc>https://daase-demo.vercel.app/#facilities</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://daase.iiti.ac.in/#gallery</loc>
+    <loc>https://daase-demo.vercel.app/#gallery</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
