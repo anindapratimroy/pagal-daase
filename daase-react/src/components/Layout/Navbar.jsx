@@ -7,6 +7,7 @@ const NAV_ITEMS = [
   { id: 'faculty', label: 'Faculty' },
   { id: 'students', label: 'Students' },
   { id: 'facilities', label: 'Facilities' },
+  { id: 'placements', label: 'Placements' },
   { id: 'events', label: 'Events' },
   { id: 'alumni', label: 'Alumni' },
   { id: 'gallery', label: 'Gallery' },
@@ -32,7 +33,7 @@ export default function Navbar({ current, onNav }) {
   return (
     <>
       <nav>
-        <div className="nav-logos">
+        <div className="nav-logos" onClick={() => handleNav('home')}>
           <img src="images/IITI_Logo.svg" alt="IIT Indore" className="nav-logo-img"
             onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
           <div className="logo-placeholder" style={{ display: 'none' }}>IITI</div>
@@ -43,7 +44,7 @@ export default function Navbar({ current, onNav }) {
           <div className="logo-placeholder" style={{ display: 'none' }}>DAASE</div>
         </div>
 
-        <div className="nav-brand">
+        <div className="nav-brand" onClick={() => handleNav('home')}>
           <div className="nav-brand-main">DAASE — IIT Indore</div>
           <div className="nav-brand-sub">Dept. of Astronomy, Astrophysics &amp; Space Engineering</div>
         </div>

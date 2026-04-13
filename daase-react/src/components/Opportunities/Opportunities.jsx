@@ -23,7 +23,7 @@ export default function Opportunities() {
         {/* Opportunities header */}
         <div className="section-header">
           <span className="section-eyebrow">✦ Join Us</span>
-          <h2 className="section-title">Open <span>Opportunities</span></h2>
+          <h1 className="section-title">Open <span>Opportunities</span></h1>
           <div className="title-bar" />
         </div>
 

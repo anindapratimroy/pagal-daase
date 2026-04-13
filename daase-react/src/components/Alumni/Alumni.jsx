@@ -11,7 +11,7 @@ export default function Alumni({ alumni }) {
       <div className="section-inner">
         <div className="section-header">
           <span className="section-eyebrow">✦ Our Legacy</span>
-          <h2 className="section-title">Distinguished <span>Alumni</span></h2>
+          <h1 className="section-title">Distinguished <span>Alumni</span></h1>
           <p className="section-desc">DAASE alumni hold positions at prestigious universities, research institutes, and industries in India and abroad.</p>
           <div className="title-bar" />
         </div>

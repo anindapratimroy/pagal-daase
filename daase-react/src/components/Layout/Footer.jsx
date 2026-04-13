@@ -98,9 +98,10 @@ export default function Footer() {
           <div className="footer-copyright">Copyright &copy; 2022–2026 DAASE, IIT Indore. All rights reserved.</div>
           <div className="footer-creator">
             ✦ &nbsp;
-            <span>Website created by: <strong>Aninda Pratim Roy</strong>, M.Tech Space Engineering, IIT Indore</span>
+            <span>Website created by: <strong>Aninda Pratim Roy </strong> and <strong>Vidhan Thakur</strong>, M.Tech Space Engineering, IIT Indore | BS CSDA, IIT Patna</span>
             <span style={{ color: 'rgba(255,255,255,0.3)' }}>|</span>
             <a href="mailto:mt2502121016@iiti.ac.in">mt2502121016@iiti.ac.in</a>
+            <a href="mailto:vidhan_2312res733@iitp.ac.in">| vidhan_2312res733@iitp.ac.in</a>
           </div>
         </div>
       </div>

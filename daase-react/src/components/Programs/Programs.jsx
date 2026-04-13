@@ -98,7 +98,7 @@ export default function Programs() {
       <div className="section-inner">
         <div className="section-header">
           <span className="section-eyebrow">✦ Academic Pathways</span>
-          <h2 className="section-title">Degree <span>Programs</span></h2>
+          <h1 className="section-title">Degree <span>Programs</span></h1>
           <p className="section-desc">The only IIT department with M.Sc. Astronomy and the first IIT with B.Tech. in Space Science &amp; Engineering.</p>
           <div className="title-bar" />
         </div>

@@ -1,12 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Footer from '../Layout/Footer';
 import { drivePhotoUrl } from '../../data/fallback';
+import { imageMap } from '../../data/imageMap';
 
-function initials(name) {
-  return name.replace(/Prof\.|Dr\./, '').trim().split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase();
-}
-
-function StudentBatch({ batch, list }) {
+function StudentBatch({ batch, list, onImageClick }) {
   return (
     <div className="batch-section">
       <div className="batch-title">
@@ -14,16 +11,15 @@ function StudentBatch({ batch, list }) {
       </div>
       <div className="students-grid">
         {list.map((s, i) => {
-          const photoSrc = drivePhotoUrl(s.photo) || `images/students/${s.email}.jpg`;
+          const photoSrc = imageMap[s.name] || drivePhotoUrl(s.photo) || `images/students/${s.email}.jpg`;
           return (
             <div className="student-card anim-fadeup" key={i} style={{ animationDelay: `${0.04 + i * 0.03}s` }}>
-              <div className="sc-avatar">
+              <div className="sc-avatar" onClick={() => onImageClick && onImageClick(photoSrc, s.name)}>
                 <img src={photoSrc} alt={s.name} onError={e => { e.target.style.display = 'none'; }} />
-                {initials(s.name)}
               </div>
               <div className="sc-name">{s.name}</div>
               {s.supervisor && <div className="sc-supervisor">{s.supervisor}</div>}
-              <a href={`mailto:${s.email}@iiti.ac.in`} className="sc-email">{s.email}@iiti.ac.in</a>
+              {s.email && <a href={`mailto:${s.email}@iiti.ac.in`} className="sc-email">{s.email.includes('@') ? s.email : s.email+'@iiti.ac.in'}</a>}
             </div>
           );
         })}
@@ -32,15 +28,38 @@ function StudentBatch({ batch, list }) {
   );
 }
 
-export default function Students({ pg, ug, phd }) {
+export default function Students({ pg, ug, phd, interns }) {
   const [tab, setTab] = useState('phd');
+  
+  // Image Modal State
+  const [modalImg, setModalImg] = useState(null);
+  const [modalName, setModalName] = useState('');
+
+  const handleImageClick = (src, name) => {
+    setModalImg(src);
+    setModalName(name);
+  };
+
+  const closeImageModal = () => {
+    setModalImg(null);
+    setModalName('');
+  };
+
+  // Close modal on Esc key
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') closeImageModal();
+    };
+    if (modalImg) window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [modalImg]);
 
   return (
     <div style={{ background: 'var(--bg)' }}>
       <div className="section-inner">
         <div className="section-header">
           <span className="section-eyebrow">✦ Current Students</span>
-          <h2 className="section-title">Our <span>Students</span></h2>
+          <h1 className="section-title">Our <span>Students</span></h1>
           <p className="section-desc">Meet our brilliant community of researchers and learners across all programs.</p>
           <div className="title-bar" />
         </div>
@@ -49,18 +68,44 @@ export default function Students({ pg, ug, phd }) {
           <button className={`student-tab${tab === 'phd' ? ' active' : ''}`} onClick={() => setTab('phd')}>Ph.D.</button>
           <button className={`student-tab${tab === 'pg' ? ' active' : ''}`} onClick={() => setTab('pg')}>Post Graduate</button>
           <button className={`student-tab${tab === 'ug' ? ' active' : ''}`} onClick={() => setTab('ug')}>Under Graduate</button>
+          <button className={`student-tab${tab === 'interns' ? ' active' : ''}`} onClick={() => setTab('interns')}>Interns</button>
         </div>
 
         {tab === 'phd' && phd && Object.entries(phd).map(([batch, list]) => (
-          <StudentBatch key={batch} batch={batch} list={list} />
+          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
         ))}
-        {tab === 'pg' && Object.entries(pg).map(([batch, list]) => (
-          <StudentBatch key={batch} batch={batch} list={list} />
+        {tab === 'pg' && pg && Object.entries(pg).sort(([a], [b]) => {
+          const lA = a.toLowerCase();
+          const lB = b.toLowerCase();
+          const getPriority = str => {
+            if (str.includes('space engineering')) return 1;
+            if (str.includes('aolt')) return 3;
+            return 2;
+          };
+          const diff = getPriority(lA) - getPriority(lB);
+          if (diff !== 0) return diff;
+          return b.localeCompare(a);
+        }).map(([batch, list]) => (
+          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
         ))}
-        {tab === 'ug' && Object.entries(ug).map(([batch, list]) => (
-          <StudentBatch key={batch} batch={batch} list={list} />
+        {tab === 'ug' && ug && Object.entries(ug).map(([batch, list]) => (
+          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+        ))}
+        {tab === 'interns' && interns && Object.entries(interns).map(([batch, list]) => (
+          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
         ))}
       </div>
+      
+      {/* Global Image Modal */}
+      {modalImg && (
+        <div className="student-modal-overlay" onClick={closeImageModal}>
+          <div className="student-modal-content" onClick={e => e.stopPropagation()}>
+            <div className="close-hint">Click outside to close</div>
+            <img src={modalImg} alt={modalName} onError={e => { e.target.style.display = 'none'; }} />
+          </div>
+        </div>
+      )}
+
       <Footer />
     </div>
   );

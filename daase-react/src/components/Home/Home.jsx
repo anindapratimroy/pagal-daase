@@ -1,7 +1,8 @@
 import CounterStat from './CounterStat';
 import Footer from '../Layout/Footer';
+import NewsTicker from './NewsTicker';
 
-export default function Home({ onNav }) {
+export default function Home({ onNav, news }) {
   return (
     <div>
       {/* Top strip */}
@@ -51,6 +52,8 @@ export default function Home({ onNav }) {
           </div>
         </div>
       </div>
+
+      <NewsTicker news={news} />
 
       {/* About navy strip */}
       <div className="about-strip">

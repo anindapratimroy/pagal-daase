@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react';
 
 const MSGS = [
-  '✦  Loading DAASE Website…',
-  '✦  Connecting to data source…',
-  '✦  Fetching faculty profiles…',
-  '✦  Loading student records…',
-  '✦  Preparing gallery…',
-  '✦  Aligning the cosmos…',
-  '✦  Almost ready…',
+  '✦  Just a moment...',
+  '✦  Connecting to data source...',
+  '✦  Setting up the cosmos...',
+  '✦  Almost ready...',
 ];
 
 export default function Preloader({ visible }) {
@@ -18,7 +15,7 @@ export default function Preloader({ visible }) {
     if (!visible) return;
     const msgTimer = setInterval(() => setMsgIdx(i => (i + 1) % MSGS.length), 900);
     const start = Date.now();
-    const DURATION = 2200;
+    const DURATION = 2500;
     const progressTimer = setInterval(() => {
       setProgress(Math.min(100, Math.round(((Date.now() - start) / DURATION) * 100)));
     }, 30);
@@ -27,9 +24,15 @@ export default function Preloader({ visible }) {
 
   return (
     <div id="preloader" className={visible ? '' : 'hidden'}>
-      <div className="pre-spinner" />
-      <div className="pre-text">Loading DAASE Website</div>
-      <div className="pre-sub">{MSGS[msgIdx]}</div>
+      <div style={{ display: 'flex', gap: '20px', alignItems: 'center', marginBottom: '20px' }}>
+        <img src="images/IITI_Logo.svg" alt="IIT Indore" style={{ height: '70px', objectFit: 'contain' }} />
+        <div style={{ width: '2px', height: '50px', background: 'var(--border)' }} />
+        <img src="images/daase.png" alt="DAASE Logo" style={{ height: '70px', objectFit: 'contain', filter: 'brightness(0) saturate(100%) invert(18%) sepia(50%) saturate(1458%) hue-rotate(192deg) brightness(98%) contrast(97%)' }} />
+      </div>
+      
+      <div className="pre-spinner" style={{ marginBottom: '16px' }} />
+      <div className="pre-text" style={{ fontSize: '20px', fontWeight: 'bold' }}>Department of Astronomy, Astrophysics and Space Engineering</div>
+      <div className="pre-sub" style={{ marginTop: '8px', fontSize: '14px', color: 'var(--navy)' }}>{MSGS[msgIdx]}</div>
       <div style={{ width: 220, height: 3, background: 'var(--border)', borderRadius: 2, overflow: 'hidden', marginTop: 4 }}>
         <div style={{ height: '100%', width: `${progress}%`, background: 'var(--navy)', transition: 'width 0.1s linear', borderRadius: 2 }} />
       </div>

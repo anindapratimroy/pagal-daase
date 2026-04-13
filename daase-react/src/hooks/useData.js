@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { SHEETS_URL, FACULTY_FB, VISITING_FB, PG_FB, UG_FB, PHD_FB, ALUMNI_FB, FACILITIES_FB, EVENTS_FB, drivePhotoUrl } from '../data/fallback';
+import { SHEETS_URL, FACULTY_FB, VISITING_FB, STAFF_FB, PG_FB, UG_FB, PHD_FB, ALUMNI_FB, FACILITIES_FB, EVENTS_FB, INTERNS_FB, NEWS_FB, OUTREACH_FB, drivePhotoUrl } from '../data/fallback';
 
 const CACHE_KEY = 'daase_v1_data';
 const CACHE_TTL = 30 * 60 * 1000; // 30 min
@@ -61,13 +61,23 @@ async function fetchFresh() {
 
 function resolveData(d) {
   return {
-    faculty:    (d?.faculty?.length   ? d.faculty.map(f => ({ ...f, photo: drivePhotoUrl(f.photo) || f.photo }))  : FACULTY_FB),
-    visiting:   (d?.visiting?.length  ? d.visiting.map(f => ({ ...f, photo: drivePhotoUrl(f.photo) || f.photo })) : VISITING_FB),
+    faculty:    (d?.faculty?.length   ? d.faculty.map(f => {
+        const fb = FACULTY_FB.find(x => x.name === f.name) || {};
+        return { ...fb, ...f, photo: drivePhotoUrl(f.photo) || f.photo };
+      }) : FACULTY_FB),
+    visiting:   (d?.visiting?.length  ? d.visiting.map(f => {
+        const fb = VISITING_FB.find(x => x.name === f.name) || {};
+        return { ...fb, ...f, photo: drivePhotoUrl(f.photo) || f.photo };
+      }) : VISITING_FB),
     pg:         (d?.pg_students       ? d.pg_students  : PG_FB),
     ug:         (d?.ug_students       ? d.ug_students  : UG_FB),
     phd:        (d?.phd_students      ? d.phd_students : PHD_FB),
     alumni:     (d?.alumni?.length    ? d.alumni       : ALUMNI_FB),
     facilities: (d?.facilities?.length? d.facilities   : FACILITIES_FB),
     events:     (d?.events?.length    ? d.events       : EVENTS_FB),
+    interns:    (d?.interns           ? d.interns      : INTERNS_FB),
+    news:       (d?.news?.length      ? d.news         : NEWS_FB),
+    outreach:   (d?.outreach?.length  ? d.outreach     : OUTREACH_FB),
+    staff:      (d?.staff?.length     ? d.staff        : STAFF_FB),
   };
 }
