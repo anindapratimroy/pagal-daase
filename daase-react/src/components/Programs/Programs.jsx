@@ -128,6 +128,17 @@ export default function Programs() {
                   </div>
                 ))}
               </div>
+              
+              <div style={{ marginTop: '32px' }}>
+                <a 
+                  href={active === 'btech' ? 'https://academic.iiti.ac.in/app/course_curriculum_list_ug' : 'https://academic.iiti.ac.in/app/course_curriculum_list_pg'}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="btn-outline"
+                >
+                  {active === 'btech' ? 'UG Syllabus' : 'PG Syllabus'} <span className="arrow">↗</span>
+                </a>
+              </div>
             </div>
             <div className="pc-highlights">
               {prog.highlights.map((h, i) => (

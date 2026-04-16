@@ -3,23 +3,56 @@ import Footer from '../Layout/Footer';
 import { drivePhotoUrl } from '../../data/fallback';
 import { imageMap } from '../../data/imageMap';
 
-function StudentBatch({ batch, list, onImageClick }) {
+function StudentBatch({ batch, list, onImageClick, type }) {
   return (
     <div className="batch-section">
       <div className="batch-title">
-        {batch} <span className="batch-count">{list.length}</span>
+        {batch} <span className="batch-count">{list.length} </span><span>  Please add [@]iiti.ac.in</span>
       </div>
       <div className="students-grid">
         {list.map((s, i) => {
-          const photoSrc = imageMap[s.name] || drivePhotoUrl(s.photo) || `images/students/${s.email}.jpg`;
+          let photoSrc = imageMap[s.name] || drivePhotoUrl(s.photo);
+          if (!photoSrc) {
+            if (type === 'interns') {
+              photoSrc = `people_images/Intern/${s.name}.png`;
+            } else {
+              photoSrc = `images/students/${s.email}.jpg`;
+            }
+          }
+
           return (
             <div className="student-card anim-fadeup" key={i} style={{ animationDelay: `${0.04 + i * 0.03}s` }}>
               <div className="sc-avatar" onClick={() => onImageClick && onImageClick(photoSrc, s.name)}>
-                <img src={photoSrc} alt={s.name} onError={e => { e.target.style.display = 'none'; }} />
+                <img src={photoSrc} alt={s.name} onError={e => {
+                  if (type === 'interns' && e.target.src.endsWith('.png')) {
+                    e.target.src = e.target.src.replace('.png', '.jpg');
+                  } else {
+                    e.target.style.display = 'none';
+                  }
+                }} />
               </div>
               <div className="sc-name">{s.name}</div>
               {s.supervisor && <div className="sc-supervisor">{s.supervisor}</div>}
-              {s.email && <a href={`mailto:${s.email}@iiti.ac.in`} className="sc-email">{s.email.includes('@') ? s.email : s.email+'@iiti.ac.in'}</a>}
+              {s.email && <div className="sc-email">{s.email}</div>}
+              
+              {type === 'interns' && (
+                <div style={{ marginTop: '8px', fontSize: '0.85rem', color: 'var(--text-light)', lineHeight: '1.4' }}>
+                  {(() => {
+                    const inst = s['home institution'] || s['Home Institution'] || s.home_institution || s.institution;
+                    const iType = s['type of internship'] || s['Type of Internship'] || s.type_of_internship || s.type || s.internship_type;
+                    const per = s.period || s.Period || s.duration || s.Duration;
+                    const bat = s.batch || s.Batch;
+                    return (
+                      <>
+                        {inst && <div><strong style={{color: 'var(--text)'}}>Institution:</strong> {inst}</div>}
+                        {iType && <div><strong style={{color: 'var(--text)'}}>Type:</strong> {iType}</div>}
+                        {per && <div><strong style={{color: 'var(--text)'}}>Period:</strong> {per}</div>}
+                        {bat && <div><strong style={{color: 'var(--text)'}}>Batch:</strong> {bat}</div>}
+                      </>
+                    );
+                  })()}
+                </div>
+              )}
             </div>
           );
         })}
@@ -30,7 +63,7 @@ function StudentBatch({ batch, list, onImageClick }) {
 
 export default function Students({ pg, ug, phd, interns }) {
   const [tab, setTab] = useState('phd');
-  
+
   // Image Modal State
   const [modalImg, setModalImg] = useState(null);
   const [modalName, setModalName] = useState('');
@@ -72,7 +105,7 @@ export default function Students({ pg, ug, phd, interns }) {
         </div>
 
         {tab === 'phd' && phd && Object.entries(phd).map(([batch, list]) => (
-          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
         ))}
         {tab === 'pg' && pg && Object.entries(pg).sort(([a], [b]) => {
           const lA = a.toLowerCase();
@@ -86,16 +119,16 @@ export default function Students({ pg, ug, phd, interns }) {
           if (diff !== 0) return diff;
           return b.localeCompare(a);
         }).map(([batch, list]) => (
-          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
         ))}
         {tab === 'ug' && ug && Object.entries(ug).map(([batch, list]) => (
-          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
         ))}
         {tab === 'interns' && interns && Object.entries(interns).map(([batch, list]) => (
-          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
         ))}
       </div>
-      
+
       {/* Global Image Modal */}
       {modalImg && (
         <div className="student-modal-overlay" onClick={closeImageModal}>

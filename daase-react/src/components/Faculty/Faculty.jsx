@@ -44,7 +44,21 @@ function FacultyCard({ f }) {
   );
 }
 
+const cleanName = (name) => {
+  if (!name) return '';
+  return name.replace(/^(Dr\.|Prof\.|Mr\.|Ms\.)\s+/i, '').trim();
+};
+
+const sortByName = (list) => {
+  if (!list) return [];
+  return [...list].sort((a, b) => cleanName(a.name).localeCompare(cleanName(b.name)));
+};
+
 export default function Faculty({ faculty, visiting, staff }) {
+  const sortedFaculty = sortByName(faculty);
+  const sortedVisiting = sortByName(visiting);
+  const sortedStaff = staff ? sortByName(staff) : [];
+
   return (
     <div>
       <div className="section-inner">
@@ -56,7 +70,7 @@ export default function Faculty({ faculty, visiting, staff }) {
         </div>
 
         <div className="faculty-grid">
-          {faculty.map((f, i) => (
+          {sortedFaculty.map((f, i) => (
             <div key={i} className="anim-fadeup" style={{ animationDelay: `${0.06 + i * 0.04}s` }}>
               <FacultyCard f={f} />
             </div>
@@ -68,20 +82,20 @@ export default function Faculty({ faculty, visiting, staff }) {
         </div>
 
         <div className="faculty-grid" style={{ marginBottom: '80px' }}>
-          {visiting.map((f, i) => (
+          {sortedVisiting.map((f, i) => (
             <div key={i} className="anim-fadeup" style={{ animationDelay: `${0.06 + i * 0.06}s` }}>
               <FacultyCard f={f} />
             </div>
           ))}
         </div>
 
-        {staff && staff.length > 0 && (
+        {sortedStaff && sortedStaff.length > 0 && (
           <>
             <div className="faculty-divider">
               Technical &amp; Support Staff <span className="visiting-badge" style={{ background: 'var(--navy)', color: '#fff' }}>HOD Office</span>
             </div>
             <div className="faculty-grid">
-              {staff.map((f, i) => (
+              {sortedStaff.map((f, i) => (
                 <div key={i} className="anim-fadeup" style={{ animationDelay: `${0.06 + i * 0.06}s` }}>
                   <FacultyCard f={f} />
                 </div>

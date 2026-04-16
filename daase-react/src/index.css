@@ -846,7 +846,163 @@ nav {
   border-radius: var(--r);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-  margin-bottom: 32px;
+}
+
+/* News & Events Feed */
+.news-feed-container {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 32px 24px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--tr);
+}
+
+.news-feed-container:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-dark);
+}
+
+.news-feed-title {
+  font-family: 'Merriweather', serif;
+  font-size: 24px;
+  color: var(--navy);
+  margin-bottom: 24px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.news-feed-title::before {
+  content: '✦';
+  color: var(--gold);
+  font-size: 18px;
+  animation: pulse 2s infinite;
+}
+
+.news-feed-title span {
+  color: var(--gold);
+}
+
+.vertical-marquee-container {
+  height: 380px;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+.vertical-marquee-container:hover .vertical-marquee-content {
+  animation-play-state: paused;
+}
+
+.vertical-marquee-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  /* Adjust duration as needed; 30s is a smooth scroll */
+  animation: scrollVertical 35s linear infinite;
+}
+
+@keyframes scrollVertical {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    /* Since the content array is exactly duplicated, we translate by -50% to seamlessly loop */
+    transform: translateY(calc(-50% - 6px));
+  }
+}
+
+.news-feed-item {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--bg);
+  transition: var(--tr);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.news-feed-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--gold);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.news-feed-item:hover::after {
+  transform: scaleY(1);
+}
+
+.news-feed-item:hover {
+  border-color: var(--navy);
+  background: var(--white);
+  transform: translateX(4px);
+  box-shadow: var(--shadow-sm);
+}
+
+.news-feed-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.type-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 3px 6px;
+  border-radius: 3px;
+}
+
+.type-badge.news {
+  background: var(--navy-light);
+  color: var(--navy);
+}
+
+.type-badge.event {
+  background: var(--gold-bg);
+  color: var(--gold);
+  border: 1px solid var(--gold-border);
+}
+
+.news-feed-date {
+  font-size: 12px;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.news-feed-headline {
+  font-size: 14.5px;
+  color: var(--text-body);
+  font-weight: 600;
+  line-height: 1.4;
+  display: block;
+  text-decoration: none;
+  transition: var(--tr);
+}
+
+a.news-feed-headline:hover {
+  color: var(--navy);
+}
+
+.news-feed-empty {
+  font-size: 14px;
+  color: var(--text-light);
+  text-align: center;
+  padding: 24px 0;
 }
 
 .hero-stat {
@@ -1195,7 +1351,7 @@ nav {
   border-bottom: 3px solid transparent;
   margin-bottom: -2px;
   font-family: 'Source Sans 3', sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1581,7 +1737,7 @@ nav {
   border-bottom: 3px solid transparent;
   margin-bottom: -2px;
   font-family: 'Source Sans 3', sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1636,7 +1792,7 @@ nav {
 .student-card {
   background: var(--white);
   border: 1px solid var(--border);
-  border-radius: var(--r-sm);
+  border-radius: 30px;
   padding: 24px 16px;
   text-align: center;
   transition: var(--tr);
@@ -1655,7 +1811,7 @@ nav {
 .sc-avatar {
   width: 100px;
   height: 100px;
-  border-radius: 50%;
+  border-radius: 20%;
   margin: 0 auto 9px;
   background: var(--navy-light);
   border: 2px solid var(--border);
@@ -1702,7 +1858,7 @@ nav {
 
 .sc-email {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 18px;
   color: var(--navy-mid);
   display: block;
   transition: var(--tr);
@@ -2605,34 +2761,34 @@ a.sc-email:hover {
 
 .bg-satellite {
   position: absolute;
-  width: 40px;
-  height: 40px;
-  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
-  animation: orbit-satellite 45s linear infinite;
-  opacity: 0.15;
+  width: 50px;
+  height: 50px;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9));
+  animation: orbit-satellite 40s linear infinite;
+  opacity: 0.35;
 }
 
 .bg-planet {
   position: absolute;
-  width: 150px;
-  height: 150px;
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, var(--navy-light), var(--navy-dark));
-  box-shadow: inset -20px -20px 40px rgba(0, 0, 0, 0.5), 0 0 40px rgba(15, 45, 96, 0.2);
+  box-shadow: inset -20px -20px 40px rgba(0, 0, 0, 0.4), 0 0 40px rgba(15, 45, 96, 0.35);
   top: 15%;
   right: 5%;
-  opacity: 0.1;
-  animation: floatY 15s ease-in-out infinite;
+  opacity: 0.3;
+  animation: floatY 12s ease-in-out infinite, planetPulse 15s ease-in-out infinite;
 }
 
 .bg-rocket {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   transform: rotate(45deg);
-  opacity: 0.2;
-  animation: rocket-launch 35s ease-in-out infinite both;
-  animation-delay: 10s;
+  opacity: 0.4;
+  animation: rocket-launch 30s ease-in-out infinite both;
+  animation-delay: 5s;
 }
 
 @keyframes orbit-satellite {
@@ -2652,15 +2808,29 @@ a.sc-email:hover {
   }
 
   10% {
-    opacity: 0.4;
+    opacity: 0.6;
   }
 
   90% {
-    opacity: 0.4;
+    opacity: 0.6;
   }
 
   100% {
     transform: translate(110vw, -20vh) rotate(45deg);
     opacity: 0;
+  }
+}
+
+@keyframes planetPulse {
+
+  0%,
+  100% {
+    filter: brightness(1);
+    transform: scale(1);
+  }
+
+  50% {
+    filter: brightness(1.2);
+    transform: scale(1.05);
   }
 }

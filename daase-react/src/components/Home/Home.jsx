@@ -2,7 +2,13 @@ import CounterStat from './CounterStat';
 import Footer from '../Layout/Footer';
 import NewsTicker from './NewsTicker';
 
-export default function Home({ onNav, news }) {
+export default function Home({ onNav, news, events }) {
+  // Combine and sort recent news and upcoming events
+  const combinedUpdates = [
+    ...(news || []).map(n => ({ type: 'news', ...n })),
+    ...(events || []).map(e => ({ type: 'event', ...e }))
+  ].slice(0, 8); // Top 8 items
+
   return (
     <div>
       {/* Top strip */}
@@ -32,28 +38,55 @@ export default function Home({ onNav, news }) {
               View Programs <span className="arrow">→</span>
             </button>
           </div>
-          <div className="scroll-hint">Scroll to explore</div>
-        </div>
 
-        <div className="hero-right">
-          <div className="hero-stats-grid">
+          <div className="hero-stats-grid" style={{ marginTop: '48px' }}>
             <CounterStat target={7}   label="Research Areas"    delay="0.06s" />
             <CounterStat target={5}   label="Degree Programs"   delay="0.12s" />
             <CounterStat target={13}  label="Faculty Members"   delay="0.18s" />
             <CounterStat target={100} label="+ Alumni"          delay="0.23s" />
           </div>
-          <div className="hero-quick-links">
-            <div className="hero-quick-link" onClick={() => onNav('faculty')}>Faculty Directory <span className="arrow">→</span></div>
-            <div className="hero-quick-link" onClick={() => onNav('students')}>Current Students <span className="arrow">→</span></div>
-            <a href="https://academic.iiti.ac.in/phdadvt.php" target="_blank" rel="noopener noreferrer" className="hero-quick-link">
-              PhD Admissions <span className="arrow">↗</span>
-            </a>
-            <div className="hero-quick-link" onClick={() => onNav('events')}>Events &amp; Workshops <span className="arrow">→</span></div>
+
+          <div className="scroll-hint">Scroll to explore</div>
+        </div>
+
+        <div className="hero-right">
+          <div className="news-feed-container anim-fadein" style={{ animationDelay: '0.2s', paddingBottom: '20px' }}>
+            <h2 className="news-feed-title">News &amp; <span>Events</span></h2>
+            
+            <div className="vertical-marquee-container">
+              <div className="vertical-marquee-content">
+                {combinedUpdates.length > 0 ? [...combinedUpdates, ...combinedUpdates].map((item, index) => (
+                  <div key={index} className="news-feed-item">
+                    <div className="news-feed-meta">
+                      {item.type === 'event' && <span className="type-badge event">Event</span>}
+                      {item.type === 'news' && <span className="type-badge news">News</span>}
+                      <span className="news-feed-date">{item.date}</span>
+                    </div>
+                    {item.link || item.url ? (
+                      <a href={item.link || item.url} target="_blank" rel="noopener noreferrer" className="news-feed-headline">
+                        {item.title || item.text} <span className="arrow">↗</span>
+                      </a>
+                    ) : (
+                      <div className="news-feed-headline">{item.title || item.text}</div>
+                    )}
+                  </div>
+                )) : (
+                  <div className="news-feed-empty">No updates to show right now.</div>
+                )}
+              </div>
+            </div>
+            
+            <div className="hero-quick-links" style={{ marginTop: '24px' }}>
+              <div className="hero-quick-link" onClick={() => onNav('faculty')}>Faculty Directory <span className="arrow">→</span></div>
+              <div className="hero-quick-link" onClick={() => onNav('students')}>Current Students <span className="arrow">→</span></div>
+              <a href="https://academic.iiti.ac.in/phdadvt.php" target="_blank" rel="noopener noreferrer" className="hero-quick-link">
+                PhD Admissions <span className="arrow">↗</span>
+              </a>
+              <div className="hero-quick-link" onClick={() => onNav('events')}>Events &amp; Workshops <span className="arrow">→</span></div>
+            </div>
           </div>
         </div>
       </div>
-
-      <NewsTicker news={news} />
 
       {/* About navy strip */}
       <div className="about-strip">

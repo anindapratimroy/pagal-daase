@@ -52,7 +52,7 @@ export default function App() {
 
   const renderView = () => {
     switch (view) {
-      case 'home': return <Home onNav={handleNav} news={data.news} />;
+      case 'home': return <Home onNav={handleNav} news={data.news} events={data.events} />;
       case 'research': return <Research />;
       case 'programs': return <Programs />;
       case 'faculty': return <Faculty faculty={data.faculty} visiting={data.visiting} staff={data.staff} />;
