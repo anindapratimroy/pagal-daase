@@ -959,7 +959,7 @@ nav {
 }
 
 .type-badge {
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -979,13 +979,13 @@ nav {
 }
 
 .news-feed-date {
-  font-size: 12px;
+  font-size: 16px;
   color: var(--text-light);
   font-weight: 500;
 }
 
 .news-feed-headline {
-  font-size: 14.5px;
+  font-size: 18px;
   color: var(--text-body);
   font-weight: 600;
   line-height: 1.4;
