@@ -1613,10 +1613,6 @@ a.news-feed-headline:hover {
   text-transform: uppercase;
 }
 
-.fc-designation-badge.dean-badge {
-  background: var(--navy);
-  color: #fff;
-}
 
 .fc-body {
   padding: 14px 14px 16px;

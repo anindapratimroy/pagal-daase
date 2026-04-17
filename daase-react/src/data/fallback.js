@@ -28,7 +28,7 @@ export const RESEARCH_AREAS = [
 
 export const FACULTY_FB = [
   { name: 'Dr. Saurabh Das', designation: 'Associate Professor & HoD', isHOD: true, research: 'Remote Sensing, Atmospheric Physics, Aerosols, Climate Science, LIDAR', email: 'saurabh.das', photo: 'images/faculty/saurabh_das.jpg', url: 'http://people.iiti.ac.in/~saurabh.das/' },
-  { name: 'Prof. Abhirup Datta', isDean: true, designation: 'Professor & Dean R&D', research: 'Radio Astronomy, Epoch of Reionization, SKA, Radio Instrumentation', email: 'abhirup.datta', photo: 'images/faculty/abhirup_datta.jpg', url: 'https://sites.google.com/iiti.ac.in/abhirupdatta/' },
+  { name: 'Prof. Abhirup Datta', designation: 'Professor', research: 'Radio Astronomy, Epoch of Reionization, SKA, Radio Instrumentation', email: 'abhirup.datta', photo: 'images/faculty/abhirup_datta.jpg', url: 'https://sites.google.com/iiti.ac.in/abhirupdatta/' },
   { name: 'Prof. Bhargav Vaidya', designation: 'Professor', research: 'Computational Astrophysics, MHD, Relativistic Jets, High-Energy Astrophysics', email: 'bhargav.vaidya', photo: 'images/faculty/bhargav_vaidya.jpg', url: 'http://people.iiti.ac.in/~bvaidya/' },
   { name: 'Dr. Narendra Nath Patra', designation: 'Associate Professor', research: 'HI 21-cm, Epoch of Reionization, Radio Interferometry, IGM', email: 'narendranath.patra', photo: 'images/faculty/narendra_patra.jpg', url: 'http://people.iiti.ac.in/~naren/' },
   { name: 'Dr. Manoneeta Chakraborty', designation: 'Assistant Professor', research: 'X-ray Astronomy, Compact Objects, Neutron Stars, Black Holes', email: 'manoneeta.chakraborty', photo: 'images/faculty/manoneeta_chakraborty.jpg', url: 'http://people.iiti.ac.in/~manoneeta/' },

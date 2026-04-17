@@ -18,7 +18,6 @@ function FacultyCard({ f }) {
       </div>
       <div className="fc-body">
         {f.isHOD && <div className="hod-badge">Head of Department</div>}
-        {f.isDean && <div className="hod-badge">Dean, Research & Development</div>}
         <div className="fc-name">{f.name}</div>
         <div className="fc-research">{f.research}</div>
         {f.email
@@ -51,7 +50,11 @@ const cleanName = (name) => {
 
 const sortByName = (list) => {
   if (!list) return [];
-  return [...list].sort((a, b) => cleanName(a.name).localeCompare(cleanName(b.name)));
+  return [...list].sort((a, b) => {
+    if (a.isHOD && !b.isHOD) return -1;
+    if (!a.isHOD && b.isHOD) return 1;
+    return cleanName(a.name).localeCompare(cleanName(b.name));
+  });
 };
 
 export default function Faculty({ faculty, visiting, staff }) {
