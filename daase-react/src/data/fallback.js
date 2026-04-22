@@ -276,11 +276,11 @@ export const NEWS_FB = [];
 export const OUTREACH_FB = [];
 
 export const STAFF_FB = [
-  { name: 'Swapnil Dasharath Sankhe', designation: 'Senior Assistant (HoD Staff)', email: 'aase-office' },
-  { name: 'Abhijeet Dutta', designation: 'Technical/Administrative Staff', email: 'aase-office' },
-  { name: 'Durgesh Chouhan', designation: 'Technical/Administrative Staff', email: 'aase-office' },
-  { name: 'Rahul Khare', designation: 'Technical/Administrative Staff', email: 'aase-office' },
-  { name: 'Varunesh', designation: 'Technical/Administrative Staff', email: 'aase-office' },
+  { sortOrder: 1, name: 'Swapnil Dasharath Sankhe', designation: 'Senior Assistant (HoD Staff)', email: 'aase-office' },
+  { sortOrder: 2, name: 'Rahul Khare', designation: 'Technical/Administrative Staff', email: 'aase-office' },
+  { sortOrder: 3, name: 'Varunesh Shukla', designation: 'Technical/Administrative Staff', email: 'aase-office' },
+  { sortOrder: 4, name: 'Abhijeet Dutta', designation: 'Technical/Administrative Staff', email: 'aase-office' },
+  { sortOrder: 5, name: 'Durgesh Chouhan', designation: 'Technical/Administrative Staff', email: 'aase-office' },
 ];
 
 

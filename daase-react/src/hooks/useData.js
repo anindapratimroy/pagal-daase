@@ -78,6 +78,12 @@ function resolveData(d) {
     interns:    (d?.interns           ? d.interns      : INTERNS_FB),
     news:       (d?.news?.length      ? d.news         : NEWS_FB),
     outreach:   (d?.outreach?.length  ? d.outreach     : OUTREACH_FB),
-    staff:      (d?.staff?.length     ? d.staff        : STAFF_FB),
+    staff: (() => {
+      const raw = d?.staff?.length ? d.staff.map((f, idx) => {
+        const fb = STAFF_FB.find(x => x.name === f.name) || {};
+        return { ...fb, ...f, sortOrder: f.sortOrder ?? fb.sortOrder ?? idx };
+      }) : STAFF_FB;
+      return [...raw].sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));
+    })(),
   };
 }

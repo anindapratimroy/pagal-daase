@@ -18,13 +18,23 @@ import Placements from './components/Placements/Placements';
 
 import { useData } from './hooks/useData';
 
+// Map People dropdown IDs → Faculty component tab IDs
+const PEOPLE_TAB_MAP = {
+  'people-faculty': 'faculty',
+  'people-staff':   'staff',
+  'people-phd':     'phd',
+  'people-pg':      'pg',
+  'people-ug':      'ug',
+  'people-alumni':  'alumni',
+};
+
 export default function App() {
   const [view, setView] = useState('home');
+  const [peopleTab, setPeopleTab] = useState('faculty'); // active tab inside People page
   const [loading, setLoading] = useState(true);
   const [showBackTop, setShowTop] = useState(false);
   const mainRef = useRef(null);
 
-  // Data from Sheets / fallback
   const data = useData();
 
   // Preloader: show until data resolves (max 2.5s)
@@ -46,24 +56,56 @@ export default function App() {
   }, []);
 
   const handleNav = (id) => {
-    setView(id);
+    if (PEOPLE_TAB_MAP[id]) {
+      // It's a People sub-item — map to the People page with the right tab
+      setPeopleTab(PEOPLE_TAB_MAP[id]);
+      setView('people');
+    } else {
+      setView(id);
+    }
     if (mainRef.current) mainRef.current.scrollTop = 0;
   };
 
+  // Compute what the "current" value is for Navbar highlighting
+  // (reverse-map: if we're on 'people' page, tell Navbar which sub-item is active)
+  const navCurrent = view === 'people'
+    ? Object.entries(PEOPLE_TAB_MAP).find(([, tab]) => tab === peopleTab)?.[0] ?? 'people-faculty'
+    : view;
+
   const renderView = () => {
     switch (view) {
-      case 'home': return <Home onNav={handleNav} news={data.news} events={data.events} />;
-      case 'research': return <Research />;
-      case 'programs': return <Programs />;
-      case 'faculty': return <Faculty faculty={data.faculty} visiting={data.visiting} staff={data.staff} />;
-      case 'students': return <Students pg={data.pg} ug={data.ug} phd={data.phd} interns={data.interns} />;
+      case 'home':       return <Home onNav={handleNav} news={data.news} events={data.events} />;
+      case 'research':   return <Research />;
+      case 'programs':   return <Programs />;
+      case 'people':     return (
+        <Faculty
+          key={peopleTab}  /* remount when tab changes from navbar */
+          initialTab={peopleTab}
+          faculty={data.faculty}
+          visiting={data.visiting}
+          staff={data.staff}
+          phd={data.phd}
+          pg={data.pg}
+          ug={data.ug}
+          alumni={data.alumni}
+        />
+      );
       case 'facilities': return <Facilities facilities={data.facilities} />;
-      case 'events': return <Events events={data.events} outreach={data.outreach} />;
-      case 'alumni': return <Alumni alumni={data.alumni} />;
-      case 'gallery': return <Gallery />;
+      case 'events':     return <Events events={data.events} outreach={data.outreach} />;
+      case 'gallery':    return <Gallery />;
       case 'opportunities': return <Opportunities />;
       case 'placements': return <Placements />;
-      default: return <Home onNav={handleNav} news={data.news} />;
+      // Legacy routes kept for safety
+      case 'faculty':    return (
+        <Faculty
+          initialTab="faculty"
+          faculty={data.faculty} visiting={data.visiting} staff={data.staff}
+          phd={data.phd} pg={data.pg} ug={data.ug} alumni={data.alumni}
+        />
+      );
+      case 'students':   return <Students pg={data.pg} ug={data.ug} phd={data.phd} interns={data.interns} />;
+      case 'alumni':     return <Alumni alumni={data.alumni} />;
+      default:           return <Home onNav={handleNav} news={data.news} />;
     }
   };
 
@@ -76,7 +118,7 @@ export default function App() {
       </div>
       <Preloader visible={loading} />
 
-      <Navbar current={view} onNav={handleNav} />
+      <Navbar current={navCurrent} onNav={handleNav} />
 
       <main id="main-content" ref={mainRef}
         style={{ paddingTop: 'var(--nav-h)', minHeight: '100vh', overflowY: 'auto', overflowX: 'hidden' }}>

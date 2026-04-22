@@ -188,5 +188,6 @@ export const imageMap =
   "Abhijeet Dutta": "/people_images/Staff/Abhijeet_Dutta,.jpg",
   "Durgesh Chouhan": "/people_images/Staff/Durgesh_Chouhan.jpg",
   "Rahul Khare": "/people_images/Staff/Rahul_Khare,.jpg",
-  "Varunesh": "/people_images/Staff/Varunesh,.jpg"
+  "Varunesh": "/people_images/Staff/Varunesh,.jpg",
+  "Varunesh Shukla": "/people_images/Staff/Varunesh,.jpg"
 };

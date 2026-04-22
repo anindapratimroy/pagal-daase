@@ -1,6 +1,7 @@
 import CounterStat from './CounterStat';
 import Footer from '../Layout/Footer';
 import NewsTicker from './NewsTicker';
+import Collaborators from './Collaborators';
 
 export default function Home({ onNav, news, events }) {
   // Combine and sort recent news and upcoming events
@@ -76,14 +77,8 @@ export default function Home({ onNav, news, events }) {
               </div>
             </div>
             
-            <div className="hero-quick-links" style={{ marginTop: '24px' }}>
-              <div className="hero-quick-link" onClick={() => onNav('faculty')}>Faculty Directory <span className="arrow">→</span></div>
-              <div className="hero-quick-link" onClick={() => onNav('students')}>Current Students <span className="arrow">→</span></div>
-              <a href="https://academic.iiti.ac.in/phdadvt.php" target="_blank" rel="noopener noreferrer" className="hero-quick-link">
-                PhD Admissions <span className="arrow">↗</span>
-              </a>
-              <div className="hero-quick-link" onClick={() => onNav('events')}>Events &amp; Workshops <span className="arrow">→</span></div>
-            </div>
+
+            <Collaborators />
           </div>
         </div>
       </div>

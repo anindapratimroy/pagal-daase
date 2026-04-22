@@ -1,16 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
+// People sub-menu items — each maps to a tab inside the People/Faculty page
+const PEOPLE_ITEMS = [
+  { id: 'people-faculty',  label: 'Faculty' },
+  { id: 'people-staff',    label: 'Non-Teaching Staff' },
+  { id: 'people-phd',      label: 'Ph.D. students' },
+  { id: 'people-pg',       label: 'Post Graduate Students' },
+  { id: 'people-ug',       label: 'Under Graduate Students' },
+  { id: 'people-alumni',   label: 'Alumni' },
+];
+
+// Flat nav items (no dropdown)
 const NAV_ITEMS = [
-  { id: 'home', label: 'Home' },
-  { id: 'research', label: 'Research' },
-  { id: 'programs', label: 'Programs' },
-  { id: 'faculty', label: 'Faculty' },
-  { id: 'students', label: 'Students' },
+  { id: 'home',       label: 'Home' },
+  { id: 'research',   label: 'Research' },
+  { id: 'programs',   label: 'Programs' },
   { id: 'facilities', label: 'Facilities' },
   { id: 'placements', label: 'Placements' },
-  { id: 'events', label: 'Events' },
-  { id: 'alumni', label: 'Alumni' },
-  { id: 'gallery', label: 'Gallery' },
+  { id: 'events',     label: 'Events' },
+  { id: 'gallery',    label: 'Gallery' },
 ];
 
 const USEFUL_LINKS = [
@@ -21,14 +29,32 @@ const USEFUL_LINKS = [
   { href: 'mailto:aase-office@iiti.ac.in', label: '📧 Department Office' },
 ];
 
+// Whether the current view is any People sub-page
+const isPeopleActive = (current) => current.startsWith('people-');
+
 export default function Navbar({ current, onNav }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const [openDropdown, setOpenDropdown] = useState(null);
 
   const handleNav = (id) => {
     onNav(id);
     setMobileOpen(false);
+    setOpenDropdown(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const toggleDropdown = (name, e) => {
+    e.stopPropagation();
+    setOpenDropdown(prev => prev === name ? null : name);
+  };
+
+  // Close dropdowns if clicking anywhere outside
+  useEffect(() => {
+    const handleOutsideClick = () => setOpenDropdown(null);
+    document.addEventListener('click', handleOutsideClick);
+    return () => document.removeEventListener('click', handleOutsideClick);
+  }, []);
 
   return (
     <>
@@ -50,7 +76,50 @@ export default function Navbar({ current, onNav }) {
         </div>
 
         <div className="nav-links">
-          {NAV_ITEMS.map(item => (
+          {/* Home */}
+          <button
+            className={current === 'home' ? 'active' : ''}
+            onClick={() => handleNav('home')}
+          >
+            Home
+          </button>
+
+          {/* People dropdown */}
+          <div className={`nav-dropdown${openDropdown === 'people' ? ' open' : ''}`} onClick={(e) => toggleDropdown('people', e)}>
+            <button className={`nav-dropdown-trigger${isPeopleActive(current) || openDropdown === 'people' ? ' active' : ''}`}>
+              People ▾
+            </button>
+            <div className="nav-dropdown-menu">
+              {PEOPLE_ITEMS.map(item => (
+                <button
+                  key={item.id}
+                  className={current === item.id ? 'active' : ''}
+                  onClick={(e) => { e.stopPropagation(); handleNav(item.id); }}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Research */}
+          <button
+            className={current === 'research' ? 'active' : ''}
+            onClick={() => handleNav('research')}
+          >
+            Research
+          </button>
+
+          {/* Programs */}
+          <button
+            className={current === 'programs' ? 'active' : ''}
+            onClick={() => handleNav('programs')}
+          >
+            Programs
+          </button>
+
+          {/* Remaining flat items */}
+          {NAV_ITEMS.slice(3).map(item => (
             <button
               key={item.id}
               className={current === item.id ? 'active' : ''}
@@ -60,11 +129,12 @@ export default function Navbar({ current, onNav }) {
             </button>
           ))}
 
-          <div className="nav-dropdown">
-            <button className="nav-dropdown-trigger">Useful Links ▾</button>
+          {/* Useful Links dropdown */}
+          <div className={`nav-dropdown${openDropdown === 'links' ? ' open' : ''}`} onClick={(e) => toggleDropdown('links', e)}>
+            <button className={`nav-dropdown-trigger${openDropdown === 'links' ? ' active' : ''}`}>Useful Links ▾</button>
             <div className="nav-dropdown-menu">
               {USEFUL_LINKS.map(l => (
-                <a key={l.href} href={l.href} target={l.href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer">
+                <a key={l.href} href={l.href} target={l.href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
                   {l.label}
                 </a>
               ))}
@@ -84,8 +154,28 @@ export default function Navbar({ current, onNav }) {
         </div>
       </nav>
 
+      {/* Mobile menu */}
       <div className={`mobile-menu${mobileOpen ? ' open' : ''}`}>
-        {NAV_ITEMS.map(item => (
+        <button className={current === 'home' ? 'active' : ''} onClick={() => handleNav('home')}>Home</button>
+
+        {/* People section header */}
+        <div style={{ padding: '6px 12px 2px', fontSize: '10px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--text-light)' }}>
+          People
+        </div>
+        {PEOPLE_ITEMS.map(item => (
+          <button
+            key={item.id}
+            style={{ paddingLeft: '24px' }}
+            className={current === item.id ? 'active' : ''}
+            onClick={() => handleNav(item.id)}
+          >
+            {item.label}
+          </button>
+        ))}
+
+        <button className={current === 'research' ? 'active' : ''} onClick={() => handleNav('research')}>Research</button>
+        <button className={current === 'programs' ? 'active' : ''} onClick={() => handleNav('programs')}>Programs</button>
+        {NAV_ITEMS.slice(3).map(item => (
           <button key={item.id} className={current === item.id ? 'active' : ''} onClick={() => handleNav(item.id)}>
             {item.label}
           </button>
