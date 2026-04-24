@@ -79,6 +79,9 @@ function resolveData(d) {
     news:       (d?.news?.length      ? d.news         : NEWS_FB),
     outreach:   (d?.outreach?.length  ? d.outreach     : OUTREACH_FB),
     staff: (() => {
+      if (d?.non_teaching_staff) {
+        return d.non_teaching_staff;
+      }
       const raw = d?.staff?.length ? d.staff.map((f, idx) => {
         const fb = STAFF_FB.find(x => x.name === f.name) || {};
         return { ...fb, ...f, sortOrder: f.sortOrder ?? fb.sortOrder ?? idx };

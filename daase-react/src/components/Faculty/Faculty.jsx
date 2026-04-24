@@ -68,7 +68,7 @@ const sortFacultyByName = (list) => {
 
 // Staff: sort by sortOrder field (set explicitly in data)
 const sortStaff = (list) => {
-  if (!list) return [];
+  if (!list || !Array.isArray(list)) return [];
   return [...list].sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));
 };
 
@@ -164,7 +164,7 @@ export default function Faculty({ initialTab = 'faculty', faculty, visiting, sta
 
   const sortedFaculty = sortFacultyByName(faculty);
   const sortedVisiting = sortFacultyByName(visiting);
-  const sortedStaff = sortStaff(staff);
+  const sortedStaff = Array.isArray(staff) ? sortStaff(staff) : [];
 
   // Image Modal State
   const [modalImg, setModalImg] = useState(null);
@@ -235,18 +235,37 @@ export default function Faculty({ initialTab = 'faculty', faculty, visiting, sta
             )}
 
             {/* ── NON-TEACHING STAFF TAB ──────────────────────────────────── */}
-            {activeTab === 'staff' && (
+            {activeTab === 'staff' && staff && (
               <>
-                <div className="faculty-divider" style={{ marginTop: '0' }}>
-                  Technical &amp; Support Staff <span className="visiting-badge" style={{ background: 'var(--navy)', color: '#fff', borderColor: 'var(--navy)' }}>HOD Office</span>
-                </div>
-                <div className="faculty-grid" style={{ marginBottom: '40px' }}>
-                  {sortedStaff.map((f, i) => (
-                    <div key={i} className="anim-fadeup" style={{ animationDelay: `${0.06 + i * 0.06}s` }}>
-                      <FacultyCard f={f} />
+                {Array.isArray(staff) ? (
+                  <>
+                    <div className="faculty-divider" style={{ marginTop: '0' }}>
+                      Technical &amp; Support Staff <span className="visiting-badge" style={{ background: 'var(--navy)', color: '#fff', borderColor: 'var(--navy)' }}>HOD Office</span>
                     </div>
-                  ))}
-                </div>
+                    <div className="faculty-grid" style={{ marginBottom: '40px' }}>
+                      {sortedStaff.map((f, i) => (
+                        <div key={i} className="anim-fadeup" style={{ animationDelay: `${0.06 + i * 0.06}s` }}>
+                          <FacultyCard f={f} />
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  Object.entries(staff).map(([category, list], catIndex) => (
+                    <div key={category} className="anim-fadein">
+                      <div className="faculty-divider" style={{ marginTop: catIndex === 0 ? '0' : '40px' }}>
+                        {category} <span className="visiting-badge" style={{ background: 'var(--navy)', color: '#fff', borderColor: 'var(--navy)' }}>HOD Office</span>
+                      </div>
+                      <div className="faculty-grid" style={{ marginBottom: '40px' }}>
+                        {sortStaff(list).map((f, i) => (
+                          <div key={i} className="anim-fadeup" style={{ animationDelay: `${0.06 + i * 0.06}s` }}>
+                            <FacultyCard f={f} />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))
+                )}
               </>
             )}
 

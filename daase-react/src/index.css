@@ -2800,6 +2800,11 @@ a.sc-email:hover {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .about-highlights-grid {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
   .gallery-item.wide {
     grid-column: span 1;
   }
