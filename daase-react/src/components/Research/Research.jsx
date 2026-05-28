@@ -15,24 +15,25 @@ export default function Research({ onNav }) {
         </div>
 
         {/* Video — autoplays muted immediately, sits right below the title */}
-        <div style={{ marginTop: '36px', display: 'flex', justifyContent: 'center' }}>
-          <div style={{
-            borderRadius: '12px',
-            overflow: 'hidden',
-            boxShadow: '0 8px 40px rgba(0,0,0,0.18)',
-            width: '100%',
-            maxWidth: '960px',
-            aspectRatio: '16/9',
-            background: '#000',
-          }}>
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/biwLe51Rq44?autoplay=1&mute=1&playsinline=1&loop=1&playlist=biwLe51Rq44&controls=1&modestbranding=1&rel=0"
-              title="DAASE Research Video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
-            />
-          </div>
+        <div style={{
+          position: 'relative',
+          paddingBottom: '56.25%', /* 16:9 Aspect Ratio */
+          height: 0,
+          width: '100%',
+          maxWidth: '960px',
+          margin: '36px auto 0 auto',
+          borderRadius: '12px',
+          overflow: 'hidden',
+          boxShadow: '0 8px 40px rgba(0,0,0,0.18)',
+          background: '#000',
+        }}>
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/biwLe51Rq44?autoplay=1&mute=1&playsinline=1&loop=1&playlist=biwLe51Rq44&controls=1&modestbranding=1&rel=0"
+            title="DAASE Research Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none', display: 'block' }}
+          />
         </div>
       </div>
 

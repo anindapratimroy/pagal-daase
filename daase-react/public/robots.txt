@@ -1,4 +1,34 @@
+# ============================================================
+# robots.txt — DAASE IIT Indore
+# ============================================================
+
+# Allow all well-behaved crawlers
 User-agent: *
 Allow: /
+Disallow: /src/
+Disallow: /.env
+Disallow: /node_modules/
 
-Sitemap: https://daase-demo.vercel.app/sitemap.xml
+# Block bad/malicious bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+# Sitemap location
+Sitemap: https://daase.iiti.ac.in/sitemap.xml
