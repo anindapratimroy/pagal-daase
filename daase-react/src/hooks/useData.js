@@ -51,7 +51,8 @@ export function useData() {
 
 async function fetchFresh() {
   try {
-    const res = await fetch(SHEETS_URL);
+    const url = SHEETS_URL + (SHEETS_URL.includes('?') ? '&' : '?') + 't=' + Date.now();
+    const res = await fetch(url, { cache: 'no-store' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const json = await res.json();
     if (json.error) throw new Error(json.error);
