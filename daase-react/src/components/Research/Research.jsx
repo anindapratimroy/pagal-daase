@@ -1,27 +1,46 @@
+import React from 'react';
 import { RESEARCH_AREAS } from '../../data/fallback';
+import Publications from './Publications';
 import Footer from '../Layout/Footer';
 
-export default function Research() {
+export default function Research({ onNav }) {
   return (
-    <div>
-      <div className="section-inner">
-        <div className="section-header">
+    <div className="research-page fade-in">
+      <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '48px 40px 32px 40px' }}>
+        <div className="section-header center">
           <span className="section-eyebrow">✦ Science &amp; Discovery</span>
           <h1 className="section-title">Research <span>Areas</span></h1>
           <p className="section-desc">DAASE covers the full spectrum — from Heliophysics to Cosmology, from Earth observations to black holes.</p>
           <div className="title-bar" />
         </div>
 
-        <div style={{ marginBottom: '60px', borderRadius: 'var(--r)', overflow: 'hidden', boxShadow: 'var(--shadow-md)', width: '100%', aspectRatio: '16/9' }}>
-          <iframe 
-            src="https://www.youtube.com/embed/biwLe51Rq44?autoplay=1&mute=1&loop=1&playlist=biwLe51Rq44&controls=1&showinfo=0&modestbranding=1" 
-            title="DAASE Research Video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowFullScreen
-            style={{ width: '100%', height: '100%', border: 'none' }}
-          ></iframe>
+        {/* Video — autoplays muted immediately, sits right below the title */}
+        <div style={{ marginTop: '36px', display: 'flex', justifyContent: 'center' }}>
+          <div style={{
+            borderRadius: '12px',
+            overflow: 'hidden',
+            boxShadow: '0 8px 40px rgba(0,0,0,0.18)',
+            width: '100%',
+            maxWidth: '960px',
+            aspectRatio: '16/9',
+            background: '#000',
+          }}>
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/biwLe51Rq44?autoplay=1&mute=1&playsinline=1&loop=1&playlist=biwLe51Rq44&controls=1&modestbranding=1&rel=0"
+              title="DAASE Research Video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
+            />
+          </div>
         </div>
+      </div>
 
+      {/* Publications Scroller — below the video */}
+      <Publications />
+
+      {/* Research Area Cards */}
+      <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '40px 40px 56px 40px' }}>
         <div className="research-grid">
           {RESEARCH_AREAS.map((r, i) => (
             <div
@@ -30,27 +49,32 @@ export default function Research() {
               style={{ animationDelay: `${0.06 + i * 0.05}s` }}
             >
               <div style={{ height: '180px', overflow: 'hidden', borderRadius: 'var(--r-sm) var(--r-sm) 0 0', margin: '-24px -24px 20px -24px' }}>
-                <img 
-                  src={`images/research/img_${(i % 17) + 1}.jpg`} 
+                <img
+                  src={r.image}
                   alt={r.title}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex' }}
+                  onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }}
                 />
                 <div className="rc-icon" style={{ display: 'none', height: '100%', alignItems: 'center', justifyContent: 'center', fontSize: '40px', background: 'var(--navy-light)' }}>
                   {r.icon}
                 </div>
               </div>
               <h3 className="rc-title">{r.title}</h3>
-              <p className="rc-desc">{r.desc}</p>
-              {r.url && (
-                <a href={r.url} target="_blank" rel="noopener noreferrer" className="rc-link">
+              <p className="rc-desc" style={{ flexGrow: 1 }}>{r.desc}</p>
+              {r.id && (
+                <button
+                  onClick={() => onNav('research-detail', r.id)}
+                  className="rc-link btn-link"
+                  style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
+                >
                   Learn More ↗
-                </a>
+                </button>
               )}
             </div>
           ))}
         </div>
       </div>
+
       <Footer />
     </div>
   );

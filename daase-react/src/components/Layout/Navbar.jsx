@@ -13,9 +13,7 @@ const PEOPLE_ITEMS = [
 // Flat nav items (no dropdown)
 const NAV_ITEMS = [
   { id: 'home',       label: 'Home' },
-  { id: 'research',   label: 'Research' },
   { id: 'programs',   label: 'Programs' },
-  { id: 'facilities', label: 'Facilities' },
   { id: 'placements', label: 'Placements' },
   { id: 'events',     label: 'Events' },
   { id: 'gallery',    label: 'Gallery' },
@@ -102,13 +100,26 @@ export default function Navbar({ current, onNav }) {
             </div>
           </div>
 
-          {/* Research */}
-          <button
-            className={current === 'research' ? 'active' : ''}
-            onClick={() => handleNav('research')}
-          >
-            Research
-          </button>
+          {/* Research dropdown */}
+          <div className={`nav-dropdown${openDropdown === 'research' ? ' open' : ''}`} onClick={(e) => toggleDropdown('research', e)}>
+            <button className={`nav-dropdown-trigger${current === 'research' || current === 'facilities' || openDropdown === 'research' ? ' active' : ''}`}>
+              Research ▾
+            </button>
+            <div className="nav-dropdown-menu">
+              <button
+                className={current === 'research' ? 'active' : ''}
+                onClick={(e) => { e.stopPropagation(); handleNav('research'); }}
+              >
+                Research Overview
+              </button>
+              <button
+                className={current === 'facilities' ? 'active' : ''}
+                onClick={(e) => { e.stopPropagation(); handleNav('facilities'); }}
+              >
+                Research Facilities
+              </button>
+            </div>
+          </div>
 
           {/* Programs */}
           <button
@@ -119,7 +130,7 @@ export default function Navbar({ current, onNav }) {
           </button>
 
           {/* Remaining flat items */}
-          {NAV_ITEMS.slice(3).map(item => (
+          {NAV_ITEMS.slice(2).map(item => (
             <button
               key={item.id}
               className={current === item.id ? 'active' : ''}
@@ -173,9 +184,14 @@ export default function Navbar({ current, onNav }) {
           </button>
         ))}
 
-        <button className={current === 'research' ? 'active' : ''} onClick={() => handleNav('research')}>Research</button>
+        <div style={{ padding: '6px 12px 2px', fontSize: '10px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--text-light)', marginTop: '8px' }}>
+          Research
+        </div>
+        <button style={{ paddingLeft: '24px' }} className={current === 'research' ? 'active' : ''} onClick={() => handleNav('research')}>Research Overview</button>
+        <button style={{ paddingLeft: '24px' }} className={current === 'facilities' ? 'active' : ''} onClick={() => handleNav('facilities')}>Research Facilities</button>
+
         <button className={current === 'programs' ? 'active' : ''} onClick={() => handleNav('programs')}>Programs</button>
-        {NAV_ITEMS.slice(3).map(item => (
+        {NAV_ITEMS.slice(2).map(item => (
           <button key={item.id} className={current === item.id ? 'active' : ''} onClick={() => handleNav(item.id)}>
             {item.label}
           </button>

@@ -1,0 +1,184 @@
+/* ── Publications Scroller — Light Theme ─────────────────────── */
+.publications-section {
+  background: #f8f9fc;
+  padding: 48px 0 52px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle decorative background accent */
+.publications-section::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(197,160,72,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.publications-header {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.publications-header h2 {
+  margin: 0;
+  font-family: 'Merriweather', serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--navy, #001932);
+  letter-spacing: 0.01em;
+}
+
+.pub-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold, #c5a048);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.pub-title-bar {
+  width: 48px;
+  height: 3px;
+  background: var(--gold, #c5a048);
+  border-radius: 2px;
+  margin-bottom: 9px;
+}
+
+/* ── Scroller ────────────────────────────────────────────────── */
+.publications-scroller {
+  height: 340px;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 7%, black 93%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 7%, black 93%, transparent 100%);
+}
+
+.publications-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  animation: scrollUp 45s linear infinite;
+}
+
+.publications-scroller:hover .publications-content {
+  animation-play-state: paused;
+}
+
+@keyframes scrollUp {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+/* ── Publication Item ────────────────────────────────────────── */
+.pub-item {
+  display: flex;
+  gap: 14px;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #4a5568;
+  padding: 16px 18px;
+  border-left: 3px solid transparent;
+  border-bottom: 1px solid #edf0f5;
+  border-radius: 0 6px 6px 0;
+  background: transparent;
+  transition: background 0.25s ease, border-left-color 0.25s ease, transform 0.2s ease;
+}
+
+.pub-item:hover {
+  background: #fff;
+  border-left-color: var(--gold, #c5a048);
+  transform: translateX(5px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  color: #2d3748;
+}
+
+.pub-num {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--gold, #c5a048);
+  min-width: 26px;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+
+.pub-item p {
+  margin: 0;
+}
+
+/* ── Linked item layout ─────────────────────────────────────── */
+.pub-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.pub-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  text-decoration: none;
+  color: inherit;
+  line-height: 1.75;
+}
+
+.pub-link:hover .pub-text {
+  color: var(--navy, #001932);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pub-link:hover .pub-arrow {
+  color: var(--gold, #c5a048);
+}
+
+.pub-text {
+  flex: 1;
+}
+
+.pub-arrow {
+  font-size: 12px;
+  color: #9daab8;
+  flex-shrink: 0;
+  margin-top: 3px;
+  transition: color 0.2s;
+}
+
+.pub-item--linked {
+  cursor: pointer;
+}
+
+.pub-item a {
+  color: var(--navy, #001932);
+  text-decoration: underline;
+  word-break: break-all;
+  opacity: 0.75;
+}
+
+.pub-item a:hover {
+  opacity: 1;
+  color: var(--gold, #c5a048);
+}
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .publications-section {
+    padding: 36px 0 40px;
+  }
+  .publications-header h2 {
+    font-size: 1.25rem;
+  }
+  .pub-item {
+    font-size: 13px;
+    padding: 14px 14px;
+  }
+  .publications-scroller {
+    height: 280px;
+  }
+}

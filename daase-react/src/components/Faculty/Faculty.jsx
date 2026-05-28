@@ -3,9 +3,19 @@ import Footer from '../Layout/Footer';
 import { drivePhotoUrl } from '../../data/fallback';
 import { imageMap } from '../../data/imageMap';
 
+// Ensure link has protocol prefix
+function normalizeLink(link) {
+  if (!link) return null;
+  const trimmed = link.trim();
+  if (!trimmed) return null;
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
+  return 'https://' + trimmed;
+}
+
 // ─── Faculty Card ────────────────────────────────────────────────────────────
 function FacultyCard({ f }) {
-  const hasUrl = f.url && f.url.length > 0;
+  const normalizedUrl = normalizeLink(f.url);
+  const hasUrl = !!normalizedUrl;
   const photoSrc = imageMap[f.name] || (f.photo ? (drivePhotoUrl(f.photo) || f.photo) : '');
 
   const inner = (
@@ -29,7 +39,7 @@ function FacultyCard({ f }) {
         <div className="fc-name">{f.name}</div>
         {f.research && <div className="fc-research">{f.research}</div>}
         {f.email
-          ? <div className="fc-email">✉ {f.email}@iiti.ac.in</div>
+          ? <div className="fc-email">✉ {f.email.split('@')[0]}</div>
           : <div className="fc-email" style={{ color: 'var(--text-light)' }}>✉ Contact via Dept. Office</div>
         }
       </div>
@@ -38,7 +48,7 @@ function FacultyCard({ f }) {
 
   if (hasUrl) {
     return (
-      <a href={f.url} target="_blank" rel="noopener noreferrer"
+      <a href={normalizedUrl} target="_blank" rel="noopener noreferrer"
         className={`faculty-card${f.isHOD ? ' hod-card' : ''}`}>
         {inner}
       </a>
@@ -103,6 +113,7 @@ function StudentBatch({ batch, list, type, onImageClick }) {
               </div>
               <div className="sc-name">{s.name}</div>
               {s.supervisor && <div className="sc-supervisor">{s.supervisor}</div>}
+              {(s.research || s.research_interests) && <div className="sc-research">{s.research || s.research_interests}</div>}
               {s.email && <div className="sc-email">{s.email}</div>}
             </div>
           );
@@ -117,7 +128,7 @@ function AlumniSection({ alumni }) {
   if (!alumni || !alumni.length) return <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '40px' }}>No alumni data available.</p>;
   return (
     <>
-      {alumni.map((yearData, i) => (
+      {[...alumni].sort((a, b) => String(b.year).localeCompare(String(a.year))).map((yearData, i) => (
         <div key={i} className="batch-section">
           <div className="batch-title">{yearData.year}</div>
           {yearData.phd?.length > 0 && (
@@ -212,6 +223,12 @@ export default function Faculty({ initialTab = 'faculty', faculty, visiting, sta
             {/* ── FACULTY TAB ─────────────────────────────────────────────── */}
             {activeTab === 'faculty' && (
               <>
+                <div className="faculty-divider" style={{ marginTop: '0' }}>
+                  Core Faculty
+                  <span style={{ fontWeight: 400, fontSize: '13px', color: 'var(--text-muted)', marginLeft: '12px', textTransform: 'none', letterSpacing: 'normal' }}>
+                    — add @iiti.ac.in to email ID
+                  </span>
+                </div>
                 <div className="faculty-grid">
                   {sortedFaculty.map((f, i) => (
                     <div key={i} className="anim-fadeup" style={{ animationDelay: `${0.06 + i * 0.04}s` }}>
@@ -222,6 +239,9 @@ export default function Faculty({ initialTab = 'faculty', faculty, visiting, sta
 
                 <div className="faculty-divider">
                   Visiting &amp; Distinguished Faculty <span className="visiting-badge">Visiting Members</span>
+                  <span style={{ fontWeight: 400, fontSize: '13px', color: 'var(--text-muted)', marginLeft: '12px', textTransform: 'none', letterSpacing: 'normal' }}>
+                    — add @iiti.ac.in to email ID
+                  </span>
                 </div>
 
                 <div className="faculty-grid" style={{ marginBottom: '40px' }}>
@@ -241,6 +261,9 @@ export default function Faculty({ initialTab = 'faculty', faculty, visiting, sta
                   <>
                     <div className="faculty-divider" style={{ marginTop: '0' }}>
                       Technical &amp; Support Staff <span className="visiting-badge" style={{ background: 'var(--navy)', color: '#fff', borderColor: 'var(--navy)' }}>HOD Office</span>
+                      <span style={{ fontWeight: 400, fontSize: '13px', color: 'var(--text-muted)', marginLeft: '12px', textTransform: 'none', letterSpacing: 'normal' }}>
+                        — add @iiti.ac.in to email ID
+                      </span>
                     </div>
                     <div className="faculty-grid" style={{ marginBottom: '40px' }}>
                       {sortedStaff.map((f, i) => (
@@ -255,6 +278,9 @@ export default function Faculty({ initialTab = 'faculty', faculty, visiting, sta
                     <div key={category} className="anim-fadein">
                       <div className="faculty-divider" style={{ marginTop: catIndex === 0 ? '0' : '40px' }}>
                         {category} <span className="visiting-badge" style={{ background: 'var(--navy)', color: '#fff', borderColor: 'var(--navy)' }}>HOD Office</span>
+                        <span style={{ fontWeight: 400, fontSize: '13px', color: 'var(--text-muted)', marginLeft: '12px', textTransform: 'none', letterSpacing: 'normal' }}>
+                          — add @iiti.ac.in to email ID
+                        </span>
                       </div>
                       <div className="faculty-grid" style={{ marginBottom: '40px' }}>
                         {sortStaff(list).map((f, i) => (
@@ -270,18 +296,22 @@ export default function Faculty({ initialTab = 'faculty', faculty, visiting, sta
             )}
 
             {/* ── PH.D. TAB ────────────────────────────────────────────────── */}
-            {activeTab === 'phd' && phd && (
+            {activeTab === 'phd' && (
               <div className="anim-fadein">
-                {Object.entries(phd).map(([batch, list]) => (
+                {phd ? Object.entries(phd).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
                   <StudentBatch key={batch} batch={batch} list={list} type="phd" onImageClick={handleImageClick} />
-                ))}
+                )) : (
+                  <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px', fontSize: '15px' }}>
+                    Ph.D. student data will appear here once added to the database.
+                  </p>
+                )}
               </div>
             )}
 
             {/* ── PG TAB ────────────────────────────────────────────────────── */}
-            {activeTab === 'pg' && pg && (
+            {activeTab === 'pg' && (
               <div className="anim-fadein">
-                {Object.entries(pg).sort(([a], [b]) => {
+                {pg ? Object.entries(pg).sort(([a], [b]) => {
                   const lA = a.toLowerCase(), lB = b.toLowerCase();
                   const getPriority = s => {
                     if (s.includes('space engineering')) return 1;
@@ -292,16 +322,24 @@ export default function Faculty({ initialTab = 'faculty', faculty, visiting, sta
                   return diff !== 0 ? diff : b.localeCompare(a);
                 }).map(([batch, list]) => (
                   <StudentBatch key={batch} batch={batch} list={list} type="pg" onImageClick={handleImageClick} />
-                ))}
+                )) : (
+                  <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px', fontSize: '15px' }}>
+                    Post Graduate student data will appear here once added to the database.
+                  </p>
+                )}
               </div>
             )}
 
             {/* ── UG TAB ────────────────────────────────────────────────────── */}
-            {activeTab === 'ug' && ug && (
+            {activeTab === 'ug' && (
               <div className="anim-fadein">
-                {Object.entries(ug).map(([batch, list]) => (
+                {ug ? Object.entries(ug).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
                   <StudentBatch key={batch} batch={batch} list={list} type="ug" onImageClick={handleImageClick} />
-                ))}
+                )) : (
+                  <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px', fontSize: '15px' }}>
+                    Under Graduate student data will appear here once added to the database.
+                  </p>
+                )}
               </div>
             )}
 

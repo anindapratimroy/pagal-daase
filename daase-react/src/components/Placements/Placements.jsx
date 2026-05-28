@@ -4,7 +4,7 @@ export default function Placements() {
   const images = Array.from({ length: 6 }, (_, i) => `images/placements/img_${i + 1}.jpg`);
 
   return (
-    <div style={{ background: 'var(--bg)' }}>
+    <div style={{ background: 'transparent' }}>
       <div className="section-inner">
         <div className="section-header">
           <span className="section-eyebrow">✦ Career & Outcomes</span>

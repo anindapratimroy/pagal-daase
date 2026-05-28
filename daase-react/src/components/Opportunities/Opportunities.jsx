@@ -16,7 +16,23 @@ const FUNDERS = [
 
 
 
-export default function Opportunities() {
+export default function Opportunities({ opportunities = [] }) {
+  // Only show active opportunities
+  const activeOpps = opportunities.filter(o => {
+    const s = (o.status || '').toString().toLowerCase().trim();
+    return s === 'active';
+  });
+
+  const formatDate = (dateStr) => {
+    if (!dateStr) return '';
+    if (dateStr.includes('T')) {
+      return new Date(dateStr).toLocaleDateString('en-US', {
+        month: 'long', day: 'numeric', year: 'numeric'
+      });
+    }
+    return dateStr;
+  };
+
   return (
     <div>
       <div className="section-inner">
@@ -28,32 +44,45 @@ export default function Opportunities() {
         </div>
 
         <div className="opp-grid">
-          {/* PhD card */}
-          <div className="opp-card anim-fadeup d1">
-            <div className="opp-badge">🎓 &nbsp;PhD Admissions Open</div>
-            <h3 className="opp-title">Ph.D. Positions — Open Call</h3>
-            <p className="opp-desc">
-              Applications are invited from highly motivated students for the Ph.D. program at DAASE.
-              We seek passionate individuals with strong backgrounds in physics, mathematics, engineering,
-              or related disciplines who are ready to pursue cutting-edge research.
-            </p>
-            <div className="opp-deadline">
-              <div>
-                <div className="opp-deadline-label">Last Date to Apply</div>
-                <div className="opp-deadline-date">November 1, 2025</div>
+          {/* Dynamic Opportunities */}
+          <div className="opp-list-container" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            {activeOpps.length > 0 ? activeOpps.map((opp, idx) => (
+              <div key={idx} className="opp-card anim-fadeup" style={{ animationDelay: `${0.1 * idx}s` }}>
+                {opp.tag && (
+                  <div className="opp-badge">🎓 &nbsp;{opp.tag}</div>
+                )}
+                <h3 className="opp-title">{opp.title}</h3>
+                <p className="opp-desc">{opp.desc}</p>
+                {opp.lastDate && (
+                  <div className="opp-deadline">
+                    <div>
+                      <div className="opp-deadline-label">Last Date to Apply</div>
+                      <div className="opp-deadline-date">{formatDate(opp.lastDate)}</div>
+                    </div>
+                  </div>
+                )}
+                {opp.applyLink && (
+                  <>
+                    <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 20 }}>
+                      Applications through the IIT Indore Academic Portal.
+                    </p>
+                    <a
+                      href={opp.applyLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary"
+                    >
+                      Apply Now <span className="arrow">→</span>
+                    </a>
+                  </>
+                )}
               </div>
-            </div>
-            <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 20 }}>
-              Applications through the IIT Indore Academic Portal.
-            </p>
-            <a
-              href="https://academic.iiti.ac.in/phdadvt.php"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-            >
-              Apply Now <span className="arrow">→</span>
-            </a>
+            )) : (
+              <div className="opp-card anim-fadeup" style={{ textAlign: 'center', padding: '40px' }}>
+                <h3 className="opp-title">No Open Opportunities</h3>
+                <p className="opp-desc" style={{ marginBottom: 0 }}>Please check back later for new openings.</p>
+              </div>
+            )}
           </div>
 
           {/* Funding card */}

@@ -33,6 +33,7 @@ function StudentBatch({ batch, list, onImageClick, type }) {
               </div>
               <div className="sc-name">{s.name}</div>
               {s.supervisor && <div className="sc-supervisor">{s.supervisor}</div>}
+              {(s.research || s.research_interests) && <div className="sc-research">{s.research || s.research_interests}</div>}
               {s.email && <div className="sc-email">{s.email}</div>}
               
               {type === 'interns' && (
@@ -88,7 +89,7 @@ export default function Students({ pg, ug, phd, interns }) {
   }, [modalImg]);
 
   return (
-    <div style={{ background: 'var(--bg)' }}>
+    <div style={{ background: 'transparent' }}>
       <div className="section-inner">
         <div className="section-header">
           <span className="section-eyebrow">✦ Current Students</span>
@@ -104,29 +105,45 @@ export default function Students({ pg, ug, phd, interns }) {
           <button className={`student-tab${tab === 'interns' ? ' active' : ''}`} onClick={() => setTab('interns')}>Interns</button>
         </div>
 
-        {tab === 'phd' && phd && Object.entries(phd).map(([batch, list]) => (
-          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
-        ))}
-        {tab === 'pg' && pg && Object.entries(pg).sort(([a], [b]) => {
-          const lA = a.toLowerCase();
-          const lB = b.toLowerCase();
-          const getPriority = str => {
-            if (str.includes('space engineering')) return 1;
-            if (str.includes('aolt')) return 3;
-            return 2;
-          };
-          const diff = getPriority(lA) - getPriority(lB);
-          if (diff !== 0) return diff;
-          return b.localeCompare(a);
-        }).map(([batch, list]) => (
-          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
-        ))}
-        {tab === 'ug' && ug && Object.entries(ug).map(([batch, list]) => (
-          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
-        ))}
-        {tab === 'interns' && interns && Object.entries(interns).map(([batch, list]) => (
-          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
-        ))}
+        {tab === 'phd' && (
+          phd
+            ? Object.entries(phd).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
+                <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
+              ))
+            : <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px' }}>Ph.D. student data will appear here once added to the database.</p>
+        )}
+        {tab === 'pg' && (
+          pg
+            ? Object.entries(pg).sort(([a], [b]) => {
+                const lA = a.toLowerCase();
+                const lB = b.toLowerCase();
+                const getPriority = str => {
+                  if (str.includes('space engineering')) return 1;
+                  if (str.includes('aolt')) return 3;
+                  return 2;
+                };
+                const diff = getPriority(lA) - getPriority(lB);
+                if (diff !== 0) return diff;
+                return b.localeCompare(a);
+              }).map(([batch, list]) => (
+                <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
+              ))
+            : <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px' }}>Post Graduate student data will appear here once added to the database.</p>
+        )}
+        {tab === 'ug' && (
+          ug
+            ? Object.entries(ug).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
+                <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
+              ))
+            : <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px' }}>Under Graduate student data will appear here once added to the database.</p>
+        )}
+        {tab === 'interns' && (
+          interns
+            ? Object.entries(interns).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
+                <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
+              ))
+            : <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px' }}>Intern data will appear here once added to the database.</p>
+        )}
       </div>
 
       {/* Global Image Modal */}

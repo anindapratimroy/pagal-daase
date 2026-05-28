@@ -1,12 +1,12 @@
 const COLLABS = [
-  { href: 'https://skaindia.ncra.tifr.res.in', label: 'SKA-IC' },
+  { href: 'https://www.ncra.tifr.res.in/skaindia', label: 'SKA-IC' },
   { href: 'https://www.grss-ieee.org', label: 'GRSS-IEEE' },
   { href: 'https://ieeeaps.org', label: 'APS-IEEE' },
-  { href: 'https://www.astron-soc.in', label: 'ASI' },
+  { href: 'https://astron-soc.in', label: 'ASI' },
   { href: 'https://www.iau.org', label: 'IAU' },
   { href: 'https://www.isro.gov.in', label: 'ISRO Missions' },
   { href: 'https://www.nasa.gov', label: 'NASA Collaborations' },
-  { href: 'https://www.mpg.de', label: 'Max Planck Group' },
+  { href: 'https://www.mpg.de/en', label: 'Max Planck Group' },
 ];
 
 export default function Footer() {
@@ -69,7 +69,7 @@ export default function Footer() {
           <div className="anim-fadeup d2">
             <div className="map-wrapper">
               <iframe
-                src="https://maps.google.com/maps?q=GWHF%2BF9C,+Indore,+Madhya+Pradesh+453552&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.093!2d75.923391!3d22.528688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDMxJzQzLjMiTiA3NcKwNTUnMjQuMiJF!5e0!3m2!1sen!2sin!4v1716976200000"
                 title="IIT Indore Map"
                 loading="lazy"
                 allowFullScreen
@@ -97,11 +97,16 @@ export default function Footer() {
         <div className="footer-inner">
           <div className="footer-copyright">Copyright &copy; 2022–2026 DAASE, IIT Indore. All rights reserved.</div>
           <div className="footer-creator">
-            ✦ &nbsp;
-            <span>Website created by: <strong>Aninda Pratim Roy </strong> and <strong>Vidhan Thakur</strong>, M.Tech Space Engineering, IIT Indore | BS CSDA, IIT Patna</span>
-            <span style={{ color: 'rgba(255,255,255,0.3)' }}>|</span>
-            <a href="mailto:mt2502121016@iiti.ac.in">mt2502121016@iiti.ac.in</a>
-            <a href="mailto:vidhan_2312res733@iitp.ac.in">| vidhan_2312res733@iitp.ac.in</a>
+            <span style={{ color: 'var(--gold-light)' }}>✦</span>
+            <span>
+              Website created by: <a href="https://www.linkedin.com/in/aninda-pratim-roy" target="_blank" rel="noopener noreferrer">Aninda Pratim Roy</a> and <a href="https://www.linkedin.com/in/vidhan-thakur27" target="_blank" rel="noopener noreferrer">Vidhan Thakur</a>
+              <span className="footer-divider"> | </span>
+              M.Tech Space Engineering, IIT Indore &amp; BS CSDA, IIT Patna
+              <span className="footer-divider"> | </span>
+              <a href="mailto:mt2502121016@iiti.ac.in" className="footer-email">mt2502121016@iiti.ac.in</a>
+              <span className="footer-divider">, </span>
+              <a href="mailto:vidhan_2312res733@iitp.ac.in" className="footer-email">vidhan_2312res733@iitp.ac.in</a>
+            </span>
           </div>
         </div>
       </div>

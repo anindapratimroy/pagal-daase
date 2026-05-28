@@ -4,8 +4,7 @@
 // ============================================================
 
 export const SHEETS_URL =
-  import.meta.env.VITE_SHEETS_URL ||
-  'https://script.google.com/macros/s/AKfycbzbTSQnAv8MUll88VtPdH5nnMbYUGP6S7BFaZUiGM6vpJKJlUNkq-Apk1T_ewlMhkT0/exec';
+  'https://script.google.com/macros/s/AKfycbxUatsKOENxCBlC_cPO1e0DoNOIoHcSuOIOcKyCzqheAxmNm3o_TCttqvg5cbNaPRimsQ/exec';
 
 export function drivePhotoUrl(raw) {
   if (!raw) return '';
@@ -16,21 +15,97 @@ export function drivePhotoUrl(raw) {
   return raw;
 }
 
+export const PUBLICATIONS_FB = [
+  {
+    text: "Aggarwal, K., Choudhary, R. K., Datta, A., & Imamura, T. (2025). On the estimation of solar wind velocity under varying solar activity conditions using Akatsuki measurements. MNRAS.",
+    url: "https://doi.org/10.1093/mnras/staf001"
+  },
+  {
+    text: "Datta, A., Choudhury, T. R., Majumdar, S., More, S., Mukherjee, S. (2025). Current status and prospects of cosmology research in India. J Earth Syst Sci.",
+    url: "https://doi.org/10.1007/s12040-025-02456-1"
+  },
+  {
+    text: "Brawar, B., Datta, A., & Mangla, S. (2025). Imaging Ionosphere's Wave like Structure Using Interferometry Data. AdSpR.",
+    url: "https://doi.org/10.1016/j.asr.2025.01.012"
+  },
+  {
+    text: "Bhaskar, D., Tripathi, R., Shrivastava, M. N. (2025). Lower Ionospheric Perturbations Associated with Lightning Activity over Low and Equatorial Regions. Atmosphere.",
+    url: "https://doi.org/10.3390/atmos16010001"
+  },
+  {
+    text: "Saharan, S., Purohit, J., Shrivastava, M. N., Dube, A. (2025). Seasonal dependence of solar flare induced Total Electron Content over low latitude ionosphere. ApSS.",
+    url: "https://doi.org/10.1007/s10509-025-04312-4"
+  },
+  {
+    text: "Rana, P., Tarafdar, P., Nobleson, K., Dwivedi, C. (2025). Data-driven Analysis of Stellar Populations. Astronomy & Astrophysics.",
+    url: "https://doi.org/10.1051/0004-6361/202452001"
+  }
+];
+
 export const RESEARCH_AREAS = [
-  { icon: '⚫', title: 'Compact Objects & Transients', desc: 'Studies of black holes, neutron stars, pulsars, and transient phenomena including gamma-ray bursts and fast radio bursts. Combining observational and theoretical approaches across multi-wavelength data.', url: 'https://sites.google.com/view/daase/research' },
-  { icon: '🌌', title: 'Cosmology', desc: 'Probing the early universe, the Epoch of Reionization, observational cosmology, and large-scale structure formation. Using radio interferometry, Lyman-alpha forests, and 21-cm signal analysis.', url: 'https://sites.google.com/view/daase/research' },
-  { icon: '🌀', title: 'Galaxies & Active Galactic Nuclei', desc: 'Formation and evolution of galaxies, interstellar medium physics, AGN feedback, quasar absorption systems, and intergalactic medium studies from early epochs to the present day.', url: 'https://sites.google.com/view/daase/research' },
-  { icon: '☀️', title: 'Sun & Heliosphere', desc: 'Solar physics, heliospheric science, solar wind dynamics, coronal mass ejections, and their propagation through the heliosphere. Contributions to solar monitoring missions.', url: 'https://sites.google.com/view/daase/research' },
-  { icon: '🌤️', title: 'Space Weather & Atmospheric Science', desc: 'Atmospheric modeling, ionospheric physics, climate modeling, space weather prediction, and aeronomy. Facilities at IIT Indore and the Indian Arctic Research Station Himadri.', url: 'https://sites.google.com/view/daase/research' },
-  { icon: '📡', title: 'Communication, Navigation & Remote Sensing', desc: 'RF instrumentation, antenna design, SAR and optical remote sensing, GNSS, CubeSat and drone technologies, radio astronomical instrumentation, and Earth observation.', url: 'https://sites.google.com/view/daase/research' },
-  { icon: '🧠', title: 'Data Science & ML in Astrophysics', desc: 'Machine learning, statistical inference, Bayesian analysis, and computational astrophysics. Developing data-driven tools for large astronomical surveys and signal processing.', url: 'https://sites.google.com/view/daase/research' },
+  {
+    id: 'compact-objects',
+    title: 'Compact Objects & Transients',
+    desc: 'Studies of black holes, neutron stars, pulsars, and transient phenomena including gamma-ray bursts.',
+    full_description: "The extreme gravity and immense density around the compact objects make them excellent astrophysical laboratories for testing fundamental physics and observing phenomena that can't be created on Earth. The department boasts a vibrant group focusing on observational as well as theoretical aspects of the compact objects and energetic transients in our universe.\n\nThe overarching themes include:\nMultiwavelength study of Neutron Stars, Black Holes, Ultra Luminous X-ray sources (ULXs), Fast Radio Bursts (FRBs), Gamma-Ray bursts (GRBs).\nSimulations of General Relativistic Magneto-hydrodynamics (GRMHD) of accretion disc-jet, High Energy Astrophysics, Astro-particle physics, Multi-messenger Astrophysics.",
+    image: 'images/research/img_3.jpg',
+    faculty: ['Prof. Bhargav Vaidya', 'Dr. Manoneeta Chakraborty', 'Dr. Mukul Bhattacharya']
+  },
+  {
+    id: 'cosmology',
+    title: 'Cosmology',
+    desc: 'Probing the early universe, the Epoch of Reionization, observational cosmology, and large-scale structure formation.',
+    full_description: "These multiwavelength surveys help us address many fundamental questions in cosmology, e.g. what are the major constituents of our Universe, what is the nature of the dark matter and dark energy, how were the first galaxies formed, how did they affect the state of the intergalactic medium and also the subsequent galaxy formation, how did the galaxies arranged themselves in the complex cosmic web that we see around us today.\n\nGalaxy clusters are the largest gravitationally bound structures in the Universe. Multiwavelength (mostly X-ray and radio) observations of the galaxy clusters can reveal the nature of the dark matter and help us to verify the standard models of cosmology.\n\nLarge-scale Numerical Simulations of the Universe, starting from the early stages of the Universe to the present day, Advanced Machine Learning algorithms for emulation of the cosmological signals and robust Bayesian inference frameworks help us in interpreting these complex observations and reveal the mysterious nature of the Universe.",
+    image: 'images/research/img_9.jpg',
+    faculty: ['Prof. Abhirup Datta', 'Dr. Saurabh Das']
+  },
+  {
+    id: 'galaxies-agn',
+    title: 'Galaxies & Active Galactic Nuclei',
+    desc: 'Formation and evolution of galaxies, interstellar medium physics, AGN feedback, and quasar absorption systems.',
+    full_description: "Active Galactic Nucleus (AGN) & Jets\nThe primary focus includes investigations of multiwavelength (radio, X-ray, Gamma-ray) signatures of the energetic processes taking place in the vicinity of Active Galactic Nuclei (AGN). Along with observations, researchers are actively involved in building state-of-the-art physics based simulations combining relativity and magnetism (GRMHD/SRMHD) to explore formation, acceleration and propagation of large scale outflows and jets from such supermassive black holes (SMBHs). It also aids to unveil the mystery underlying the launching of extreme particles (UHECRs, Neutrinos) from these objects.\n\nGalaxies\nStudy of Galaxies is another active area of research where both theory/simulation as well observation approaches are used. The specific area of interest include: Interstellar Medium, Dynamical modeling of galaxies, Dark matter distribution in galaxies, Circumgalactic medium.",
+    image: 'images/research/img_2.jpg',
+    faculty: ['Dr. Suman Majumdar', 'Dr. Rajlaxmi Sahu']
+  },
+  {
+    id: 'sun-heliosphere',
+    title: 'Sun & Heliosphere',
+    desc: 'Solar physics, heliospheric science, solar wind dynamics, and coronal mass ejections.',
+    full_description: "Solar Physics and Space Weather\nStudy of Sun, the nearest star and its physical process through simulation, observation and modelling is the primary focus. A major focus is on space plasma processes in the Sun-Earth environment, aiming to create indigenous space weather modeling frameworks. Physics based simulation as well machine learning/AI approches are used to study the behaviour of Sun and the solar phenomena.\n\nComputational Astrophysics\nThis combines computational methods and algorithms for simulating and analyzing astrophysical data to discover new phenomena. Research also covers dynamical evolution of jets from Active Galactic Nuclei (AGN) and particle acceleration, using advanced simulations to predict observational features.\n\nLower-Upper Atmosphere Coupling\nThe Earth has both neutral atmosphere at the lower height in addition to the ionized layers above. The interaction between these two region shapes the characteristics of both the region. The Space Weather impacts the lower atmosphere through complex mechanism connecting Magnetosphere-Ionosphere-lower atmosphere. The current research is focused on the study of these interaction both from both top side and bottom side.",
+    image: 'images/research/img_10.jpg',
+    faculty: ['Prof. Bhargav Vaidya', 'Dr. Hariharan']
+  },
+  {
+    id: 'space-weather',
+    title: 'Space Weather & Atmospheric Science',
+    desc: 'Atmospheric modeling, ionospheric physics, climate modeling, and space weather prediction.',
+    full_description: "Remote Sensing & Atmospheric Science\nCloud plays a crucial role in Earth's radiation budget and key component of the hydrological cycle. The thrust of this group is to improve the understanding of the precipitation characteristics and its spatio-temporal evolution using satellite and ground based observations, both in tropical regions like India as well in polar regions like Arctic.\n\nDAASE has established an experimental facility since 2022 at Himadri, Ny Alesund, in the northernmost human settlement to study the precipitation, cloud, atmospheric electricity, lightning and space weather phenomena.\n\nNumerical Weather Prediction and Climate-informatics\nWe actively use WRF models for studying the extreme weather conditions as well on developing improved parameterization schemes. There is an active research going on to develop AI/ML techniques for better predictions of the extreme weathers such as cyclone, thunderstorms, turbulence and lightning combining satellite and NWP models.",
+    image: 'images/research/img_16.jpg',
+    faculty: ['Prof. Abhirup Datta', 'Dr. Priyanka Singh']
+  },
+  {
+    id: 'instrumentation',
+    title: 'Communication, Navigation & Remote Sensing',
+    desc: 'RF instrumentation, antenna design, SAR and optical remote sensing, GNSS, CubeSat and drone technologies.',
+    full_description: "Instrumentation & Space Technology\n• Satellite Based Navigation\n• Satellite Communication\n• V/Ka/Ku band channel modelling\n• Cubesat communication\n• Payload, Navigation, Control\n• Detector Simulation and Calibration",
+    image: 'images/research/img_1.jpg',
+    faculty: ['Dr. Siddharth Malu', 'Dr. Unmesh Khati', 'Dr. Amit Shukla']
+  },
+  {
+    id: 'data-science',
+    title: 'Data Science & ML in Astrophysics',
+    desc: 'Machine learning, statistical inference, Bayesian analysis, and computational astrophysics.',
+    full_description: "Data Science\n• Bayesian Machine Learning\n• Quantum Machine Learning",
+    image: 'images/research/img_4.jpg',
+    faculty: ['Dr. Suman Majumdar', 'Dr. Saurabh Das']
+  }
 ];
 
 export const FACULTY_FB = [
   { name: 'Dr. Saurabh Das', designation: 'Associate Professor & HoD', isHOD: true, research: 'Remote Sensing, Atmospheric Physics, Aerosols, Climate Science, LIDAR', email: 'saurabh.das', photo: 'images/faculty/saurabh_das.jpg', url: 'http://people.iiti.ac.in/~saurabh.das/' },
   { name: 'Prof. Abhirup Datta', designation: 'Professor', research: 'Radio Astronomy, Epoch of Reionization, SKA, Radio Instrumentation', email: 'abhirup.datta', photo: 'images/faculty/abhirup_datta.jpg', url: 'https://sites.google.com/iiti.ac.in/abhirupdatta/' },
   { name: 'Prof. Bhargav Vaidya', designation: 'Professor', research: 'Computational Astrophysics, MHD, Relativistic Jets, High-Energy Astrophysics', email: 'bhargav.vaidya', photo: 'images/faculty/bhargav_vaidya.jpg', url: 'http://people.iiti.ac.in/~bvaidya/' },
-  { name: 'Dr. Narendra Nath Patra', designation: 'Associate Professor', research: 'HI 21-cm, Epoch of Reionization, Radio Interferometry, IGM', email: 'narendranath.patra', photo: 'images/faculty/narendra_patra.jpg', url: 'http://people.iiti.ac.in/~naren/' },
+  { name: 'Dr. Narendra Nath Patra', designation: 'Assistant Professor', research: 'HI 21-cm, Epoch of Reionization, Radio Interferometry, IGM', email: 'narendranath.patra', photo: 'images/faculty/narendra_patra.jpg', url: 'http://people.iiti.ac.in/~naren/' },
   { name: 'Dr. Manoneeta Chakraborty', designation: 'Assistant Professor', research: 'X-ray Astronomy, Compact Objects, Neutron Stars, Black Holes', email: 'manoneeta.chakraborty', photo: 'images/faculty/manoneeta_chakraborty.jpg', url: 'http://people.iiti.ac.in/~manoneeta/' },
   { name: 'Dr. Soumavo Ghosh', designation: 'Assistant Professor', research: 'Galaxy Evolution, Interstellar Medium, Disk Galaxies, HI Observations', email: 'soumavo.ghosh', photo: 'images/faculty/soumavo_ghosh.jpg', url: 'https://sites.google.com/view/drsoumavoghosh' },
   { name: 'Dr. Prakash Gaikwad', designation: 'Assistant Professor', research: 'Cosmology, Lyman-alpha Forest, Intergalactic Medium, Reionization', email: 'prakash.gaikwad', photo: 'images/faculty/prakash_gaikwad.jpg', url: 'https://sites.google.com/view/daase/faculty' },
@@ -39,7 +114,7 @@ export const FACULTY_FB = [
   { name: 'Dr. Priyanka Singh', designation: 'Assistant Professor', research: 'Space Weather, Ionospheric Physics, GNSS, Atmospheric Science', email: 'priyanka.singh', photo: 'images/faculty/priyanka_singh.jpg', url: 'https://psingh220.github.io/pswebpage/home.html' },
   { name: 'Dr. Unmesh Khati', designation: 'Assistant Professor', research: 'SAR Remote Sensing, GNSS, Earth Observation, Navigation', email: 'unmesh.khati', photo: 'images/faculty/unmesh_khati.jpg', url: 'http://people.iiti.ac.in/~unmesh.khati/' },
   { name: 'Dr. Amit Shukla', designation: 'Assistant Professor', research: 'RF Engineering, Antenna Design, Microwave Systems, Instrumentation', email: 'amit.shukla', photo: 'images/faculty/amit_shukla.jpg', url: 'https://sites.google.com/iiti.ac.in/welcome/home' },
-  { name: 'Dr. Mukul Bhattacharya', designation: 'Assistant Professor', research: 'Multi-messenger Physics, High Energy Transients', email: 'mukulb', photo: 'images/faculty/mukul_bhattacharya.jpg', url: 'https://sites.google.com/view/daase/faculty' },
+  { name: 'Dr. Mukul Bhattacharya', designation: 'Assistant Professor', research: 'Multi-messenger Physics, High Energy Transients', email: 'mukulb', photo: 'images/faculty/mukul_bhattacharya.jpg', url: 'https://mukulbhattacharya1.wixsite.com/mukulb' },
 ];
 
 export const VISITING_FB = [

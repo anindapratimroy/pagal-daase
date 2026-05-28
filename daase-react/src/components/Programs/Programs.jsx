@@ -94,12 +94,12 @@ export default function Programs() {
   const prog = PROGRAMS[active];
 
   return (
-    <div style={{ background: 'var(--bg)' }}>
+    <div style={{ background: 'transparent' }}>
       <div className="section-inner">
         <div className="section-header">
-          <span className="section-eyebrow">✦ Academic Pathways</span>
-          <h1 className="section-title">Degree <span>Programs</span></h1>
-          <p className="section-desc">The only IIT department with M.Sc. Astronomy and the first IIT with B.Tech. in Space Science &amp; Engineering.</p>
+          <span className="section-eyebrow anim-fadeup d1">✦ Academic Pathways</span>
+          <h1 className="section-title anim-fadeup d2">Degree <span>Programs</span></h1>
+          <p className="section-desc anim-fadeup d3">The only IIT department with M.Sc. Astronomy and the first IIT with B.Tech. in Space Science &amp; Engineering.</p>
           <div className="title-bar" />
         </div>
 
@@ -115,13 +115,13 @@ export default function Programs() {
           ))}
         </div>
 
-        <div className="prog-content">
+        <div className="prog-content" key={active}>
           <div className="prog-card">
             <div>
-              <div className="pc-badge">{prog.badge}</div>
-              <h3 className="pc-title">{prog.title}</h3>
-              <p className="pc-desc">{prog.desc}</p>
-              <div className="pc-detail-list">
+              <div className="pc-badge anim-fadeup d1">{prog.badge}</div>
+              <h3 className="pc-title anim-fadeup d2">{prog.title}</h3>
+              <p className="pc-desc anim-fadeup d3">{prog.desc}</p>
+              <div className="pc-detail-list anim-fadeup d4">
                 {prog.details.map((d, i) => (
                   <div className="pc-detail" key={i}>
                     <div className="pc-detail-bullet" />{d}
@@ -129,7 +129,7 @@ export default function Programs() {
                 ))}
               </div>
               
-              <div style={{ marginTop: '32px' }}>
+              <div style={{ marginTop: '32px' }} className="anim-fadeup d5">
                 <a 
                   href={active === 'btech' ? 'https://academic.iiti.ac.in/app/course_curriculum_list_ug' : 'https://academic.iiti.ac.in/app/course_curriculum_list_pg'}
                   target="_blank" 
@@ -140,7 +140,7 @@ export default function Programs() {
                 </a>
               </div>
             </div>
-            <div className="pc-highlights">
+            <div className="pc-highlights anim-fadeup d3">
               {prog.highlights.map((h, i) => (
                 <div className="pc-highlight" key={i}>
                   <div className="pc-highlight-num">{h.num}</div>

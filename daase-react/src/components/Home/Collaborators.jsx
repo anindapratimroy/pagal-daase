@@ -17,7 +17,20 @@ const LOGOS = [
   'sheffield.png',
   'uni-hamburg.png',
   'open.png',
-  'rug.png'
+  'rug.png',
+  'stockholm.png',
+  'uppsala.png',
+  'sussex.png',
+  'imperial.png',
+  'sissa.png',
+  'sns.png',
+  'ictp.png',
+  'dawn.png',
+  'issi.png',
+  'dtu.png',
+  'ifpu.png',
+  'colorado.png',
+  'torino.png'
 ];
 
 export default function Collaborators() {

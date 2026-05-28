@@ -3,12 +3,26 @@ import Footer from '../Layout/Footer';
 import NewsTicker from './NewsTicker';
 import Collaborators from './Collaborators';
 
+// Ensure link has protocol prefix
+function normalizeLink(link) {
+  if (!link) return null;
+  const trimmed = link.trim();
+  if (!trimmed) return null;
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
+  return 'https://' + trimmed;
+}
+
 export default function Home({ onNav, news, events }) {
-  // Combine and sort recent news and upcoming events
-  const combinedUpdates = [
-    ...(news || []).map(n => ({ type: 'news', ...n })),
-    ...(events || []).map(e => ({ type: 'event', ...e }))
-  ].slice(0, 8); // Top 8 items
+  // Filter only active news, normalize 'text' field to 'title'
+  const activeNews = (news || [])
+    .filter(n => !n.status || n.status.toString().toLowerCase().trim() === 'active')
+    .map(n => ({ type: 'news', title: n.text || n.title, link: normalizeLink(n.link || n.url), date: n.date }));
+
+  // Include events with their link field
+  const activeEvents = (events || [])
+    .map(e => ({ type: 'event', title: e.title, link: normalizeLink(e.link), date: e.date }));
+
+  const combinedUpdates = [...activeNews, ...activeEvents].slice(0, 8);
 
   return (
     <div>
@@ -17,7 +31,7 @@ export default function Home({ onNav, news, events }) {
         Department of Astronomy, Astrophysics &amp; Space Engineering &nbsp;·&nbsp;{' '}
         <span><a href="https://www.iiti.ac.in" target="_blank" rel="noopener noreferrer">Indian Institute of Technology Indore</a></span>
         &nbsp;·&nbsp; Est. 2015 &nbsp;·&nbsp;{' '}
-        <a href="https://dst.gov.in/scientific-programmes/scientific-engineering-research/fist" target="_blank" rel="noopener noreferrer">DST-FIST Funded</a>
+        <a href="http://www.fist-dst.org" target="_blank" rel="noopener noreferrer">DST-FIST Funded</a>
       </div>
 
       {/* Hero main */}
@@ -91,7 +105,7 @@ export default function Home({ onNav, news, events }) {
             <p>The Department of Astronomy, Astrophysics and Space Engineering (DAASE) at IIT Indore is the <strong>only dedicated department of its kind among all IITs</strong>, offering a comprehensive academic ecosystem spanning the cosmos to cutting-edge space engineering.</p>
             <p>A founding member of the <strong>Square Kilometre Array – India Consortium (SKA-IC)</strong> since 2015, DAASE plays a significant role in global astronomical collaboration, with faculty contributing to major ISRO and NASA missions.</p>
             <div className="about-highlights-grid" style={{ marginTop: 24 }}>
-              <a href="https://dst.gov.in/scientific-programmes/scientific-engineering-research/fist" target="_blank" rel="noopener noreferrer" className="about-hl">
+              <a href="http://www.fist-dst.org" target="_blank" rel="noopener noreferrer" className="about-hl">
                 <div className="about-hl-icon">🏆</div>
                 <div className="about-hl-title">DST-FIST Funded ↗</div>
                 <div className="about-hl-desc">Received DST-FIST funding in 2022 for research excellence</div>

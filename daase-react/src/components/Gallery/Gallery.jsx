@@ -36,7 +36,7 @@ export default function Gallery() {
   const [modalLabel, setModalLabel] = useState('');
 
   return (
-    <div style={{ background: 'var(--bg)' }}>
+    <div style={{ background: 'transparent' }}>
       <div className="section-inner">
         <div className="section-header">
           <span className="section-eyebrow">✦ Life at DAASE</span>

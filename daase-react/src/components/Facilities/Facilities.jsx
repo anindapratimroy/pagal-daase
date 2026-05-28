@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Footer from '../Layout/Footer';
 
 // Mapping facility names to downloaded images (fac_1 to fac_12 available)
@@ -17,8 +18,51 @@ const FAC_IMAGE_MAP = {
 };
 
 export default function Facilities({ facilities }) {
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // Close on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setSelectedImage(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <div>
+      {/* Lightbox Modal */}
+      {selectedImage && (
+        <div 
+          style={{
+            position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+            backgroundColor: 'rgba(0,0,0,0.85)', zIndex: 9999,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer'
+          }}
+          onClick={() => setSelectedImage(null)}
+        >
+          <div style={{ position: 'relative', maxWidth: '90%', maxHeight: '90%' }}>
+            <button 
+              onClick={(e) => { e.stopPropagation(); setSelectedImage(null); }}
+              style={{
+                position: 'absolute', top: '-40px', right: '-40px',
+                background: 'transparent', border: 'none', color: '#fff',
+                fontSize: '32px', cursor: 'pointer', padding: '8px',
+              }}
+            >
+              &times;
+            </button>
+            <img 
+              src={selectedImage} 
+              alt="Facility" 
+              style={{ maxWidth: '100%', maxHeight: '90vh', objectFit: 'contain', borderRadius: '4px', cursor: 'default' }}
+              onClick={(e) => e.stopPropagation()} 
+            />
+          </div>
+        </div>
+      )}
+
       <div className="section-inner">
         <div className="section-header">
           <span className="section-eyebrow">✦ Infrastructure</span>
@@ -36,10 +80,11 @@ export default function Facilities({ facilities }) {
                     <img
                       src={imgSrc}
                       alt={f.name}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.3s ease' }}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.3s ease', cursor: 'pointer' }}
                       onError={e => { e.target.style.display = 'none'; e.target.parentElement.style.display = 'none'; }}
                       onMouseOver={e => { e.target.style.transform = 'scale(1.05)'; }}
                       onMouseOut={e => { e.target.style.transform = 'scale(1)'; }}
+                      onClick={() => setSelectedImage(imgSrc)}
                     />
                   </div>
                 )}
