@@ -43,6 +43,14 @@ function EventCard({ ev, i, badgeClass, badgeLabel }) {
 }
 
 export default function Events({ events, outreach }) {
+  const sortedEvents = [...(events || [])].sort((a, b) => {
+    const aType = (a.type || '').toLowerCase().trim();
+    const bType = (b.type || '').toLowerCase().trim();
+    if (aType === 'upcoming' && bType !== 'upcoming') return -1;
+    if (aType !== 'upcoming' && bType === 'upcoming') return 1;
+    return 0;
+  });
+
   return (
     <div style={{ background: 'transparent' }}>
       <div className="section-inner">
@@ -52,7 +60,7 @@ export default function Events({ events, outreach }) {
           <div className="title-bar" />
         </div>
         <div className="events-grid">
-          {events.map((ev, i) => (
+          {sortedEvents.map((ev, i) => (
             <EventCard
               key={i}
               ev={ev}

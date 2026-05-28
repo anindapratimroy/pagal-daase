@@ -18,11 +18,16 @@ export default function Home({ onNav, news, events }) {
     .filter(n => !n.status || n.status.toString().toLowerCase().trim() === 'active')
     .map(n => ({ type: 'news', title: n.text || n.title, link: normalizeLink(n.link || n.url), date: n.date }));
 
-  // Include events with their link field
+  // Include events with their link field and raw type
   const activeEvents = (events || [])
-    .map(e => ({ type: 'event', title: e.title, link: normalizeLink(e.link), date: e.date }));
+    .map(e => ({ type: 'event', title: e.title, link: normalizeLink(e.link), date: e.date, rawType: e.type }));
 
-  const combinedUpdates = [...activeNews, ...activeEvents].slice(0, 8);
+  // Filter events into upcoming and past
+  const upcomingEvents = activeEvents.filter(e => (e.rawType || '').toLowerCase().trim() === 'upcoming');
+  const pastEvents = activeEvents.filter(e => (e.rawType || '').toLowerCase().trim() !== 'upcoming');
+
+  // Prioritize upcoming events first, then active news, and then past events
+  const combinedUpdates = [...upcomingEvents, ...activeNews, ...pastEvents].slice(0, 15);
 
   return (
     <div>

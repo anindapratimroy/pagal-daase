@@ -8,12 +8,12 @@ import {
 const CACHE_KEY = 'daase_v7_data';
 const CACHE_TTL = 30 * 60 * 1000; // 30 min
 
-function getCached() {
+function getCached(ignoreTTL = false) {
   try {
     const raw = localStorage.getItem(CACHE_KEY);
     if (!raw) return null;
     const { data, ts } = JSON.parse(raw);
-    if (Date.now() - ts > CACHE_TTL) { localStorage.removeItem(CACHE_KEY); return null; }
+    if (!ignoreTTL && (Date.now() - ts > CACHE_TTL)) { localStorage.removeItem(CACHE_KEY); return null; }
     return data;
   } catch { return null; }
 }
@@ -28,18 +28,19 @@ export function useData() {
   useEffect(() => {
     let mounted = true;
     async function load() {
-      // 1. Try cache first for instant display
-      const cached = getCached();
-      if (cached) {
-        if (mounted) { setData(cached); setLoading(false); }
-        // Background refresh
-        fetchFresh().then(fresh => { if (mounted && fresh) setData(fresh); }).catch(() => {});
-        return;
-      }
-      // 2. Fetch from Sheets
       setLoading(true);
+      // Fetch fresh data from Sheets directly on load to reflect updates without fail
       const fresh = await fetchFresh();
-      if (mounted) { setData(fresh); setLoading(false); }
+      if (mounted) {
+        if (fresh) {
+          setData(fresh);
+        } else {
+          // If network is offline or fetch fails, fall back to cached data
+          const cached = getCached(true);
+          if (cached) setData(cached);
+        }
+        setLoading(false);
+      }
     }
     load();
     return () => { mounted = false; };
