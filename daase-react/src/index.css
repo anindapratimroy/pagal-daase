@@ -18,10 +18,10 @@
   --white: #ffffff;
   --bg: #f5f6f8;
   --bg-alt: #eef0f5;
-  --text-primary: #0d1b2e;
-  --text-body: #2d3a4a;
-  --text-muted: #5a6a7e;
-  --text-light: #8898aa;
+  --text-primary: #050a11;
+  --text-body: #192230;
+  --text-muted: #3a4b60;
+  --text-light: #526377;
   --border: #dce3ed;
   --border-dark: #bbc8da;
   --shadow-sm: 0 1px 4px rgba(15, 45, 96, 0.08);
@@ -310,9 +310,9 @@ nav {
   display: flex;
   align-items: center;
   padding: 0 32px;
-  background: var(--white);
-  border-bottom: 2px solid var(--navy);
-  box-shadow: var(--shadow-sm);
+  background: var(--navy);
+  border-bottom: 2px solid var(--gold);
+  box-shadow: 0 4px 20px rgba(15, 45, 96, 0.4);
 }
 
 .nav-logos {
@@ -327,6 +327,7 @@ nav {
   height: 52px;
   width: auto;
   object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 #black-logo {}
@@ -350,7 +351,7 @@ nav {
 .nav-divider {
   width: 1px;
   height: 28px;
-  background: var(--border);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .nav-brand {
@@ -363,15 +364,15 @@ nav {
   font-family: 'Merriweather', serif;
   font-size: 17px;
   font-weight: 700;
-  color: var(--navy);
+  color: #fff;
   letter-spacing: 0.04em;
   line-height: 1.2;
   white-space: nowrap;
 }
 
 .nav-brand-sub {
-  font-size: 12.5px;
-  color: var(--text-muted);
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.75);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   max-width: 380px;
@@ -387,11 +388,11 @@ nav {
 
 .nav-links button {
   font-family: 'Source Sans 3', sans-serif;
-  font-size: 13px;
+  font-size: 14.5px;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.85);
   padding: 6px 8px;
   border: none;
   background: none;
@@ -403,20 +404,20 @@ nav {
 }
 
 .nav-links button:hover {
-  color: var(--navy);
-  background: var(--navy-light);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .nav-links button.active {
-  color: var(--navy);
-  background: var(--navy-light);
-  border-bottom-color: var(--navy);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  border-bottom-color: var(--gold);
 }
 
 .nav-cta-btn {
   margin-left: 8px !important;
-  background: var(--navy) !important;
-  color: #fff !important;
+  background: var(--gold) !important;
+  color: var(--navy) !important;
   padding: 6px 16px !important;
   border-radius: var(--r-sm) !important;
   border-bottom: none !important;
@@ -424,12 +425,12 @@ nav {
 }
 
 .nav-cta-btn:hover {
-  background: var(--navy-dark) !important;
-  color: #fff !important;
+  background: var(--gold-light) !important;
+  color: var(--navy) !important;
 }
 
 .nav-cta-btn.active {
-  background: var(--navy-dark) !important;
+  background: var(--gold-light) !important;
   border-bottom: none !important;
 }
 
@@ -440,11 +441,11 @@ nav {
 
 .nav-dropdown-trigger {
   font-family: 'Source Sans 3', sans-serif;
-  font-size: 13px;
+  font-size: 14.5px;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.85);
   padding: 6px 8px;
   border: none;
   background: none;
@@ -457,8 +458,8 @@ nav {
 }
 
 .nav-dropdown-trigger:hover {
-  color: var(--navy);
-  background: var(--navy-light);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .nav-dropdown-menu {
@@ -485,10 +486,10 @@ nav {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 12px;
+  padding: 10px 14px;
   border-radius: var(--r-sm);
-  font-size: 14px;
-  color: var(--text-body);
+  font-size: 15.5px;
+  color: var(--text-primary);
   transition: var(--tr);
   background: none;
   border: none;
@@ -496,7 +497,7 @@ nav {
   width: 100%;
   text-align: left;
   font-family: 'Source Sans 3', sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0;
   text-transform: none;
 }
@@ -515,9 +516,9 @@ nav {
 
 /* Active state on the dropdown trigger when a sub-item is current */
 .nav-dropdown-trigger.active {
-  color: var(--navy);
-  background: var(--navy-light);
-  border-bottom: 2px solid var(--navy);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  border-bottom: 2px solid var(--gold);
 }
 
 /* Hamburger */
@@ -634,11 +635,11 @@ nav {
 }
 
 .section-desc {
-  font-size: 17px;
-  color: var(--text-muted);
+  font-size: 19px;
+  color: var(--text-primary);
   max-width: 600px;
   margin: 0 auto;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.8;
 }
 
@@ -796,7 +797,7 @@ nav {
   border: 1px solid var(--gold-border);
   border-radius: var(--r-sm);
   padding: 5px 14px;
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -827,7 +828,7 @@ nav {
 }
 
 .hero-subtitle {
-  font-size: 15px;
+  font-size: 16.5px;
   font-weight: 600;
   color: var(--text-muted);
   letter-spacing: 0.18em;
@@ -837,7 +838,7 @@ nav {
 
 .hero-tagline {
   font-family: 'Merriweather', serif;
-  font-size: 18px;
+  font-size: 19.5px;
   color: var(--text-body);
   font-style: italic;
   font-weight: 300;
@@ -1058,7 +1059,7 @@ a.news-feed-headline:hover {
 
 .hero-stat-num {
   font-family: 'Merriweather', serif;
-  font-size: clamp(28px, 3vw, 42px);
+  font-size: clamp(32px, 4vw, 48px);
   font-weight: 900;
   color: var(--navy);
   display: block;
@@ -1066,7 +1067,7 @@ a.news-feed-headline:hover {
 }
 
 .hero-stat-label {
-  font-size: 12px;
+  font-size: 13.5px;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1164,10 +1165,10 @@ a.news-feed-headline:hover {
 }
 
 .about-strip p {
-  font-size: 16.5px;
-  color: rgba(255, 255, 255, 0.82);
+  font-size: 17.5px;
+  color: rgba(255, 255, 255, 0.95);
   line-height: 1.85;
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: 14px;
 }
 
@@ -1312,7 +1313,7 @@ a.news-feed-headline:hover {
 
 .rc-title {
   font-family: 'Merriweather', serif;
-  font-size: 17px;
+  font-size: 18.5px;
   font-weight: 700;
   color: var(--navy);
   margin-bottom: 8px;
@@ -1320,7 +1321,7 @@ a.news-feed-headline:hover {
 }
 
 .rc-desc {
-  font-size: 15px;
+  font-size: 16.5px;
   color: var(--text-muted);
   line-height: 1.78;
   font-weight: 400;
@@ -1331,7 +1332,7 @@ a.news-feed-headline:hover {
   align-items: center;
   gap: 6px;
   margin-top: 14px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--navy);
   letter-spacing: 0.05em;
@@ -1604,25 +1605,25 @@ a.news-feed-headline:hover {
 }
 
 .faculty-card {
-  background: var(--white);
-  border: 1px solid var(--border);
+  background: linear-gradient(145deg, #ffffff, #f4f6fa);
+  border: 1px solid rgba(15, 45, 96, 0.1);
   border-radius: var(--r);
   overflow: hidden;
-  transition: var(--tr);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: flex;
   flex-direction: column;
   text-decoration: none;
   color: inherit;
   position: relative;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 20px rgba(15, 45, 96, 0.04), inset 0 2px 0 rgba(255, 255, 255, 1);
   cursor: pointer;
   height: 100%;
 }
 
 .faculty-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--navy);
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 25px 50px -12px rgba(15, 45, 96, 0.25), 0 0 20px rgba(15, 45, 96, 0.05), inset 0 2px 0 rgba(255, 255, 255, 1);
+  border-color: rgba(15, 45, 96, 0.3);
 }
 
 .faculty-card:hover .fc-name {
@@ -1712,8 +1713,8 @@ a.news-feed-headline:hover {
   background: rgba(255, 255, 255, 0.93);
   color: var(--navy);
   border-radius: var(--r-sm);
-  padding: 3px 10px;
-  font-size: 10.5px;
+  padding: 5px 14px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1733,23 +1734,23 @@ a.news-feed-headline:hover {
   display: block;
   background: var(--navy);
   color: #fff;
-  font-size: 11px;
+  font-size: 13.5px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 7px 14px;
+  padding: 8px 16px;
   border-radius: var(--r-sm);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   text-align: center;
   width: 100%;
 }
 
 .fc-name {
   font-family: 'Merriweather', serif;
-  font-size: 15.5px;
+  font-size: 19.5px;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   line-height: 1.3;
   transition: var(--tr);
   position: relative;
@@ -1771,10 +1772,10 @@ a.news-feed-headline:hover {
 }
 
 .fc-research {
-  font-size: 13px;
+  font-size: 15.5px;
   color: var(--text-muted);
   line-height: 1.5;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   font-weight: 400;
   flex: 1;
 }
@@ -1892,29 +1893,45 @@ a.news-feed-headline:hover {
 }
 
 .student-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 30px;
-  padding: 24px 16px;
+  background: linear-gradient(145deg, #ffffff, #f4f6fa);
+  border: 1px solid rgba(15, 45, 96, 0.1);
+  border-radius: 20px;
+  padding: 28px 18px;
   text-align: center;
-  transition: var(--tr);
-  box-shadow: var(--shadow-sm);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 20px rgba(15, 45, 96, 0.04), inset 0 2px 0 rgba(255, 255, 255, 1);
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.student-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--navy));
+  opacity: 0;
+  transition: all 0.4s ease;
 }
 
 .student-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--navy);
-  transform: translateY(-3px);
+  box-shadow: 0 25px 50px -12px rgba(15, 45, 96, 0.25), 0 0 20px rgba(15, 45, 96, 0.05), inset 0 2px 0 rgba(255, 255, 255, 1);
+  border-color: rgba(15, 45, 96, 0.3);
+  transform: translateY(-8px) scale(1.01);
+}
+
+.student-card:hover::before {
+  opacity: 1;
 }
 
 .sc-avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 20%;
-  margin: 0 auto 9px;
+  width: 120px;
+  height: 120px;
+  border-radius: 24%;
+  margin: 0 auto 12px;
   background: var(--navy-light);
   border: 2px solid var(--border);
   display: flex;
@@ -1937,39 +1954,44 @@ a.news-feed-headline:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.student-card:hover .sc-avatar img {
+  transform: scale(1.08);
 }
 
 .sc-name {
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 2px;
+  margin-bottom: 6px;
   line-height: 1.3;
   width: 100%;
 }
 
 .sc-supervisor {
-  font-size: 12px;
+  font-size: 14.5px;
   color: var(--text-light);
   font-weight: 400;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   line-height: 1.3;
   width: 100%;
 }
 
 .sc-research {
-  font-size: 12px;
+  font-size: 14.5px;
   color: var(--text-light);
   font-weight: 400;
-  margin-bottom: 4px;
-  line-height: 1.3;
+  margin-bottom: 8px;
+  line-height: 1.4;
   width: 100%;
   flex: 1;
 }
 
 .sc-email {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 18px;
+  font-size: 16px;
   color: var(--navy-mid);
   display: block;
   transition: var(--tr);
@@ -2450,7 +2472,7 @@ a.sc-email:hover {
 }
 
 .ci-label {
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -2459,7 +2481,7 @@ a.sc-email:hover {
 }
 
 .ci-value {
-  font-size: 15.5px;
+  font-size: 16.5px;
   color: var(--text-body);
   line-height: 1.65;
 }
@@ -2579,8 +2601,8 @@ a.sc-email:hover {
 }
 
 .footer-copyright {
-  font-size: 14.5px;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 15.5px;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .footer-creator {
@@ -2588,8 +2610,8 @@ a.sc-email:hover {
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--r-sm);
   padding: 8px 16px;
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.75);
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.95);
   display: inline-flex;
   align-items: center;
   gap: 7px;

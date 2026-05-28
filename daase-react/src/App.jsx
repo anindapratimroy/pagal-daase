@@ -51,11 +51,9 @@ export default function App() {
 
   // Back-to-top visibility
   useEffect(() => {
-    const el = mainRef.current;
-    if (!el) return;
-    const handler = () => setShowTop(el.scrollTop > 300);
-    el.addEventListener('scroll', handler);
-    return () => el.removeEventListener('scroll', handler);
+    const handler = () => setShowTop(window.scrollY > 300);
+    window.addEventListener('scroll', handler);
+    return () => window.removeEventListener('scroll', handler);
   }, []);
 
   const handleNav = (id, detailId = null) => {
@@ -69,7 +67,7 @@ export default function App() {
     } else {
       setView(id);
     }
-    if (mainRef.current) mainRef.current.scrollTop = 0;
+    window.scrollTo(0, 0);
   };
 
   // Compute what the "current" value is for Navbar highlighting
@@ -131,7 +129,7 @@ export default function App() {
       <button
         id="back-to-top"
         className={showBackTop ? 'visible' : ''}
-        onClick={() => { if (mainRef.current) mainRef.current.scrollTo({ top: 0, behavior: 'smooth' }); }}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         title="Back to top"
         aria-label="Back to top"
       >

@@ -63,7 +63,7 @@ export default function Navbar({ current, onNav }) {
           <div className="logo-placeholder" style={{ display: 'none' }}>IITI</div>
           <div className="nav-divider" />
           <img src="images/daase.png" alt="DAASE" className="nav-logo-img"
-            style={{ filter: 'brightness(0)' }}
+            style={{ filter: 'brightness(0) invert(1)' }}
             onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
           <div className="logo-placeholder" style={{ display: 'none' }}>DAASE</div>
         </div>
