@@ -3026,7 +3026,7 @@ a.sc-email:hover {
   margin-top: 24px;
   padding: 12px 0 0 0;
   position: relative;
-  height: 160px;
+  height: 230px;
   overflow: hidden;
   width: 100%;
 }
@@ -3043,7 +3043,7 @@ a.sc-email:hover {
 
 .collab-marquee-container {
   position: absolute;
-  bottom: 0;
+  top: 56px;
   left: 0;
   width: 100%;
   display: flex;
