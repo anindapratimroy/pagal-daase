@@ -125,76 +125,356 @@ export const VISITING_FB = [
 ];
 
 export const PG_FB = {
-  'M.Sc. Astronomy — Batch 2025': [
-    { name: 'Aman Kumar Jha', email: 'msc2503121001' },
-    { name: 'Asutosh Kumar Behera', email: 'msc2503121002' },
-    { name: 'Gayathri M', email: 'msc2503121003' },
-    { name: 'Jayanti Paul', email: 'msc2503121004' },
-    { name: 'Kalash D. Thakkar', email: 'msc2503121005' },
-    { name: 'Kanchan Singh', email: 'msc2503121006' },
-    { name: 'Purvin S. Bhalekar', email: 'msc2503121007' },
-    { name: 'Ranjan Yadav', email: 'msc2503121008' },
-    { name: 'Rohit Raj', email: 'msc2503121009' },
-    { name: 'Rushikesh A. Sonkusale', email: 'msc2503121010' },
-    { name: 'Sougata Bhattacharyya', email: 'msc2503121011' },
-    { name: 'Vibhawari P. Suryawanshi', email: 'msc2503121014' },
-    { name: 'Yash Mani Tiwari', email: 'msc2503121015' },
+  "M.Sc. Astronomy \u2014 Batch 2025": [
+    {
+      "name": "Aman Kumar Jha",
+      "email": "msc2503121001",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Asutosh Kumar Behera",
+      "email": "msc2503121002",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Gayathri M",
+      "email": "msc2503121003",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Jayanti Paul",
+      "email": "msc2503121004",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Kalash Dharmeshbhai Thakkar",
+      "email": "msc2503121005",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Kanchan Singh",
+      "email": "msc2503121006",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Purvin Sunil Bhalekar",
+      "email": "msc2503121007",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Ranjan Yadav",
+      "email": "msc2503121008",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Rohit Raj",
+      "email": "msc2503121009",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Rushikesh Ashok Sonkusale",
+      "email": "msc2503121010",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Sougata Bhattacharyya",
+      "email": "msc2503121011",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Vibhawari Pramod Suryawanshi",
+      "email": "msc2503121014",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Yash Mani Tiwari",
+      "email": "msc2503121015",
+      "supervisor": "",
+      "research_interests": ""
+    }
   ],
-  'M.Sc. Astronomy — Batch 2024': [
-    { name: 'Aditya Prakash Sharma', supervisor: 'Dr. N. N. Patra', email: 'msc2403121001' },
-    { name: 'Kaivan Sanjay Shah', supervisor: 'Dr. Manoneeta Chakraborty', email: 'msc2403121004' },
-    { name: 'Kanishka Gautam', supervisor: 'Dr. Soumavo Ghosh', email: 'msc2403121005' },
-    { name: 'Kartik V. Kambhampati', supervisor: 'Dr. Prakash Gaikwad', email: 'msc2403121006' },
-    { name: 'Manpreet Singh', supervisor: 'Dr. Prakash Gaikwad', email: 'msc2403121007' },
-    { name: 'Mayukh Mandal', supervisor: 'Dr. Suman Majumdar', email: 'msc2403121008' },
-    { name: 'Nityananda Padhi', supervisor: 'Dr. Manoneeta Chakraborty', email: 'msc2403121009' },
-    { name: 'Sangeeta', supervisor: 'Dr. Soumavo Ghosh', email: 'msc2403121011' },
-    { name: 'Sangeetha A', supervisor: 'Prof. Abhirup Datta', email: 'msc2403121012' },
-    { name: 'Sayan Maity', supervisor: 'Dr. Deepika Bollimpalli', email: 'msc2403121013' },
-    { name: 'Sucharita Charan', supervisor: 'Dr. Priyanka Singh', email: 'msc2403121014' },
-    { name: 'Vishal Sarkar', supervisor: 'Dr. Saurabh Das', email: 'msc2403121016' },
+  "M.Sc. Astronomy \u2014 Batch 2024": [
+    {
+      "name": "Aditya Prakash Sharma",
+      "email": "msc2403121001",
+      "supervisor": "Dr. Narendra Nath Patra",
+      "research_interests": ""
+    },
+    {
+      "name": "Kaivan Sanjay Shah",
+      "email": "msc2403121004",
+      "supervisor": "Dr. Manoneeta Chakraborty",
+      "research_interests": ""
+    },
+    {
+      "name": "Kanishka Gautam",
+      "email": "msc2403121005",
+      "supervisor": "Dr. Soumavo Ghosh",
+      "research_interests": ""
+    },
+    {
+      "name": "Kartik Venkataramana Kambhampati",
+      "email": "msc2403121006",
+      "supervisor": "Dr. Prakash Gaikwad",
+      "research_interests": ""
+    },
+    {
+      "name": "Manpreet Singh",
+      "email": "msc2403121007",
+      "supervisor": "Dr. Prakash Gaikwad",
+      "research_interests": ""
+    },
+    {
+      "name": "Mayukh Mandal",
+      "email": "msc2403121008",
+      "supervisor": "Dr. Suman Majumdar",
+      "research_interests": ""
+    },
+    {
+      "name": "Nityananda Padhi",
+      "email": "msc2403121009",
+      "supervisor": "Dr. Manoneeta Chakraborty",
+      "research_interests": ""
+    },
+    {
+      "name": "Sangeeta",
+      "email": "msc2403121011",
+      "supervisor": "Dr. Soumavo Ghosh",
+      "research_interests": ""
+    },
+    {
+      "name": "Sangeetha A",
+      "email": "msc2403121012",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": ""
+    },
+    {
+      "name": "Sayan Maity",
+      "email": "msc2403121013",
+      "supervisor": "Dr. Deepika Bollimpalli",
+      "research_interests": ""
+    },
+    {
+      "name": "Sucharita Charan",
+      "email": "msc2403121014",
+      "supervisor": "Dr. Priyanka Singh",
+      "research_interests": ""
+    },
+    {
+      "name": "Vishal Sarkar",
+      "email": "msc2403121016",
+      "supervisor": "Dr. Saurabh Das",
+      "research_interests": ""
+    }
   ],
-  'M.Tech. Space Engineering — Batch 2025': [
-    { name: 'Aninda Pratim Roy', email: 'mt2502121016' },
-    { name: 'Ashutosh Kumar', supervisor: 'Prof. Abhirup Datta', email: 'mt2502121018' },
-    { name: 'Atreyee Bhattacharjee', supervisor: 'Dr. Amit Shukla', email: 'mt2502121019' },
-    { name: 'Shubhangi Uikey', supervisor: 'Dr. Unmesh Khati', email: 'mt2502101017' },
-    { name: 'Eshaan Sowale', supervisor: 'Dr. N. N. Patra', email: 'mt2502121021' },
-    { name: 'Karni Rathore', email: 'mt2502121022' },
-    { name: 'Sanjay Sugunan', email: 'mt2502121023' },
-    { name: 'Shreya Ojha', supervisor: 'Dr. Unmesh Khati', email: 'mt2502121024' },
-    { name: 'Unnati M. Dhingriya', supervisor: 'Dr. Bhargav Vaidya', email: 'mt2502121025' },
+  "M.Tech. AOLT \u2014 Batch 2025": [
+    {
+      "name": "Akash Patel",
+      "email": "mt2502121001",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Alekh Prasad Behera",
+      "email": "mt2502121002",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Arbaj Khan",
+      "email": "mt2302121003",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Arka Biswas",
+      "email": "mt2502121004",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Shubham Shrivastava",
+      "email": "mt2502121006",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Varad Shridharbhai Purohit",
+      "email": "mt2502121007",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Anshul Parmar",
+      "email": "mt2502121008",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Navneet Dubey",
+      "email": "mt2502121009",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Pallavisingh",
+      "email": "mt2502121010",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Rashmiranjita Suar",
+      "email": "mt2502121011",
+      "supervisor": "",
+      "research_interests": ""
+    }
   ],
-  'M.Tech. AOLT — Batch 2025': [
-    { name: 'Akash Patel', email: 'mt2502121001' },
-    { name: 'Alekh Prasad Behera', email: 'mt2502121002' },
-    { name: 'Arbaj Khan', email: 'mt2302121003' },
-    { name: 'Arka Biswas', email: 'mt2502121004' },
-    { name: 'Shubham Shrivastava', email: 'mt2502121006' },
-    { name: 'Varad S. Purohit', email: 'mt2502121007' },
-    { name: 'Anshul Parmar', email: 'mt2502121008' },
-    { name: 'Navneet Dubey', email: 'mt2502121009' },
-    { name: 'Pallavisingh', email: 'mt2502121010' },
-    { name: 'Rashmiranjita Suar', email: 'mt2502121011' },
+  "M.Tech. Space Engineering \u2014 Batch 2025": [
+    {
+      "name": "Aninda Pratim Roy",
+      "email": "mt2502121016",
+      "supervisor": "Dr. Saurabh Das",
+      "research_interests": "Radar Instrumentation"
+    },
+    {
+      "name": "Ashutosh Kumar",
+      "email": "mt2502121018",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": ""
+    },
+    {
+      "name": "Atreyee Bhattacharjee",
+      "email": "mt2502121019",
+      "supervisor": "Dr. Amit Shukla",
+      "research_interests": ""
+    },
+    {
+      "name": "Shubhangi Uikey",
+      "email": "mt2502101017",
+      "supervisor": "Dr. Unmesh Khati",
+      "research_interests": ""
+    },
+    {
+      "name": "Eshaan Sowale",
+      "email": "mt2502121021",
+      "supervisor": "Dr. Narendra Nath Patra",
+      "research_interests": ""
+    },
+    {
+      "name": "Karni Rathore",
+      "email": "mt2502121022",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Sanjay Sugunan",
+      "email": "mt2502121023",
+      "supervisor": "",
+      "research_interests": ""
+    },
+    {
+      "name": "Shreya Ojha",
+      "email": "mt2502121024",
+      "supervisor": "Dr. Unmesh Khati",
+      "research_interests": ""
+    },
+    {
+      "name": "Unnati Manohar Dhingriya",
+      "email": "mt2502121025",
+      "supervisor": "Dr. Bhargav Vaidya",
+      "research_interests": ""
+    }
   ],
-  'M.Tech. Space Engineering — Batch 2024': [
-    { name: 'Anismita Biswas', supervisor: 'Prof. Abhirup Datta', email: 'mt2402121001' },
-    { name: 'Rasaprolu Lakshya', supervisor: 'Dr. Saurabh Das', email: 'mt2402121002' },
-    { name: 'Eknoor Kaur', supervisor: 'Dr. Bhargav Vaidya', email: 'mt2402121003' },
+  "M.Tech. Space Engineering \u2014 Batch 2024": [
+    {
+      "name": "Anismita Biswas",
+      "email": "mt2402121001",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": ""
+    },
+    {
+      "name": "Rasaprolu Lakshya",
+      "email": "mt2402121002",
+      "supervisor": "Dr. Saurabh Das",
+      "research_interests": ""
+    },
+    {
+      "name": "Eknoor Kaur",
+      "email": "mt2402121003",
+      "supervisor": "Dr. Bhargav Vaidya",
+      "research_interests": ""
+    }
   ],
-  'M.S. (Research) — Batch 2025': [
-    { name: 'Chanchal', supervisor: 'Dr. N. N. Patra', email: 'ms2504121001' },
-    { name: 'Renuka Mahajan', supervisor: 'Dr. Suman Majumdar', email: 'ms2504121003' },
-    { name: 'Soumya Gupta', supervisor: 'Dr. N. N. Patra', email: 'ms2504121004' },
-    { name: 'Sudhamshu G', supervisor: 'Prof. Abhirup Datta', email: 'ms2504121005' },
+  "M.S. (Research) \u2014 Batch 2025": [
+    {
+      "name": "Chanchal",
+      "email": "ms2504121001",
+      "supervisor": "Dr. Narendra Nath Patra",
+      "research_interests": ""
+    },
+    {
+      "name": "Renuka Mahajan",
+      "email": "ms2504121003",
+      "supervisor": "Dr. Suman Majumdar",
+      "research_interests": ""
+    },
+    {
+      "name": "Soumya Gupta",
+      "email": "ms2504121004",
+      "supervisor": "Dr. Narendra Nath Patra",
+      "research_interests": ""
+    },
+    {
+      "name": "Sudhamshu G",
+      "email": "ms2504121005",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": ""
+    }
   ],
-  'M.S. (Research) — Batch 2024': [
-    { name: 'Yash Raj', supervisor: 'Dr. Unmesh Khati', email: 'ms2404121001' },
-    { name: 'Riddhi Srivastava', supervisor: 'Prof. Abhirup Datta', email: 'ms2404121002' },
-    { name: 'Riya', supervisor: 'Prof. Abhirup Datta', email: 'ms2404121003' },
-    { name: 'Ankur Sinha', supervisor: 'Dr. N. N. Patra', email: 'ms2404121004' },
-    { name: 'Shailendra Dabral', supervisor: 'Dr. Unmesh Khati', email: 'ms2404121005' },
-  ],
+  "M.S. (Research) \u2014 Batch 2024": [
+    {
+      "name": "Yash Raj",
+      "email": "ms2404121001",
+      "supervisor": "Dr. Unmesh Khati",
+      "research_interests": ""
+    },
+    {
+      "name": "Riddhi Srivastava",
+      "email": "ms2404121002",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": ""
+    },
+    {
+      "name": "Riya",
+      "email": "ms2404121003",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": ""
+    },
+    {
+      "name": "Ankur Sinha",
+      "email": "ms2404121004",
+      "supervisor": "Dr. Narendra Nath Patra",
+      "research_interests": ""
+    },
+    {
+      "name": "Shailendra Dabral",
+      "email": "ms2404121005",
+      "supervisor": "Dr. Unmesh Khati",
+      "research_interests": ""
+    }
+  ]
 };
 
 export const UG_FB = {
@@ -275,68 +555,323 @@ export const EVENTS_FB = [
   { title: 'DAASE Outreach Series — Stargazing Sessions, Space Quizzes & Hackathons', date: 'Ongoing · Semester Events', type: 'past' },
 ];
 export const PHD_FB = {
-  'Ph.D. — Batch 2026': [
-    { name: 'Nithyapriya S', supervisor: 'Prof. Abhirup Datta', email: 'phd2501221003' }
+  "Ph.D. \u2014 Batch 2021": [
+    {
+      "name": "Rashmi Sagar",
+      "email": "phd2101121003",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": "Observational Cosmology"
+    },
+    {
+      "name": "Bhuvnesh Brawar",
+      "email": "phd2101121005",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": "Space weather and Ionospheric phenomena"
+    },
+    {
+      "name": "Lekhraj Saini",
+      "email": "phd2101121007",
+      "supervisor": "Dr. Saurabh Das",
+      "research_interests": "Climate change over the Arctic region"
+    },
+    {
+      "name": "Samit Kumar Pal",
+      "email": "phd2101121008",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": "Radio Astronomy, Observational Cosmology"
+    },
+    {
+      "name": "Ayush Garg",
+      "email": "phd2101221001",
+      "supervisor": "Dr. Amit Shukla",
+      "research_interests": "Gamma-Ray Bursts (GRBs), Active Galactic Nucleus (AGNs)"
+    },
+    {
+      "name": "Biki Ram",
+      "email": "phd2101221002",
+      "supervisor": "Dr. Manoneeta Chakraborty",
+      "research_interests": "Neutron star, Black holes, X-ray binaries, Accretion Physics, X-ray Burst"
+    }
   ],
-  'Ph.D. — Batch 2025': [
-    { name: 'Devesh Sharma', supervisor: 'Dr. Bhargav Vaidya', email: 'mscphd2303121008' },
-    { name: 'Arpan Dawn', supervisor: 'Dr. Unmesh Khati', email: 'phd2501121003' },
-    { name: 'Shivani Pandey', supervisor: 'Dr. Soumavo Ghosh', email: 'phd2501121012' },
-    { name: 'Manish Singh Almia', supervisor: 'Dr. Prakash Gaikwad', email: 'phd2501121011' },
-    { name: 'Ami Nimeshkumar Tank', supervisor: 'Dr. Soumavo Ghosh', email: 'phd2501121002' },
-    { name: 'Amar Deep', supervisor: 'Prof. Abhirup Datta', email: 'mscphd2303121001' },
-    { name: 'Shiriny Akthar', supervisor: 'Dr. Suman Majumdar', email: 'phd2401221002' },
-    { name: 'Aniket Sharma', supervisor: 'Dr. Bhargav Vaidya', email: 'phd2501121005' },
-    { name: 'Shubhi Tiwari', supervisor: 'Prof. Abhirup Datta & Dr. Hari B Hablani', email: 'mtphd2302121006' },
-    { name: 'Vishrut Pandya', supervisor: 'Dr Suman Majumdar & Prof. Abhirup datta', email: 'mscphd2303121015' },
-    { name: 'Bhavya Jaiman', supervisor: 'Dr. Unmesh Khati', email: 'phd2501121007' },
-    { name: 'Pratived Sahu', supervisor: 'Prof. Abhirup Datta', email: 'phd2501121001' },
-    { name: 'Barenya Kumar Dev', supervisor: 'Prof. Abhirup Datta', email: 'phd2501121008' },
-    { name: 'Popat Jeel Hitendrabhai', supervisor: 'Dr. Deepika Bollimpalli', email: 'phd2401221001' },
-    { name: 'Vatsal garg', supervisor: 'Dr. Narendra Nath Patra', email: 'phd2401221005' }
+  "Ph.D. \u2014 Batch 2022": [
+    {
+      "name": "Jithu J Athalathil",
+      "email": "phd2201121002",
+      "supervisor": "Dr. Bhargav Vaidya",
+      "research_interests": "Space-Weather"
+    },
+    {
+      "name": "Anam Sabir",
+      "email": "phd2201121003",
+      "supervisor": "Dr. Unmesh Khati",
+      "research_interests": "SAR Time-series, Forest Disturbance Mapping"
+    },
+    {
+      "name": "Leon Noble",
+      "email": "phd2201121004",
+      "supervisor": "Dr. Suman Majumdar",
+      "research_interests": "Cosmic Dawn and Epoch of Reionization"
+    },
+    {
+      "name": "Chandan Kumar Das",
+      "email": "phd2201121006",
+      "supervisor": "Dr. Amit Shukla",
+      "research_interests": "Particle Acceleration in Astrophysical Jets"
+    },
+    {
+      "name": "Vaibhav Tyagi",
+      "email": "phd2201121012",
+      "supervisor": "Dr. Saurabh Das",
+      "research_interests": "Atmospheric Remote Sensing: Extreme weather conditions"
+    },
+    {
+      "name": "Shraddha Mohnnai",
+      "email": "phd2201121011",
+      "supervisor": "Dr. Amit Shukla",
+      "research_interests": "High Energy Astrophysics"
+    },
+    {
+      "name": "Sakshi Jain",
+      "email": "phd2201121014",
+      "supervisor": "Dr. Unmesh Khati",
+      "research_interests": "Remote sensing"
+    }
   ],
-  'Ph.D. — Batch 2024': [
-    { name: 'Saurabh Jha', supervisor: 'Prof. Abhirup Datta', email: 'phd2401121005' },
-    { name: 'Samir Sethi', supervisor: 'Dr. Priyanka Singh', email: 'phd2401121003' },
-    { name: 'Thomas George P', supervisor: 'Dr. Priyanka Singh', email: 'phd2401121006' },
-    { name: 'Dizna James', supervisor: 'Dr. Saurabh Das', email: 'phd2401121001' },
-    { name: 'Pritam Hore', supervisor: 'Prof. Abhirup Datta', email: 'phd2401121002' },
-    { name: 'Santanu Maity', supervisor: 'Dr. Saurabh Das', email: 'phd2401121004' }
+  "Ph.D. \u2014 Batch 2023": [
+    {
+      "name": "Harshita Bhuyan",
+      "email": "phd2201221002",
+      "supervisor": "Dr. Bhargav Vaidya",
+      "research_interests": "Multi-wavelength and multi-messenger astronomy, computational astrophysics"
+    },
+    {
+      "name": "Nalla Chumbitha Leena",
+      "email": "phd2201221004",
+      "supervisor": "Dr. Unmesh Khati",
+      "research_interests": "Microwave remote sensing"
+    },
+    {
+      "name": "Atharva Hemant Mirashi",
+      "email": "phd2301121001",
+      "supervisor": "Dr. Narendra Nath Patra",
+      "research_interests": "Galaxy Structure & Evolution, Radio Astronomy"
+    },
+    {
+      "name": "Tamanna Singh",
+      "email": "phd2301121002",
+      "supervisor": "Dr. Saurabh Das",
+      "research_interests": "Extreme Weather Prediction and TGFs"
+    },
+    {
+      "name": "Sirsha Nandy",
+      "email": "phd2301121003",
+      "supervisor": "Dr. Bhargav Vaidya",
+      "research_interests": "Physics-based Modeling of Solar Wind-Magnetosphere Interaction"
+    },
+    {
+      "name": "Aditya Sharma",
+      "email": "phd2301121004",
+      "supervisor": "Dr. Bhargav Vaidya",
+      "research_interests": "Relativistic AGN Jets"
+    },
+    {
+      "name": "Aromal P",
+      "email": "phd2301121005",
+      "supervisor": "Dr. Manoneeta Chakraborty",
+      "research_interests": "Compact Objects"
+    },
+    {
+      "name": "D Manas Mohit",
+      "email": "phd2301121006",
+      "supervisor": "Dr. Suman Majumdar",
+      "research_interests": "Large-Scale Structure, Line Intensity Mapping, Cosmic Dawn and Epoch of Reionisation"
+    },
+    {
+      "name": "Jibin Jose",
+      "email": "phd2301121007",
+      "supervisor": "Dr. Manoneeta Chakraborty",
+      "research_interests": "Compact Objects"
+    },
+    {
+      "name": "Kavita",
+      "email": "phd2301121008",
+      "supervisor": "Dr. Saurabh Das",
+      "research_interests": "Atmospheric and Space Science"
+    },
+    {
+      "name": "Keerthi K",
+      "email": "phd2301121009",
+      "supervisor": "Dr. Narendra Nath Patra",
+      "research_interests": "Galaxy evolution and properties of bars"
+    },
+    {
+      "name": "Nasmi S Anand",
+      "email": "phd2301121010",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": "Study of diffuse radio emission in galaxy clusters"
+    },
+    {
+      "name": "Parvathy Thankachy P",
+      "email": "phd2301121011",
+      "supervisor": "Dr. Saurabh Das",
+      "research_interests": "Parameterization in NWP model"
+    },
+    {
+      "name": "Pranjal Chaturvedi",
+      "email": "phd2301121012",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": "Multiwavelength Astronomy, AstroSat, Galaxies"
+    },
+    {
+      "name": "Yashrajsinh Mahida",
+      "email": "phd2301121014",
+      "supervisor": "Dr. Suman Majumdar",
+      "research_interests": "Cosmic Dawn and Epoch of Reionization, Early Universe Cosmology"
+    },
+    {
+      "name": "Keshav Aggarwal",
+      "email": "mscphd2301121015",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": "Solar, Planetary and Exoplanetary atmospheres"
+    }
   ],
-  'Ph.D. — Batch 2023': [
-    { name: 'Harshita Bhuyan', supervisor: 'Dr. Bhargav Vaidya', email: 'phd2201221002' },
-    { name: 'Nalla Chumbitha Leena', supervisor: 'Dr. Unmesh Khati', email: 'phd2201221004' },
-    { name: 'Atharva Hemant Mirashi', supervisor: 'Dr. Narendra Nath Patra', email: 'phd2301121001' },
-    { name: 'Tamanna Singh', supervisor: 'Dr. Saurabh Das', email: 'phd2301121002' },
-    { name: 'Sirsha Nandy', supervisor: 'Dr. Bhargav Vaidya', email: 'phd2301121003' },
-    { name: 'Aditya Sharma', supervisor: 'Dr. Bhargav Vaidya', email: 'phd2301121004' },
-    { name: 'Aromal P', supervisor: 'Dr. Manoneeta Chakraborty', email: 'phd2301121005' },
-    { name: 'D Manas Mohit', supervisor: 'Dr. Suman Majumdar', email: 'phd2301121006' },
-    { name: 'Jibin Jose', supervisor: 'Dr.Manoneeta Chakraborty', email: 'phd2301121007' },
-    { name: 'Kavita', supervisor: 'Dr. Saurabh Das', email: 'phd2301121008' },
-    { name: 'Keerthi K', supervisor: 'Dr. Narendra Nath Patra', email: 'phd2301121009' },
-    { name: 'Nasmi S Anand', supervisor: 'Prof. Abhirup Datta', email: 'phd2301121010' },
-    { name: 'Parvathy Thankachy P', supervisor: 'Dr. Saurabh Das', email: 'phd2301121011' },
-    { name: 'Pranjal Chaturvedi', supervisor: 'Prof. Abhirup Datta', email: 'phd2301121012' },
-    { name: 'Yashrajsinh Mahida', supervisor: 'Dr. Suman Majumdar', email: 'phd2301121014' },
-    { name: 'Keshav Aggarwal', supervisor: 'Prof. Abhirup Datta', email: 'mscphd2301121015' }
+  "Ph.D. \u2014 Batch 2024": [
+    {
+      "name": "Saurabh Jha",
+      "email": "phd2401121005",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": "Space Weather, Ionospheric Physics"
+    },
+    {
+      "name": "Samir Sethi",
+      "email": "phd2401121003",
+      "supervisor": "Dr. Priyanka Singh",
+      "research_interests": "Cosmology with Fast Radio Burst"
+    },
+    {
+      "name": "Thomas George P",
+      "email": "phd2401121006",
+      "supervisor": "Dr. Priyanka Singh",
+      "research_interests": "Circumgalactic Medium, Galaxy Cluster Evolution"
+    },
+    {
+      "name": "Dizna James",
+      "email": "phd2401121001",
+      "supervisor": "Dr. Saurabh Das",
+      "research_interests": "Atmospheric Remote Sensing"
+    },
+    {
+      "name": "Pritam Hore",
+      "email": "phd2401121002",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": "Radio Astronomy, Galaxy Clusters"
+    },
+    {
+      "name": "Santanu Maity",
+      "email": "phd2401121004",
+      "supervisor": "Dr. Saurabh Das",
+      "research_interests": "Space Weather Phenomenon, ML and DL methods"
+    }
   ],
-  'Ph.D. — Batch 2022': [
-    { name: 'Jithu J Athalathil', supervisor: 'Dr. Bhargav Vaidya', email: 'phd2201121002' },
-    { name: 'Anam Sabir', supervisor: 'Dr. Unmesh Khati', email: 'phd2201121003' },
-    { name: 'Leon Noble', supervisor: 'Dr. Suman Majumdar', email: 'phd2201121004' },
-    { name: 'Chandan Kumar Das', supervisor: 'Dr. Amit Shukla', email: 'phd2201121006' },
-    { name: 'Vaibhav Tyagi', supervisor: 'Dr. Saurabh Das', email: 'phd2201121012' },
-    { name: 'Shraddha Mohnnai', supervisor: 'Dr. Amit Shukla', email: 'phd2201121011' },
-    { name: 'Sakshi Jain', supervisor: 'Dr. Unmesh Khati', email: 'phd2201121014' }
+  "Ph.D. \u2014 Batch 2025": [
+    {
+      "name": "Devesh Sharma",
+      "email": "mscphd2303121008",
+      "supervisor": "Dr. Bhargav Vaidya",
+      "research_interests": "Solar Physics"
+    },
+    {
+      "name": "Arpan Dawn",
+      "email": "phd2501121003",
+      "supervisor": "Dr. Unmesh Khati",
+      "research_interests": "SAR, Forest Biomass"
+    },
+    {
+      "name": "Shivani Pandey",
+      "email": "phd2501121012",
+      "supervisor": "Dr. Soumavo Ghosh",
+      "research_interests": "Galaxy Dynamics and Evolution"
+    },
+    {
+      "name": "Manish Singh Almia",
+      "email": "phd2501121011",
+      "supervisor": "Dr. Prakash Gaikwad",
+      "research_interests": "Astrophysics"
+    },
+    {
+      "name": "Ami Nimeshkumar Tank",
+      "email": "phd2501121002",
+      "supervisor": "Dr. Soumavo Ghosh",
+      "research_interests": "Galaxy dynamics and evolution"
+    },
+    {
+      "name": "Amar Deep",
+      "email": "mscphd2303121001",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": "Interaction of solar wind with the Earth's magnetosphere, energy transfer processes and magnetospheric dynamics"
+    },
+    {
+      "name": "Shiriny Akthar",
+      "email": "phd2401221002",
+      "supervisor": "Dr. Suman Majumdar",
+      "research_interests": "Line-Intensity-Mapping (LIM), Epoch of Reionization (EoR), Cosmological Model"
+    },
+    {
+      "name": "Aniket Sharma",
+      "email": "phd2501121005",
+      "supervisor": "Dr. Bhargav Vaidya",
+      "research_interests": "Solar Wind Turbulence"
+    },
+    {
+      "name": "Shubhi Tiwari",
+      "email": "mtphd2302121006",
+      "supervisor": "Prof. Abhirup Datta & Dr. Hari B Hablani",
+      "research_interests": "Space Debris Detection using Small Satellites"
+    },
+    {
+      "name": "Vishrut Pandya",
+      "email": "mscphd2303121015",
+      "supervisor": "Dr. Suman Majumdar & Prof. Abhirup Datta",
+      "research_interests": "Developing novel statistical techniques to explore cosmology"
+    },
+    {
+      "name": "Bhavya Jaiman",
+      "email": "phd2501121007",
+      "supervisor": "Dr. Unmesh Khati",
+      "research_interests": "Earth Observation (SAR)"
+    },
+    {
+      "name": "Pratived Sahu",
+      "email": "phd2501121001",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": "Astronomy and Astrophysics"
+    },
+    {
+      "name": "Barenya Kumar Dev",
+      "email": "phd2501121008",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": "Radio Astronomy, Radio Loud AGN, Galaxy Evolution, Galaxy Clusters"
+    },
+    {
+      "name": "Popat Jeel Hitendrabhai",
+      "email": "phd2401221001",
+      "supervisor": "Dr. Deepika Bollimpalli",
+      "research_interests": "Modeling variability phenomena in BHXRBs"
+    },
+    {
+      "name": "Vatsal Garg",
+      "email": "phd2401221005",
+      "supervisor": "Dr. Narendra Nath Patra",
+      "research_interests": "Galaxy Formation and Evolution"
+    }
   ],
-  'Ph.D. — Batch 2021': [
-    { name: 'Rashmi Sagar', supervisor: 'Prof. Abhirup Datta', email: 'phd2101121003' },
-    { name: 'Bhuvnesh Brawar', supervisor: 'Prof. Abhirup Datta', email: 'phd2101121005' },
-    { name: 'Lekhraj Saini', supervisor: 'Dr. Saurabh Das', email: 'phd2101121007' },
-    { name: 'Samit Kumar Pal', supervisor: 'Prof. Abhirup Datta', email: 'phd2101121008' },
-    { name: 'Ayush Garg', supervisor: 'Dr. Amit Shukla', email: 'phd2101221001' },
-    { name: 'Biki Ram', supervisor: 'Dr. Manoneeta Chakraborty', email: 'phd2101221002' }
+  "Ph.D. \u2014 Batch 2026": [
+    {
+      "name": "Nithyapriya S",
+      "email": "phd2501221003",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": "Cosmology, Galaxy Cluster"
+    }
   ]
 };
 
