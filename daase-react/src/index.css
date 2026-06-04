@@ -2753,6 +2753,13 @@ a.sc-email:hover {
 }
 
 @media(max-width:1100px) {
+  nav {
+    padding: 0 16px;
+  }
+  .nav-logos {
+    margin-right: 16px;
+  }
+
   .hero-main {
     grid-template-columns: 1fr;
   }
@@ -2787,6 +2794,16 @@ a.sc-email:hover {
 }
 
 @media(max-width:900px) {
+  .nav-brand-sub {
+    display: none;
+  }
+  .nav-brand-main {
+    white-space: normal;
+  }
+  .nav-brand {
+    margin-right: 16px;
+  }
+
   .hero-stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
