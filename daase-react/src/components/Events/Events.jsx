@@ -11,7 +11,9 @@ function normalizeLink(link) {
 }
 
 function EventCard({ ev, i, badgeClass, badgeLabel }) {
-  const href = normalizeLink(ev.link);
+  // Check multiple possible keys in case the Apps Script / Google Sheet uses a different column name
+  const rawLink = ev.link || ev.url || ev.Link || ev.URL || ev.href || '';
+  const href = normalizeLink(rawLink);
 
   const cardContent = (
     <>

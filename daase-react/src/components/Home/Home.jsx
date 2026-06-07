@@ -3,13 +3,37 @@ import Footer from '../Layout/Footer';
 import NewsTicker from './NewsTicker';
 import Collaborators from './Collaborators';
 
-// Ensure link has protocol prefix
+// Ensure link has protocol prefix for external, but respect internal links
 function normalizeLink(link) {
   if (!link) return null;
+  if (typeof link !== 'string') return null;
   const trimmed = link.trim();
   if (!trimmed) return null;
-  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
-  return 'https://' + trimmed;
+  
+  // Internal or relative links (e.g. /events, #section, ?query)
+  if (trimmed.startsWith('/') || trimmed.startsWith('#') || trimmed.startsWith('?')) {
+    return trimmed;
+  }
+  
+  // Known URLs missing protocol
+  if (trimmed.startsWith('www.') || trimmed.includes('.ac.in') || trimmed.includes('.edu') || trimmed.includes('.org') || trimmed.includes('.com') || trimmed.includes('.in/')) {
+    if (!trimmed.startsWith('http://') && !trimmed.startsWith('https://')) {
+      return 'https://' + trimmed;
+    }
+  }
+  
+  // Already has protocol or is a generic external
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+    return trimmed;
+  }
+  
+  // Fallback for everything else, treat as relative/internal
+  return trimmed;
+}
+
+function isExternal(link) {
+  if (!link) return false;
+  return link.startsWith('http://') || link.startsWith('https://') || link.startsWith('www.');
 }
 
 export default function Home({ onNav, news, events }) {
@@ -22,7 +46,7 @@ export default function Home({ onNav, news, events }) {
 
   // Include events with their link field and raw type
   const activeEvents = (events || [])
-    .map(e => ({ type: 'event', title: e.title, link: normalizeLink(e.link), date: e.date, rawType: e.type }));
+    .map(e => ({ type: 'event', title: e.title, link: normalizeLink(e.link || e.url || e.Link || e.URL || e.href || ''), date: e.date, rawType: e.type }));
 
   // Filter events into upcoming and past
   const upcomingEvents = activeEvents.filter(e => (e.rawType || '').toLowerCase().trim() === 'upcoming');
@@ -77,27 +101,30 @@ export default function Home({ onNav, news, events }) {
 
             <div className="vertical-marquee-container">
               <div className="vertical-marquee-content">
-                {combinedUpdates.length > 0 ? [...combinedUpdates, ...combinedUpdates].map((item, index) => (
-                  <div key={index} className="news-feed-item">
-                    <div className="news-feed-meta">
-                      {item.type === 'event' && <span className="type-badge event">Event</span>}
-                      {item.type === 'news' && <span className="type-badge news">News</span>}
-                      <span className="news-feed-date">{item.date}</span>
-                    </div>
-                    {(item.link || item.url) ? (
-                      <a
-                        href={item.link || item.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="news-feed-headline"
-                      >
-                        {item.title || item.text} <span className="arrow">↗</span>
-                      </a>
-                    ) : (
-                      <div className="news-feed-headline">{item.title || item.text}</div>
-                    )}
-                  </div>
-                )) : (
+                {combinedUpdates.length > 0 ? [...combinedUpdates, ...combinedUpdates].map((item, index) => {
+                  const rawLink = item.link || item.url || '';
+                  const ItemWrapper = rawLink ? 'a' : 'div';
+                  const isExt = isExternal(rawLink);
+                  const props = rawLink ? {
+                    href: rawLink,
+                    target: isExt ? '_blank' : '_self',
+                    rel: isExt ? 'noopener noreferrer' : undefined,
+                    style: { textDecoration: 'none', display: 'block', color: 'inherit' }
+                  } : {};
+
+                  return (
+                    <ItemWrapper key={index} className="news-feed-item" {...props}>
+                      <div className="news-feed-meta">
+                        {item.type === 'event' && <span className="type-badge event">Event</span>}
+                        {item.type === 'news' && <span className="type-badge news">News</span>}
+                        <span className="news-feed-date">{item.date}</span>
+                      </div>
+                      <div className="news-feed-headline">
+                        {item.title || item.text} {rawLink && <span className="arrow">↗</span>}
+                      </div>
+                    </ItemWrapper>
+                  );
+                }) : (
                   <div className="news-feed-empty">No updates to show right now.</div>
                 )}
 
