@@ -2745,8 +2745,8 @@ a.sc-email:hover {
 ============================================================ */
 .section-footer {
   background: rgba(2, 6, 23, 0.5);
-  backdrop-filter: blur(12px) saturate(140%);
-  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   color: #fff;
   margin-top: 60px;
@@ -3692,8 +3692,8 @@ a.sc-email:hover {
 /* ── Footer bottom strip — transparent ───────────────────────── */
 .section-footer {
   background: rgba(2, 6, 23, 0.5) !important;
-  backdrop-filter: blur(12px) saturate(140%);
-  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 

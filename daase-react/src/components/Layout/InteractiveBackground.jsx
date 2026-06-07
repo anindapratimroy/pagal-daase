@@ -130,7 +130,7 @@ const InteractiveBackground = () => {
 
     let resizeTimer;
     const resize = (isInit) => {
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       canvas.width  = window.innerWidth  * dpr;
       canvas.height = window.innerHeight * dpr;
       canvas.style.width  = window.innerWidth  + 'px';
@@ -284,21 +284,14 @@ const InteractiveBackground = () => {
         const alpha  = Math.min(1, clamp + prox);
 
         if (s.isBeacon) {
-          const bg = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.size * 9);
-          bg.addColorStop(0,   s.colorBase + (alpha * 0.22).toFixed(3) + ')');
-          bg.addColorStop(0.5, s.colorBase + (alpha * 0.07).toFixed(3) + ')');
-          bg.addColorStop(1,   s.colorBase + '0)');
-          ctx.fillStyle = bg;
+          ctx.fillStyle = s.colorBase + (alpha * 0.15).toFixed(3) + ')';
           ctx.beginPath();
-          ctx.arc(s.x, s.y, s.size * 9, 0, Math.PI * 2);
+          ctx.arc(s.x, s.y, s.size * 5, 0, Math.PI * 2);
           ctx.fill();
         } else if (s.size > 1.0) {
-          const gg = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.size * 4);
-          gg.addColorStop(0, s.colorBase + (alpha * 0.28).toFixed(3) + ')');
-          gg.addColorStop(1, s.colorBase + '0)');
-          ctx.fillStyle = gg;
+          ctx.fillStyle = s.colorBase + (alpha * 0.15).toFixed(3) + ')';
           ctx.beginPath();
-          ctx.arc(s.x, s.y, s.size * 4, 0, Math.PI * 2);
+          ctx.arc(s.x, s.y, s.size * 2.5, 0, Math.PI * 2);
           ctx.fill();
         }
 
