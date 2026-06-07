@@ -1,4 +1,5 @@
 import Footer from '../Layout/Footer';
+import TiltCard from '../Layout/TiltCard';
 
 // Ensure link has protocol prefix
 function normalizeLink(link) {
@@ -11,36 +12,76 @@ function normalizeLink(link) {
 
 function EventCard({ ev, i, badgeClass, badgeLabel }) {
   const href = normalizeLink(ev.link);
-  const CardTag = href ? 'a' : 'div';
-  const linkProps = href
-    ? { href, target: '_blank', rel: 'noopener noreferrer' }
-    : {};
 
-  return (
-    <CardTag
-      key={i}
-      className={`event-card${ev.type === 'upcoming' ? ' upcoming-card' : ' past-card'} anim-fadeup`}
-      style={{
-        animationDelay: `${0.06 + i * 0.07}s`,
-        cursor: href ? 'pointer' : 'default',
-        textDecoration: 'none',
-        display: 'flex',
-        flexDirection: 'column',
-        transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-      }}
-      {...linkProps}
-    >
+  const cardContent = (
+    <>
       <div className={`event-type ${badgeClass}`}>{badgeLabel}</div>
       <h3 className="event-title">{ev.title}</h3>
       {ev.date && <div className="event-date">📅 &nbsp;{ev.date}</div>}
       {href && (
-        <div style={{ marginTop: 'auto', paddingTop: '12px', fontSize: '13px', color: 'var(--gold)', fontWeight: 600 }}>
-          Visit ↗
+        <div style={{ marginTop: 'auto', paddingTop: '12px' }}>
+          <span style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            background: 'var(--navy)',
+            color: '#fff',
+            fontSize: '12px',
+            fontWeight: 700,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            padding: '6px 14px',
+            borderRadius: '6px',
+          }}>
+            View Event ↗
+          </span>
         </div>
       )}
-    </CardTag>
+    </>
+  );
+
+  // If there's a link, wrap the whole TiltCard in a plain <a> — same pattern as news headlines.
+  // TiltCard's tilt-card-wrapper/inner don't block outer <a> clicks at the grid level.
+  if (href) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ textDecoration: 'none', color: 'inherit', display: 'block', height: '100%' }}
+      >
+        <TiltCard
+          className={`event-card${ev.type === 'upcoming' ? ' upcoming-card' : ' past-card'} anim-fadeup`}
+          style={{
+            animationDelay: `${0.06 + i * 0.07}s`,
+            cursor: 'pointer',
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+          }}
+        >
+          {cardContent}
+        </TiltCard>
+      </a>
+    );
+  }
+
+  return (
+    <TiltCard
+      className={`event-card past-card anim-fadeup`}
+      style={{
+        animationDelay: `${0.06 + i * 0.07}s`,
+        cursor: 'default',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+      }}
+    >
+      {cardContent}
+    </TiltCard>
   );
 }
+
 
 export default function Events({ events, outreach }) {
   const sortedEvents = [...(events || [])].sort((a, b) => {

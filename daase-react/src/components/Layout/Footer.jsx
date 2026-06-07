@@ -21,7 +21,7 @@ export default function Footer() {
 
         <div className="contact-grid">
           <div className="contact-info anim-fadeup d1">
-            <div className="contact-item">
+            <div className="contact-item glass-card" style={{ animationDelay: '0.2s', paddingBottom: '20px' }}>
               <div className="ci-icon">📍</div>
               <div>
                 <div className="ci-label">Campus Address</div>
@@ -32,7 +32,7 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-            <div className="contact-item">
+            <div className="contact-item glass-card" style={{ animationDelay: '0.2s', paddingBottom: '20px' }}>
               <div className="ci-icon">📧</div>
               <div>
                 <div className="ci-label">Email</div>
@@ -42,7 +42,7 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-            <div className="contact-item">
+            <div className="contact-item glass-card" style={{ animationDelay: '0.2s', paddingBottom: '20px' }}>
               <div className="ci-icon">🌐</div>
               <div>
                 <div className="ci-label">Institute</div>
@@ -69,7 +69,7 @@ export default function Footer() {
           <div className="anim-fadeup d2">
             <div className="map-wrapper">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.093!2d75.923391!3d22.528688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDMxJzQzLjMiTiA3NcKwNTUnMjQuMiJF!5e0!3m2!1sen!2sin!4v1716976200000"
+                src="https://maps.google.com/maps?q=22.528688,75.923391&t=k&z=16&output=embed"
                 title="IIT Indore Map"
                 loading="lazy"
                 allowFullScreen
@@ -79,11 +79,11 @@ export default function Footer() {
                   <div className="map-overlay-title">IIT Indore — DAASE</div>
                   <div className="map-overlay-addr">GWHF+F9C, Indore, Madhya Pradesh 453552</div>
                   <a
-                    href="https://maps.google.com/?q=GWHF%2BF9C,+Indore,+Madhya+Pradesh+453552"
+                    href="https://www.google.com/maps/search/?api=1&query=22.528688,75.923391"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-primary"
-                    style={{ fontSize: 11, padding: '9px 20px' }}
+                    style={{ fontSize: 14, padding: '9px 20px' }}
                   >
                     Open in Google Maps →
                   </a>

@@ -14,6 +14,8 @@ function normalizeLink(link) {
 
 export default function Home({ onNav, news, events }) {
   // Filter only active news, normalize 'text' field to 'title'
+
+  console.log("EVENTS:", events);
   const activeNews = (news || [])
     .filter(n => !n.status || n.status.toString().toLowerCase().trim() === 'active')
     .map(n => ({ type: 'news', title: n.text || n.title, link: normalizeLink(n.link || n.url), date: n.date }));
@@ -60,19 +62,19 @@ export default function Home({ onNav, news, events }) {
           </div>
 
           <div className="hero-stats-grid" style={{ marginTop: '48px' }}>
-            <CounterStat target={7}   label="Research Areas"    delay="0.06s" />
-            <CounterStat target={5}   label="Degree Programs"   delay="0.12s" />
-            <CounterStat target={13}  label="Faculty Members"   delay="0.18s" />
-            <CounterStat target={100} label="+ Alumni"          delay="0.23s" />
+            <CounterStat target={7} label="Research Areas" delay="0.06s" />
+            <CounterStat target={5} label="Degree Programs" delay="0.12s" />
+            <CounterStat target={13} label="Faculty Members" delay="0.18s" />
+            <CounterStat target={100} label="+ Alumni" delay="0.23s" />
           </div>
 
           <div className="scroll-hint">Scroll to explore</div>
         </div>
 
         <div className="hero-right">
-          <div className="news-feed-container anim-fadein" style={{ animationDelay: '0.2s', paddingBottom: '20px' }}>
+          <div className="news-feed-container anim-fadein glass-card" style={{ animationDelay: '0.2s', paddingBottom: '20px' }}>
             <h2 className="news-feed-title">News &amp; <span>Events</span></h2>
-            
+
             <div className="vertical-marquee-container">
               <div className="vertical-marquee-content">
                 {combinedUpdates.length > 0 ? [...combinedUpdates, ...combinedUpdates].map((item, index) => (
@@ -82,8 +84,13 @@ export default function Home({ onNav, news, events }) {
                       {item.type === 'news' && <span className="type-badge news">News</span>}
                       <span className="news-feed-date">{item.date}</span>
                     </div>
-                    {item.link || item.url ? (
-                      <a href={item.link || item.url} target="_blank" rel="noopener noreferrer" className="news-feed-headline">
+                    {(item.link || item.url) ? (
+                      <a
+                        href={item.link || item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="news-feed-headline"
+                      >
                         {item.title || item.text} <span className="arrow">↗</span>
                       </a>
                     ) : (
@@ -93,9 +100,10 @@ export default function Home({ onNav, news, events }) {
                 )) : (
                   <div className="news-feed-empty">No updates to show right now.</div>
                 )}
+
               </div>
             </div>
-            
+
 
             <Collaborators />
           </div>

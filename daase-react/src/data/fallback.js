@@ -549,10 +549,10 @@ export const FACILITIES_FB = [
 ];
 
 export const EVENTS_FB = [
-  { title: '3-Day Workshop on Numerical Techniques for Atmospheric and Space Sciences 2025', date: 'December 15–17, 2025', type: 'upcoming' },
-  { title: 'SKA-India Summer Training Program 2025', date: 'July 7–18, 2025', type: 'past' },
-  { title: 'RETCO-VI: 6th National Conference on Recent Trends in the Study of Compact Objects', date: 'March 10–12, 2025', type: 'past' },
-  { title: 'DAASE Outreach Series — Stargazing Sessions, Space Quizzes & Hackathons', date: 'Ongoing · Semester Events', type: 'past' },
+  { title: '3-Day Workshop on Numerical Techniques for Atmospheric and Space Sciences 2025', date: 'December 15–17, 2025', type: 'upcoming', link: 'https://www.iiti.ac.in/daase/events' },
+  { title: 'SKA-India Summer Training Program 2025', date: 'July 7–18, 2025', type: 'past', link: 'https://www.iiti.ac.in/daase/ska' },
+  { title: 'RETCO-VI: 6th National Conference on Recent Trends in the Study of Compact Objects', date: 'March 10–12, 2025', type: 'past', link: '' },
+  { title: 'DAASE Outreach Series — Stargazing Sessions, Space Quizzes & Hackathons', date: 'Ongoing · Semester Events', type: 'past', link: '' },
 ];
 export const PHD_FB = {
   "Ph.D. \u2014 Batch 2021": [

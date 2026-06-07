@@ -1,4 +1,5 @@
 import Footer from '../Layout/Footer';
+import TiltCard from '../Layout/TiltCard';
 
 const FUNDERS = [
   { href: 'https://www.education.gov.in', label: 'Ministry of Education (MoE) ↗' },
@@ -47,7 +48,7 @@ export default function Opportunities({ opportunities = [] }) {
           {/* Dynamic Opportunities */}
           <div className="opp-list-container" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             {activeOpps.length > 0 ? activeOpps.map((opp, idx) => (
-              <div key={idx} className="opp-card anim-fadeup" style={{ animationDelay: `${0.1 * idx}s` }}>
+              <TiltCard key={idx} className="opp-card anim-fadeup" style={{ animationDelay: `${0.1 * idx}s` }}>
                 {opp.tag && (
                   <div className="opp-badge">🎓 &nbsp;{opp.tag}</div>
                 )}
@@ -76,7 +77,7 @@ export default function Opportunities({ opportunities = [] }) {
                     </a>
                   </>
                 )}
-              </div>
+              </TiltCard>
             )) : (
               <div className="opp-card anim-fadeup" style={{ textAlign: 'center', padding: '40px' }}>
                 <h3 className="opp-title">No Open Opportunities</h3>
@@ -86,7 +87,7 @@ export default function Opportunities({ opportunities = [] }) {
           </div>
 
           {/* Funding card */}
-          <div className="funding-card anim-fadeup d2">
+          <TiltCard className="funding-card anim-fadeup d2">
             <div className="funding-title">Funding &amp; Support</div>
             <div className="funder-list">
               {FUNDERS.map(f => (
@@ -95,7 +96,7 @@ export default function Opportunities({ opportunities = [] }) {
                 </a>
               ))}
             </div>
-          </div>
+          </TiltCard>
         </div>
 
 

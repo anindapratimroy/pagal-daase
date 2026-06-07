@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Footer from '../Layout/Footer';
+import TiltCard from '../Layout/TiltCard';
 import { drivePhotoUrl } from '../../data/fallback';
 import { imageMap } from '../../data/imageMap';
 
@@ -7,7 +8,10 @@ function StudentBatch({ batch, list, onImageClick, type }) {
   return (
     <div className="batch-section">
       <div className="batch-title">
-        {batch} <span className="batch-count">{list.length} </span><span>  Please add [@]iiti.ac.in</span>
+        {batch} <span className="batch-count">{list.length} </span>
+        <span style={{ color: '#ffd97a', fontSize: '0.82em', fontWeight: 600, opacity: 0.9 }}>
+          — add @iiti.ac.in to email ID
+        </span>
       </div>
       <div className="students-grid">
         {list.map((s, i) => {
@@ -21,7 +25,7 @@ function StudentBatch({ batch, list, onImageClick, type }) {
           }
 
           return (
-            <div className="student-card anim-fadeup" key={i} style={{ animationDelay: `${0.04 + i * 0.03}s` }}>
+            <TiltCard className="student-card anim-fadeup" key={i} style={{ animationDelay: `${0.04 + i * 0.03}s` }}>
               <div className="sc-avatar" onClick={() => onImageClick && onImageClick(photoSrc, s.name)}>
                 <img src={photoSrc} alt={s.name} onError={e => {
                   if (type === 'interns' && e.target.src.endsWith('.png')) {
@@ -37,7 +41,7 @@ function StudentBatch({ batch, list, onImageClick, type }) {
               {s.email && <div className="sc-email">{s.email}</div>}
               
               {type === 'interns' && (
-                <div style={{ marginTop: '8px', fontSize: '0.85rem', color: 'var(--text-light)', lineHeight: '1.4' }}>
+                <div style={{ marginTop: '12px', fontSize: '1rem', color: 'var(--text-on-dark-body)', lineHeight: '1.5' }}>
                   {(() => {
                     const inst = s['home institution'] || s['Home Institution'] || s.home_institution || s.institution;
                     const iType = s['type of internship'] || s['Type of Internship'] || s.type_of_internship || s.type || s.internship_type;
@@ -45,16 +49,16 @@ function StudentBatch({ batch, list, onImageClick, type }) {
                     const bat = s.batch || s.Batch;
                     return (
                       <>
-                        {inst && <div><strong style={{color: 'var(--text)'}}>Institution:</strong> {inst}</div>}
-                        {iType && <div><strong style={{color: 'var(--text)'}}>Type:</strong> {iType}</div>}
-                        {per && <div><strong style={{color: 'var(--text)'}}>Period:</strong> {per}</div>}
-                        {bat && <div><strong style={{color: 'var(--text)'}}>Batch:</strong> {bat}</div>}
+                        {inst && <div><strong style={{color: 'var(--text-on-dark)'}}>Institution:</strong> {inst}</div>}
+                        {iType && <div><strong style={{color: 'var(--text-on-dark)'}}>Type:</strong> {iType}</div>}
+                        {per && <div><strong style={{color: 'var(--text-on-dark)'}}>Period:</strong> {per}</div>}
+                        {bat && <div><strong style={{color: 'var(--text-on-dark)'}}>Batch:</strong> {bat}</div>}
                       </>
                     );
                   })()}
                 </div>
               )}
-            </div>
+            </TiltCard>
           );
         })}
       </div>

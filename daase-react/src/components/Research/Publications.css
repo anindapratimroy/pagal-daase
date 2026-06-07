@@ -1,6 +1,6 @@
-/* ── Publications Scroller — Light Theme ─────────────────────── */
+/* ── Publications Scroller — Dark Theme ─────────────────────── */
 .publications-section {
-  background: #f8f9fc;
+  background: transparent;
   padding: 48px 0 52px;
   position: relative;
   overflow: hidden;
@@ -30,7 +30,7 @@
   font-family: 'Merriweather', serif;
   font-size: 1.55rem;
   font-weight: 700;
-  color: var(--navy, #001932);
+  color: var(--text-on-dark, #fff);
   letter-spacing: 0.01em;
 }
 
@@ -81,23 +81,23 @@
 .pub-item {
   display: flex;
   gap: 14px;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.75;
-  color: #4a5568;
+  color: var(--text-on-dark-body);
   padding: 16px 18px;
   border-left: 3px solid transparent;
-  border-bottom: 1px solid #edf0f5;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 0 6px 6px 0;
   background: transparent;
   transition: background 0.25s ease, border-left-color 0.25s ease, transform 0.2s ease;
 }
 
 .pub-item:hover {
-  background: #fff;
-  border-left-color: var(--gold, #c5a048);
+  background: rgba(255, 255, 255, 0.05);
+  border-left-color: var(--gold-light, #c5a048);
   transform: translateX(5px);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  color: #2d3748;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  color: #fff;
 }
 
 .pub-num {
@@ -129,7 +129,7 @@
 }
 
 .pub-link:hover .pub-text {
-  color: var(--navy, #001932);
+  color: var(--gold-light, #fff);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -155,10 +155,10 @@
 }
 
 .pub-item a {
-  color: var(--navy, #001932);
+  color: var(--gold-light, #fff);
   text-decoration: underline;
   word-break: break-all;
-  opacity: 0.75;
+  opacity: 0.85;
 }
 
 .pub-item a:hover {

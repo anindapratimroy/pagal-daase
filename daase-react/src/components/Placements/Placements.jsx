@@ -25,7 +25,7 @@ export default function Placements() {
             </div>
           ))}
         </div> */}
-        <h1>Placements will be coming soon , we don't know when this happens 🙃</h1>
+        <h1 style={{ color: "white" }}>Placements will be coming soon , we don't know when this happens 🙃</h1>
       </div>
       <Footer />
     </div>

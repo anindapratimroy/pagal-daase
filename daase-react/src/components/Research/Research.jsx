@@ -2,6 +2,7 @@ import React from 'react';
 import { RESEARCH_AREAS } from '../../data/fallback';
 import Publications from './Publications';
 import Footer from '../Layout/Footer';
+import TiltCard from '../Layout/TiltCard';
 
 export default function Research({ onNav }) {
   return (
@@ -17,22 +18,22 @@ export default function Research({ onNav }) {
         {/* Video — autoplays muted immediately, sits right below the title */}
         <div style={{
           position: 'relative',
-          paddingBottom: '56.25%', /* 16:9 Aspect Ratio */
-          height: 0,
           width: '100%',
-          maxWidth: '960px',
+          maxWidth: '880px',
           margin: '36px auto 0 auto',
-          borderRadius: '12px',
+          borderRadius: '16px',
           overflow: 'hidden',
-          boxShadow: '0 8px 40px rgba(0,0,0,0.18)',
+          boxShadow: '0 8px 40px rgba(0,0,0,0.4)',
           background: '#000',
+          aspectRatio: '16 / 9',
+          minHeight: '220px',
         }}>
           <iframe
             src="https://www.youtube.com/embed/biwLe51Rq44?autoplay=1&mute=1&playsinline=1&loop=1&playlist=biwLe51Rq44&controls=1&modestbranding=1&rel=0"
             title="DAASE Research Video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
-            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none', display: 'block' }}
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none', display: 'block', borderRadius: '16px' }}
           />
         </div>
       </div>
@@ -44,10 +45,10 @@ export default function Research({ onNav }) {
       <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '40px 40px 56px 40px' }}>
         <div className="research-grid">
           {RESEARCH_AREAS.map((r, i) => (
-            <div
+            <TiltCard
               key={i}
               className="rc anim-fadeup"
-              style={{ animationDelay: `${0.06 + i * 0.05}s` }}
+              style={{ animationDelay: `${0.06 + i * 0.05}s`, height: '100%' }}
             >
               <div style={{ height: '180px', overflow: 'hidden', borderRadius: 'var(--r-sm) var(--r-sm) 0 0', margin: '-24px -24px 20px -24px' }}>
                 <img
@@ -71,7 +72,7 @@ export default function Research({ onNav }) {
                   Learn More ↗
                 </button>
               )}
-            </div>
+            </TiltCard>
           ))}
         </div>
       </div>

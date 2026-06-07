@@ -122,7 +122,7 @@ export default function App() {
       <Navbar current={navCurrent} onNav={handleNav} />
 
       <main id="main-content" ref={mainRef}
-        style={{ paddingTop: 'var(--nav-h)', minHeight: '100vh', overflowY: 'auto', overflowX: 'hidden' }}>
+        style={{ paddingTop: 'var(--nav-h)', minHeight: '100vh', overflowX: 'hidden' }}>
         {renderView()}
       </main>
 
