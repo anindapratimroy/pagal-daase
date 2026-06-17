@@ -3564,7 +3564,7 @@ a.sc-email:hover {
 .about-strip {
   /* background: rgba(0, 12, 40, 0.55) !important;
   backdrop-filter: blur(24px) saturate(160%) !important; */
-  -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
+  /* -webkit-backdrop-filter: blur(24px) saturate(160%) !important; */
 }
 
 .about-strip p {
