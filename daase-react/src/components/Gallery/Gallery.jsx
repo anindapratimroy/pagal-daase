@@ -5,7 +5,7 @@ const GALLERY_ITEMS = [
   { cls: 'tall', src: 'images/gallery/img_1.jpg', label: 'SKA Summer Training 2025' },
   { cls: '',     src: 'images/gallery/img_2.jpg', label: 'RETCO-VI Conference 2025' },
   { cls: '',     src: 'images/gallery/img_3.jpg', label: 'Department Group Photo' },
-  { cls: 'wide', src: 'images/gallery/img_4.jpg', label: 'Academic Event' },
+  { cls: 'wide', src: 'images/gallery/Academic Event.JPG', label: 'Academic Event' },
   { cls: 'wide', src: 'images/gallery/img_5.jpg', label: 'DAASE Team Outdoors' },
 ];
 

@@ -72,7 +72,7 @@ export default function Facilities({ facilities }) {
         </div>
         <div className="facilities-grid">
           {facilities.map((f, i) => {
-            const imgSrc = FAC_IMAGE_MAP[f.name];
+            const imgSrc = f.image || FAC_IMAGE_MAP[f.name];
             return (
               <div className="facility-card anim-fadeup" key={i} style={{ animationDelay: `${0.04 + i * 0.03}s`, padding: 0, overflow: 'hidden' }}>
                 {imgSrc && (

@@ -64,7 +64,7 @@ export default function Opportunities({ opportunities = [] }) {
                 )}
                 {opp.applyLink && (
                   <>
-                    <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 20 }}>
+                    <p style={{ fontSize: 13.5, color: '#F0F4FF', fontWeight: 600, letterSpacing: '0.02em', marginBottom: 20 }}>
                       Applications through the IIT Indore Academic Portal.
                     </p>
                     <a

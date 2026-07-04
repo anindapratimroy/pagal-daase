@@ -4,6 +4,7 @@ export default function TiltCard({ children, className = '', style = {}, ...prop
   const cardRef = useRef(null);
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
   const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
@@ -26,7 +27,10 @@ export default function TiltCard({ children, className = '', style = {}, ...prop
     setGlare({ x: glareX, y: glareY, opacity: 0.1 });
   };
 
+  const handleMouseEnter = () => setIsHovered(true);
+
   const handleMouseLeave = () => {
+    setIsHovered(false);
     setRotate({ x: 0, y: 0 });
     setGlare(g => ({ ...g, opacity: 0 }));
   };
@@ -35,12 +39,15 @@ export default function TiltCard({ children, className = '', style = {}, ...prop
     <div
       ref={cardRef}
       className="tilt-card-wrapper"
+      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
         ...style,
-        perspective: '900px',
+        perspective: '1000px',
         transformStyle: 'preserve-3d',
+        transform: isHovered ? 'scale(1.05) translateY(-10px)' : 'scale(1) translateY(0)',
+        transition: 'transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1)',
       }}
       {...props}
     >
@@ -48,7 +55,7 @@ export default function TiltCard({ children, className = '', style = {}, ...prop
         className={`tilt-card-inner ${className}`}
         style={{
           transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
-          transition: 'transform 0.15s ease-out',
+          transition: 'transform 0.1s ease-out',
           height: '100%',
           width: '100%',
           willChange: 'transform',
