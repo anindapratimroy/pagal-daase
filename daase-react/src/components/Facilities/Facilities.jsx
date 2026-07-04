@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Footer from '../Layout/Footer';
-
+import TiltCard from '../Layout/TiltCard';
 // Mapping facility names to downloaded images (fac_1 to fac_12 available)
 const FAC_IMAGE_MAP = {
   'IITI Radio Interferometer Observatory': '/images/facilities/fac_1.jpg',
@@ -74,7 +74,7 @@ export default function Facilities({ facilities }) {
           {facilities.map((f, i) => {
             const imgSrc = f.image || FAC_IMAGE_MAP[f.name];
             return (
-              <div className="facility-card anim-fadeup" key={i} style={{ animationDelay: `${0.04 + i * 0.03}s`, padding: 0, overflow: 'hidden' }}>
+              <TiltCard className="facility-card anim-fadeup" key={i} style={{ animationDelay: `${0.04 + i * 0.03}s`, padding: 0, overflow: 'hidden' }}>
                 {imgSrc && (
                   <div style={{ width: '100%', height: '140px', overflow: 'hidden' }}>
                     <img
@@ -92,7 +92,7 @@ export default function Facilities({ facilities }) {
                   {!imgSrc && <div className="fac-icon">{f.icon}</div>}
                   <div className="fac-name">{f.name}</div>
                 </div>
-              </div>
+              </TiltCard>
             );
           })}
         </div>

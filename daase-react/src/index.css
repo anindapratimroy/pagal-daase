@@ -2183,7 +2183,7 @@ a.sc-email:hover {
 .fac-name {
   font-size: 14.5px;
   font-weight: 600;
-  color: var(--text-body);
+  color: var(--text-on-dark);
   line-height: 1.4;
 }
 
