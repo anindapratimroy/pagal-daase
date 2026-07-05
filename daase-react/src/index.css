@@ -3009,6 +3009,98 @@ a.sc-email:hover {
 
 
 @media(max-width:640px) {
+  /* --- Mobile Optimization Fixes --- */
+  /* 1. Show two people per row without causing overflow */
+  .faculty-grid, .students-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important; /* minmax(0) prevents grid items from blowing out container */
+    gap: 10px !important;
+  }
+  
+  .faculty-card {
+    min-width: 0 !important;
+  }
+  
+  .student-card {
+    min-width: 0 !important;
+    padding: 12px 8px !important;
+  }
+
+  .fc-photo {
+    height: 160px !important; /* Shrink photo height on mobile */
+  }
+
+  .fc-body {
+    padding: 10px 8px 12px !important;
+  }
+
+  /* Shrink badges so they don't force minimum width */
+  .fc-designation-badge {
+    font-size: 8.5px !important;
+    padding: 3px 6px !important;
+    letter-spacing: 0.02em !important;
+    bottom: 4px !important;
+    left: 4px !important;
+    white-space: normal !important; /* allow breaking into two lines if needed */
+    text-align: center;
+    max-width: 92%;
+    line-height: 1.2;
+  }
+
+  .hod-badge {
+    font-size: 8.5px !important;
+    padding: 4px 6px !important;
+    letter-spacing: 0.02em !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* Shrink text for cards to fit 2-column perfectly */
+  .fc-name, .sc-name {
+    font-size: 14px !important;
+    word-break: break-word;
+    line-height: 1.25 !important;
+  }
+  
+  .sc-supervisor, .sc-research, .fc-research, .fc-title {
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+    margin-top: 4px !important;
+  }
+
+  .fc-email, .sc-email {
+    font-size: 11px !important;
+    word-break: break-all !important;
+    margin-top: 6px !important;
+  }
+
+  /* 2. Fix lag by turning off expensive effects on mobile (glassmorphism/filters) */
+  .student-card, .event-card, .faculty-card, .hod-card, .rc, .prog-card,
+  .news-card, .facility-card, .opp-card, .funding-card, .contact-item,
+  .collab-tag, .news-feed-item, .hero-stat, .collab-logo-wrapper, .about-hl {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    background-color: rgba(18, 38, 75, 0.9) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+    transition: transform 0.2s ease-out !important;
+  }
+
+  /* 3. Turn off sheen animation to save GPU/Battery */
+  .student-card::before, .event-card::before, .faculty-card::before,
+  .hod-card::before, .rc::before, .prog-card::before, .news-card::before,
+  .facility-card::before, .opp-card::before, .funding-card::before,
+  .contact-item::before, .collab-tag::before, .news-feed-item::before,
+  .hero-stat::before, .collab-logo-wrapper::before, .about-hl::before {
+    display: none !important;
+  }
+
+  /* 4. Disable heavy background planet/satellite animations on small screens */
+  .cool-bg-container .bg-satellite,
+  .cool-bg-container .bg-planet,
+  .cool-bg-container .bg-rocket {
+    animation: none !important;
+    display: none !important;
+  }
+  /* --------------------------------- */
+
   .section-inner {
     padding: 36px 18px 52px;
   }
