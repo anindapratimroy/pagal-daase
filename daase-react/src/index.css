@@ -623,16 +623,11 @@ nav {
   /* rounded-3xl */
   padding: 12px 24px;
   /* px-6 py-3 */
-  /* backdrop-filter: blur(8px); */
   -webkit-backdrop-filter: blur(8px);
-  /* box-shadow:
-    0 25px 50px -12px rgba(0, 0, 0, 0.2), */
-
-  /* inset 0 1px 3px rgba(255, 255, 255, 0.15); */
-  /* inset-shadow */
-  /* width: fit-content; */
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .glass-card:hover {
@@ -1030,6 +1025,7 @@ nav {
   position: relative;
   mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
   -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  transform: translateZ(0);
 }
 
 .vertical-marquee-container:hover .vertical-marquee-content {
@@ -1042,6 +1038,8 @@ nav {
   gap: 12px;
   /* Adjust duration as needed; 30s is a smooth scroll */
   animation: scrollVertical 35s linear infinite;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 @keyframes scrollVertical {
@@ -3338,6 +3336,8 @@ a.sc-email:hover {
   padding: 0 20px;
   animation: slideLeft 50s linear infinite;
   width: max-content;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .collab-logo-wrapper {
@@ -3447,11 +3447,7 @@ a.sc-email:hover {
 .collab-logo-wrapper,
 .about-hl {
   background-color: rgba(255, 255, 255, 0.02) !important;
-  /* background-image:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.0) 100%),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E") !important; */
-  /* backdrop-filter: blur(24px) saturate(180%); */
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
   box-shadow:
     0 24px 48px rgba(0, 0, 0, 0.4),
@@ -3460,6 +3456,8 @@ a.sc-email:hover {
   color: rgba(255, 255, 255, 0.95) !important;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
   overflow: hidden !important;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Hover: glass lifts and intensifies */
@@ -3487,7 +3485,7 @@ a.sc-email:hover {
     0 24px 48px rgba(0, 0, 0, 0.5),
     inset 0 1px 1px rgba(255, 255, 255, 0.5),
     inset 0 -1px 1px rgba(0, 0, 0, 0.3) !important;
-  transform: translateY(-4px) scale(1.02);
+  transform: translate3d(0, -4px, 0) scale(1.02) !important;
 }
 
 /* Specular Reflection Sheen */
@@ -3510,15 +3508,15 @@ a.sc-email:hover {
   content: '';
   position: absolute;
   top: 0;
-  left: -150%;
+  left: 0;
   width: 50%;
   height: 100%;
   background: linear-gradient(to right,
       rgba(255, 255, 255, 0) 0%,
       rgba(255, 255, 255, 0.08) 50%,
       rgba(255, 255, 255, 0) 100%);
-  transform: skewX(-25deg);
-  transition: left 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: translate3d(-300%, 0, 0) skewX(-25deg);
+  transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
   pointer-events: none;
   z-index: 10;
 }
@@ -3539,7 +3537,7 @@ a.sc-email:hover {
 .hero-stat:hover::before,
 .collab-logo-wrapper:hover::before,
 .about-hl:hover::before {
-  left: 200%;
+  transform: translate3d(400%, 0, 0) skewX(-25deg);
 }
 
 /* ── Heading & text visibility inside cards ───────────────────── */
