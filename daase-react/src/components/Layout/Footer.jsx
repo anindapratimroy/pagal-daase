@@ -95,17 +95,12 @@ export default function Footer() {
       </div>
       <div className="section-footer">
         <div className="footer-inner">
-          <div className="footer-copyright">Copyright &copy; {new Date().getFullYear()} DAASE, IIT Indore. All rights reserved.</div>
+          <div className="footer-copyright">
+            <span style={{ fontSize: '1.2em', verticalAlign: 'middle', marginRight: '4px' }}>©</span> 
+            {new Date().getFullYear()} DAASE, IIT Indore. All rights reserved.
+          </div>
           <div className="footer-creator">
-            <span>
-              Website created by: <a href="https://www.linkedin.com/in/aninda-pratim-roy" target="_blank" rel="noopener noreferrer">Aninda Pratim Roy</a> and <a href="https://www.linkedin.com/in/vidhan-thakur27" target="_blank" rel="noopener noreferrer">Vidhan Thakur</a>
-              <span className="footer-divider"> | </span>
-              M.Tech Space Engineering, IIT Indore &amp; BS CSDA, IIT Patna
-              <span className="footer-divider"> | </span>
-              <a href="mailto:mt2502121016@iiti.ac.in" className="footer-email">mt2502121016@iiti.ac.in</a>
-              <span className="footer-divider">, </span>
-              <a href="mailto:vidhan_2312res733@iitp.ac.in" className="footer-email">vidhan_2312res733@iitp.ac.in</a>
-            </span>
+            Website created by: <a href="https://www.linkedin.com/in/aninda-pratim-roy" target="_blank" rel="noopener noreferrer">Aninda Pratim Roy</a> and <a href="https://www.linkedin.com/in/vidhan-thakur27" target="_blank" rel="noopener noreferrer">Vidhan Thakur</a>
           </div>
         </div>
       </div>
