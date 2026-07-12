@@ -68,7 +68,7 @@ export default function ResearchAreaDetail({ areaId, onNav }) {
       {/* Hero Section */}
       <div style={{ background: '#000f23', width: '100%', overflow: 'hidden' }}>
         <div className="rd-hero">
-          <div className="rd-hero-bg" style={{ backgroundImage: `url("/${area.image}")` }}></div>
+          <div className="rd-hero-bg" style={{ backgroundImage: `url("./${area.image}")` }}></div>
           <div className="rd-hero-overlay"></div>
           <div className="container rd-hero-content">
             <button onClick={() => onNav('research')} className="rd-back-link">
@@ -82,7 +82,7 @@ export default function ResearchAreaDetail({ areaId, onNav }) {
       <div className="container rd-content-container">
         <div className="rd-main-content anim-fadeup" style={{ animationDelay: '0.1s' }}>
           <img 
-            src={`/${area.image}`} 
+            src={`./${area.image}`} 
             alt={area.title} 
             style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'cover', borderRadius: 'var(--r)', marginBottom: '32px', boxShadow: 'var(--shadow-md)' }} 
           />
