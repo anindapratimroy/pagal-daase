@@ -95,9 +95,8 @@ export default function Footer() {
       </div>
       <div className="section-footer">
         <div className="footer-inner">
-          <div className="footer-copyright">Copyright &copy; 2022–2026 DAASE, IIT Indore. All rights reserved.</div>
+          <div className="footer-copyright">Copyright &copy; {new Date().getFullYear()} DAASE, IIT Indore. All rights reserved.</div>
           <div className="footer-creator">
-            <span style={{ color: 'var(--gold-light)' }}>✦</span>
             <span>
               Website created by: <a href="https://www.linkedin.com/in/aninda-pratim-roy" target="_blank" rel="noopener noreferrer">Aninda Pratim Roy</a> and <a href="https://www.linkedin.com/in/vidhan-thakur27" target="_blank" rel="noopener noreferrer">Vidhan Thakur</a>
               <span className="footer-divider"> | </span>

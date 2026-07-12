@@ -15,7 +15,7 @@ const LOGOS = [
   { img: 'uchile.png', name: 'University of Chile', url: 'https://uchile.cl/english' },
   { img: 'ukzn.png', name: 'University of KwaZulu-Natal', url: 'https://ukzn.ac.za/' },
   { img: 'sheffield.png', name: 'University of Sheffield', url: 'https://www.sheffield.ac.uk/' },
-  { img: 'uni-hamburg.png', name: 'University of Hamburg', url: 'https://www.uni-hamburg.de/en.html' },
+  { img: 'uni_hamburg.png', name: 'University of Hamburg', url: 'https://www.uni-hamburg.de/en.html' },
   { img: 'open.png', name: 'The Open University', url: 'https://www.open.ac.uk/' },
   { img: 'rug.png', name: 'University of Groningen', url: 'https://www.rug.nl/' },
   { img: 'stockholm.png', name: 'Stockholm University', url: 'https://www.su.se/english/' },
@@ -43,7 +43,7 @@ export default function Collaborators() {
           {[...LOGOS, ...LOGOS].map((logo, idx) => (
             <a href={logo.url} target="_blank" rel="noopener noreferrer" className="collab-logo-wrapper" key={idx}>
               <div className="collab-img-box">
-                <img src={`images/collaborators/${logo.img}`} alt={logo.name} loading="lazy" />
+                <img src={`./images/collaborators/${logo.img}`} alt={logo.name} loading="lazy" />
               </div>
               <span className="collab-name">{logo.name}</span>
             </a>

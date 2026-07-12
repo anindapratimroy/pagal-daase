@@ -271,7 +271,7 @@
 }
 
 .faculty-no-link:hover {
-  background: #f9f9f9;
+  background: transparent;
   transform: none;
   border-color: transparent;
 }

@@ -22,7 +22,9 @@ function setCached(data) {
 }
 
 export function useData() {
-  const [data, setData] = useState(null);
+  // Initialize with cached data immediately so the UI doesn't use hardcoded fallbacks
+  // if a cache exists, preventing a visual jump when live data finishes fetching.
+  const [data, setData] = useState(() => getCached(false) || null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -33,7 +35,12 @@ export function useData() {
       const fresh = await fetchFresh();
       if (mounted) {
         if (fresh) {
-          setData(fresh);
+          // Only update state if data actually changed! This completely prevents
+          // the CSS animations (like the News scroller) from resetting abruptly.
+          setData(prev => {
+            if (JSON.stringify(prev) === JSON.stringify(fresh)) return prev;
+            return fresh;
+          });
         } else {
           // If network is offline or fetch fails, fall back to cached data
           const cached = getCached(true);

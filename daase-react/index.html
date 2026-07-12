@@ -98,16 +98,24 @@
     <meta name="apple-mobile-web-app-title" content="DAASE IIT Indore" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="application-name" content="DAASE IIT Indore" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/daase.png" />
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/daase.png" />
+    <link rel="manifest" href="./manifest.json" />
 
     <!-- ═══════════════════════════════════════════════════════════
-         PRECONNECT / DNS PREFETCH (Performance)
+         PRECONNECT / DNS PREFETCH / RESOURCE CACHING (Performance)
     ═══════════════════════════════════════════════════════════ -->
+    <meta http-equiv="Cache-Control" content="max-age=31536000, public" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://sheets.googleapis.com" />
     <link rel="dns-prefetch" href="https://docs.google.com" />
+    
+    <!-- Render-blocking CSS fixed: Moved from index.css to index.html with fetchpriority="high" for better LCP -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" fetchpriority="high" />
+
+    <!-- Preload critical LCP Images to fix LCP breakdowns -->
+    <link rel="preload" as="image" href="./images/IITI_Logo.svg" fetchpriority="high" />
+    <link rel="preload" as="image" href="./images/daase.png" fetchpriority="high" />
 
     <!-- ═══════════════════════════════════════════════════════════
          STRUCTURED DATA — Schema.org (split into separate tags to fix JSON-LD parser errors)
@@ -268,7 +276,7 @@
     </script>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/images/daase.png" />
+    <link rel="icon" type="image/png" href="./images/daase.png" />
   </head>
   <body>
     <div id="root"></div>

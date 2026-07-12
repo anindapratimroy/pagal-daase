@@ -17,7 +17,14 @@ export default function Preloader({ visible }) {
     const start = Date.now();
     const DURATION = 2500;
     const progressTimer = setInterval(() => {
-      setProgress(Math.min(100, Math.round(((Date.now() - start) / DURATION) * 100)));
+      const elapsed = Date.now() - start;
+      if (elapsed < DURATION) {
+        setProgress(Math.round((elapsed / DURATION) * 85));
+      } else {
+        const extra = elapsed - DURATION;
+        const creep = 14 * (1 - Math.exp(-extra / 3000));
+        setProgress(Math.round(85 + creep));
+      }
     }, 30);
     return () => { clearInterval(msgTimer); clearInterval(progressTimer); };
   }, [visible]);

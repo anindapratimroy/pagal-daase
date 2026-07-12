@@ -101,7 +101,14 @@ export default function Home({ onNav, news, events }) {
 
             <div className="vertical-marquee-container">
               <div className="vertical-marquee-content">
-                {combinedUpdates.length > 0 ? [...combinedUpdates, ...combinedUpdates].map((item, index) => {
+                {combinedUpdates.length > 0 ? (() => {
+                  // Ensure we always have enough items to fill the container height
+                  // so the marquee doesn't jump when we have less data.
+                  const copiesNeeded = Math.max(2, Math.ceil(12 / combinedUpdates.length) * 2);
+                  const displayUpdates = [];
+                  for (let i = 0; i < copiesNeeded; i++) displayUpdates.push(...combinedUpdates);
+                  return displayUpdates;
+                })().map((item, index) => {
                   const rawLink = item.link || item.url || '';
                   const ItemWrapper = rawLink ? 'a' : 'div';
                   const isExt = isExternal(rawLink);

@@ -34,40 +34,67 @@ export default function App() {
   const [view, setView] = useState('home');
   const [peopleTab, setPeopleTab] = useState('faculty'); // active tab inside People page
   const [researchAreaId, setResearchAreaId] = useState(null); // active research area
-  const [loading, setLoading] = useState(true);
+  const [minTimePassed, setMinTimePassed] = useState(false);
   const [showBackTop, setShowTop] = useState(false);
   const mainRef = useRef(null);
 
   const data = useData();
 
-  // Preloader: show until data resolves (fallback 15s in case of total failure)
+  // Preloader: strictly wait 1.8s minimum for animation to finish.
+  // We no longer wait for data fetch to complete so the page loads blazing fast.
   useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 2600);
+    const t = setTimeout(() => setMinTimePassed(true), 1800);
     return () => clearTimeout(t);
   }, []);
-  useEffect(() => {
-    if (!data.loading) setLoading(false);
-  }, [data.loading]);
+  
+  const isLoading = !minTimePassed;
 
-  // Back-to-top visibility
+  // Hash Routing Listener
   useEffect(() => {
-    const handler = () => setShowTop(window.scrollY > 300);
-    window.addEventListener('scroll', handler);
+    const syncHashToState = () => {
+      const hash = window.location.hash.replace('#', '') || 'home';
+      
+      if (hash.startsWith('research-detail/')) {
+        setResearchAreaId(hash.split('/')[1]);
+        setView('research-detail');
+      } else if (PEOPLE_TAB_MAP[hash]) {
+        setPeopleTab(PEOPLE_TAB_MAP[hash]);
+        setView('people');
+      } else {
+        setView(hash);
+      }
+      window.scrollTo(0, 0);
+    };
+
+    // Sync on initial load
+    syncHashToState();
+
+    window.addEventListener('hashchange', syncHashToState);
+    return () => window.removeEventListener('hashchange', syncHashToState);
+  }, []);
+
+  // Back-to-top visibility (Optimized to prevent forced reflows / layout thrashing)
+  useEffect(() => {
+    let ticking = false;
+    const handler = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setShowTop(window.scrollY > 300);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', handler, { passive: true });
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
   const handleNav = (id, detailId = null) => {
-    if (PEOPLE_TAB_MAP[id]) {
-      // It's a People sub-item — map to the People page with the right tab
-      setPeopleTab(PEOPLE_TAB_MAP[id]);
-      setView('people');
-    } else if (id === 'research-detail') {
-      setResearchAreaId(detailId);
-      setView('research-detail');
+    if (id === 'research-detail') {
+      window.location.hash = `research-detail/${detailId}`;
     } else {
-      setView(id);
+      window.location.hash = id;
     }
-    window.scrollTo(0, 0);
   };
 
   // Compute what the "current" value is for Navbar highlighting
@@ -117,7 +144,7 @@ export default function App() {
   return (
     <>
       <InteractiveBackground />
-      <Preloader visible={loading} />
+      <Preloader visible={isLoading} />
 
       <Navbar current={navCurrent} onNav={handleNav} />
 
