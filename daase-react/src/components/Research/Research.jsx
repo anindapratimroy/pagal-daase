@@ -29,7 +29,7 @@ export default function Research({ onNav }) {
           minHeight: '220px',
         }}>
           <iframe
-            src="https://www.youtube.com/embed/biwLe51Rq44?autoplay=1&mute=1&playsinline=1&loop=1&playlist=biwLe51Rq44&controls=1&modestbranding=1&rel=0"
+            src="https://www.youtube-nocookie.com/embed/biwLe51Rq44?autoplay=1&mute=1&playsinline=1&loop=1&playlist=biwLe51Rq44&controls=1&modestbranding=1&rel=0"
             title="DAASE Research Video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
