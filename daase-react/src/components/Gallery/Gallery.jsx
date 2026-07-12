@@ -2,11 +2,11 @@ import { useState } from 'react';
 import Footer from '../Layout/Footer';
 
 const GALLERY_ITEMS = [
-  { cls: 'tall', src: './images/gallery/img_4.jpg', label: 'SKA Summer Training 2025' },
-  { cls: '',     src: './images/gallery/img_2.jpg', label: 'RETCO-VI Conference 2025' },
-  { cls: '',     src: './images/gallery/img_3.jpg', label: 'Department Group Photo' },
-  { cls: 'wide', src: './images/gallery/Academic_Event.jpg', label: 'Academic Event' },
-  { cls: 'wide', src: './images/gallery/img_5.jpg', label: 'DAASE Team Outdoors' },
+  { src: './images/gallery/img_4.jpg', label: 'SKA Summer Training 2025' },
+  { src: './images/gallery/img_2.jpg', label: 'RETCO-VI Conference 2025' },
+  { src: './images/gallery/img_3.jpg', label: 'Department Group Photo' },
+  { src: './images/gallery/Academic_Event.jpg', label: 'Academic Event' },
+  { src: './images/gallery/img_5.jpg', label: 'DAASE Team Outdoors' },
 ];
 
 const DELAY = ['d1','d2','d3','d4','d5','d6','d7','d8'];
@@ -17,7 +17,7 @@ function GalleryItem({ item, i, onOpen }) {
 
   return (
     <div
-      className={`gallery-item${item.cls ? ' ' + item.cls : ''} anim-fadeup ${DELAY[i % DELAY.length]}`}
+      className={`gallery-item anim-fadeup ${DELAY[i % DELAY.length]}`}
       onClick={() => onOpen(item.src, item.label)}
       style={{ cursor: 'pointer' }}
     >
