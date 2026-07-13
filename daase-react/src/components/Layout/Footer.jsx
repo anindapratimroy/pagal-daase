@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 const COLLABS = [
   { href: 'https://www.ncra.tifr.res.in/skaindia', label: 'SKA-IC' },
   { href: 'https://www.grss-ieee.org', label: 'GRSS-IEEE' },
@@ -10,6 +12,8 @@ const COLLABS = [
 ];
 
 export default function Footer() {
+  const [showCredits, setShowCredits] = useState(false);
+
   return (
     <>
       <div className="section-inner" style={{ paddingTop: 60, paddingBottom: 20 }}>
@@ -101,9 +105,22 @@ export default function Footer() {
           </div>
           <div className="footer-creator">
             Website created by: <a href="https://www.linkedin.com/in/aninda-pratim-roy" target="_blank" rel="noopener noreferrer">Aninda Pratim Roy</a> and <a href="https://www.linkedin.com/in/vidhan-thakur27" target="_blank" rel="noopener noreferrer">Vidhan Thakur</a>
+            <button className="credits-btn" onClick={() => setShowCredits(true)}>Credits</button>
           </div>
         </div>
       </div>
+
+      {showCredits && (
+        <div className="credits-modal-overlay" onClick={() => setShowCredits(false)}>
+          <div className="credits-modal-content" onClick={e => e.stopPropagation()}>
+            <h3 className="credits-modal-title">Additional Credits</h3>
+            <p className="credits-modal-desc">
+              Special thanks to <a href="https://www.linkedin.com/in/chitrashri-bhargava" target="_blank" rel="noopener noreferrer" className="credits-link">Chitrashri Bhargava</a> for her contributions.
+            </p>
+            <button className="credits-modal-close" onClick={() => setShowCredits(false)}>Close</button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
