@@ -75,7 +75,12 @@ export default function Home({ onNav, news, events }) {
             &amp; Space Engineering
           </h1>
           <p className="hero-subtitle">IIT Indore &nbsp;·&nbsp; DAASE</p>
-          <p className="hero-tagline">"Exploring the Universe, Engineering the Future"</p>
+          <p className="hero-tagline">
+            "<a href="https://aase.iiti.ac.in/solarverse/" className="solarverse-link" target="_blank" rel="noopener noreferrer" title="Visit the Solar System">
+              <span className="solarverse-default">Exploring the Universe</span>
+              <span className="solarverse-hover">Visit the Solar System</span>
+            </a>, Engineering the Future"
+          </p>
           <div className="hero-buttons">
             <button className="btn-primary" onClick={() => onNav('research')}>
               Explore Research <span className="arrow">→</span>
