@@ -113,11 +113,15 @@ export default function Footer() {
       {showCredits && (
         <div className="credits-modal-overlay" onClick={() => setShowCredits(false)}>
           <div className="credits-modal-content" onClick={e => e.stopPropagation()}>
+            <button className="credits-modal-close-icon" onClick={() => setShowCredits(false)} aria-label="Close">
+              &times;
+            </button>
             <h3 className="credits-modal-title">Additional Credits</h3>
-            <p className="credits-modal-desc">
-              Special thanks to <a href="https://www.linkedin.com/in/chitrashri-bhargava" target="_blank" rel="noopener noreferrer" className="credits-link">Chitrashri Bhargava</a> for her contributions.
-            </p>
-            <button className="credits-modal-close" onClick={() => setShowCredits(false)}>Close</button>
+            <div className="credits-list">
+              <a href="https://www.linkedin.com/in/chitrashri-bhargava" target="_blank" rel="noopener noreferrer" className="credits-link">
+                Chitrashri Bhargava
+              </a>
+            </div>
           </div>
         </div>
       )}
