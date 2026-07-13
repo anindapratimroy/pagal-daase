@@ -3973,26 +3973,17 @@ a.sc-email:hover {
   color: rgba(255, 255, 255, 0.82) !important;
 }
 
-/* Credits Modal Styles */
-.credits-btn {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 13px;
-  padding: 2px 10px;
-  border-radius: 12px;
+/* Credits Trigger & Modal Styles */
+.credits-trigger {
+  color: var(--gold-light);
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.4);
+  transition: text-shadow 0.3s ease;
   cursor: pointer;
-  margin-left: 10px;
-  transition: all 0.3s ease;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
 }
 
-.credits-btn:hover {
-  border-color: rgba(255, 255, 255, 0.8);
-  color: #fff;
-  background: rgba(255, 255, 255, 0.05);
+.credits-trigger:hover {
+  text-shadow: 0 0 15px rgba(255, 215, 0, 1), 0 0 30px rgba(255, 215, 0, 0.8);
 }
 
 .credits-modal-overlay {
@@ -4001,9 +3992,9 @@ a.sc-email:hover {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(2, 6, 23, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(2, 6, 23, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   z-index: 99999;
   display: flex;
   align-items: center;
@@ -4013,24 +4004,24 @@ a.sc-email:hover {
 
 .credits-modal-content {
   position: relative;
-  background: rgba(10, 20, 40, 0.8);
+  background: rgba(0, 5, 15, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 45px 50px;
-  border-radius: 16px;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+  padding: 40px 60px;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,215,0,0.05);
   text-align: center;
-  min-width: 300px;
+  min-width: 320px;
   animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .credits-modal-close-icon {
   position: absolute;
   top: 15px;
-  right: 20px;
+  right: 18px;
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 28px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 26px;
   line-height: 1;
   cursor: pointer;
   transition: color 0.2s ease;
@@ -4041,13 +4032,11 @@ a.sc-email:hover {
 }
 
 .credits-modal-title {
-  color: rgba(255, 255, 255, 0.9);
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: 20px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 25px;
+  color: #fff;
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  font-size: 26px;
+  margin-bottom: 24px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 15px;
 }
@@ -4059,17 +4048,16 @@ a.sc-email:hover {
 }
 
 .credits-link {
-  color: #93c5fd;
-  font-weight: 400;
-  font-size: 17px;
+  color: var(--gold-light) !important;
+  font-weight: 700;
+  font-size: 16px;
   text-decoration: none;
-  transition: all 0.2s ease;
-  letter-spacing: 0.02em;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
 .credits-link:hover {
-  color: #fff;
-  text-shadow: 0 0 12px rgba(147, 197, 253, 0.6);
+  text-shadow: 0 0 15px rgba(255, 215, 0, 1), 0 0 30px rgba(255, 215, 0, 0.8);
 }
 
 @keyframes slideUpFade {

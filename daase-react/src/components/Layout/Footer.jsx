@@ -105,7 +105,8 @@ export default function Footer() {
           </div>
           <div className="footer-creator">
             Website created by: <a href="https://www.linkedin.com/in/aninda-pratim-roy" target="_blank" rel="noopener noreferrer">Aninda Pratim Roy</a> and <a href="https://www.linkedin.com/in/vidhan-thakur27" target="_blank" rel="noopener noreferrer">Vidhan Thakur</a>
-            <button className="credits-btn" onClick={() => setShowCredits(true)}>Credits</button>
+            <span style={{ margin: '0 8px', color: 'rgba(255,255,255,0.3)' }}>|</span>
+            <span className="credits-trigger" onClick={() => setShowCredits(true)}>Credits</span>
           </div>
         </div>
       </div>
