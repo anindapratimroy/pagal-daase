@@ -17,11 +17,13 @@
       justify-content: center;
       text-align: center;
     }
-    canvas {
+    #bg-canvas {
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: 1;
-      /* allow clicks to hit the canvas for gravity ripples! */
     }
     .content {
       position: relative;
@@ -34,7 +36,7 @@
       box-shadow: 0 20px 50px rgba(0,0,0,0.5);
       max-width: 450px;
       margin: 20px;
-      pointer-events: none; /* Let clicks pass through to canvas ripples */
+      pointer-events: none;
     }
     .error-code {
       font-size: 110px;
@@ -66,47 +68,39 @@
   <div class="content">
     <h1 class="error-code">404</h1>
     <h2 class="title">Lost in Space</h2>
-    <p class="desc">The page you are looking for has drifted beyond the observable universe, or our servers are currently experiencing a solar flare.</p>
+    <p class="desc">The page you are looking for has drifted beyond the observable universe, or our servers are currently experiencing a solar flare.<br><br>Let's guide you back to safety.</p>
   </div>
 
   <script>
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
     
-    let w, h;
-    const mouse = { x: -9999, y: -9999 };
+    let mouse = { x: -9999, y: -9999 };
     let stars = [], shooting = [], nebulas = [], auroras = [], ripples = [];
     let time = 0;
-    
+
     const STAR_COLORS = [
       'rgba(255,255,255,', 'rgba(200,220,255,', 'rgba(170,200,255,',
       'rgba(96,165,250,', 'rgba(139,92,246,', 'rgba(255,220,180,', 'rgba(120,180,255,'
     ];
-    const NEBULA_PALETTE = [
-      [29, 78, 216], [139, 92, 246], [16, 185, 129], [236, 72, 153]
-    ];
-    
-    const STAR_COUNT = 320, NEBULA_COUNT = 7, AURORA_COUNT = 3;
-    const ATTRACT_R = 300, ATTRACT_STR = 0.45, GLOW_R = 280;
-    const LINE_DIST = 95, LINE_ALPHA = 0.06, FRICTION = 0.962;
+    const NEBULA_PALETTE = [[29, 78, 216], [139, 92, 246], [16, 185, 129], [236, 72, 153]];
 
-    const createStar = () => {
+    const createStar = (w, h) => {
       const isBeacon = Math.random() < 0.04;
       return {
         x: Math.random() * w, y: Math.random() * h,
-        size: isBeacon ? Math.random() * 2 + 2.5 : Math.random() * 2.2 + 0.3,
+        size: isBeacon ? (Math.random() * 2 + 2.5) : (Math.random() * 2.2 + 0.3),
         colorBase: STAR_COLORS[Math.floor(Math.random() * STAR_COLORS.length)],
-        opacity: isBeacon ? Math.random() * 0.3 + 0.5 : Math.random() * 0.6 + 0.2,
-        twinkleSpeed: isBeacon ? Math.random() * 0.007 + 0.003 : Math.random() * 0.02 + 0.005,
+        opacity: isBeacon ? (Math.random() * 0.3 + 0.5) : (Math.random() * 0.6 + 0.2),
+        twinkleSpeed: isBeacon ? (Math.random() * 0.007 + 0.003) : (Math.random() * 0.02 + 0.005),
         twinkleOff: Math.random() * Math.PI * 2,
         driftX: (Math.random() - 0.5) * 0.08, driftY: (Math.random() - 0.5) * 0.04 + 0.012,
         isBeacon, vx: 0, vy: 0
       };
     };
 
-    const createShooting = () => {
-      const angle = Math.PI / 6 + Math.random() * Math.PI / 5;
-      const speed = 6 + Math.random() * 9;
+    const createShooting = (w, h) => {
+      const angle = Math.PI / 6 + Math.random() * Math.PI / 5, speed = 6 + Math.random() * 9;
       return {
         x: Math.random() * w * 1.2 - w * 0.1, y: Math.random() * h * 0.35,
         vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
@@ -115,128 +109,90 @@
       };
     };
 
-    const createNebula = (i) => ({
-      x: Math.random() * w, y: Math.random() * h,
-      radius: 130 + Math.random() * 260,
-      ci: i % NEBULA_PALETTE.length,
-      colorPhase: Math.random() * Math.PI * 2,
-      colorSpeed: 0.0008 + Math.random() * 0.015,
-      driftX: (Math.random() - 0.5) * 0.022, driftY: (Math.random() - 0.5) * 0.016,
-      pulseSpeed: 0.0018 + Math.random() * 0.0035, pulseOff: Math.random() * Math.PI * 2,
-      baseAlpha: 0.010 + Math.random() * 0.018
+    const createNebula = (w, h, ci) => ({
+      x: Math.random() * w, y: Math.random() * h, radius: 130 + Math.random() * 260,
+      ci: ci % NEBULA_PALETTE.length, colorPhase: Math.random() * Math.PI * 2,
+      colorSpeed: 0.0008 + Math.random() * 0.0015, driftX: (Math.random() - 0.5) * 0.022,
+      driftY: (Math.random() - 0.5) * 0.016, pulseSpeed: 0.0018 + Math.random() * 0.0035,
+      pulseOff: Math.random() * Math.PI * 2, baseAlpha: 0.010 + Math.random() * 0.018
     });
 
-    const createAurora = () => ({
+    const createAurora = (w, h) => ({
       y: Math.random() * h * 0.65, amp: 45 + Math.random() * 80,
       wavelength: 320 + Math.random() * 420, phase: Math.random() * Math.PI * 2,
-      phaseSpeed: 0.0025 + Math.random() * 0.004,
-      ci: Math.floor(Math.random() * NEBULA_PALETTE.length),
-      alpha: 0.012 + Math.random() * 0.018,
-      thickness: 55 + Math.random() * 90, driftY: (Math.random() - 0.5) * 0.012
+      phaseSpeed: 0.0025 + Math.random() * 0.004, ci: Math.floor(Math.random() * NEBULA_PALETTE.length),
+      alpha: 0.012 + Math.random() * 0.018, thickness: 55 + Math.random() * 90, driftY: (Math.random() - 0.5) * 0.012
     });
 
-    const createRipple = (mx, my) => ({
-      x: mx, y: my, radius: 0, maxR: 200 + Math.random() * 120,
-      speed: 2.2 + Math.random() * 1.2, life: 1.0, decay: 0.012
+    const createRipple = (x, y) => ({
+      x, y, radius: 0, maxR: 200 + Math.random() * 120, speed: 2.2 + Math.random() * 1.2, life: 1.0, decay: 0.012
     });
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      w = window.innerWidth; h = window.innerHeight;
-      canvas.width = w * dpr; canvas.height = h * dpr;
-      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+      canvas.width = window.innerWidth * dpr; canvas.height = window.innerHeight * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      init();
+      const W = window.innerWidth, H = window.innerHeight;
+      stars = Array.from({ length: 320 }, () => createStar(W, H));
+      nebulas = Array.from({ length: 7 }, (_, i) => createNebula(W, H, i));
+      auroras = Array.from({ length: 3 }, () => createAurora(W, H));
     };
+    window.addEventListener('resize', () => setTimeout(resize, 250));
+    resize();
 
-    const init = () => {
-      stars = Array.from({ length: STAR_COUNT }, createStar);
-      nebulas = Array.from({ length: NEBULA_COUNT }, (_, i) => createNebula(i));
-      auroras = Array.from({ length: AURORA_COUNT }, createAurora);
-      ripples = []; shooting = [];
-    };
-
-    window.addEventListener('resize', () => { clearTimeout(window.rt); window.rt = setTimeout(resize, 250); });
     window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
     window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
     window.addEventListener('click', e => {
       ripples.push(createRipple(e.clientX, e.clientY));
       for (const s of stars) {
-        const dx = s.x - e.clientX, dy = s.y - e.clientY, dist = Math.sqrt(dx*dx + dy*dy);
+        const dist = Math.hypot(s.x - e.clientX, s.y - e.clientY);
         if (dist < 180 && dist > 1) {
           const force = (1 - dist / 180) * 0.7;
-          s.vx += (dx / dist) * force; s.vy += (dy / dist) * force;
+          s.vx += ((s.x - e.clientX) / dist) * force; s.vy += ((s.y - e.clientY) / dist) * force;
         }
       }
     });
 
-    resize();
-
     const animate = () => {
-      time++;
-      ctx.clearRect(0, 0, w, h);
+      const W = window.innerWidth, H = window.innerHeight;
+      time++; ctx.clearRect(0, 0, W, H);
 
       for (const a of auroras) {
         a.phase += a.phaseSpeed; a.y += a.driftY;
-        if (a.y < -a.thickness * 2) a.y = h + a.thickness * 2;
-        if (a.y > h + a.thickness * 2) a.y = -a.thickness * 2;
+        if (a.y < -a.thickness * 2) a.y = H + a.thickness * 2;
+        if (a.y > H + a.thickness * 2) a.y = -a.thickness * 2;
         const [r, g, b] = NEBULA_PALETTE[a.ci];
-        ctx.save(); ctx.beginPath(); ctx.moveTo(0, a.y);
-        for (let x = 0; x <= w; x += 6) ctx.lineTo(x, a.y + Math.sin((x / a.wavelength) * Math.PI * 2 + a.phase) * a.amp);
-        ctx.strokeStyle = `rgba(${r},${g},${b},${a.alpha * 0.55})`;
-        ctx.lineWidth = a.thickness; ctx.lineCap = 'round'; ctx.stroke(); ctx.restore();
+        ctx.beginPath(); ctx.moveTo(0, a.y);
+        for (let x = 0; x <= W; x += 6) ctx.lineTo(x, a.y + Math.sin((x / a.wavelength) * Math.PI * 2 + a.phase) * a.amp);
+        ctx.strokeStyle = `rgba(${r},${g},${b},${a.alpha * 0.55})`; ctx.lineWidth = a.thickness; ctx.lineCap = 'round'; ctx.stroke();
       }
 
       for (const nb of nebulas) {
         nb.x += nb.driftX; nb.y += nb.driftY; nb.colorPhase += nb.colorSpeed;
-        if (nb.x < -nb.radius) nb.x = w + nb.radius; if (nb.x > w + nb.radius) nb.x = -nb.radius;
-        if (nb.y < -nb.radius) nb.y = h + nb.radius; if (nb.y > h + nb.radius) nb.y = -nb.radius;
-        const ci2 = (nb.ci + 1) % NEBULA_PALETTE.length;
-        const mix = (Math.sin(nb.colorPhase) + 1) / 2;
-        const c1 = NEBULA_PALETTE[nb.ci], c2 = NEBULA_PALETTE[ci2];
-        const rr = Math.round(c1[0] * (1 - mix) + c2[0] * mix);
-        const gg = Math.round(c1[1] * (1 - mix) + c2[1] * mix);
-        const bb = Math.round(c1[2] * (1 - mix) + c2[2] * mix);
-        const pulse = 0.75 + 0.25 * Math.sin(time * nb.pulseSpeed + nb.pulseOff);
-        const grad = ctx.createRadialGradient(nb.x, nb.y, 0, nb.x, nb.y, nb.radius * pulse);
-        grad.addColorStop(0, `rgba(${rr},${gg},${bb},${nb.baseAlpha})`);
-        grad.addColorStop(1, 'transparent');
+        if (nb.x < -nb.radius) nb.x = W + nb.radius; if (nb.x > W + nb.radius) nb.x = -nb.radius;
+        if (nb.y < -nb.radius) nb.y = H + nb.radius; if (nb.y > H + nb.radius) nb.y = -nb.radius;
+        const mix = (Math.sin(nb.colorPhase) + 1) / 2, c1 = NEBULA_PALETTE[nb.ci], c2 = NEBULA_PALETTE[(nb.ci + 1) % NEBULA_PALETTE.length];
+        const rr = Math.round(c1[0] * (1 - mix) + c2[0] * mix), gg = Math.round(c1[1] * (1 - mix) + c2[1] * mix), bb = Math.round(c1[2] * (1 - mix) + c2[2] * mix);
+        const grad = ctx.createRadialGradient(nb.x, nb.y, 0, nb.x, nb.y, nb.radius * (0.75 + 0.25 * Math.sin(time * nb.pulseSpeed + nb.pulseOff)));
+        grad.addColorStop(0, `rgba(${rr},${gg},${bb},${nb.baseAlpha})`); grad.addColorStop(1, 'transparent');
         ctx.fillStyle = grad; ctx.fillRect(nb.x - nb.radius, nb.y - nb.radius, nb.radius * 2, nb.radius * 2);
       }
 
       if (mouse.x > 0 && mouse.y > 0) {
-        const ag = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, GLOW_R);
-        ag.addColorStop(0, 'rgba(255, 217, 122, 0.08)');
-        ag.addColorStop(0.4, 'rgba(255, 217, 122, 0.025)');
-        ag.addColorStop(1, 'transparent');
-        ctx.fillStyle = ag; ctx.beginPath(); ctx.arc(mouse.x, mouse.y, GLOW_R, 0, Math.PI * 2); ctx.fill();
+        const ag = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 280);
+        ag.addColorStop(0, 'rgba(255, 217, 122, 0.08)'); ag.addColorStop(0.4, 'rgba(255, 217, 122, 0.025)'); ag.addColorStop(1, 'transparent');
+        ctx.fillStyle = ag; ctx.beginPath(); ctx.arc(mouse.x, mouse.y, 280, 0, Math.PI * 2); ctx.fill();
       }
 
       for (const s of stars) {
-        const dx = mouse.x - s.x, dy = mouse.y - s.y, dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < ATTRACT_R && dist > 1) {
-          const force = (1 - dist / ATTRACT_R) * ATTRACT_STR;
-          s.vx -= (dx / dist) * force * 6; s.vy -= (dy / dist) * force * 6;
-        }
-        s.vx *= FRICTION; s.vy *= FRICTION; s.x += s.driftX + s.vx; s.y += s.driftY + s.vy;
-        if (s.x < -10) s.x = w + 10; if (s.x > w + 10) s.x = -10;
-        if (s.y < -10) s.y = h + 10; if (s.y > h + 10) s.y = -10;
-        
-        const tw = Math.sin(time * s.twinkleSpeed + s.twinkleOff);
-        const base = s.opacity + tw * (s.isBeacon ? 0.35 : 0.25);
-        const clamp = Math.max(0.05, Math.min(1, base));
-        const prox = dist < GLOW_R ? (1 - dist / GLOW_R) * 0.45 : 0;
-        const alpha = Math.min(1, clamp + prox);
-        
-        if (s.isBeacon) {
-          ctx.fillStyle = s.colorBase + (alpha * 0.15).toFixed(3) + ')';
-          ctx.beginPath(); ctx.arc(s.x, s.y, s.size * 5, 0, Math.PI * 2); ctx.fill();
-        } else if (s.size > 1.0) {
-          ctx.fillStyle = s.colorBase + (alpha * 0.15).toFixed(3) + ')';
-          ctx.beginPath(); ctx.arc(s.x, s.y, s.size * 2.5, 0, Math.PI * 2); ctx.fill();
-        }
+        const dx = mouse.x - s.x, dy = mouse.y - s.y, dist = Math.hypot(dx, dy);
+        if (dist < 300 && dist > 1) { const f = (1 - dist / 300) * 0.45; s.vx -= (dx / dist) * f * 6; s.vy -= (dy / dist) * f * 6; }
+        s.vx *= 0.962; s.vy *= 0.962; s.x += s.driftX + s.vx; s.y += s.driftY + s.vy;
+        if (s.x < -10) s.x = W + 10; if (s.x > W + 10) s.x = -10;
+        if (s.y < -10) s.y = H + 10; if (s.y > H + 10) s.y = -10;
+        const alpha = Math.min(1, Math.max(0.05, Math.min(1, s.opacity + Math.sin(time * s.twinkleSpeed + s.twinkleOff) * (s.isBeacon ? 0.35 : 0.25))) + (dist < 280 ? (1 - dist / 280) * 0.45 : 0));
         ctx.fillStyle = s.colorBase + alpha.toFixed(3) + ')';
-        ctx.beginPath(); ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.isBeacon ? s.size * 5 : (s.size > 1.0 ? s.size * 2.5 : s.size), 0, Math.PI * 2); ctx.fill();
         s._rx = s.x; s._ry = s.y; s._a = alpha;
       }
 
@@ -245,45 +201,35 @@
       for (let i = 0; i < chk; i++) {
         let c = 0;
         for (let j = i + 1; j < chk && c < 3; j++) {
-          const dx2 = stars[i]._rx - stars[j]._rx, dy2 = stars[i]._ry - stars[j]._ry, ds = dx2*dx2 + dy2*dy2;
-          if (ds < LINE_DIST * LINE_DIST) {
-            const d = Math.sqrt(ds), la = (1 - d / LINE_DIST) * LINE_ALPHA * Math.min(stars[i]._a, stars[j]._a);
-            ctx.strokeStyle = `rgba(96,165,250,${la.toFixed(4)})`;
-            ctx.beginPath(); ctx.moveTo(stars[i]._rx, stars[i]._ry); ctx.lineTo(stars[j]._rx, stars[j]._ry); ctx.stroke();
-            c++;
+          const ds = (stars[i]._rx - stars[j]._rx) ** 2 + (stars[i]._ry - stars[j]._ry) ** 2;
+          if (ds < 9025) {
+            ctx.strokeStyle = `rgba(96,165,250,${((1 - Math.sqrt(ds) / 95) * 0.06 * Math.min(stars[i]._a, stars[j]._a)).toFixed(4)})`;
+            ctx.beginPath(); ctx.moveTo(stars[i]._rx, stars[i]._ry); ctx.lineTo(stars[j]._rx, stars[j]._ry); ctx.stroke(); c++;
           }
         }
       }
 
-      if (Math.random() < 0.005) shooting.push(createShooting());
+      if (Math.random() < 0.005) shooting.push(createShooting(W, H));
       for (let i = shooting.length - 1; i >= 0; i--) {
-        const ss = shooting[i];
-        ss.x += ss.vx; ss.y += ss.vy; ss.life -= ss.decay;
+        const ss = shooting[i]; ss.x += ss.vx; ss.y += ss.vy; ss.life -= ss.decay;
         if (ss.life <= 0) { shooting.splice(i, 1); continue; }
-        const mag = Math.sqrt(ss.vx * ss.vx + ss.vy * ss.vy);
-        const tx = ss.x - ss.vx * (ss.len / mag), ty = ss.y - ss.vy * (ss.len / mag);
+        const mag = Math.hypot(ss.vx, ss.vy), tx = ss.x - ss.vx * (ss.len / mag), ty = ss.y - ss.vy * (ss.len / mag);
         const sg = ctx.createLinearGradient(tx, ty, ss.x, ss.y);
         sg.addColorStop(0, 'rgba(255,255,255,0)'); sg.addColorStop(0.5, `rgba(200,220,255,${(ss.life * 0.35).toFixed(3)})`); sg.addColorStop(1, `rgba(255,255,255,${(ss.life * 0.95).toFixed(3)})`);
         ctx.strokeStyle = sg; ctx.lineWidth = ss.width * ss.life; ctx.lineCap = 'round';
         ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(ss.x, ss.y); ctx.stroke();
-        ctx.fillStyle = `rgba(255,255,255,${(ss.life * 0.8).toFixed(3)})`;
-        ctx.beginPath(); ctx.arc(ss.x, ss.y, ss.width * ss.life * 0.85, 0, Math.PI * 2); ctx.fill();
       }
 
       for (let i = ripples.length - 1; i >= 0; i--) {
-        const rp = ripples[i];
-        rp.radius += rp.speed * (1 + rp.radius / rp.maxR * 0.6); rp.life -= rp.decay;
+        const rp = ripples[i]; rp.radius += rp.speed * (1 + rp.radius / rp.maxR * 0.6); rp.life -= rp.decay;
         if (rp.life <= 0 || rp.radius > rp.maxR) { ripples.splice(i, 1); continue; }
-        const ringAlpha = rp.life * (1 - rp.radius / rp.maxR) * 0.55;
         ctx.beginPath(); ctx.arc(rp.x, rp.y, rp.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(96,165,250,${ringAlpha.toFixed(3)})`; ctx.lineWidth = 1.2; ctx.stroke();
-        const haloGrad = ctx.createRadialGradient(rp.x, rp.y, Math.max(0, rp.radius - 12), rp.x, rp.y, rp.radius + 4);
-        haloGrad.addColorStop(0, `rgba(96,165,250,0)`); haloGrad.addColorStop(0.5, `rgba(96,165,250,${(ringAlpha * 0.18).toFixed(3)})`); haloGrad.addColorStop(1, `rgba(96,165,250,0)`);
-        ctx.fillStyle = haloGrad; ctx.beginPath(); ctx.arc(rp.x, rp.y, rp.radius + 4, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = `rgba(96,165,250,${(rp.life * (1 - rp.radius / rp.maxR) * 0.55).toFixed(3)})`; ctx.lineWidth = 1.2; ctx.stroke();
       }
 
       requestAnimationFrame(animate);
     };
+
     requestAnimationFrame(animate);
   </script>
 </body>
