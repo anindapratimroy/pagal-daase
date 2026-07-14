@@ -61,8 +61,7 @@ export default function Home({ onNav, news, events }) {
       <div className="hero-top-strip">
         Department of Astronomy, Astrophysics &amp; Space Engineering &nbsp;·&nbsp;{' '}
         <span><a href="https://www.iiti.ac.in" target="_blank" rel="noopener noreferrer">Indian Institute of Technology Indore</a></span>
-        &nbsp;·&nbsp; Est. 2015 &nbsp;·&nbsp;{' '}
-        <a href="http://www.fist-dst.org" target="_blank" rel="noopener noreferrer">DST-FIST Funded</a>
+        &nbsp;·&nbsp; Est. 2015
       </div>
 
       {/* Hero main */}
@@ -71,10 +70,8 @@ export default function Home({ onNav, news, events }) {
           <div className="hero-tag">✦ &nbsp;Est. 2015 &nbsp;·&nbsp; IIT Indore</div>
           <h1 className="hero-title">
             Department of<br />
-            <span className="accent">Astronomy, Astrophysics</span><br />
-            &amp; Space Engineering
+            <span className="accent">Astronomy, Astrophysics<br />&amp; Space Engineering</span>
           </h1>
-          <p className="hero-subtitle">IIT Indore &nbsp;·&nbsp; DAASE</p>
           <p className="hero-tagline">
             "<a href="https://aase.iiti.ac.in/solarverse/" className="solarverse-link" target="_blank" rel="noopener noreferrer" title="Visit the Solar System">
               <span className="solarverse-default">Exploring the Universe</span>

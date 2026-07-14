@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 
 const COLLABS = [
   { href: 'https://www.ncra.tifr.res.in/skaindia', label: 'SKA-IC' },
@@ -13,6 +13,27 @@ const COLLABS = [
 
 export default function Footer() {
   const [showCredits, setShowCredits] = useState(false);
+  const mapRetryCount = useRef(0);
+  const mapIframeRef = useRef(null);
+
+  // Two reliable embed URLs — primary and fallback
+  const MAP_URLS = [
+    'https://maps.google.com/maps?q=22.528688,75.923391&t=k&z=16&ie=UTF8&iwloc=&output=embed',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.2!2d75.920717!3d22.528688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962ede93d5ac471%3A0xf7a8f5f2e8c2d3b0!2sIIT%20Indore!5e1!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin',
+    'https://maps.google.com/maps?q=IIT+Indore+Khandwa+Road+Simrol&t=k&z=16&ie=UTF8&iwloc=&output=embed',
+  ];
+
+  const handleMapError = useCallback(() => {
+    if (mapRetryCount.current < MAP_URLS.length - 1 && mapIframeRef.current) {
+      mapRetryCount.current += 1;
+      mapIframeRef.current.src = MAP_URLS[mapRetryCount.current];
+    }
+  }, []);
+
+  const handleMapLoad = useCallback(() => {
+    // Map loaded successfully — reset retry counter
+    mapRetryCount.current = 0;
+  }, []);
 
   return (
     <>
@@ -73,10 +94,15 @@ export default function Footer() {
           <div className="anim-fadeup d2">
             <div className="map-wrapper">
               <iframe
-                src="https://maps.google.com/maps?q=22.528688,75.923391&t=k&z=16&output=embed"
+                ref={mapIframeRef}
+                src={MAP_URLS[0]}
                 title="IIT Indore Map"
                 loading="lazy"
                 allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                onLoad={handleMapLoad}
+                onError={handleMapError}
+                style={{ border: 0 }}
               />
               <div className="map-overlay">
                 <div className="map-overlay-content">
