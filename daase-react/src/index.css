@@ -1429,22 +1429,25 @@ a.news-feed-headline:hover {
   text-align: center;
   gap: 6px;
   padding: 22px 18px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 35%, rgba(255,255,255,0.01) 65%, rgba(255,255,255,0.08) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-top: 1px solid rgba(255, 217, 122, 0.4);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255,255,255,0.4);
+  border-left: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 16px 40px -8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
   border-radius: 12px;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .about-badge:hover {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
-  border-color: rgba(255, 217, 122, 0.6);
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 12px 40px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.04) 35%, rgba(255,255,255,0.02) 65%, rgba(255,255,255,0.1) 100%);
+  border-color: rgba(255,255,255,0.2);
+  border-top-color: rgba(255,217,122,0.8);
+  border-left-color: rgba(255,217,122,0.4);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 24px 48px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
 .about-badge-icon {
@@ -2811,22 +2814,25 @@ a.sc-email:hover {
   gap: 18px;
   align-items: flex-start;
   padding: 24px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 35%, rgba(255,255,255,0.01) 65%, rgba(255,255,255,0.08) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-top: 1px solid rgba(255, 217, 122, 0.4);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255,255,255,0.4);
+  border-left: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 16px 40px -8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
   border-radius: 16px;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   cursor: default;
 }
 
 .contact-block:hover {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
-  border-color: rgba(255, 217, 122, 0.6);
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 12px 40px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.04) 35%, rgba(255,255,255,0.02) 65%, rgba(255,255,255,0.1) 100%);
+  border-color: rgba(255,255,255,0.2);
+  border-top-color: rgba(255,217,122,0.8);
+  border-left-color: rgba(255,217,122,0.4);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 24px 48px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
 .contact-block:first-child {
@@ -3066,23 +3072,26 @@ a.sc-email:hover {
    FOOTER
 ============================================================ */
 .section-footer {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 35%, rgba(255,255,255,0.01) 65%, rgba(255,255,255,0.08) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-top: 1px solid rgba(255, 217, 122, 0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255,255,255,0.4);
+  border-left: 1px solid rgba(255,255,255,0.2);
   border-radius: 16px;
   color: #fff;
   margin: 0 clamp(24px, 5vw, 72px) 32px;
   padding: 24px 32px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.25);
-  transition: all 0.3s ease;
+  box-shadow: 0 16px 40px -8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .section-footer:hover {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
-  border-color: rgba(255, 217, 122, 0.5);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 12px 40px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.04) 35%, rgba(255,255,255,0.02) 65%, rgba(255,255,255,0.1) 100%);
+  border-color: rgba(255,255,255,0.2);
+  border-top-color: rgba(255,217,122,0.8);
+  border-left-color: rgba(255,217,122,0.4);
+  box-shadow: 0 24px 48px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
 .footer-inner {
@@ -4024,20 +4033,23 @@ a.sc-email:hover {
 }
 
 .about-info-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%) !important;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 35%, rgba(255,255,255,0.01) 65%, rgba(255,255,255,0.08) 100%) !important;
   backdrop-filter: blur(24px) !important;
   -webkit-backdrop-filter: blur(24px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-top: 1px solid rgba(255, 217, 122, 0.4) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.25) !important;
-  transition: all 0.3s ease !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-top: 1px solid rgba(255,255,255,0.4) !important;
+  border-left: 1px solid rgba(255,255,255,0.2) !important;
+  box-shadow: 0 16px 40px -8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2) !important;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
 }
 
 .about-info-card:hover {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%) !important;
-  border-color: rgba(255, 217, 122, 0.6) !important;
-  transform: translateY(-4px) scale(1.02) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 12px 40px rgba(0, 0, 0, 0.4) !important;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.04) 35%, rgba(255,255,255,0.02) 65%, rgba(255,255,255,0.1) 100%) !important;
+  border-color: rgba(255,255,255,0.2) !important;
+  border-top-color: rgba(255,217,122,0.8) !important;
+  border-left-color: rgba(255,217,122,0.4) !important;
+  transform: translateY(-6px) scale(1.02) !important;
+  box-shadow: 0 24px 48px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.3) !important;
 }
 
 
