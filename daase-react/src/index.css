@@ -2788,41 +2788,48 @@ a.sc-email:hover {
   grid-template-columns: 2fr 3fr;
   gap: 0;
   width: 100%;
-  padding: 0 clamp(24px, 5vw, 72px);
+  padding: 0 clamp(24px, 5vw, 72px) 64px;
   align-items: stretch;
   min-height: 420px;
 }
 
-/* ── Left panel (unified glass card) ── */
+/* ── Left panel (unified container) ── */
 .contact-panel {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-top: 2px solid rgba(255, 217, 122, 0.5);
-  border-right: none;
-  border-radius: 16px 0 0 16px;
-  padding: 36px 32px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 16px;
+  /* Removed the giant unified glass background to make individual blocks pop */
 }
 
 .contact-block {
   display: flex;
   gap: 18px;
   align-items: flex-start;
-  padding: 22px 0;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1.5px solid rgba(255, 217, 122, 0.4);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.contact-block:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 217, 122, 0.6);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
 }
 
 .contact-block:first-child {
-  padding-top: 0;
+  padding-top: 24px;
 }
 
 .contact-divider {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.08);
-  width: 100%;
+  display: none;
 }
 
 .contact-block-icon {
@@ -3059,7 +3066,7 @@ a.sc-email:hover {
   -webkit-backdrop-filter: blur(12px);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   color: #fff;
-  margin-top: 60px;
+  margin-top: 0;
   padding: 32px 0;
 }
 
