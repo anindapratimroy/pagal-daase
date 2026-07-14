@@ -151,8 +151,62 @@ export default function Home({ onNav, news, events }) {
         <div className="about-strip-inner">
           <div className="anim-right">
             <h2>About <span>DAASE</span></h2>
-            <p>The Department of Astronomy, Astrophysics and Space Engineering (DAASE) at IIT Indore is the <strong>only dedicated department of its kind among all IITs</strong>, offering a comprehensive academic ecosystem spanning the cosmos to cutting-edge space engineering.</p>
-            <p>A founding member of the <strong>Square Kilometre Array – India Consortium (SKA-IC)</strong> since 2015, DAASE plays a significant role in global astronomical collaboration, with faculty contributing to major ISRO and NASA missions.</p>
+            <p>
+              The Department of Astronomy, Astrophysics and Space Engineering (DAASE) at IIT Indore commenced its
+              journey in December 2015 as the Centre for Astronomy with the initiation of a Ph.D. program in
+              Astronomy. In May 2018, the Centre transitioned into a full-fledged department by introducing its
+              flagship <strong>M.Sc. program in Astronomy</strong>, making DAASE the first and only IIT department
+              to offer an M.Sc. in this field. In 2021, DAASE expanded its academic offerings with the{' '}
+              <strong>M.Tech. in Space Engineering</strong> and the <strong>M.S. (Research) in Space Science and
+              Engineering</strong>. In 2022, the department further broadened its educational scope by launching the
+              flagship <strong>B.Tech. program in Space Science and Engineering</strong>, a pioneering initiative
+              within the IIT system. DAASE also offers a Minor in Astronomy and Space Science for undergraduate
+              students at IIT Indore and received DST-FIST funding in 2022 in recognition of its research excellence.
+            </p>
+            <p>
+              DAASE's teaching and research activities concentrate on four core domains: Astronomy &amp; Astrophysics,
+              Space Science and Instrumentation, Remote Sensing and Atmospheric Physics, and Data Science and
+              Data-Driven Techniques. Our bachelor's and master's curricula integrate these domains, providing
+              students with rigorous theoretical knowledge and hands-on experience to promote both academic
+              achievement and innovation.
+            </p>
+            <p>
+              As the only dedicated department of its kind among all IITs, DAASE provides a specialised platform for
+              advanced research and education in astronomy, astrophysics, remote sensing, and space sciences. Faculty
+              members pursue research across a broad spectrum — from Earth observations to black holes and neutron
+              stars; from galaxies and interstellar medium to solar physics; from drone and CubeSat technologies to
+              radio astronomical instrumentation; from early universe and observational cosmology to atmospheric and
+              ionospheric modelling; and from computational and high-energy astrophysics to climate modelling.
+            </p>
+            <p>
+              DAASE supports research and learning with state-of-the-art laboratories: the Radio Frequency (RF) Lab,
+              Optics Lab, IoT Lab, Remote Sensing Lab, Plasma Lab, and the IITI Radio Interferometer Observatory.
+              These cutting-edge facilities facilitate experimental and applied research, including RF system testing
+              up to 60 GHz, Helmholtz cages, precision optics, satellite receiving stations, PCB fabrication tools,
+              IoT devices, drones, hyperspectral and multispectral cameras, and more. Since 2022, the department has
+              participated in the Indian research contingent to the Arctic, maintaining advanced facilities at the
+              Indian Research Station Himadri for atmospheric and space science investigations.
+            </p>
+            <p>
+              A founding member of the <strong>Square Kilometre Array – India Consortium (SKA-IC)</strong> since
+              2015, DAASE plays an important role in global astronomical collaboration. Faculty and researchers
+              contribute to major ISRO and NASA missions and engage in active partnerships with leading universities
+              and institutes worldwide. National and international agencies, including MoE, UGC, ANRF/SERB, DST,
+              MoES, CSIR, SPARC, DAE, ISRO, Max Planck Partner Group, and ASEM-DUO, provide critical support for
+              our pursuit of research excellence that advances both science and society.
+            </p>
+            <p>
+              Though a relatively young department, DAASE already boasts an accomplished alumni network, with former
+              Master's and Ph.D. students holding research and professional positions across prestigious universities,
+              research institutes, and industries in India and abroad.
+            </p>
+            <p>
+              Beyond academics and research, DAASE demonstrates a strong commitment to outreach, aiming to inspire
+              the next generation of scientists. Faculty and students actively collaborate with local schools and
+              colleges, organise sky-watching sessions, stargazing events, space quizzes, hackathons, and celebrate
+              significant celestial occurrences. DAASE faculty and students also represent the department as core
+              members of various professional organisations, including GRSS-IEEE, APS-IEEE, ASI, and IAU.
+            </p>
             <div className="about-highlights-grid" style={{ marginTop: 24 }}>
               <a href="http://www.fist-dst.org" target="_blank" rel="noopener noreferrer" className="about-hl">
                 <div className="about-hl-icon">🏆</div>
@@ -182,7 +236,7 @@ export default function Home({ onNav, news, events }) {
               { year: 'December 2015', text: 'Founded as Centre for Astronomy', sub: 'Ph.D. program launched · Founding SKA-IC member' },
               { year: 'May 2018', text: 'Upgraded to Full Department', sub: 'M.Sc. Astronomy launched — first & only in IITs' },
               { year: '2021', text: 'Space Engineering Programs', sub: 'M.Tech. Space Engineering · M.S. (Research) launched' },
-              { year: '2022', text: 'B.Tech. in Space Science & Engineering', sub: 'First B.Tech. of its kind in IIT system · DST-FIST · Arctic research' },
+              { year: '2022', text: 'B.Tech. in Space Science & Engineering', sub: "First B.Tech of it's kind in IIT System. Arctic Research Facility" },
               { year: 'Present', text: '100+ Alumni · World-Class Labs', sub: 'Alumni at prestigious institutes & industries globally' },
             ].map((t, i) => (
               <div className="tl-item" key={i}>

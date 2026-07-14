@@ -67,28 +67,6 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-            <div className="contact-item glass-card" style={{ animationDelay: '0.2s', paddingBottom: '20px' }}>
-              <div className="ci-icon">🌐</div>
-              <div>
-                <div className="ci-label">Institute</div>
-                <div className="ci-value">
-                  <a href="https://www.iiti.ac.in" target="_blank" rel="noopener noreferrer">www.iiti.ac.in</a>
-                  &nbsp;|&nbsp;
-                  <a href="https://academic.iiti.ac.in" target="_blank" rel="noopener noreferrer">academic.iiti.ac.in</a>
-                </div>
-              </div>
-            </div>
-
-            <div className="collab-section">
-              <div className="collab-title">Professional Memberships</div>
-              <div className="collab-grid">
-                {COLLABS.map(c => (
-                  <a key={c.href} href={c.href} target="_blank" rel="noopener noreferrer" className="collab-tag">
-                    {c.label}
-                  </a>
-                ))}
-              </div>
-            </div>
           </div>
 
           <div className="anim-fadeup d2">
