@@ -1294,16 +1294,17 @@ a.news-feed-headline:hover {
   background: transparent;
   color: #fff;
   padding: 60px 0;
+  width: 100%;
 }
 
 .about-strip-inner {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0 40px;
+  width: 100%;
+  padding: 0 clamp(24px, 5vw, 72px);
   display: grid;
   grid-template-columns: 3fr 2fr;
-  gap: 64px;
+  gap: 56px;
   align-items: start;
+  box-sizing: border-box;
 }
 
 .about-strip h2 {
