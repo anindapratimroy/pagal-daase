@@ -1429,7 +1429,7 @@ a.news-feed-headline:hover {
   text-align: center;
   gap: 6px;
   padding: 22px 18px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.01) 35%, rgba(255,255,255,0) 65%, rgba(255,255,255,0.04) 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 35%, rgba(255,255,255,0) 65%, rgba(255,255,255,0.01) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255,255,255,0.1);
@@ -1442,7 +1442,7 @@ a.news-feed-headline:hover {
 }
 
 .about-badge:hover {
-  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.03) 35%, rgba(255,255,255,0.01) 65%, rgba(255,255,255,0.06) 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 35%, rgba(255,255,255,0) 65%, rgba(255,255,255,0.03) 100%);
   border-color: rgba(255,255,255,0.2);
   border-top-color: rgba(255,217,122,0.8);
   border-left-color: rgba(255,217,122,0.4);
@@ -2814,7 +2814,7 @@ a.sc-email:hover {
   gap: 18px;
   align-items: flex-start;
   padding: 24px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.01) 35%, rgba(255,255,255,0) 65%, rgba(255,255,255,0.04) 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 35%, rgba(255,255,255,0) 65%, rgba(255,255,255,0.01) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255,255,255,0.1);
@@ -2827,7 +2827,7 @@ a.sc-email:hover {
 }
 
 .contact-block:hover {
-  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.03) 35%, rgba(255,255,255,0.01) 65%, rgba(255,255,255,0.06) 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 35%, rgba(255,255,255,0) 65%, rgba(255,255,255,0.03) 100%);
   border-color: rgba(255,255,255,0.2);
   border-top-color: rgba(255,217,122,0.8);
   border-left-color: rgba(255,217,122,0.4);
@@ -3077,7 +3077,7 @@ a.sc-email:hover {
    FOOTER
 ============================================================ */
 .section-footer {
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.01) 35%, rgba(255,255,255,0) 65%, rgba(255,255,255,0.04) 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 35%, rgba(255,255,255,0) 65%, rgba(255,255,255,0.01) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255,255,255,0.1);
@@ -3092,7 +3092,7 @@ a.sc-email:hover {
 }
 
 .section-footer:hover {
-  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.03) 35%, rgba(255,255,255,0.01) 65%, rgba(255,255,255,0.06) 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 35%, rgba(255,255,255,0) 65%, rgba(255,255,255,0.03) 100%);
   border-color: rgba(255,255,255,0.2);
   border-top-color: rgba(255,217,122,0.8);
   border-left-color: rgba(255,217,122,0.4);
@@ -4038,7 +4038,7 @@ a.sc-email:hover {
 }
 
 .about-info-card {
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.01) 35%, rgba(255,255,255,0) 65%, rgba(255,255,255,0.04) 100%) !important;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 35%, rgba(255,255,255,0) 65%, rgba(255,255,255,0.01) 100%) !important;
   backdrop-filter: blur(24px) !important;
   -webkit-backdrop-filter: blur(24px) !important;
   border: 1px solid rgba(255,255,255,0.1) !important;
@@ -4049,7 +4049,7 @@ a.sc-email:hover {
 }
 
 .about-info-card:hover {
-  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.03) 35%, rgba(255,255,255,0.01) 65%, rgba(255,255,255,0.06) 100%) !important;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 35%, rgba(255,255,255,0) 65%, rgba(255,255,255,0.03) 100%) !important;
   border-color: rgba(255,255,255,0.2) !important;
   border-top-color: rgba(255,217,122,0.8) !important;
   border-left-color: rgba(255,217,122,0.4) !important;
