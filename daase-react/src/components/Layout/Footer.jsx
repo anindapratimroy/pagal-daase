@@ -37,40 +37,78 @@ export default function Footer() {
 
   return (
     <>
-      <div className="section-inner" style={{ paddingTop: 60, paddingBottom: 20 }}>
-        <div className="section-header" style={{ marginBottom: 28 }}>
-          <span className="section-eyebrow">✦ Get in Touch</span>
-          <h2 className="section-title" style={{ fontSize: 'clamp(20px,2.8vw,30px)' }}>Contact <span>Us</span></h2>
-          <div className="title-bar" />
+      {/* ── Contact Us — Redesigned ── */}
+      <div className="contact-section">
+
+        {/* Header */}
+        <div className="contact-hdr">
+          <span className="about-eyebrow">✦ &nbsp;Get in Touch</span>
+          <h2 className="contact-main-title">Contact <span>Us</span></h2>
+          <div className="title-bar" style={{ margin: '0 auto 0' }} />
         </div>
 
-        <div className="contact-grid">
-          <div className="contact-info anim-fadeup d1">
-            <div className="contact-item glass-card" style={{ animationDelay: '0.2s', paddingBottom: '20px' }}>
-              <div className="ci-icon">📍</div>
-              <div>
-                <div className="ci-label">Campus Address</div>
-                <div className="ci-value">
+        {/* Main grid */}
+        <div className="contact-redesign-grid">
+
+          {/* Left — unified info card */}
+          <div className="contact-panel anim-fadeup d1">
+
+            {/* Address */}
+            <div className="contact-block">
+              <div className="contact-block-icon">📍</div>
+              <div className="contact-block-body">
+                <div className="contact-block-label">Campus Address</div>
+                <div className="contact-block-value">
                   Department of Astronomy, Astrophysics and Space Engineering (DAASE),<br />
                   Indian Institute of Technology Indore,<br />
                   Khandwa Road, Simrol, Indore 453552, MP, India
                 </div>
               </div>
             </div>
-            <div className="contact-item glass-card" style={{ animationDelay: '0.2s', paddingBottom: '20px' }}>
-              <div className="ci-icon">📧</div>
-              <div>
-                <div className="ci-label">Email</div>
-                <div className="ci-value">
-                  <a href="mailto:hodaase@iiti.ac.in">hodaase@iiti.ac.in</a> &nbsp;(Head of Department)<br />
-                  <a href="mailto:aase-office@iiti.ac.in">aase-office@iiti.ac.in</a> &nbsp;(Department Office)
+
+            <div className="contact-divider" />
+
+            {/* Email */}
+            <div className="contact-block">
+              <div className="contact-block-icon">📧</div>
+              <div className="contact-block-body">
+                <div className="contact-block-label">Email</div>
+                <div className="contact-block-value">
+                  <div className="contact-email-row">
+                    <a href="mailto:hodaase@iiti.ac.in">hodaase@iiti.ac.in</a>
+                    <span className="contact-email-tag">Head of Department</span>
+                  </div>
+                  <div className="contact-email-row">
+                    <a href="mailto:aase-office@iiti.ac.in">aase-office@iiti.ac.in</a>
+                    <span className="contact-email-tag">Department Office</span>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <div className="contact-divider" />
+
+            {/* Quick links */}
+            <div className="contact-block">
+              <div className="contact-block-icon">🌐</div>
+              <div className="contact-block-body">
+                <div className="contact-block-label">Institute</div>
+                <div className="contact-links-row">
+                  <a href="https://www.iiti.ac.in" target="_blank" rel="noopener noreferrer" className="contact-link-pill">
+                    www.iiti.ac.in ↗
+                  </a>
+                  <a href="https://academic.iiti.ac.in" target="_blank" rel="noopener noreferrer" className="contact-link-pill">
+                    academic.iiti.ac.in ↗
+                  </a>
+                </div>
+              </div>
+            </div>
+
           </div>
 
-          <div className="anim-fadeup d2">
-            <div className="map-wrapper">
+          {/* Right — Map */}
+          <div className="contact-map-panel anim-fadeup d2">
+            <div className="map-wrapper-new">
               <iframe
                 ref={mapIframeRef}
                 src={MAP_URLS[0]}
@@ -82,25 +120,29 @@ export default function Footer() {
                 onError={handleMapError}
                 style={{ border: 0 }}
               />
-              <div className="map-overlay">
-                <div className="map-overlay-content">
-                  <div className="map-overlay-title">IIT Indore — DAASE</div>
-                  <div className="map-overlay-addr">GWHF+F9C, Indore, Madhya Pradesh 453552</div>
-                  <a
-                    href="https://www.google.com/maps/search/?api=1&query=22.528688,75.923391"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary"
-                    style={{ fontSize: 14, padding: '9px 20px' }}
-                  >
-                    Open in Google Maps →
-                  </a>
+              <div className="map-overlay-new">
+                <div className="map-pin-label">
+                  <span className="map-pin-dot">📍</span>
+                  <div>
+                    <div className="map-pin-title">IIT Indore — DAASE</div>
+                    <div className="map-pin-addr">Khandwa Road, Simrol, Indore 453552</div>
+                  </div>
                 </div>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=22.528688,75.923391"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="map-open-btn"
+                >
+                  Open in Google Maps →
+                </a>
               </div>
             </div>
           </div>
+
         </div>
       </div>
+
       <div className="section-footer">
         <div className="footer-inner">
           <div className="footer-copyright">
