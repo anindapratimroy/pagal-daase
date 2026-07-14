@@ -999,12 +999,11 @@ nav {
 }
 
 .hero-right {
-  padding: 40px 40px 40px 52px;
+  padding: 60px 40px 60px 52px;
   background: transparent;
-  height: 51rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   /* animation: slideLeft 0.7s var(--ease-out) 0.15s both; */
 }
 
@@ -1025,7 +1024,6 @@ nav {
   box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.2), 0 16px 40px -8px rgba(0, 0, 0, 0.6);
   border-radius: 16px;
   padding: 32px 24px;
-  height: 100%;
   transition: var(--tr);
   /* dark context overrides */
   --navy: #7BAEE8;
@@ -1068,7 +1066,7 @@ nav {
 }
 
 .vertical-marquee-container {
-  height: 580px;
+  height: 280px;
   overflow: hidden;
   position: relative;
   mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
