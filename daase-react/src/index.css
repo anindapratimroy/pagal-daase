@@ -3061,19 +3061,26 @@ a.sc-email:hover {
    FOOTER
 ============================================================ */
 .section-footer {
-  background: rgba(2, 6, 23, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1.5px solid rgba(255, 217, 122, 0.3);
+  border-radius: 16px;
   color: #fff;
-  margin-top: 0;
-  padding: 32px 0;
+  margin: 0 clamp(24px, 5vw, 72px) 32px;
+  padding: 24px 32px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.section-footer:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 217, 122, 0.5);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
 }
 
 .footer-inner {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0 40px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -4012,11 +4019,19 @@ a.sc-email:hover {
 }
 
 .about-info-card {
-  background: rgba(255, 255, 255, 0.05) !important;
-  backdrop-filter: blur(20px) saturate(160%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-top: 2px solid rgba(255, 217, 122, 0.4) !important;
+  transition: all 0.3s ease !important;
+}
+
+.about-info-card:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 217, 122, 0.6) !important;
+  transform: translateY(-4px) scale(1.02) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3) !important;
 }
 
 
