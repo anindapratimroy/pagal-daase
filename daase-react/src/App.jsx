@@ -18,6 +18,9 @@ import Gallery from './components/Gallery/Gallery';
 import Opportunities from './components/Opportunities/Opportunities';
 import Placements from './components/Placements/Placements';
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 import { useData } from './hooks/useData';
 
 // Map People dropdown IDs → Faculty component tab IDs
@@ -43,6 +46,13 @@ export default function App() {
   // Preloader: strictly wait 1.8s minimum for animation to finish.
   // We no longer wait for data fetch to complete so the page loads blazing fast.
   useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100,
+      easing: 'ease-out-cubic'
+    });
+
     const t = setTimeout(() => setMinTimePassed(true), 1800);
     return () => clearTimeout(t);
   }, []);

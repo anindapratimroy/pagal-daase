@@ -65,9 +65,9 @@ export default function Home({ onNav, news, events }) {
       </div>
 
       {/* Hero main */}
-      <div className="hero-main">
-        <div className="hero-left">
-          <div className="hero-tag">✦ &nbsp;Est. 2015 &nbsp;·&nbsp; IIT Indore</div>
+      <div className="hero-section">
+        <div className="hero-left" data-aos="fade-right">
+          <div className="hero-eyebrow">DEPARTMENT OF ASTRONOMY, ASTROPHYSICS AND SPACE ENGINEERING</div>
           <h1 className="hero-title">
             Department of<br />
             <span className="accent">Astronomy, Astrophysics<br />&amp; Space Engineering</span>
@@ -94,10 +94,10 @@ export default function Home({ onNav, news, events }) {
             <CounterStat target={100} label="+ Alumni" delay="0.23s" />
           </div>
 
-          <div className="scroll-hint">Scroll to explore</div>
+          <div className="scroll-hint" data-aos="fade-in" data-aos-delay="300">Scroll to explore</div>
         </div>
 
-        <div className="hero-right">
+        <div className="hero-right" data-aos="fade-left">
           <div className="news-feed-container anim-fadein glass-card" style={{ animationDelay: '0.2s' }}>
             <h2 className="news-feed-title">News &amp; <span>Events</span></h2>
 
@@ -148,7 +148,7 @@ export default function Home({ onNav, news, events }) {
       <div className="about-strip">
 
         {/* ── Header ── */}
-        <div className="about-hdr">
+        <div className="about-hdr" data-aos="fade-up">
           <span className="about-eyebrow">✦ &nbsp;Established 2015 &nbsp;·&nbsp; IIT Indore</span>
           <h2 className="about-main-title">About <span>DAASE</span></h2>
           <p className="about-intro-text">
@@ -160,7 +160,7 @@ export default function Home({ onNav, news, events }) {
 
         {/* ── 3-column info cards ── */}
         <div className="about-info-grid">
-          <div className="about-info-card">
+          <div className="about-info-card" data-aos="fade-up" data-aos-delay="100">
             <div className="about-info-card-icon">🎓</div>
             <h3 className="about-info-card-title">Academic Programs</h3>
             <ul className="about-info-list">
@@ -173,7 +173,7 @@ export default function Home({ onNav, news, events }) {
             </ul>
           </div>
 
-          <div className="about-info-card">
+          <div className="about-info-card" data-aos="fade-up" data-aos-delay="200">
             <div className="about-info-card-icon">🔭</div>
             <h3 className="about-info-card-title">Research Areas</h3>
             <ul className="about-info-list">
@@ -186,7 +186,7 @@ export default function Home({ onNav, news, events }) {
             </ul>
           </div>
 
-          <div className="about-info-card">
+          <div className="about-info-card" data-aos="fade-up" data-aos-delay="300">
             <div className="about-info-card-icon">🔬</div>
             <h3 className="about-info-card-title">Labs &amp; Facilities</h3>
             <ul className="about-info-list">
@@ -201,7 +201,7 @@ export default function Home({ onNav, news, events }) {
         </div>
 
         {/* ── 4 Highlight badges ── */}
-        <div className="about-badges-row">
+        <div className="about-badges-row" data-aos="fade-up" data-aos-offset="50">
           <a href="http://www.fist-dst.org" target="_blank" rel="noopener noreferrer" className="about-badge">
             <span className="about-badge-icon">🏆</span>
             <span className="about-badge-label">DST-FIST Funded</span>
@@ -225,7 +225,7 @@ export default function Home({ onNav, news, events }) {
         </div>
 
         {/* ── Horizontal Timeline ── */}
-        <div className="about-timeline-wrap">
+        <div className="about-timeline-wrap" data-aos="fade-up" data-aos-offset="50">
           <div className="about-timeline-track" />
           <div className="about-timeline-row">
             {[

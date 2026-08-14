@@ -8,7 +8,7 @@ export default function Research({ onNav }) {
   return (
     <div className="research-page fade-in">
       <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '48px 40px 32px 40px' }}>
-        <div className="section-header center">
+        <div className="section-header center" data-aos="fade-up">
           <span className="section-eyebrow">✦ Science &amp; Discovery</span>
           <h1 className="section-title">Research <span>Areas</span></h1>
           <p className="section-desc">DAASE covers the full spectrum — from Heliophysics to Cosmology, from Earth observations to black holes.</p>
@@ -16,7 +16,7 @@ export default function Research({ onNav }) {
         </div>
 
         {/* Video — autoplays muted immediately, sits right below the title */}
-        <div style={{
+        <div data-aos="fade-up" data-aos-delay="100" style={{
           position: 'relative',
           width: '100%',
           maxWidth: '880px',
@@ -45,10 +45,10 @@ export default function Research({ onNav }) {
       <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '40px 40px 56px 40px' }}>
         <div className="research-grid">
           {RESEARCH_AREAS.map((r, i) => (
+            <div data-aos="fade-up" data-aos-delay={i * 50} key={i}>
             <TiltCard
-              key={i}
-              className="rc anim-fadeup"
-              style={{ animationDelay: `${0.06 + i * 0.05}s`, height: '100%' }}
+              className="rc"
+              style={{ height: '100%' }}
             >
               <div style={{ height: '180px', overflow: 'hidden', borderRadius: 'var(--r-sm) var(--r-sm) 0 0', margin: '-24px -24px 20px -24px' }}>
                 <img
@@ -73,6 +73,7 @@ export default function Research({ onNav }) {
                 </button>
               )}
             </TiltCard>
+            </div>
           ))}
         </div>
       </div>

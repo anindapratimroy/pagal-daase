@@ -233,7 +233,7 @@ export default function Faculty({ initialTab = 'faculty', faculty, visiting, sta
                 </div>
                 <div className="faculty-grid">
                   {sortedFaculty.map((f, i) => (
-                    <div key={i} className="anim-fadeup" style={{ animationDelay: `${0.06 + i * 0.04}s` }}>
+                    <div key={i} data-aos="fade-up" data-aos-delay={i * 50}>
                       <FacultyCard f={f} />
                     </div>
                   ))}
@@ -248,7 +248,7 @@ export default function Faculty({ initialTab = 'faculty', faculty, visiting, sta
 
                 <div className="faculty-grid" style={{ marginBottom: '40px' }}>
                   {sortedVisiting.map((f, i) => (
-                    <div key={i} className="anim-fadeup" style={{ animationDelay: `${0.06 + i * 0.06}s` }}>
+                    <div key={i} data-aos="fade-up" data-aos-delay={i * 50}>
                       <FacultyCard f={f} />
                     </div>
                   ))}
@@ -277,7 +277,7 @@ export default function Faculty({ initialTab = 'faculty', faculty, visiting, sta
                   </>
                 ) : (
                   Object.entries(staff).map(([category, list], catIndex) => (
-                    <div key={category} className="anim-fadein">
+                    <div key={category} data-aos="fade-up">
                       <div className="faculty-divider" style={{ marginTop: catIndex === 0 ? '0' : '40px' }}>
                         {category} <span className="visiting-badge" style={{ background: 'var(--navy)', color: '#fff', borderColor: 'var(--navy)' }}>HOD Office</span>
                         <span style={{ fontWeight: 600, fontSize: '13px', color: '#ffd97a', opacity: 0.9, marginLeft: '8px' }}>
