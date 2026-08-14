@@ -69,7 +69,7 @@ export default function Navbar({ current, onNav }) {
         </div>
 
         <div className="nav-brand" onClick={() => handleNav('home')}>
-          <div className="nav-brand-main">DAASE — IIT Indore</div>
+          <div className="nav-brand-main">DAASE IIT Indore</div>
           <div className="nav-brand-sub">Dept. of Astronomy, Astrophysics &amp; Space Engineering</div>
         </div>
 
