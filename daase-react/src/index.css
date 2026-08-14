@@ -2802,22 +2802,22 @@ a.sc-email:hover {
 
 .contact-section {
   width: 100%;
-  padding: 72px 0 0;
+  padding: 32px 0 0;
   color: #fff;
 }
 
 .contact-hdr {
   text-align: center;
-  margin-bottom: 52px;
+  margin-bottom: 24px;
   padding: 0 clamp(24px, 8vw, 120px);
 }
 
 .contact-main-title {
   
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(28px, 3.5vw, 42px);
   font-weight: 900;
   color: #fff;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   line-height: 1.15;
 }
 
@@ -2830,9 +2830,9 @@ a.sc-email:hover {
   grid-template-columns: 2fr 3fr;
   gap: 0;
   width: 100%;
-  padding: 0 clamp(24px, 5vw, 72px) 64px;
+  padding: 0 clamp(24px, 5vw, 72px) 40px;
   align-items: stretch;
-  min-height: 420px;
+  min-height: 320px;
 }
 
 @media (max-width: 900px) {
@@ -2841,7 +2841,7 @@ a.sc-email:hover {
     gap: 32px;
   }
   .contact-redesign-right {
-    min-height: 400px;
+    min-height: 300px;
   }
   .map-container {
     border-radius: 16px !important;
@@ -2850,18 +2850,18 @@ a.sc-email:hover {
 
 /* ── Left panel (unified container) ── */
 .contact-panel {
-  padding: 32px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   /* Removed the giant unified glass background to make individual blocks pop */
 }
 
 .contact-block {
   display: flex;
-  gap: 18px;
+  gap: 16px;
   align-items: flex-start;
-  padding: 24px;
+  padding: 16px 20px;
   background: linear-gradient(110deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 15%, rgba(255, 255, 255, 0) 85%, rgba(255, 255, 255, 0.04) 100%);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -2869,7 +2869,7 @@ a.sc-email:hover {
   border-top: 1px solid rgba(255, 255, 255, 0.4);
   border-left: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.2), 0 16px 40px -8px rgba(0, 0, 0, 0.6);
-  border-radius: 16px;
+  border-radius: 12px;
   transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   cursor: default;
 }
@@ -2911,19 +2911,19 @@ a.sc-email:hover {
 
 .contact-block-label {
   
-  font-size: 13.5px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .contact-block-value {
   
-  font-size: 17px;
+  font-size: 14.5px;
   color: rgba(255, 255, 255, 0.85);
-  line-height: 1.7;
+  line-height: 1.5;
 }
 
 .contact-email-row {
@@ -2940,7 +2940,7 @@ a.sc-email:hover {
 
 .contact-email-row a {
   
-  font-size: 15px;
+  font-size: 14px;
   color: #93C5FD;
   text-decoration: none;
   transition: color 0.2s;
@@ -2999,7 +2999,7 @@ a.sc-email:hover {
 .map-wrapper-new {
   position: relative;
   height: 100%;
-  min-height: 420px;
+  min-height: 320px;
   border-radius: 0 16px 16px 0;
   overflow: hidden;
   border: 1px solid rgba(255, 217, 122, 0.25);
