@@ -46,13 +46,13 @@ const InteractiveBackground = () => {
 
   const createStar = useCallback((w, h) => {
     const col      = STAR_COLORS[Math.floor(Math.random() * STAR_COLORS.length)];
-    const isBeacon = Math.random() < 0.04;
+    const isBeacon = Math.random() < 0.06;
     return {
       x:            Math.random() * w,
       y:            Math.random() * h,
-      size:         isBeacon ? (Math.random() * 2 + 2.5) : (Math.random() * 2.2 + 0.3),
+      size:         isBeacon ? (Math.random() * 1.5 + 2.0) : (Math.random() * 1.2 + 0.2),
       colorBase:    col,
-      opacity:      isBeacon ? (Math.random() * 0.3 + 0.5) : (Math.random() * 0.6 + 0.2),
+      opacity:      isBeacon ? (Math.random() * 0.4 + 0.6) : (Math.random() * 0.5 + 0.1),
       twinkleSpeed: isBeacon ? (Math.random() * 0.007 + 0.003) : (Math.random() * 0.02 + 0.005),
       twinkleOff:   Math.random() * Math.PI * 2,
       driftX:       (Math.random() - 0.5) * 0.08,
@@ -284,20 +284,41 @@ const InteractiveBackground = () => {
         const alpha  = Math.min(1, clamp + prox);
 
         if (s.isBeacon) {
-          ctx.fillStyle = s.colorBase + (alpha * 0.15).toFixed(3) + ')';
+          // Core soft glow
+          ctx.fillStyle = s.colorBase + (alpha * 0.25).toFixed(3) + ')';
           ctx.beginPath();
-          ctx.arc(s.x, s.y, s.size * 5, 0, Math.PI * 2);
+          ctx.arc(s.x, s.y, s.size * 3.5, 0, Math.PI * 2);
           ctx.fill();
-        } else if (s.size > 1.0) {
+
+          // Tapered cross flare (realistic optical lens flare)
+          const flare = s.size * 6;
+          ctx.fillStyle = s.colorBase + (alpha * 0.6).toFixed(3) + ')';
+          
+          // Vertical spike
+          ctx.beginPath();
+          ctx.moveTo(s.x, s.y - flare);
+          ctx.lineTo(s.x + Math.max(0.6, s.size * 0.2), s.y);
+          ctx.lineTo(s.x, s.y + flare);
+          ctx.lineTo(s.x - Math.max(0.6, s.size * 0.2), s.y);
+          ctx.fill();
+          
+          // Horizontal spike
+          ctx.beginPath();
+          ctx.moveTo(s.x - flare, s.y);
+          ctx.lineTo(s.x, s.y + Math.max(0.6, s.size * 0.2));
+          ctx.lineTo(s.x + flare, s.y);
+          ctx.lineTo(s.x, s.y - Math.max(0.6, s.size * 0.2));
+          ctx.fill();
+        } else if (s.size > 1.2) {
           ctx.fillStyle = s.colorBase + (alpha * 0.15).toFixed(3) + ')';
           ctx.beginPath();
-          ctx.arc(s.x, s.y, s.size * 2.5, 0, Math.PI * 2);
+          ctx.arc(s.x, s.y, s.size * 2, 0, Math.PI * 2);
           ctx.fill();
         }
 
-        ctx.fillStyle = s.colorBase + alpha.toFixed(3) + ')';
+        ctx.fillStyle = s.colorBase + Math.min(1, alpha * 1.2).toFixed(3) + ')';
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.arc(s.x, s.y, s.size * (s.isBeacon ? 0.7 : 0.9), 0, Math.PI * 2);
         ctx.fill();
 
         s._rx = s.x; s._ry = s.y; s._a = alpha;
