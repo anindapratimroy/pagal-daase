@@ -98,7 +98,7 @@ export default function Home({ onNav, news, events }) {
         </div>
 
         <div className="hero-right">
-          <div className="news-feed-container anim-fadein glass-card" style={{ animationDelay: '0.2s', paddingBottom: '20px' }}>
+          <div className="news-feed-container anim-fadein glass-card" style={{ animationDelay: '0.2s' }}>
             <h2 className="news-feed-title">News &amp; <span>Events</span></h2>
 
             <div className="vertical-marquee-container">
@@ -118,7 +118,7 @@ export default function Home({ onNav, news, events }) {
                     href: rawLink,
                     target: isExt ? '_blank' : '_self',
                     rel: isExt ? 'noopener noreferrer' : undefined,
-                    style: { textDecoration: 'none', display: 'block', color: 'inherit' }
+                    style: { textDecoration: 'none', color: 'inherit' }
                   } : {};
 
                   return (
@@ -139,10 +139,8 @@ export default function Home({ onNav, news, events }) {
 
               </div>
             </div>
-
-
-            <Collaborators />
           </div>
+          <Collaborators />
         </div>
       </div>
 

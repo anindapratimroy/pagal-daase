@@ -27,7 +27,7 @@
 
 .publications-header h2 {
   margin: 0;
-  font-family: 'Merriweather', serif;
+  
   font-size: 1.55rem;
   font-weight: 700;
   color: var(--text-on-dark, #fff);
@@ -65,7 +65,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  animation: scrollUp 45s linear infinite;
+  animation: scrollUp 18s linear infinite;
 }
 
 .publications-scroller:hover .publications-content {

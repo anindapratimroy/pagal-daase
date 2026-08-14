@@ -60,7 +60,7 @@ html {
 }
 
 body {
-  font-family: 'Source Sans 3', system-ui, sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   background: transparent;
   color: var(--text-body);
   line-height: 1.75;
@@ -354,7 +354,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Merriweather', serif;
+  
   font-size: 10px;
   font-weight: 700;
   color: #fff;
@@ -376,7 +376,7 @@ nav {
 }
 
 .nav-brand-main {
-  font-family: 'Merriweather', serif;
+  
   font-size: 17px;
   font-weight: 700;
   color: #fff;
@@ -404,7 +404,7 @@ nav {
 }
 
 .nav-links button {
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 14.5px;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -457,7 +457,7 @@ nav {
 }
 
 .nav-dropdown-trigger {
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 14.5px;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -516,7 +516,7 @@ nav {
   cursor: pointer;
   width: 100%;
   text-align: left;
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-weight: 600;
   letter-spacing: 0;
   text-transform: none;
@@ -584,7 +584,7 @@ nav {
 
 .mobile-menu button,
 .mobile-menu a {
-  font-family: 'Source Sans 3', sans-serif;
+  
   color: var(--text-on-dark-body);
   font-size: 15px;
   font-weight: 600;
@@ -641,7 +641,7 @@ nav {
 }
 
 .section-eyebrow {
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.3em;
@@ -663,7 +663,7 @@ nav {
 }
 
 .section-title {
-  font-family: 'Merriweather', serif;
+  
   font-size: clamp(30px, 3.8vw, 44px);
   font-weight: 700;
   color: var(--text-on-dark);
@@ -700,6 +700,11 @@ nav {
   max-width: 1240px;
   margin: 0 auto;
   padding: 56px 40px 72px;
+}
+
+.people-section-inner {
+  max-width: 1380px;
+  padding: 56px 4% 72px;
 }
 
 /* Cards — dark glass, space-themed */
@@ -740,7 +745,7 @@ nav {
   color: #fff;
   padding: 14px 32px;
   border-radius: var(--r);
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-weight: 800;
   font-size: 16px;
   letter-spacing: 0.1em;
@@ -788,7 +793,7 @@ nav {
   color: #fff;
   padding: 14px 32px;
   border-radius: var(--r);
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-weight: 800;
   font-size: 16px;
   letter-spacing: 0.1em;
@@ -830,7 +835,7 @@ nav {
   color: #fff;
   padding: 14px 0;
   text-align: center;
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.18em;
@@ -858,7 +863,7 @@ nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: calc(100vh - var(--nav-h) - 40px);
-  align-items: center;
+  align-items: flex-start;
 }
 
 .hero-left {
@@ -909,7 +914,7 @@ nav {
 }
 
 .hero-title {
-  font-family: 'Merriweather', serif;
+  
   font-size: clamp(36px, 5.2vw, 68px);
   font-weight: 900;
   line-height: 1.1;
@@ -919,7 +924,7 @@ nav {
 }
 
 .hero-title .accent {
-  color: var(--gold);
+  color: #E2B53E;
 }
 
 .hero-subtitle {
@@ -932,7 +937,7 @@ nav {
 }
 
 .hero-tagline {
-  font-family: 'Merriweather', serif;
+  
   font-size: 21px;
   color: var(--text-on-dark-body);
   font-style: italic;
@@ -1023,7 +1028,9 @@ nav {
   border-left: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.2), 0 16px 40px -8px rgba(0, 0, 0, 0.6);
   border-radius: 16px;
-  padding: 32px 24px;
+  padding: 32px 8px;
+  margin-bottom: 0px;
+  overflow: hidden;
   transition: var(--tr);
   /* dark context overrides */
   --navy: #7BAEE8;
@@ -1044,10 +1051,10 @@ nav {
 }
 
 .news-feed-title {
-  font-family: 'Merriweather', serif;
+  
   font-size: 24px;
   color: var(--text-on-dark);
-  margin-bottom: 24px;
+  margin: 0 16px 24px 16px;
   font-weight: 800;
   display: flex;
   align-items: center;
@@ -1066,9 +1073,11 @@ nav {
 }
 
 .vertical-marquee-container {
-  height: 280px;
+  height: 450px;
   overflow: hidden;
   position: relative;
+  margin: 0 -20px;
+  padding: 0 20px;
   mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
   -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
   transform: translateZ(0);
@@ -1100,41 +1109,42 @@ nav {
 }
 
 .news-feed-item {
-  padding: 16px;
-  background: transparent;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  margin: 0 16px 12px 16px;
   transition: var(--tr);
   cursor: pointer;
   position: relative;
   overflow: hidden;
-}
-
-.news-feed-item::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: var(--gold);
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform 0.3s var(--ease-out);
-}
-
-.news-feed-item:hover::after {
-  transform: scaleY(1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .news-feed-item:hover {
-  transform: translateX(4px);
+  background: linear-gradient(110deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border-top-color: rgba(255, 255, 255, 0.3);
+  border-left-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.6), inset 1px 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.news-feed-item:hover .news-feed-headline {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.news-feed-item:hover .arrow {
+  transform: translateX(3px) translateY(-3px);
 }
 
 .news-feed-meta {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 8px;
+  flex-shrink: 0;
 }
 
 .type-badge {
@@ -1142,8 +1152,8 @@ nav {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  padding: 3px 6px;
-  border-radius: 3px;
+  padding: 4px 10px;
+  border-radius: 20px;
 }
 
 .type-badge.news {
@@ -1211,7 +1221,7 @@ a.news-feed-headline:hover {
 }
 
 .hero-stat-num {
-  font-family: 'Merriweather', serif;
+  
   font-size: clamp(32px, 4vw, 48px);
   font-weight: 900;
   color: var(--gold-light);
@@ -1309,7 +1319,7 @@ a.news-feed-headline:hover {
 
 .about-eyebrow {
   display: inline-block;
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.22em;
@@ -1319,7 +1329,7 @@ a.news-feed-headline:hover {
 }
 
 .about-main-title {
-  font-family: 'Merriweather', serif;
+  
   font-size: clamp(32px, 4vw, 52px);
   font-weight: 900;
   line-height: 1.15;
@@ -1332,7 +1342,7 @@ a.news-feed-headline:hover {
 }
 
 .about-intro-text {
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: clamp(16px, 1.5vw, 19px);
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.8;
@@ -1375,7 +1385,7 @@ a.news-feed-headline:hover {
 }
 
 .about-info-card-title {
-  font-family: 'Merriweather', serif;
+  
   font-size: 20px;
   font-weight: 700;
   color: var(--gold-light);
@@ -1394,7 +1404,7 @@ a.news-feed-headline:hover {
 }
 
 .about-info-list li {
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 16px;
   color: rgba(255, 255, 255, 0.82);
   line-height: 1.55;
@@ -1456,7 +1466,7 @@ a.news-feed-headline:hover {
 }
 
 .about-badge-label {
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 17px;
   font-weight: 700;
   color: var(--gold-light);
@@ -1464,7 +1474,7 @@ a.news-feed-headline:hover {
 }
 
 .about-badge-desc {
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 14px;
   color: rgba(255, 255, 255, 0.55);
   line-height: 1.4;
@@ -1517,7 +1527,7 @@ a.news-feed-headline:hover {
 }
 
 .about-tl-year {
-  font-family: 'JetBrains Mono', monospace;
+  
   font-size: 14px;
   font-weight: 700;
   color: var(--gold-light);
@@ -1526,7 +1536,7 @@ a.news-feed-headline:hover {
 }
 
 .about-tl-title {
-  font-family: 'Merriweather', serif;
+  
   font-size: 13.5px;
   color: #fff;
   font-weight: 700;
@@ -1535,7 +1545,7 @@ a.news-feed-headline:hover {
 }
 
 .about-tl-sub {
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 12px;
   color: rgba(255, 255, 255, 0.5);
   line-height: 1.45;
@@ -1588,7 +1598,7 @@ a.news-feed-headline:hover {
 }
 
 .rc-title {
-  font-family: 'Merriweather', serif;
+  
   font-size: 18.5px;
   font-weight: 700;
   color: var(--navy);
@@ -1643,7 +1653,7 @@ a.news-feed-headline:hover {
   border: none;
   border-bottom: 3px solid transparent;
   margin-bottom: -2px;
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1714,7 +1724,7 @@ a.news-feed-headline:hover {
 }
 
 .pc-title {
-  font-family: 'Merriweather', serif;
+  
   font-size: 26px;
   font-weight: 700;
   color: var(--navy);
@@ -1781,7 +1791,7 @@ a.news-feed-headline:hover {
 }
 
 .pc-highlight-num {
-  font-family: 'Merriweather', serif;
+  
   font-size: 30px;
   font-weight: 700;
   color: var(--navy);
@@ -1828,12 +1838,17 @@ a.news-feed-headline:hover {
 .people-tabs {
   display: flex;
   flex-direction: column;
-  background: var(--navy-dark);
-  border-radius: var(--r);
-  width: 220px;
-  min-width: 190px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), inset 1px 1px 1px rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  width: 250px;
+  min-width: 230px;
   flex-shrink: 0;
-  box-shadow: var(--shadow-md);
   overflow: hidden;
   align-self: flex-start;
   position: sticky;
@@ -1841,30 +1856,36 @@ a.news-feed-headline:hover {
 }
 
 .people-tab {
-  padding: 14px 20px;
+  padding: 16px 24px;
   border: none;
   background: transparent;
-  color: rgba(255, 255, 255, 0.72);
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.75);
+  
+  font-size: 15px;
   font-weight: 600;
   text-align: left;
   cursor: pointer;
-  transition: background 0.18s var(--ease), color 0.18s var(--ease);
-  border-left: 3px solid transparent;
-  letter-spacing: 0.01em;
+  transition: all 0.25s var(--ease);
+  border-left: 4px solid transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  letter-spacing: 0.02em;
   line-height: 1.3;
 }
 
+.people-tab:last-child {
+  border-bottom: none;
+}
+
 .people-tab:hover {
-  background: rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.06);
   color: #fff;
 }
 
 .people-tab.active {
-  background: rgba(255, 255, 255, 0.14);
-  color: #fff;
-  border-left-color: var(--gold-light);
+  background: rgba(255, 217, 122, 0.08);
+  color: #ffd97a;
+  border-left-color: #ffd97a;
+  font-weight: 700;
 }
 
 /* The wrapper that holds sidebar + content */
@@ -1905,9 +1926,9 @@ a.news-feed-headline:hover {
 ============================================================ */
 .faculty-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(218px, 1fr));
-  gap: 16px;
-  margin-bottom: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
   align-items: stretch;
 }
 
@@ -1953,7 +1974,7 @@ a.news-feed-headline:hover {
   padding: 22px 12px 11px;
   opacity: 0;
   transition: var(--tr);
-  font-family: 'Source Sans 3', sans-serif;
+  
 }
 
 .faculty-card:hover::after {
@@ -1976,7 +1997,7 @@ a.news-feed-headline:hover {
 
 .fc-photo {
   width: 100%;
-  height: 250px;
+  height: 280px;
   /* background: var(--navy-light); */
   display: flex;
   align-items: center;
@@ -1999,7 +2020,7 @@ a.news-feed-headline:hover {
 }
 
 .fc-photo-placeholder {
-  font-family: 'Merriweather', serif;
+  
   font-size: 40px;
   font-weight: 700;
   color: rgba(15, 45, 96, 0.25);
@@ -2015,16 +2036,22 @@ a.news-feed-headline:hover {
 
 .fc-designation-badge {
   position: absolute;
-  bottom: 8px;
-  left: 8px;
-  background: rgba(255, 255, 255, 0.93);
-  color: var(--navy);
+  bottom: 12px;
+  left: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
   border-radius: var(--r-sm);
-  padding: 5px 14px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 1px 1px 1px rgba(255, 255, 255, 0.15);
 }
 
 
@@ -2039,13 +2066,18 @@ a.news-feed-headline:hover {
 
 .hod-badge {
   display: block;
-  background: var(--navy);
-  color: #fff;
-  font-size: 13.5px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  background: linear-gradient(135deg, rgba(255, 217, 122, 0.15), rgba(255, 217, 122, 0.02));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 217, 122, 0.3);
+  border-top: 1px solid rgba(255, 217, 122, 0.5);
+  box-shadow: inset 1px 1px 1px rgba(255, 217, 122, 0.2), 0 4px 16px rgba(0, 0, 0, 0.25);
+  color: #ffd97a;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  padding: 8px 16px;
+  padding: 6px 12px;
   border-radius: var(--r-sm);
   margin-bottom: 12px;
   text-align: center;
@@ -2053,7 +2085,7 @@ a.news-feed-headline:hover {
 }
 
 .fc-name {
-  font-family: 'Merriweather', serif;
+  
   font-size: 19.5px;
   font-weight: 700;
   color: var(--text-primary);
@@ -2088,7 +2120,7 @@ a.news-feed-headline:hover {
 }
 
 .fc-email {
-  font-family: 'JetBrains Mono', monospace;
+  
   font-size: 10.5px;
   color: var(--navy-mid);
   white-space: nowrap;
@@ -2108,7 +2140,7 @@ a.news-feed-headline:hover {
 }
 
 .faculty-divider {
-  font-family: 'Merriweather', serif;
+  
   font-size: 19px;
   font-weight: 700;
   color: var(--navy);
@@ -2121,16 +2153,20 @@ a.news-feed-headline:hover {
 }
 
 .visiting-badge {
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  background: var(--gold-bg);
-  border: 1px solid var(--gold-border);
-  color: var(--gold);
-  padding: 3px 10px;
+  background: linear-gradient(135deg, rgba(255, 217, 122, 0.15), rgba(255, 217, 122, 0.02));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 217, 122, 0.3);
+  border-top: 1px solid rgba(255, 217, 122, 0.5);
+  color: #ffd97a;
+  padding: 4px 12px;
   border-radius: var(--r-sm);
+  box-shadow: inset 1px 1px 1px rgba(255, 217, 122, 0.2);
 }
 
 /* ============================================================
@@ -2151,7 +2187,7 @@ a.news-feed-headline:hover {
   border: none;
   border-bottom: 3px solid transparent;
   margin-bottom: -2px;
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -2176,7 +2212,7 @@ a.news-feed-headline:hover {
 }
 
 .batch-title {
-  font-family: 'Merriweather', serif;
+  
   font-size: 17px;
   font-weight: 700;
   color: var(--navy);
@@ -2189,7 +2225,7 @@ a.news-feed-headline:hover {
 }
 
 .batch-count {
-  font-family: 'JetBrains Mono', monospace;
+  
   font-size: 12px;
   background: var(--navy);
   color: #fff;
@@ -2199,8 +2235,8 @@ a.news-feed-headline:hover {
 
 .students-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
   align-items: stretch;
 }
 
@@ -2251,7 +2287,7 @@ a.news-feed-headline:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Merriweather', serif;
+  
   font-size: 14px;
   font-weight: 700;
   color: var(--navy);
@@ -2304,7 +2340,7 @@ a.news-feed-headline:hover {
 }
 
 .sc-email {
-  font-family: 'JetBrains Mono', monospace;
+  
   font-size: 16px;
   color: var(--navy-mid);
   display: block;
@@ -2427,7 +2463,7 @@ a.sc-email:hover {
 }
 
 .event-title {
-  font-family: 'Merriweather', serif;
+  
   font-size: 19px;
   font-weight: 700;
   color: var(--navy);
@@ -2436,7 +2472,7 @@ a.sc-email:hover {
 }
 
 .event-date {
-  font-family: 'JetBrains Mono', monospace;
+  
   font-size: 13px;
   color: var(--text-muted);
   display: flex;
@@ -2488,7 +2524,7 @@ a.sc-email:hover {
 }
 
 .alumni-year {
-  font-family: 'Merriweather', serif;
+  
   font-size: 22px;
   font-weight: 800;
   color: #fff;
@@ -2671,7 +2707,7 @@ a.sc-email:hover {
 }
 
 .opp-title {
-  font-family: 'Merriweather', serif;
+  
   font-size: 24px;
   font-weight: 700;
   color: var(--navy);
@@ -2707,7 +2743,7 @@ a.sc-email:hover {
 }
 
 .opp-deadline-date {
-  font-family: 'JetBrains Mono', monospace;
+  
   font-size: 15px;
   color: var(--text-body);
   font-weight: 500;
@@ -2722,7 +2758,7 @@ a.sc-email:hover {
 }
 
 .funding-title {
-  font-family: 'Merriweather', serif;
+  
   font-size: 18px;
   font-weight: 800;
   color: #fff;
@@ -2777,7 +2813,7 @@ a.sc-email:hover {
 }
 
 .contact-main-title {
-  font-family: 'Merriweather', serif;
+  
   font-size: clamp(32px, 4vw, 52px);
   font-weight: 900;
   color: #fff;
@@ -2797,6 +2833,19 @@ a.sc-email:hover {
   padding: 0 clamp(24px, 5vw, 72px) 64px;
   align-items: stretch;
   min-height: 420px;
+}
+
+@media (max-width: 900px) {
+  .contact-redesign-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .contact-redesign-right {
+    min-height: 400px;
+  }
+  .map-container {
+    border-radius: 16px !important;
+  }
 }
 
 /* ── Left panel (unified container) ── */
@@ -2861,7 +2910,7 @@ a.sc-email:hover {
 }
 
 .contact-block-label {
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 13.5px;
   font-weight: 800;
   letter-spacing: 0.22em;
@@ -2871,7 +2920,7 @@ a.sc-email:hover {
 }
 
 .contact-block-value {
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 17px;
   color: rgba(255, 255, 255, 0.85);
   line-height: 1.7;
@@ -2890,7 +2939,7 @@ a.sc-email:hover {
 }
 
 .contact-email-row a {
-  font-family: 'JetBrains Mono', monospace;
+  
   font-size: 15px;
   color: #93C5FD;
   text-decoration: none;
@@ -2903,7 +2952,7 @@ a.sc-email:hover {
 }
 
 .contact-email-tag {
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -2924,7 +2973,7 @@ a.sc-email:hover {
 }
 
 .contact-link-pill {
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 15px;
   font-weight: 600;
   color: #93C5FD;
@@ -2996,7 +3045,7 @@ a.sc-email:hover {
 }
 
 .map-pin-title {
-  font-family: 'Merriweather', serif;
+  
   font-size: 15px;
   font-weight: 700;
   color: #fff;
@@ -3004,13 +3053,13 @@ a.sc-email:hover {
 }
 
 .map-pin-addr {
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 12.5px;
   color: rgba(255, 255, 255, 0.6);
 }
 
 .map-open-btn {
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 13px;
   font-weight: 700;
   color: #fff;
@@ -3040,7 +3089,7 @@ a.sc-email:hover {
 }
 
 .collab-title {
-  font-family: 'Merriweather', serif;
+  
   font-size: 15px;
   font-weight: 700;
   color: var(--navy);
@@ -3158,7 +3207,7 @@ a.sc-email:hover {
 }
 
 .footer-creator .footer-email {
-  font-family: 'JetBrains Mono', monospace;
+  
   font-weight: 400;
   font-size: 12px;
 }
@@ -3212,7 +3261,7 @@ a.sc-email:hover {
 }
 
 .pre-text {
-  font-family: 'Merriweather', serif;
+  
   font-size: 15px;
   font-weight: 700;
   color: var(--navy);
@@ -3392,6 +3441,40 @@ a.sc-email:hover {
 
 @media(max-width:640px) {
   /* --- Mobile Optimization Fixes --- */
+  
+  .hero-top-strip {
+    font-size: 11.5px !important;
+    letter-spacing: 0.12em !important;
+    line-height: 1.6 !important;
+    padding: 12px 16px !important;
+  }
+  
+  .hero-top-strip a {
+    display: inline-block;
+  }
+
+  .news-feed-container {
+    padding: 24px 4px !important;
+  }
+  
+  .news-feed-title {
+    margin: 0 8px 16px 8px !important;
+    font-size: 20px !important;
+  }
+  
+  .vertical-marquee-container {
+    margin: 0 -8px !important;
+    padding: 0 8px !important;
+  }
+  
+  .news-feed-item {
+    padding: 12px 14px !important;
+    margin: 0 8px 10px 8px !important;
+  }
+  
+  .news-feed-headline {
+    font-size: 14px !important;
+  }
   /* 1. Show two people per row without causing overflow */
   .faculty-grid, .students-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important; /* minmax(0) prevents grid items from blowing out container */
@@ -3670,7 +3753,7 @@ a.sc-email:hover {
 
 /* ── COLLABORATIONS MARQUEE ─────────────────────────────────────────────────── */
 .collaborators-section {
-  margin-top: 24px;
+  margin-top: 12px;
   padding: 12px 0 0 0;
   position: relative;
   height: 230px;
@@ -3680,7 +3763,7 @@ a.sc-email:hover {
 
 .collab-marquee-title {
   text-align: center;
-  font-family: 'Merriweather', serif;
+  
   font-size: 20px;
   font-weight: 800;
   margin-bottom: 16px;
@@ -3770,7 +3853,7 @@ a.sc-email:hover {
 }
 
 .collab-name {
-  font-family: 'Source Sans 3', sans-serif;
+  
   font-size: 12px;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.72);
@@ -3819,7 +3902,6 @@ a.sc-email:hover {
 .funding-card,
 .contact-item,
 .collab-tag,
-.news-feed-item,
 .hero-stat,
 .collab-logo-wrapper,
 .about-hl {
@@ -3850,7 +3932,6 @@ a.sc-email:hover {
 .funding-card:hover,
 .contact-item:hover,
 .collab-tag:hover,
-.news-feed-item:hover,
 .hero-stat:hover,
 .collab-logo-wrapper:hover,
 .about-hl:hover {
@@ -4061,12 +4142,7 @@ a.sc-email:hover {
 }
 
 .news-feed-item {
-  background: transparent !important;
-  border: none !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-.news-feed-item:last-child {
-  border-bottom: none !important;
+  /* Inherits base glass card style */
 }
 
 .news-feed-headline {
@@ -4168,8 +4244,7 @@ a.sc-email:hover {
   color: rgba(255, 255, 255, 0.72) !important;
 }
 
-.map-overlay-content .btn-primary,
-.hero-top-strip {
+.map-overlay-content .btn-primary {
   font-size: 14px !important;
 }
 
@@ -4356,7 +4431,7 @@ a.sc-email:hover {
 
 .credits-modal-title {
   color: #fff;
-  font-family: 'Merriweather', serif;
+  
   font-style: italic;
   font-size: 26px;
   margin-bottom: 24px;

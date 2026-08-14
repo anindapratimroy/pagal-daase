@@ -195,7 +195,7 @@ export default function Faculty({ initialTab = 'faculty', faculty, visiting, sta
 
   return (
     <div>
-      <div className="section-inner">
+      <div className="section-inner people-section-inner">
         <div className="section-header">
           <span className="section-eyebrow">✦ Our People</span>
           <h1 className="section-title">People at <span>DAASE</span></h1>
