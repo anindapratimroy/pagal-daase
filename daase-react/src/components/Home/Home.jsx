@@ -65,7 +65,7 @@ export default function Home({ onNav, news, events }) {
       </div>
 
       {/* Hero main */}
-      <div className="hero-section">
+      <div className="hero-main">
         <div className="hero-left" data-aos="fade-right">
           <div className="hero-eyebrow">DEPARTMENT OF ASTRONOMY, ASTROPHYSICS AND SPACE ENGINEERING</div>
           <h1 className="hero-title">
