@@ -48,7 +48,8 @@ export default function Research({ onNav }) {
             <div data-aos="fade-up" data-aos-delay={i * 50} key={i}>
             <TiltCard
               className="rc"
-              style={{ height: '100%' }}
+              style={{ height: '100%', cursor: r.id ? 'pointer' : 'default' }}
+              onClick={() => { if (r.id) onNav('research-detail', r.id); }}
             >
               <div style={{ height: '180px', overflow: 'hidden', borderRadius: 'var(--r-sm) var(--r-sm) 0 0', margin: '-24px -24px 20px -24px' }}>
                 <img
@@ -64,13 +65,12 @@ export default function Research({ onNav }) {
               <h3 className="rc-title">{r.title}</h3>
               <p className="rc-desc" style={{ flexGrow: 1 }}>{r.desc}</p>
               {r.id && (
-                <button
-                  onClick={() => onNav('research-detail', r.id)}
+                <div
                   className="rc-link btn-link"
-                  style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
+                  style={{ background: 'transparent', border: 'none', padding: 0, marginTop: 'auto' }}
                 >
                   Learn More ↗
-                </button>
+                </div>
               )}
             </TiltCard>
             </div>
