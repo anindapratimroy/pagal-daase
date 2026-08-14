@@ -67,7 +67,7 @@ export default function Home({ onNav, news, events }) {
       {/* Hero main */}
       <div className="hero-main">
         <div className="hero-left" data-aos="fade-right">
-          <div className="hero-eyebrow">DEPARTMENT OF ASTRONOMY, ASTROPHYSICS AND SPACE ENGINEERING</div>
+          <div className="hero-tag">✦ &nbsp;Est. 2015 &nbsp;·&nbsp; IIT Indore</div>
           <h1 className="hero-title">
             Department of<br />
             <span className="accent">Astronomy, Astrophysics<br />&amp; Space Engineering</span>
