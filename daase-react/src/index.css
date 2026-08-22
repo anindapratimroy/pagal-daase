@@ -319,11 +319,27 @@ nav {
   display: flex;
   align-items: center;
   padding: 0 32px;
-  background: rgba(2, 8, 22, 0.82);
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+nav.nav-top {
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+}
+
+nav.nav-scrolled {
+  top: 16px;
+  left: 5%;
+  right: 5%;
+  width: auto;
+  background: rgba(2, 8, 22, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 2px solid var(--gold);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 40px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+  padding: 0 24px 0 32px;
 }
 
 .nav-logos {
@@ -441,14 +457,34 @@ nav {
   animation: navCtaPulse 3s ease-in-out 1.5s 2;
 }
 
-.nav-cta-btn:hover {
+.nav-cta-btn.active {
   background: var(--gold-light) !important;
   color: var(--navy) !important;
 }
 
-.nav-cta-btn.active {
+.nav-divider-vertical {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 12px;
+}
+
+.hamburger.desktop-hamburger {
+  display: flex;
+  margin-left: 0;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.hamburger.desktop-hamburger:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-cta-btn:hover {
   background: var(--gold-light) !important;
-  border-bottom: none !important;
+  color: var(--navy) !important;
 }
 
 /* Dropdown */
@@ -3310,6 +3346,11 @@ a.sc-email:hover {
 
 @media(max-width:1550px) {
   nav { padding: 0 16px; }
+  nav.nav-scrolled {
+    left: 16px;
+    right: 16px;
+    padding: 0 16px 0 20px;
+  }
   .nav-brand-main { font-size: 17px; }
   .nav-brand-sub { font-size: 11px; max-width: 270px; }
   .nav-links button { font-size: 12.5px; padding: 6px 4px; }
@@ -3317,12 +3358,13 @@ a.sc-email:hover {
 }
 
 @media(max-width:1400px) {
-  .nav-links {
+  /* No need to hide nav-links because we've already permanently moved items to hamburger. 
+     Wait, do we want to hide everything at 1400px? Yes, we hide the visible ones too! */
+  .nav-links button, .nav-dropdown, .nav-cta-btn, .nav-divider-vertical {
     display: none;
   }
-
-  .hamburger {
-    display: flex;
+  .hamburger.desktop-hamburger {
+    display: flex !important;
     margin-left: auto;
   }
 }
@@ -3330,6 +3372,12 @@ a.sc-email:hover {
 @media(max-width:1100px) {
   nav {
     padding: 0 16px;
+  }
+  nav.nav-scrolled {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    border-radius: 24px;
   }
 
   .nav-logos {

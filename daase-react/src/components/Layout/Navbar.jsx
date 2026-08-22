@@ -32,8 +32,17 @@ const isPeopleActive = (current) => current.startsWith('people-');
 
 export default function Navbar({ current, onNav }) {
   const [mobileOpen, setMobileOpen] = useState(false);
-
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleNav = (id) => {
     onNav(id);
@@ -56,7 +65,7 @@ export default function Navbar({ current, onNav }) {
 
   return (
     <>
-      <nav>
+      <nav className={isScrolled ? 'nav-scrolled' : 'nav-top'}>
         <div className="nav-logos" onClick={() => handleNav('home')}>
           <img src="images/IITI_Logo.svg" alt="IIT Indore" className="nav-logo-img"
             onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
@@ -74,14 +83,6 @@ export default function Navbar({ current, onNav }) {
         </div>
 
         <div className="nav-links">
-          {/* Home */}
-          <button
-            className={current === 'home' ? 'active' : ''}
-            onClick={() => handleNav('home')}
-          >
-            Home
-          </button>
-
           {/* People dropdown */}
           <div className={`nav-dropdown${openDropdown === 'people' ? ' open' : ''}`} onClick={(e) => toggleDropdown('people', e)}>
             <button className={`nav-dropdown-trigger${isPeopleActive(current) || openDropdown === 'people' ? ' active' : ''}`}>
@@ -129,39 +130,20 @@ export default function Navbar({ current, onNav }) {
             Programs
           </button>
 
-          {/* Remaining flat items */}
-          {NAV_ITEMS.slice(2).map(item => (
-            <button
-              key={item.id}
-              className={current === item.id ? 'active' : ''}
-              onClick={() => handleNav(item.id)}
-            >
-              {item.label}
-            </button>
-          ))}
-
-          {/* Useful Links dropdown */}
-          <div className={`nav-dropdown${openDropdown === 'links' ? ' open' : ''}`} onClick={(e) => toggleDropdown('links', e)}>
-            <button className={`nav-dropdown-trigger${openDropdown === 'links' ? ' active' : ''}`}>Useful Links ▾</button>
-            <div className="nav-dropdown-menu">
-              {USEFUL_LINKS.map(l => (
-                <a key={l.href} href={l.href} target={l.href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
-                  {l.label}
-                </a>
-              ))}
-            </div>
-          </div>
-
+          {/* Opportunities CTA */}
           <button
             className={`nav-cta-btn${current === 'opportunities' ? ' active' : ''}`}
             onClick={() => handleNav('opportunities')}
           >
             Opportunities
           </button>
-        </div>
 
-        <div className="hamburger" onClick={() => setMobileOpen(o => !o)}>
-          <span /><span /><span />
+          <div className="nav-divider-vertical" />
+
+          {/* Permanent Desktop Hamburger */}
+          <div className="hamburger desktop-hamburger" onClick={() => setMobileOpen(o => !o)}>
+            <span /><span /><span />
+          </div>
         </div>
       </nav>
 
