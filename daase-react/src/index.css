@@ -328,17 +328,21 @@ nav.nav-top {
   box-shadow: none;
 }
 
+nav.nav-hidden {
+  transform: translateY(-150%);
+}
+
 nav.nav-scrolled {
   top: 16px;
   left: 5%;
   right: 5%;
   width: auto;
-  background: rgba(2, 8, 22, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(2, 8, 22, 0.55);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 40px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 16px 40px rgba(0, 0, 0, 0.7);
   padding: 0 24px 0 32px;
 }
 
@@ -426,14 +430,15 @@ nav.nav-scrolled {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.85);
-  padding: 6px 8px;
+  padding: 6px 10px;
   border: none;
   background: none;
   cursor: pointer;
   transition: var(--tr);
   border-radius: var(--r-sm);
   white-space: nowrap;
-  border-bottom: 2px solid transparent;
+  position: relative;
+  z-index: 1;
 }
 
 .nav-links button:hover {
@@ -443,8 +448,22 @@ nav.nav-scrolled {
 
 .nav-links button.active {
   color: #fff;
-  background: rgba(255, 255, 255, 0.15);
-  border-bottom-color: var(--gold);
+  background: transparent;
+}
+
+.nav-links button.active::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: var(--r-sm);
+  z-index: -1;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 .nav-cta-btn {
@@ -460,6 +479,10 @@ nav.nav-scrolled {
 .nav-cta-btn.active {
   background: var(--gold-light) !important;
   color: var(--navy) !important;
+}
+
+.nav-cta-btn.active::before {
+  display: none !important;
 }
 
 .nav-divider-vertical {

@@ -34,11 +34,24 @@ export default function Navbar({ current, onNav }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState('up');
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 20);
+
+      // Determine scroll direction for auto-hide
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setScrollDirection('down'); // scrolling down, past top
+      } else if (currentScrollY < lastScrollY) {
+        setScrollDirection('up'); // scrolling up
+      }
+      lastScrollY = currentScrollY;
     };
+    
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
@@ -65,7 +78,7 @@ export default function Navbar({ current, onNav }) {
 
   return (
     <>
-      <nav className={isScrolled ? 'nav-scrolled' : 'nav-top'}>
+      <nav className={`${isScrolled ? 'nav-scrolled' : 'nav-top'} ${scrollDirection === 'down' ? 'nav-hidden' : ''}`}>
         <div className="nav-logos" onClick={() => handleNav('home')}>
           <img src="images/IITI_Logo.svg" alt="IIT Indore" className="nav-logo-img"
             onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
