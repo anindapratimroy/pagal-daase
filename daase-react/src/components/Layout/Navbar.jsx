@@ -160,8 +160,19 @@ export default function Navbar({ current, onNav }) {
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Backdrop overlay */}
+      <div 
+        className={`menu-overlay${mobileOpen ? ' open' : ''}`} 
+        onClick={() => setMobileOpen(false)} 
+      />
+
+      {/* Side Drawer Menu */}
       <div className={`mobile-menu${mobileOpen ? ' open' : ''}`}>
+        <div className="drawer-header">
+          <span className="drawer-title">Navigation</span>
+          <button className="drawer-close" onClick={() => setMobileOpen(false)}>✕</button>
+        </div>
+
         <button className={current === 'home' ? 'active' : ''} onClick={() => handleNav('home')}>Home</button>
 
         {/* People section header */}
