@@ -143,6 +143,22 @@ export default function Navbar({ current, onNav }) {
             Programs
           </button>
 
+          {/* Events */}
+          <button
+            className={current === 'events' ? 'active' : ''}
+            onClick={() => handleNav('events')}
+          >
+            Events
+          </button>
+
+          {/* Gallery */}
+          <button
+            className={current === 'gallery' ? 'active' : ''}
+            onClick={() => handleNav('gallery')}
+          >
+            Gallery
+          </button>
+
           {/* Opportunities CTA */}
           <button
             className={`nav-cta-btn${current === 'opportunities' ? ' active' : ''}`}
