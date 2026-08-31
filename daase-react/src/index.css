@@ -1142,17 +1142,18 @@ nav.nav-scrolled {
 /* News & Events Feed */
 .news-feed-container {
   background: linear-gradient(110deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 15%, rgba(255, 255, 255, 0) 85%, rgba(255, 255, 255, 0.04) 100%);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.2), 0 16px 40px -8px rgba(0, 0, 0, 0.6);
   border-radius: 16px;
   padding: 32px 8px;
   margin-bottom: 0px;
   overflow: hidden;
-  transition: var(--tr);
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform, box-shadow;
   /* dark context overrides */
   --navy: #7BAEE8;
   --text-primary: #F0F4FF;
@@ -1167,8 +1168,12 @@ nav.nav-scrolled {
 }
 
 .news-feed-container:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--border-dark);
+  background: linear-gradient(110deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.02) 20%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 0.07) 100%);
+  border-color: rgba(255, 255, 255, 0.15);
+  border-top-color: rgba(255, 217, 122, 0.85);
+  border-left-color: rgba(255, 217, 122, 0.55);
+  transform: translateY(-4px);
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.4), 0 24px 48px -8px rgba(0, 0, 0, 0.75);
 }
 
 .news-feed-title {
