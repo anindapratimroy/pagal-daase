@@ -334,9 +334,9 @@ nav.nav-hidden {
 
 nav.nav-scrolled {
   top: 16px;
-  left: 5%;
-  right: 5%;
-  width: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(calc(100% - 48px), 1440px);
   background: rgba(2, 8, 22, 0.55);
   backdrop-filter: blur(24px) saturate(150%);
   -webkit-backdrop-filter: blur(24px) saturate(150%);
@@ -344,6 +344,10 @@ nav.nav-scrolled {
   border-radius: 40px;
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 16px 40px rgba(0, 0, 0, 0.7);
   padding: 0 24px 0 32px;
+}
+
+nav.nav-scrolled.nav-hidden {
+  transform: translateX(-50%) translateY(-150%) !important;
 }
 
 .nav-logos {
@@ -2953,6 +2957,9 @@ a.sc-email:hover {
   text-align: center;
   margin-bottom: 24px;
   padding: 0 clamp(24px, 8vw, 120px);
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .contact-main-title {
@@ -2973,6 +2980,9 @@ a.sc-email:hover {
   grid-template-columns: 2fr 3fr;
   gap: 0;
   width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 0 clamp(24px, 5vw, 72px) 40px;
   align-items: stretch;
   min-height: 320px;
@@ -3276,10 +3286,12 @@ a.sc-email:hover {
   border-left: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
   color: #fff;
-  margin: 0 clamp(24px, 5vw, 72px) 32px;
+  max-width: 1400px;
+  margin: 0 auto 32px;
   padding: 24px 32px;
   box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.2), 0 16px 40px -8px rgba(0, 0, 0, 0.6);
   transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-sizing: border-box;
 }
 
 .section-footer:hover {
