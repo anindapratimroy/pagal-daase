@@ -76,19 +76,19 @@ export default function Facilities({ facilities }) {
             return (
               <TiltCard className="facility-card anim-fadeup" key={i} style={{ animationDelay: `${0.04 + i * 0.03}s`, padding: 0, overflow: 'hidden' }}>
                 {imgSrc && (
-                  <div style={{ width: '100%', height: '140px', overflow: 'hidden' }}>
+                  <div style={{ width: '100%', height: '220px', overflow: 'hidden', position: 'relative' }}>
                     <img
                       src={imgSrc}
                       alt={f.name}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.3s ease', cursor: 'pointer' }}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s ease', cursor: 'zoom-in', display: 'block' }}
                       onError={e => { e.target.style.display = 'none'; e.target.parentElement.style.display = 'none'; }}
-                      onMouseOver={e => { e.target.style.transform = 'scale(1.05)'; }}
+                      onMouseOver={e => { e.target.style.transform = 'scale(1.07)'; }}
                       onMouseOut={e => { e.target.style.transform = 'scale(1)'; }}
                       onClick={() => setSelectedImage(imgSrc)}
                     />
                   </div>
                 )}
-                <div style={{ padding: '14px 16px', textAlign: 'center' }}>
+                <div style={{ padding: '16px 20px 18px', textAlign: 'center' }}>
                   {!imgSrc && <div className="fac-icon">{f.icon}</div>}
                   <div className="fac-name">{f.name}</div>
                 </div>

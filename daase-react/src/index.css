@@ -2492,35 +2492,36 @@ a.sc-email:hover {
 ============================================================ */
 .facilities-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
 }
 
 .facility-card {
   background: var(--white);
   border: 1px solid var(--border);
-  border-radius: var(--r-sm);
-  padding: 20px 16px;
+  border-radius: var(--r);
+  padding: 0;
   text-align: center;
   transition: var(--tr);
   box-shadow: var(--shadow-sm);
+  overflow: hidden;
 }
 
 .facility-card:hover {
   box-shadow: var(--shadow-md);
   border-color: var(--navy);
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   background: var(--navy-light);
 }
 
 .fac-icon {
-  font-size: 26px;
-  margin-bottom: 9px;
+  font-size: 32px;
+  margin-bottom: 10px;
 }
 
 .fac-name {
-  font-size: 14.5px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--text-on-dark);
   line-height: 1.4;
 }
