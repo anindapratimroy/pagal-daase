@@ -1702,6 +1702,8 @@ a.news-feed-headline:hover {
 }
 
 .rc:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
   border-color: var(--gold);
 }
 
@@ -2074,6 +2076,8 @@ a.news-feed-headline:hover {
 }
 
 .faculty-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 25px 50px -12px rgba(15, 45, 96, 0.25), 0 0 20px rgba(15, 45, 96, 0.05), inset 0 2px 0 rgba(255, 255, 255, 1);
   border-color: rgba(15, 45, 96, 0.3);
 }
 
@@ -2502,7 +2506,9 @@ a.sc-email:hover {
 }
 
 .facility-card:hover {
+  box-shadow: var(--shadow-md);
   border-color: var(--navy);
+  transform: translateY(-4px);
   background: var(--navy-light);
 }
 
@@ -2540,6 +2546,7 @@ a.sc-email:hover {
 
 .event-card:hover {
   box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
 }
 
 .event-card.upcoming-card {
@@ -4069,10 +4076,10 @@ a.sc-email:hover {
   box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.2), 0 16px 40px -8px rgba(0, 0, 0, 0.6) !important;
   border-radius: 16px !important;
   color: rgba(255, 255, 255, 0.95) !important;
-  transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1),
-              box-shadow 0.32s cubic-bezier(0.2, 0.8, 0.2, 1),
-              border-color 0.3s ease,
-              background 0.3s ease !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              background 0.35s ease !important;
   overflow: hidden !important;
   will-change: transform, box-shadow;
   transform: translate3d(0, 0, 0);
@@ -4095,12 +4102,12 @@ a.sc-email:hover {
 .hero-stat:hover,
 .collab-logo-wrapper:hover,
 .about-hl:hover {
-  background: linear-gradient(110deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.02) 20%, rgba(255, 255, 255, 0.8) 80%, rgba(255, 255, 255, 0.08) 100%) !important;
-  border-color: rgba(255, 255, 255, 0.15) !important;
-  border-top-color: rgba(255, 217, 122, 0.85) !important;
+  background: linear-gradient(110deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.02) 20%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 0.08) 100%) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  border-top-color: rgba(255, 217, 122, 0.8) !important;
   border-left-color: rgba(255, 217, 122, 0.5) !important;
-  transform: translate3d(0, -6px, 0) !important;
-  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.4), 0 20px 40px -8px rgba(0, 0, 0, 0.75), 0 0 20px rgba(255, 217, 122, 0.1) !important;
+  transform: translate3d(0, -5px, 0) scale(1.015) !important;
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.4), 0 24px 48px -12px rgba(0, 0, 0, 0.8) !important;
 }
 
 /* Specular Reflection Sheen */
@@ -4131,7 +4138,7 @@ a.sc-email:hover {
       rgba(255, 255, 255, 0.08) 50%,
       rgba(255, 255, 255, 0) 100%);
   transform: translate3d(-300%, 0, 0) skewX(-25deg);
-  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
   z-index: 10;
 }
