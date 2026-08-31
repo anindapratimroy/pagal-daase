@@ -11,117 +11,156 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{font-size:16px;background:#020617;scroll-behavior:smooth}
-    body{font-family:'Poppins',system-ui,sans-serif;background:#020617;color:#CBD5E1;line-height:1.6;overflow-x:hidden;min-height:100vh}
+    html{font-size:16px;background:#F8FAFC;scroll-behavior:smooth}
+    body{font-family:'Poppins',system-ui,sans-serif;background:#F8FAFC;color:#334155;line-height:1.6;overflow-x:hidden;min-height:100vh}
 
-    ::selection{background:#0f2d60;color:#fff}
+    ::selection{background:#DBEAFE;color:#0F172A}
     ::-webkit-scrollbar{width:5px}
-    ::-webkit-scrollbar-track{background:#020617}
-    ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:3px}
+    ::-webkit-scrollbar-track{background:#F8FAFC}
+    ::-webkit-scrollbar-thumb{background:rgba(148,163,184,0.4);border-radius:3px}
 
     /* ══════════════════════════════════════════════════════════
-       DISTINCT SECTION-SPECIFIC SPACE CURSOR SYSTEM (ENLARGED & HARDWARE-ACCELERATED)
+       DISTINCT SECTION-SPECIFIC SPACE CURSOR SYSTEM (SLEEK & COMPACT 22px)
     ══════════════════════════════════════════════════════════ */
 
-    /* 1. Default Space Exploration: Rocket Pointer (38x38) */
+    /* 1. Default Space Exploration: Rocket Pointer (22x22) */
     body, html {
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' viewBox='0 0 24 24'%3E%3Cpath d='M12 2s-5 4.5-5 11c0 3.5 2 6 5 7.5 3-1.5 5-4 5-7.5 0-6.5-5-11-5-11z' fill='%23FFD97A' stroke='%23FFFFFF' stroke-width='1'/%3E%3Ccircle cx='12' cy='9.5' r='2.2' fill='%23020617' stroke='%2360A5FA' stroke-width='0.8'/%3E%3Cpath d='M7 13.5l-4 3.5v2.5l4-1.5M17 13.5l4 3.5v2.5l-4-1.5M12 20.5v3' stroke='%23FF4D4D' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") 8 4, auto;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'%3E%3Cpath d='M12 2s-5 4.5-5 11c0 3.5 2 6 5 7.5 3-1.5 5-4 5-7.5 0-6.5-5-11-5-11z' fill='%232563EB' stroke='%23FFFFFF' stroke-width='1.2'/%3E%3Ccircle cx='12' cy='9.5' r='2.2' fill='%23FFFFFF' stroke='%231D4ED8' stroke-width='0.8'/%3E%3Cpath d='M7 13.5l-4 3.5v2.5l4 -1.5M17 13.5l4 3.5v2.5l-4 -1.5M12 20.5v3' stroke='%23EF4444' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") 4 2, auto;
     }
 
-    /* 2. 404 Glitch Header: System Mechanic Gear Wrench (42x42) */
+    /* 2. 404 Glitch Header: System Mechanic Gear Wrench (24x24) */
     .glitch-404, .error-section {
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='42' viewBox='0 0 24 24'%3E%3Cpath d='M14.7 13.5l-5.2-5.2a3.5 3.5 0 0 0-4.8 4.8l5.2 5.2a3.5 3.5 0 0 0 4.8-4.8z' fill='%23FFD97A' stroke='%23FFFFFF' stroke-width='1.2'/%3E%3Cpath d='M19.5 4.5a3.5 3.5 0 0 0-4.9 0l-2.1 2.1 4.9 4.9 2.1-2.1a3.5 3.5 0 0 0 0-4.9z' fill='%23EF4444' stroke='%23FFFFFF' stroke-width='0.8'/%3E%3Ccircle cx='6' cy='18' r='2' fill='%2360A5FA' stroke='%23FFFFFF' stroke-width='0.8'/%3E%3C/svg%3E") 18 18, pointer !important;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M14.7 13.5l-5.2-5.2a3.5 3.5 0 0 0-4.8 4.8l5.2 5.2a3.5 3.5 0 0 0 4.8-4.8z' fill='%232563EB' stroke='%23FFFFFF' stroke-width='1.2'/%3E%3Cpath d='M19.5 4.5a3.5 3.5 0 0 0-4.9 0l-2.1 2.1 4.9 4.9 2.1-2.1a3.5 3.5 0 0 0 0-4.9z' fill='%23EF4444' stroke='%23FFFFFF' stroke-width='0.8'/%3E%3Ccircle cx='6' cy='18' r='2' fill='%2338BDF8' stroke='%23FFFFFF' stroke-width='0.8'/%3E%3C/svg%3E") 10 10, pointer !important;
     }
 
-    /* 3. Phrases Rotator: Audio Telemetry Signal Wave Scanner (40x40) */
+    /* 3. Phrases Rotator: Audio Telemetry Signal Wave Scanner (22x22) */
     .phrase-container {
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Cpath d='M2 12h3l2-6 4 12 4-16 4 13 2-3h3' fill='none' stroke='%23FFD97A' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%2360A5FA' stroke='%23FFFFFF' stroke-width='0.8'/%3E%3C/svg%3E") 20 20, pointer !important;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'%3E%3Cpath d='M2 12h3l2-6 4 12 4-16 4 13 2-3h3' fill='none' stroke='%232563EB' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%230284C7' stroke='%23FFFFFF' stroke-width='0.8'/%3E%3C/svg%3E") 11 11, pointer !important;
     }
 
-    /* 4. Game Tab 1: Cosmonaut Runner Helmet (38x38) */
+    /* 4. Game Tab 1: Cosmonaut Runner Helmet (22x22) */
     #tab-runner {
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' viewBox='0 0 24 24'%3E%3Cpath d='M13 3a6 6 0 0 0-6 6c0 2.2 1.2 4.1 3 5.2V19l2 2 2-2v-4.8c1.8-1.1 3-3 3-5.2a6 6 0 0 0-6-6z' fill='%23E2E8F0' stroke='%23FFD97A' stroke-width='1.2'/%3E%3Cellipse cx='13' cy='8' rx='3.5' ry='2.2' fill='%2360A5FA'/%3E%3Cpath d='M6 16l-3.5 4.5h4.5l1-3.5' fill='%23FFD97A' stroke='%23FFFFFF' stroke-width='0.6'/%3E%3C/svg%3E") 16 16, pointer !important;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'%3E%3Cpath d='M13 3a6 6 0 0 0-6 6c0 2.2 1.2 4.1 3 5.2V19l2 2 2-2v-4.8c1.8-1.1 3-3 3-5.2a6 6 0 0 0-6-6z' fill='%23475569' stroke='%232563EB' stroke-width='1.2'/%3E%3Cellipse cx='13' cy='8' rx='3.5' ry='2.2' fill='%2338BDF8'/%3E%3Cpath d='M6 16l-3.5 4.5h4.5l1-3.5' fill='%232563EB' stroke='%23FFFFFF' stroke-width='0.6'/%3E%3C/svg%3E") 9 9, pointer !important;
     }
 
-    /* 5. Game Tab 2: Asteroid Defense Laser Blaster Crosshair (40x40) */
+    /* 5. Game Tab 2: Asteroid Defense Laser Blaster Crosshair (22x22) */
     #tab-blaster {
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Cpath d='M12 2v5M12 17v5M2 12h5M17 12h5' stroke='%23EF4444' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='5' fill='none' stroke='%23FFD97A' stroke-width='1.8'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23EF4444'/%3E%3C/svg%3E") 12 12, pointer !important;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'%3E%3Cpath d='M12 2v5M12 17v5M2 12h5M17 12h5' stroke='%23EF4444' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='5' fill='none' stroke='%232563EB' stroke-width='1.8'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23EF4444'/%3E%3C/svg%3E") 7 7, pointer !important;
     }
 
-    /* 6. Game Arena: High-Tech Radar Targeter (44x44) */
+    /* 6. Game Arena: High-Tech Radar Targeter (24x24) */
     .game-container, #game-canvas {
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='15' fill='none' stroke='%2360A5FA' stroke-width='1.8' stroke-dasharray='6 3'/%3E%3Ccircle cx='18' cy='18' r='6' fill='none' stroke='%23FFD97A' stroke-width='1.8'/%3E%3Ccircle cx='18' cy='18' r='2' fill='%23EF4444'/%3E%3Cline x1='18' y1='1' x2='18' y2='7' stroke='%2360A5FA' stroke-width='2'/%3E%3Cline x1='18' y1='29' x2='18' y2='35' stroke='%2360A5FA' stroke-width='2'/%3E%3Cline x1='1' y1='18' x2='7' y2='18' stroke='%2360A5FA' stroke-width='2'/%3E%3Cline x1='29' y1='18' x2='35' y2='18' stroke='%2360A5FA' stroke-width='2'/%3E%3C/svg%3E") 22 22, crosshair !important;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='15' fill='none' stroke='%232563EB' stroke-width='1.8' stroke-dasharray='6 3'/%3E%3Ccircle cx='18' cy='18' r='6' fill='none' stroke='%230284C7' stroke-width='1.8'/%3E%3Ccircle cx='18' cy='18' r='2' fill='%23EF4444'/%3E%3Cline x1='18' y1='1' x2='18' y2='7' stroke='%232563EB' stroke-width='2'/%3E%3Cline x1='18' y1='29' x2='18' y2='35' stroke='%232563EB' stroke-width='2'/%3E%3Cline x1='1' y1='18' x2='7' y2='18' stroke='%232563EB' stroke-width='2'/%3E%3Cline x1='29' y1='18' x2='35' y2='18' stroke='%232563EB' stroke-width='2'/%3E%3C/svg%3E") 12 12, crosshair !important;
     }
 
-    /* 7. Transmission Incoming Glass Card: Satellite Antenna Dish (42x42) */
+    /* 7. Transmission Incoming Glass Card: Satellite Antenna Dish (22x22) */
     .coming-soon-card {
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='42' viewBox='0 0 24 24'%3E%3Cpath d='M12 18l-4 4M12 18l4 4M12 14v4M17 7A7 7 0 0 0 7 7' fill='none' stroke='%23FFD97A' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M15 10a4 4 0 0 0-6 0' fill='none' stroke='%2360A5FA' stroke-width='1.8' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='13' r='2' fill='%23FFD97A' stroke='%23FFFFFF' stroke-width='0.8'/%3E%3C/svg%3E") 21 21, pointer !important;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'%3E%3Cpath d='M12 18l-4 4M12 18l4 4M12 14v4M17 7A7 7 0 0 0 7 7' fill='none' stroke='%232563EB' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M15 10a4 4 0 0 0-6 0' fill='none' stroke='%230284C7' stroke-width='1.8' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='13' r='2' fill='%232563EB' stroke='%23FFFFFF' stroke-width='0.8'/%3E%3C/svg%3E") 11 11, pointer !important;
     }
 
-    /* 8. Specific Research Tags: Custom Astronomy Discipline Icons (38x38) */
+    /* 8. Specific Research Tags: Custom Astronomy Discipline Icons (22x22) */
     .float-tag[style*="--tl:0s"] { /* Radio Astronomy Parabolic Dish */
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' viewBox='0 0 24 24'%3E%3Cpath d='M4 12a8 8 0 0 1 16 0M7 12a5 5 0 0 1 10 0M10 12a2 2 0 0 1 4 0M12 14v7' stroke='%23FFD97A' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='1.5' fill='%2360A5FA'/%3E%3C/svg%3E") 19 19, pointer !important;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'%3E%3Cpath d='M4 12a8 8 0 0 1 16 0M7 12a5 5 0 0 1 10 0M10 12a2 2 0 0 1 4 0M12 14v7' stroke='%232563EB' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='1.5' fill='%230284C7'/%3E%3C/svg%3E") 11 11, pointer !important;
     }
 
     .float-tag[style*="--tl:0.5s"] { /* Heliophysics Solar Flare Corona */
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='5.5' fill='%23FFD97A' stroke='%23FFFFFF' stroke-width='0.8'/%3E%3Cpath d='M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.5 4.5l2.2 2.2M17.3 17.3l2.2 2.2M4.5 19.5l2.2-2.2M17.3 6.7l2.2-2.2' stroke='%23FFD97A' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") 19 19, pointer !important;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='5.5' fill='%232563EB' stroke='%23FFFFFF' stroke-width='0.8'/%3E%3Cpath d='M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.5 4.5l2.2 2.2M17.3 17.3l2.2 2.2M4.5 19.5l2.2-2.2M17.3 6.7l2.2-2.2' stroke='%232563EB' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") 11 11, pointer !important;
     }
 
     .float-tag[style*="--tl:1s"] { /* CubeSat Satellite Chassis */
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' viewBox='0 0 24 24'%3E%3Crect x='6.5' y='6.5' width='11' height='11' rx='1.5' fill='%23CBD5E1' stroke='%2360A5FA' stroke-width='1.8'/%3E%3Cpath d='M1.5 12h5M17.5 12h5M12 1.5v5M12 17.5v5' stroke='%23FFD97A' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") 19 19, pointer !important;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'%3E%3Crect x='6.5' y='6.5' width='11' height='11' rx='1.5' fill='%23CBD5E1' stroke='%232563EB' stroke-width='1.8'/%3E%3Cpath d='M1.5 12h5M17.5 12h5M12 1.5v5M12 17.5v5' stroke='%232563EB' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") 11 11, pointer !important;
     }
 
     .float-tag[style*="--tl:0.3s"] { /* Space Engineering Gear Mechanism */
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' viewBox='0 0 24 24'%3E%3Cpath d='M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z' fill='%23FFD97A' stroke='%23FFFFFF' stroke-width='0.6'/%3E%3Cpath d='M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 0 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5v.2a2 2 0 0 1-4 0v-.2a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 0 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1h-.2a2 2 0 0 1 0-4h.2a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 0 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3h.1a1.6 1.6 0 0 0 1-1.5v-.2a2 2 0 0 1 4 0v.2a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 0 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8v.1a1.6 1.6 0 0 0 1.5 1h.2a2 2 0 0 1 0 4h-.2a1.6 1.6 0 0 0-1.5 1z' fill='none' stroke='%2360A5FA' stroke-width='1.5'/%3E%3C/svg%3E") 19 19, pointer !important;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'%3E%3Cpath d='M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z' fill='%232563EB' stroke='%23FFFFFF' stroke-width='0.6'/%3E%3Cpath d='M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 0 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5v.2a2 2 0 0 1-4 0v-.2a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 0 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1h-.2a2 2 0 0 1 0-4h.2a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 0 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3h.1a1.6 1.6 0 0 0 1-1.5v-.2a2 2 0 0 1 4 0v.2a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 0 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8v.1a1.6 1.6 0 0 0 1.5 1h.2a2 2 0 0 1 0 4h-.2a1.6 1.6 0 0 0-1.5 1z' fill='none' stroke='%230284C7' stroke-width='1.5'/%3E%3C/svg%3E") 11 11, pointer !important;
     }
 
     .float-tag[style*="--tl:0.8s"] { /* SKA-India Array Dish */
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' viewBox='0 0 24 24'%3E%3Cpath d='M12 2L2 22h20L12 2zm0 6l5 10H7l5-10z' fill='%23FFD97A' opacity='0.85' stroke='%2360A5FA' stroke-width='1.2'/%3E%3Ccircle cx='12' cy='13' r='2' fill='%23FFFFFF'/%3E%3C/svg%3E") 19 19, pointer !important;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'%3E%3Cpath d='M12 2L2 22h20L12 2zm0 6l5 10H7l5-10z' fill='%232563EB' opacity='0.85' stroke='%230284C7' stroke-width='1.2'/%3E%3Ccircle cx='12' cy='13' r='2' fill='%23FFFFFF'/%3E%3C/svg%3E") 11 11, pointer !important;
     }
 
     .float-tag[style*="--tl:1.2s"] { /* Remote Sensing Satellite Lens */
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9.5' fill='none' stroke='%23FFD97A' stroke-width='1.8'/%3E%3Ccircle cx='12' cy='12' r='4.5' fill='%2360A5FA' stroke='%23FFFFFF' stroke-width='0.8'/%3E%3Cpath d='M12 0.5v4M12 19.5v4M0.5 12h4M19.5 12h4' stroke='%23FFFFFF' stroke-width='1.5'/%3E%3C/svg%3E") 19 19, pointer !important;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9.5' fill='none' stroke='%232563EB' stroke-width='1.8'/%3E%3Ccircle cx='12' cy='12' r='4.5' fill='%230284C7' stroke='%23FFFFFF' stroke-width='0.8'/%3E%3Cpath d='M12 0.5v4M12 19.5v4M0.5 12h4M19.5 12h4' stroke='%23FFFFFF' stroke-width='1.5'/%3E%3C/svg%3E") 11 11, pointer !important;
     }
 
     .float-tag[style*="--tl:0.6s"] { /* Gravitational Physics Spacetime Ripple */
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.5a9.5 9.5 0 1 0 9.5 9.5' fill='none' stroke='%23A78BFA' stroke-width='2.2' stroke-linecap='round'/%3E%3Cpath d='M12 6a6 6 0 1 0 6 6' fill='none' stroke='%23FFD97A' stroke-width='1.8' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='2.5' fill='%2360A5FA' stroke='%23FFFFFF' stroke-width='0.8'/%3E%3C/svg%3E") 19 19, pointer !important;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.5a9.5 9.5 0 1 0 9.5 9.5' fill='none' stroke='%237C3AED' stroke-width='2.2' stroke-linecap='round'/%3E%3Cpath d='M12 6a6 6 0 1 0 6 6' fill='none' stroke='%232563EB' stroke-width='1.8' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='2.5' fill='%230284C7' stroke='%23FFFFFF' stroke-width='0.8'/%3E%3C/svg%3E") 11 11, pointer !important;
     }
 
-    /* 9. Footer & Webmaster Link: Quantum Uplink Beacon (38x38) */
+    /* 9. Footer & Webmaster Link: Quantum Uplink Beacon (22x22) */
     .site-footer a, .footer-webmaster a {
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' viewBox='0 0 24 24'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3' fill='none' stroke='%23FFD97A' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='21' cy='3' r='2.5' fill='%2360A5FA' stroke='%23FFFFFF' stroke-width='0.8'/%3E%3C/svg%3E") 19 19, pointer !important;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3' fill='none' stroke='%232563EB' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='21' cy='3' r='2.5' fill='%230284C7' stroke='%23FFFFFF' stroke-width='0.8'/%3E%3C/svg%3E") 11 11, pointer !important;
     }
 
     /* ── Background Canvas ── */
     #bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
 
     /* ── Overlays ── */
-    .vignette{position:fixed;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,0.5)100%)}
-    .crt-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:3;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.03) 0px,rgba(0,0,0,0.03) 1px,transparent 1px,transparent 3px);opacity:0.35}
+    .vignette{position:fixed;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,rgba(203,213,225,0.3) 100%)}
+    .crt-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:3;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(15,23,42,0.015) 0px,rgba(15,23,42,0.015) 1px,transparent 1px,transparent 3px);opacity:0.25}
 
     /* ── Debris ── */
     .debris-field{position:fixed;top:0;left:0;width:100%;height:100%;z-index:4;pointer-events:none;overflow:hidden}
-    .debris{position:absolute;font-family:'Courier New',monospace;font-size:12px;font-weight:600;color:rgba(148,163,184,0.18);white-space:nowrap;animation:df linear infinite;text-shadow:0 0 6px rgba(96,165,250,0.1);will-change:transform}
-    .debris.icon{font-size:16px;opacity:0.15}
-    @keyframes df{0%{transform:translate(0,0)rotate(0deg)}25%{transform:translate(25px,-18px)rotate(90deg)}50%{transform:translate(-8px,-40px)rotate(180deg)}75%{transform:translate(-25px,-15px)rotate(270deg)}100%{transform:translate(0,0)rotate(360deg)}}
-
-    /* ── EXPANSIVE FULL-WIDTH CONTENT WRAPPER ── */
+    .debris{position:absolute;font-family:'Courier New',monospace;font-size:12px;font-weight:600;color:rgba(71,85,105,0.22);white-space:nowrap;animation:df linear infinite;text-shadow:0 0 6px rgba(37,99,235,0.15);will-change:transform}
+    /* ── FULL-WIDTH RESPONSIVE LAYOUT ── */
+    /* ══ FULL-WIDTH RESPONSIVE LAYOUT ══ */
     .page-wrapper{
       position:relative;
       z-index:10;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      padding:32px 3% 40px;
-      width:96%;
-      max-width:1440px;
-      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "hero"
+        "phrase"
+        "game"
+        "info"
+        "tags"
+        "fact"
+        "footer";
+      gap: 0;
+      padding: 28px 4% 40px;
+      width: 92%;
+      max-width: 1700px;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
 
-    /* ── 404 Glitch ── */
-    .error-section{text-align:center;margin-bottom:4px}
-    .glitch-404{font-size:clamp(90px,18vw,220px);font-weight:900;line-height:1;position:relative;display:inline-block;background:linear-gradient(135deg,#fff 0%,#ffd97a 60%,#b5862a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 35px rgba(255,217,122,0.25));animation:fl404 6s ease-in-out infinite;letter-spacing:-0.02em}
-    .glitch-404::before,.glitch-404::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#fff 0%,#ffd97a 60%,#b5862a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    /* ── Grid area assignments (all screen sizes) ── */
+    .error-section    { grid-area: hero;    text-align: center; margin-bottom: 4px; }
+    .phrase-container { grid-area: phrase;  text-align: center; }
+    .game-section     { grid-area: game;    align-self: start; }
+    .coming-soon-card { grid-area: info; }
+    .tags-row         { grid-area: tags; }
+    .space-fact-section { grid-area: fact; }
+    .site-footer      { grid-area: footer; }
+
+    /* ══ WIDE SCREEN / LAPTOP / IPAD LANDSCAPE (≥ 850px) ══ */
+    @media (min-width: 850px) {
+      .page-wrapper {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
+        grid-template-areas:
+          "hero    game"
+          "phrase  game"
+          "info    game"
+          "tags    tags"
+          "fact    fact"
+          "footer  footer";
+        column-gap: 36px;
+        row-gap: 0;
+        align-items: start;
+      }
+      .error-section { text-align: left; padding-top: 8px; }
+      .phrase-container { text-align: left; }
+      .coming-soon-card { text-align: left; }
+      .cs-eye { justify-content: flex-start; }
+      .cs-tagline { display: block; }
+      .game-section { margin-top: 0; position: sticky; top: 16px; }
+    }
+
+    /* ── 404 Glitch (High-Contrast White Theme) ── */
+
+    .glitch-404{font-size:clamp(90px,18vw,220px);font-weight:900;line-height:1;position:relative;display:inline-block;background:linear-gradient(135deg,#0F172A 0%,#1D4ED8 60%,#2563EB 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 4px 20px rgba(37,99,235,0.15));animation:fl404 6s ease-in-out infinite;letter-spacing:-0.02em}
+    .glitch-404::before,.glitch-404::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#0F172A 0%,#1D4ED8 60%,#2563EB 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .glitch-404::before{animation:g1 4s infinite linear alternate-reverse;clip-path:polygon(0 0,100% 0,100% 40%,0 40%);opacity:0.8}
     .glitch-404::after{animation:g2 3s infinite linear alternate-reverse;clip-path:polygon(0 65%,100% 65%,100% 100%,0 100%);opacity:0.8}
     .glitch-404:hover::before{animation-duration:0.3s}.glitch-404:hover::after{animation-duration:0.2s}
@@ -130,42 +169,39 @@
     @keyframes g2{0%{transform:translate(0)}25%{transform:translate(2px,-3px)}50%{transform:translate(-3px,1px)}75%{transform:translate(1px,2px)}100%{transform:translate(0)}}
 
     /* ── Phrases ── */
-    .phrase-container{text-align:center;display:grid;margin-bottom:20px;width:100%;max-width:850px}
+    .phrase-container{text-align:center;display:grid;margin-bottom:20px;width:100%;max-width:100%}
     .phrase-item{grid-area:1/1;opacity:0;transform:translateY(10px);transition:opacity 0.5s ease,transform 0.5s ease;padding:2px 0}
     .phrase-item.active{opacity:1;transform:translateY(0)}
-    .phrase-main{font-size:clamp(20px, 3vw, 32px);font-weight:800;color:#FFFFFF;font-style:italic;text-shadow:0 3px 12px rgba(0,0,0,0.7);line-height:1.3;letter-spacing:-0.01em}
-    .phrase-sub{font-size:clamp(14px, 1.6vw, 18px);color:#E2E8F0;font-weight:500;margin-top:6px;line-height:1.4;text-shadow:0 1px 4px rgba(0,0,0,0.6)}
+    .phrase-main{font-size:clamp(18px, 2.2vw, 30px);font-weight:800;color:#0F172A;font-style:italic;text-shadow:0 2px 8px rgba(15,23,42,0.08);line-height:1.3;letter-spacing:-0.01em}
+    .phrase-sub{font-size:clamp(13px, 1.3vw, 17px);color:#334155;font-weight:500;margin-top:6px;line-height:1.4;text-shadow:0 1px 3px rgba(15,23,42,0.05)}
 
     /* ══════════════════════════════════════════════════════════
-       EXPANSIVE GAME SECTION
+       GAME SECTION — fills its grid column fully
     ══════════════════════════════════════════════════════════ */
-    /* ══════════════════════════════════════════════════════════
-       EXPANSIVE GAME SECTION (Modern Liquid Segmented Pill Bar)
-    ══════════════════════════════════════════════════════════ */
-    .game-section{width:100%;max-width:1150px;margin:8px auto 0;position:relative;z-index:20;display:flex;flex-direction:column;align-items:center}
+    .game-section{width:100%;max-width:100%;margin:8px auto 0;position:relative;z-index:20;display:flex;flex-direction:column;align-items:center}
 
-    .game-tabs{display:inline-flex;background:rgba(15,23,42,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:5px;border-radius:18px;border:1px solid rgba(255,255,255,0.15);border-top:1px solid rgba(255,255,255,0.35);gap:6px;margin:0 auto 16px auto;box-shadow:0 8px 24px rgba(0,0,0,0.5),inset 0 1px 1px rgba(255,255,255,0.2);position:relative;z-index:30}
-    .game-tab{font-family:'Poppins',system-ui,sans-serif;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.7);background:transparent;border:1px solid transparent;padding:10px 24px;cursor:pointer;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);border-radius:14px;position:relative;z-index:30;white-space:nowrap;user-select:none;-webkit-user-select:none}
-    .game-tab:hover{color:#FFFFFF;background:rgba(255,255,255,0.08)}
-    .game-tab.active{color:#FFD97A;background:linear-gradient(135deg,rgba(255,217,122,0.22) 0%,rgba(255,217,122,0.08) 100%);border-color:rgba(255,217,122,0.45);box-shadow:0 4px 16px rgba(0,0,0,0.4),inset 0 1px 1px rgba(255,255,255,0.3);text-shadow:0 0 10px rgba(255,217,122,0.4)}
+    .game-tabs{display:inline-flex;background:rgba(241,245,249,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:5px;border-radius:18px;border:1px solid rgba(203,213,225,0.9);border-top:1px solid rgba(255,255,255,1);gap:6px;margin:0 auto 16px auto;box-shadow:0 8px 24px rgba(15,23,42,0.08),inset 0 1px 1px rgba(255,255,255,0.9);position:relative;z-index:30}
+    .game-tab{font-family:'Poppins',system-ui,sans-serif;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#475569;background:transparent;border:1px solid transparent;padding:10px 24px;cursor:pointer;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);border-radius:14px;position:relative;z-index:30;white-space:nowrap;user-select:none;-webkit-user-select:none}
+    .game-tab:hover{color:#0F172A;background:rgba(255,255,255,0.8)}
+    .game-tab.active{color:#1D4ED8;background:#FFFFFF;border:1px solid rgba(59,130,246,0.4);box-shadow:0 4px 14px rgba(37,99,235,0.15),inset 0 1px 1px rgba(255,255,255,1);text-shadow:0 0 8px rgba(37,99,235,0.2)}
 
-    .game-container{position:relative;width:100%;border:1px solid rgba(255,255,255,0.15);border-top:1px solid rgba(255,255,255,0.25);border-radius:20px;overflow:hidden;background:rgba(2,6,23,0.96);box-shadow:0 24px 64px -12px rgba(0,0,0,0.85),inset 0 1px 0 rgba(255,255,255,0.1);touch-action:none}
-    #game-canvas{display:block;width:100%;cursor:pointer;touch-action:none}
+    .game-container{position:relative;width:100%;border:1px solid rgba(203,213,225,0.9);border-top:1px solid rgba(255,255,255,1);border-radius:20px;overflow:hidden;background:#FFFFFF;box-shadow:0 24px 64px -12px rgba(15,23,42,0.12),inset 0 1px 0 rgba(255,255,255,1);touch-action:none}
+    #game-canvas{display:block;width:100%;height:auto;aspect-ratio:16/9.2;cursor:pointer;touch-action:none}
 
-    .game-hud{display:flex;justify-content:space-between;align-items:center;padding:14px 28px;background:linear-gradient(110deg,rgba(255,255,255,0.08) 0%,rgba(255,255,255,0.02) 100%);border-top:1px solid rgba(255,255,255,0.12);font-family:'Poppins',system-ui,sans-serif}
-    .hud-item{font-size:15px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#F1F5F9}
-    .hud-item span{color:#FFD97A;font-weight:800}
-    .hud-item.lives span{color:#FF4D4D;font-size:17px;letter-spacing:3px}
-    .hud-item.high span{color:#60A5FA}
+    .game-hud{display:flex;justify-content:space-between;align-items:center;padding:14px 28px;background:linear-gradient(110deg,#F8FAFC 0%,#F1F5F9 100%);border-top:1px solid rgba(203,213,225,0.8);font-family:'Poppins',system-ui,sans-serif}
+    .hud-item{font-size:15px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#1E293B}
+    .hud-item span{color:#2563EB;font-weight:800}
+    .hud-item.lives span{color:#DC2626;font-size:17px;letter-spacing:3px}
+    .hud-item.high span{color:#0284C7}
 
     .hud-btn-pause {
       font-family: 'Poppins', system-ui, sans-serif;
       font-size: 12px;
       font-weight: 800;
       letter-spacing: 0.08em;
-      color: #FFD97A;
-      background: rgba(255, 217, 122, 0.15);
-      border: 1px solid rgba(255, 217, 122, 0.4);
+      color: #1D4ED8;
+      background: rgba(219,234,254,0.8);
+      border: 1px solid rgba(59,130,246,0.4);
       border-radius: 6px;
       padding: 5px 14px;
       cursor: pointer !important;
@@ -173,73 +209,73 @@
       display: inline-block;
     }
     .hud-btn-pause:hover {
-      background: rgba(255, 217, 122, 0.3);
+      background: rgba(191,219,254,1);
       transform: scale(1.05);
     }
 
-    .game-hint{text-align:center;font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#E2E8F0;margin-top:12px}
-    .game-hint kbd{display:inline-block;padding:3px 9px;border:1px solid rgba(255,217,122,0.3);border-radius:5px;font-family:'Poppins',monospace;font-size:11px;font-weight:700;color:#FFFFFF;background:rgba(15,23,42,0.8);margin:0 3px;box-shadow:0 2px 4px rgba(0,0,0,0.4)}
+    .game-hint{text-align:center;font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#334155;margin-top:12px}
+    .game-hint kbd{display:inline-block;padding:3px 9px;border:1px solid rgba(203,213,225,0.9);border-radius:5px;font-family:'Poppins',monospace;font-size:11px;font-weight:700;color:#0F172A;background:#FFFFFF;margin:0 3px;box-shadow:0 2px 4px rgba(0,0,0,0.06)}
 
     /* Mobile & Tablet Controls for Game */
     .mobile-controls{display:none;justify-content:center;gap:14px;margin-top:12px;width:100%;position:relative;z-index:30;box-sizing:border-box}
-    .mobile-btn{flex:1;max-width:220px;padding:14px 0;font-family:'Poppins',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#FFD97A;background:rgba(255,217,122,0.18);border:1.5px solid rgba(255,217,122,0.5);border-radius:10px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;cursor:pointer;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.4)}
-    .mobile-btn:active{background:rgba(255,217,122,0.35);transform:scale(0.95)}
+    .mobile-btn{flex:1;max-width:220px;padding:14px 0;font-family:'Poppins',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#1D4ED8;background:rgba(219,234,254,0.85);border:1.5px solid rgba(59,130,246,0.5);border-radius:10px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;cursor:pointer;text-align:center;box-shadow:0 4px 16px rgba(15,23,42,0.08)}
+    .mobile-btn:active{background:rgba(191,219,254,1);transform:scale(0.95)}
 
-    /* ── Liquid Glass Card (Enhanced Refraction & Prismatic Reflection) ── */
-    .glass-card{background:linear-gradient(135deg,rgba(255,255,255,0.06) 0%,rgba(255,255,255,0.015) 50%,rgba(255,255,255,0.04) 100%);backdrop-filter:blur(14px) saturate(150%);-webkit-backdrop-filter:blur(14px) saturate(150%);border:1px solid rgba(255,255,255,0.12);border-top:1px solid rgba(255,255,255,0.55);border-left:1px solid rgba(255,217,122,0.4);border-right:1px solid rgba(96,165,250,0.25);box-shadow:inset 0 1px 2px rgba(255,255,255,0.35),inset 0 -1px 2px rgba(0,0,0,0.3),0 24px 56px -12px rgba(0,0,0,0.75);border-radius:20px;color:rgba(255,255,255,0.95);transition:all 0.4s cubic-bezier(0.16,1,0.3,1);overflow:hidden;will-change:transform;transform:translateZ(0);position:relative}
-    .glass-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,0.15) 0%,rgba(255,217,122,0.05) 25%,transparent 60%);transform:translate3d(-30%,-30%,0) rotate(15deg);transition:transform 0.8s cubic-bezier(0.16,1,0.3,1);pointer-events:none;z-index:2}
-    .glass-card:hover{background:linear-gradient(135deg,rgba(255,255,255,0.11) 0%,rgba(255,255,255,0.03) 50%,rgba(255,255,255,0.08) 100%);border-color:rgba(255,255,255,0.25);border-top-color:rgba(255,217,122,0.95);border-left-color:rgba(255,217,122,0.75);transform:translateY(-5px) scale(1.015);box-shadow:inset 0 1px 3px rgba(255,255,255,0.5),inset 0 -1px 2px rgba(0,0,0,0.4),0 32px 64px -14px rgba(0,0,0,0.85)}
+    /* ── Liquid Glass Card (White Theme Clean Refraction) ── */
+    .glass-card{background:linear-gradient(135deg,rgba(255,255,255,0.9) 0%,rgba(241,245,249,0.75) 100%);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border:1px solid rgba(203,213,225,0.8);border-top:1px solid rgba(255,255,255,1);border-left:1px solid rgba(147,197,253,0.5);border-right:1px solid rgba(203,213,225,0.6);box-shadow:inset 0 1px 2px rgba(255,255,255,1),0 20px 48px -12px rgba(15,23,42,0.1);border-radius:20px;color:#0F172A;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);overflow:hidden;will-change:transform;transform:translateZ(0);position:relative}
+    .glass-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,0.8) 0%,rgba(219,234,254,0.3) 25%,transparent 60%);transform:translate3d(-30%,-30%,0) rotate(15deg);transition:transform 0.8s cubic-bezier(0.16,1,0.3,1);pointer-events:none;z-index:2}
+    .glass-card:hover{background:linear-gradient(135deg,#FFFFFF 0%,rgba(241,245,249,0.9) 100%);border-color:rgba(147,197,253,0.8);border-top-color:#FFFFFF;transform:translateY(-5px) scale(1.015);box-shadow:inset 0 1px 3px rgba(255,255,255,1),0 28px 56px -14px rgba(15,23,42,0.15)}
     .glass-card:hover::before{transform:translate3d(15%,15%,0) rotate(15deg)}
 
-    .coming-soon-card{width:100%;max-width:950px;padding:28px 40px;text-align:center;margin-top:28px}
-    .cs-eye{font-size:13px;font-weight:800;letter-spacing:0.25em;text-transform:uppercase;color:#FFD97A;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:10px}
-    .cs-eye .dot{width:6px;height:6px;border-radius:50%;background:#FFD97A;animation:pl 2s ease-in-out infinite;box-shadow:0 0 8px rgba(255,217,122,0.8)}
+    .coming-soon-card{width:100%;max-width:100%;padding:24px 32px;text-align:center;margin-top:20px}
+    .cs-eye{font-size:13px;font-weight:800;letter-spacing:0.25em;text-transform:uppercase;color:#2563EB;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:10px}
+    .cs-eye .dot{width:6px;height:6px;border-radius:50%;background:#2563EB;animation:pl 2s ease-in-out infinite;box-shadow:0 0 8px rgba(37,99,235,0.6)}
     @keyframes pl{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(0.8);opacity:0.5}}
-    .cs-title{font-size:clamp(18px,2.4vw,26px);font-weight:700;color:#FFFFFF;margin-bottom:10px;min-height:1.5em;text-shadow:0 2px 8px rgba(0,0,0,0.5)}
-    .typing-cursor{display:inline-block;width:3px;height:1.1em;background:#FFD97A;margin-left:3px;vertical-align:text-bottom;animation:bk 0.8s step-end infinite}
+    .cs-title{font-size:clamp(18px,2.4vw,26px);font-weight:700;color:#0F172A;margin-bottom:10px;min-height:1.5em;text-shadow:0 2px 6px rgba(15,23,42,0.08)}
+    .typing-cursor{display:inline-block;width:3px;height:1.1em;background:#2563EB;margin-left:3px;vertical-align:text-bottom;animation:bk 0.8s step-end infinite}
     @keyframes bk{0%,100%{opacity:1}50%{opacity:0}}
-    .cs-tagline{font-size:16px;font-style:italic;font-weight:400;color:#F1F5F9;border-left:3px solid #FFD97A;padding-left:16px;margin-top:14px;display:inline-block}
+    .cs-tagline{font-size:16px;font-style:italic;font-weight:400;color:#334155;border-left:3px solid #2563EB;padding-left:16px;margin-top:14px;display:inline-block}
 
-    /* ── Tags (Responsive Container - Guaranteed zero margin overflow) ── */
-    .tags-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin-top:24px;width:100%;max-width:1100px;box-sizing:border-box;padding:0 12px}
-    .float-tag{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#F1F5F9;padding:6px 14px;border-radius:24px;border:1px solid rgba(255,255,255,0.15);border-top:1px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:inset 0 1px 1px rgba(255,255,255,0.2),0 4px 14px rgba(0,0,0,0.4);white-space:nowrap;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);animation:tf var(--td,5s) ease-in-out infinite;animation-delay:var(--tl,0s);max-width:100%;box-sizing:border-box}
-    .float-tag:hover{color:#FFD97A;border-color:rgba(255,217,122,0.6);border-top-color:#FFD97A;background:rgba(255,217,122,0.18);transform:translateY(-4px) scale(1.06);box-shadow:inset 0 1px 2px rgba(255,255,255,0.4),0 8px 24px rgba(0,0,0,0.6)}
+    /* ── Tags (White Theme Liquid Glass Pills) ── */
+    .tags-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin-top:24px;width:100%;max-width:100%;box-sizing:border-box;padding:0 0 8px}
+    .float-tag{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#1E293B;padding:6px 14px;border-radius:24px;border:1px solid rgba(203,213,225,0.8);border-top:1px solid rgba(255,255,255,1);background:rgba(255,255,255,0.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:inset 0 1px 1px rgba(255,255,255,1),0 4px 12px rgba(15,23,42,0.05);white-space:nowrap;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);animation:tf var(--td,5s) ease-in-out infinite;animation-delay:var(--tl,0s);max-width:100%;box-sizing:border-box}
+    .float-tag:hover{color:#1D4ED8;border-color:rgba(59,130,246,0.6);border-top-color:#2563EB;background:rgba(219,234,254,0.9);transform:translateY(-4px) scale(1.06);box-shadow:inset 0 1px 2px rgba(255,255,255,1),0 8px 20px rgba(15,23,42,0.1)}
     
     /* ── TACTILE MOUSE CLICK INTERACTION FEEDBACK ── */
-    .glass-card:active{transform:translateY(-1px) scale(0.988)!important;box-shadow:inset 0 2px 6px rgba(0,0,0,0.6),0 16px 36px -10px rgba(0,0,0,0.9)!important;transition:transform 0.08s ease,box-shadow 0.08s ease!important}
-    .float-tag:active{transform:translateY(-1px) scale(0.93)!important;background:rgba(255,217,122,0.35)!important;border-color:#FFD97A!important;box-shadow:inset 0 2px 4px rgba(0,0,0,0.4),0 2px 8px rgba(0,0,0,0.6)!important;transition:transform 0.08s ease,background 0.08s ease!important}
-    .game-tab:active{transform:scale(0.95)!important;background:rgba(255,217,122,0.35)!important;transition:transform 0.08s ease!important}
-    .hud-btn-pause:active{transform:scale(0.92)!important;background:rgba(255,217,122,0.4)!important;box-shadow:inset 0 2px 4px rgba(0,0,0,0.5)!important}
-    .site-footer a:active{transform:scale(0.94)!important;color:#FFFFFF!important;text-shadow:0 0 16px #FFD97A!important}
+    .glass-card:active{transform:translateY(-1px) scale(0.988)!important;box-shadow:inset 0 2px 6px rgba(15,23,42,0.12),0 12px 28px -10px rgba(15,23,42,0.15)!important;transition:transform 0.08s ease,box-shadow 0.08s ease!important}
+    .float-tag:active{transform:translateY(-1px) scale(0.93)!important;background:rgba(191,219,254,1)!important;border-color:#2563EB!important;box-shadow:inset 0 2px 4px rgba(15,23,42,0.1),0 2px 8px rgba(15,23,42,0.1)!important;transition:transform 0.08s ease,background 0.08s ease!important}
+    .game-tab:active{transform:scale(0.95)!important;background:rgba(219,234,254,1)!important;transition:transform 0.08s ease!important}
+    .hud-btn-pause:active{transform:scale(0.92)!important;background:rgba(191,219,254,1)!important}
+    .site-footer a:active{transform:scale(0.94)!important;color:#1D4ED8!important}
     @keyframes tf{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 
-    /* ── ELEGANT ACADEMIC FOOTER ── */
+
+    /* ── ELEGANT ACADEMIC FOOTER (White Theme) ── */
     .site-footer {
       width: 100%;
-      max-width: 1150px;
-      margin-top: 52px;
-      padding: 26px 12px 14px;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      max-width: 100%;
+      margin-top: 0;
+      padding: 32px 0 20px;
+      border-top: 1px solid rgba(203, 213, 225, 0.8);
+      position: relative;
+      z-index: 30;
+    }
+    .footer-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 12px;
       font-size: 13px;
-      color: #CBD5E1;
+      color: #475569;
       font-weight: 500;
       letter-spacing: 0.02em;
-      position: relative;
-      z-index: 30;
+      padding-bottom: 10px;
     }
-    .footer-copyright {
-      font-weight: 500;
-    }
-    .footer-webmaster {
-      font-weight: 500;
-    }
+    .footer-copyright { font-weight: 500; }
+    .footer-webmaster { font-weight: 500; }
     .footer-webmaster a {
-      color: #FFD97A;
+      color: #2563EB;
       text-decoration: none;
       font-weight: 700;
       transition: opacity 0.2s ease, text-shadow 0.2s ease;
@@ -247,37 +283,208 @@
     }
     .footer-webmaster a:hover {
       opacity: 0.95;
-      text-shadow: 0 0 12px rgba(255, 217, 122, 0.6);
+      text-shadow: 0 0 12px rgba(37, 99, 235, 0.4);
       text-decoration: underline;
     }
+    .footer-iit {
+      font-size: 11px;
+      color: #94A3B8;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+
+
+    /* ══ SPACE FACT TICKER ══ */
+    .space-fact-section {
+      grid-area: fact;
+      width: 100%;
+      margin-top: 28px;
+    }
+    .space-fact-card {
+      background: linear-gradient(135deg, rgba(239,246,255,0.9), rgba(219,234,254,0.6));
+      border: 1px solid rgba(147,197,253,0.7);
+      border-top: 1px solid rgba(255,255,255,1);
+      border-radius: 16px;
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(37,99,235,0.08);
+      min-height: 76px;
+    }
+    .fact-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 2px 6px rgba(37,99,235,0.2));
+    }
+    .fact-content { flex: 1; min-width: 0; }
+    .fact-label {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #2563EB;
+      margin-bottom: 5px;
+    }
+    .fact-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0F172A;
+      line-height: 1.5;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fact-text.fading { opacity: 0; transform: translateY(4px); }
 
     /* ── Entrance ── */
     .ai{opacity:0;transform:translateY(18px);animation:ei 0.6s cubic-bezier(0,0,0.2,1) forwards}
     @keyframes ei{to{opacity:1;transform:translateY(0)}}
-    .d1{animation-delay:0.1s}.d2{animation-delay:0.25s}.d3{animation-delay:0.4s}.d4{animation-delay:0.6s}.d5{animation-delay:0.75s}
+    .d1{animation-delay:0.1s}.d2{animation-delay:0.25s}.d3{animation-delay:0.4s}.d4{animation-delay:0.6s}.d5{animation-delay:0.75s}.d6{animation-delay:0.9s}.d7{animation-delay:1.05s}
+    /* ── Audio Toggle ── */
+    .hud-btn-audio {
+      font-family: 'Poppins', system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: #1D4ED8;
+      background: rgba(219,234,254,0.8);
+      border: 1px solid rgba(59,130,246,0.4);
+      border-radius: 6px;
+      padding: 5px 12px;
+      cursor: pointer !important;
+      transition: all 0.2s ease;
+    }
+    .hud-btn-audio:hover { transform: scale(1.05); }
 
-    /* ── Responsive Tablet & iPad Layout (up to 1024px) ── */
-    @media(max-width:1024px){
-      .page-wrapper{padding:20px 14px;width:100%;box-sizing:border-box}
-      .game-tabs{width:94%;max-width:480px;justify-content:center}
-      .game-tab{flex:1;padding:10px 14px;font-size:11.5px;letter-spacing:0.04em}
-      .game-hud{padding:10px 14px;gap:8px;flex-wrap:wrap;justify-content:space-around}
-      .hud-item{font-size:12px}
-      .hud-item.lives span{font-size:15px}
-      .debris{display:none}
-      .mobile-controls{display:none;justify-content:center;gap:12px;margin-top:12px;width:100%;box-sizing:border-box}
-      .coming-soon-card{width:100%;padding:20px 16px;box-sizing:border-box}
-      .tags-row{gap:8px;padding:0 8px;width:100%;box-sizing:border-box}
-      .float-tag{font-size:10px;padding:5px 12px;letter-spacing:0.04em}
-      .site-footer{justify-content:center;text-align:center;margin-top:40px;padding:22px 12px}
+    /* ── Achievements Bar & Badges ── */
+    .achievement-container {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 12px;
+      flex-wrap: wrap;
     }
-    @media(max-width:480px){
-      .glitch-404{font-size:clamp(54px,18vw,120px)}
-      .game-tabs{width:100%;max-width:100%}
-      .game-tab{padding:8px 8px;font-size:10px;letter-spacing:0.02em}
-      .float-tag{font-size:9.5px;padding:4px 8px}
-      .hud-btn-pause{padding:4px 10px;font-size:10px}
+    .badge-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 14px;
+      background: rgba(241,245,249,0.5);
+      border: 1px dashed rgba(203,213,225,0.8);
+      font-size: 11px;
+      font-weight: 600;
+      color: #94A3B8;
+      cursor: not-allowed;
+      transition: all 0.3s ease;
+      filter: grayscale(100%);
     }
+    .badge-item:hover {
+      background: rgba(226,232,240,0.8);
+      color: #64748B;
+    }
+    .badge-item.unlocked {
+      opacity: 1;
+      color: #1D4ED8;
+      font-weight: 700;
+      background: linear-gradient(135deg, rgba(219,234,254,0.95), rgba(191,219,254,0.85));
+      border: 1px solid #3B82F6;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.25), inset 0 1px 2px rgba(255,255,255,0.8);
+      cursor: default;
+      filter: grayscale(0%);
+      transform: translateY(-2px);
+    }
+    .badge-icon { font-size: 14px; }
+    .prog-text { font-size: 10px; color: #64748B; margin-left: 2px; font-weight: 500; }
+    .unlocked .prog-text { display: none; }
+
+    /* ── Toast Notification ── */
+    .toast-notify {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      z-index: 200;
+      background: #0F172A;
+      color: #FFFFFF;
+      border: 1px solid #3B82F6;
+      border-radius: 14px;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .toast-notify.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       📱 MOBILE & TABLET RESPONSIVE TUNING
+    ══════════════════════════════════════════════════════════ */
+
+    /* ══════════════════════════════════════════════════════════
+       📱 TABLET & MOBILE RESPONSIVE DESIGN (Precise Breakpoints)
+    ══════════════════════════════════════════════════════════ */
+
+    /* iPad Portrait / Tablets (849px and below) */
+    @media (max-width: 849px) {
+      .page-wrapper { width: 95%; padding: 20px 2.5% 32px; }
+      .error-section { text-align: center; margin-bottom: 2px; }
+      .glitch-404 { font-size: clamp(65px, 13vw, 110px); }
+      .phrase-container { text-align: center; max-width: 680px; margin: 0 auto 16px; }
+      .phrase-main { font-size: clamp(16px, 3.2vw, 22px); }
+      .phrase-sub { font-size: clamp(12px, 2.2vw, 15px); }
+      .coming-soon-card { text-align: center; max-width: 680px; margin: 16px auto 0; padding: 20px 24px; }
+      .cs-eye { justify-content: center; }
+      .game-section { width: 100%; max-width: 760px; margin: 12px auto 0; padding: 0; }
+      .game-hud { padding: 10px 18px; flex-wrap: wrap; justify-content: space-around; gap: 8px 16px; }
+      .hud-item { font-size: 13px; width: auto; margin-bottom: 0; }
+      .hud-btn-pause, .hud-btn-audio { padding: 4px 12px; font-size: 11px; }
+    }
+
+    /* Small Tablets & Phones Landscape (max 640px) */
+    @media (max-width: 640px) {
+      .page-wrapper { padding-top: 14px; width: 98%; }
+      .glitch-404 { font-size: clamp(55px, 16vw, 95px); }
+      .game-tab { padding: 8px 14px; font-size: 11px; }
+      .game-hud { padding: 8px 12px; gap: 6px 10px; }
+      .hud-item { font-size: 12px; }
+      .hud-item.lives span { font-size: 15px; }
+      .mobile-controls { display: flex; }
+      .game-hint { display: none; }
+      .coming-soon-card { padding: 16px; }
+      .cs-title { font-size: 18px; }
+      .tags-row { padding: 0 4px; gap: 6px; }
+      .float-tag { font-size: 10px; padding: 4px 10px; }
+      .site-footer { flex-direction: column; text-align: center; font-size: 11px; gap: 8px; }
+    }
+
+    /* Compact Phones (max 420px) */
+    @media (max-width: 420px) {
+      .glitch-404 { font-size: 20vw; }
+      .phrase-main { font-size: 15px; }
+      .phrase-sub { font-size: 12px; }
+      .game-tabs { flex-direction: row; width: 100%; justify-content: center; }
+      .game-tab { flex: 1; padding: 7px 8px; font-size: 10px; text-align: center; }
+      .mobile-btn { font-size: 11px; padding: 10px 0; }
+      .badge-item { font-size: 10px; padding: 3px 7px; }
+    }
+
+    /* Enable mobile touch controls for all touch devices */
+    @media (hover: none) and (pointer: coarse) {
+      .mobile-controls { display: flex; }
+      .game-hint { display: none; }
+    }
+
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
   </style>
 </head>
@@ -311,16 +518,26 @@
       <button class="game-tab" data-game="blaster" id="tab-blaster">💥 Asteroid Defense</button>
     </div>
     <div class="game-container" id="game-container-box">
-      <canvas id="game-canvas" width="760" height="380"></canvas>
+      <canvas id="game-canvas" width="800" height="440"></canvas>
       <div class="game-hud">
         <div class="hud-item">Score: <span id="hud-score">0</span></div>
         <div class="hud-item lives">Lives: <span id="hud-lives">♥♥♥♥♥</span></div>
         <button class="hud-btn-pause" id="btn-game-pause" title="Pause / Resume Game (P)">⏸ PAUSE</button>
+        <button class="hud-btn-audio" id="btn-audio-toggle" title="Toggle Web Audio SFX">🔊 SFX ON</button>
         <div class="hud-item high">Best: <span id="hud-high">0</span></div>
       </div>
     </div>
     <div class="game-hint" id="game-hint"><kbd>P</kbd> / <kbd>Space</kbd> / <kbd>Tap</kbd> to Play & Jump · <kbd>↓</kbd> to Duck</div>
     
+    <!-- Achievement Badges Bar -->
+    <div class="achievement-container" id="achievement-container">
+      <div class="badge-item" id="badge-sat" title="Score 750+ in Asteroid Defense"><span class="badge-icon">🔒</span><span class="badge-title">Satellite Savior</span></div>
+      <div class="badge-item" id="badge-horizon" title="Score 1,000+ in Cosmonaut Run"><span class="badge-icon">🔒</span><span class="badge-title">Event Horizon</span></div>
+      <div class="badge-item" id="badge-ska" title="Collect 25 Research Stars"><span class="badge-icon">🔒</span><span class="badge-title">SKA Operator <span class="prog-text" id="prog-ska">(0/25)</span></span></div>
+      <div class="badge-item" id="badge-untouchable" title="Score 1,000 in Asteroid Defense with No Damage"><span class="badge-icon">🔒</span><span class="badge-title">Untouchable</span></div>
+      <div class="badge-item" id="badge-warp" title="Survive until Maximum Speed in Cosmonaut Run"><span class="badge-icon">🔒</span><span class="badge-title">Warp Speed</span></div>
+    </div>
+
     <!-- Touch On-Screen Game Pad for Mobile Users -->
     <div class="mobile-controls" id="mobile-controls">
       <button class="mobile-btn" id="btn-mobile-jump">⬆ JUMP</button>
@@ -334,23 +551,35 @@
     <div class="cs-tagline">"Exploring the Universe, Engineering the Future"</div>
   </div>
 
+  <!-- Toast Notification -->
+  <div class="toast-notify" id="toast-notify"><span class="toast-icon">🏅</span> <span id="toast-text">Achievement Unlocked!</span></div>
+
   <div class="tags-row ai d5">
     <span class="float-tag" style="--td:5s;--tl:0s">Radio Astronomy</span>
     <span class="float-tag" style="--td:6s;--tl:0.5s">Heliophysics</span>
-    <span class="float-tag" style="--td:4.5s;--tl:1s">CubeSat</span>
     <span class="float-tag" style="--td:5.5s;--tl:0.3s">Space Engineering</span>
     <span class="float-tag" style="--td:7s;--tl:0.8s">SKA-India</span>
-    <span class="float-tag" style="--td:5s;--tl:1.2s">Remote Sensing</span>
-    <span class="float-tag" style="--td:6.5s;--tl:0.6s">Gravitational Physics</span>
+  </div>
+
+
+
+  <!-- ══ SPACE FACT TICKER ══ -->
+  <div class="space-fact-section ai d7">
+    <div class="space-fact-card">
+      <span class="fact-icon" id="fact-icon">🌌</span>
+      <div class="fact-content">
+        <div class="fact-label">⚡ Deep Space Fact</div>
+        <div class="fact-text" id="fact-text">The observable universe contains an estimated 2 trillion galaxies.</div>
+      </div>
+    </div>
   </div>
 
   <!-- Professional Academic Footer -->
-  <footer class="site-footer ai d5">
-    <div class="footer-copyright">
-      © 2026 Department of Astronomy, Astrophysics & Space Engineering (DAASE), IIT Indore. All Rights Reserved.
-    </div>
-    <div class="footer-webmaster">
-      Webmaster: <a href="https://www.linkedin.com/in/aninda-pratim-roy" target="_blank" rel="noopener noreferrer">Aninda Pratim Roy ↗</a>
+  <footer class="site-footer ai d7">
+    <div class="footer-inner">
+      <div class="footer-copyright">&copy; 2026 DAASE, IIT Indore. All Rights Reserved.</div>
+      <div class="footer-iit">IIT Indore &middot; Simrol Campus &middot; Madhya Pradesh, India</div>
+      <div class="footer-webmaster">Webmaster: <a href="https://www.linkedin.com/in/aninda-pratim-roy" target="_blank" rel="noopener noreferrer">Aninda Pratim Roy &#8599;</a></div>
     </div>
   </footer>
 </div>
@@ -359,24 +588,147 @@
 (function(){
 'use strict';
 
+/* ── WEB AUDIO SYNTHESIZER ENGINE ── */
+let audioCtx = null;
+let sfxMuted = false;
+const btnAudioToggle = document.getElementById('btn-audio-toggle');
+
+const getAudioCtx = () => {
+  if (!audioCtx) {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (AudioContextClass) audioCtx = new AudioContextClass();
+  }
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  return audioCtx;
+};
+
+const playSfx = (type) => {
+  if (sfxMuted) return;
+  try {
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    
+    if (type === 'jump') {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(180, now);
+      osc.frequency.exponentialRampToValueAtTime(520, now + 0.12);
+      gain.gain.setValueAtTime(0.15, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.12);
+    } else if (type === 'star') {
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc1.type = 'triangle';
+      osc2.type = 'sine';
+      osc1.frequency.setValueAtTime(523.25, now);
+      osc2.frequency.setValueAtTime(659.25, now + 0.06);
+      gain.gain.setValueAtTime(0.12, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.18);
+      osc1.connect(gain);
+      osc2.connect(gain);
+      gain.connect(ctx.destination);
+      osc1.start(now);
+      osc1.stop(now + 0.18);
+      osc2.start(now + 0.06);
+      osc2.stop(now + 0.18);
+    } else if (type === 'blast') {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(140, now);
+      osc.frequency.exponentialRampToValueAtTime(40, now + 0.15);
+      gain.gain.setValueAtTime(0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.15);
+    } else if (type === 'badge') {
+      [523.25, 659.25, 783.99].forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+        gain.gain.setValueAtTime(0.15, now + idx * 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.08 + 0.15);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + idx * 0.08);
+        osc.stop(now + idx * 0.08 + 0.15);
+      });
+    }
+  } catch(e){}
+};
+
+if (btnAudioToggle) {
+  btnAudioToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    sfxMuted = !sfxMuted;
+    btnAudioToggle.textContent = sfxMuted ? '🔇 Muted' : '🔊 SFX ON';
+    if (!sfxMuted) playSfx('star');
+  });
+}
+
+/* ── ACHIEVEMENT BADGES & TOAST ENGINE ── */
+const unlockedBadges = JSON.parse(localStorage.getItem('daase404_badges') || '{}');
+
+const badgeEmojis = { sat: '🛰️', horizon: '🌌', ska: '📡', untouchable: '🛡️', warp: '🚀' };
+
+const checkBadgeUI = () => {
+  Object.keys(badgeEmojis).forEach(id => {
+    const el = document.getElementById('badge-' + id);
+    if(el && unlockedBadges[id]) {
+      el.classList.add('unlocked');
+      const icon = el.querySelector('.badge-icon');
+      if(icon) icon.textContent = badgeEmojis[id];
+    }
+  });
+};
+checkBadgeUI();
+
+const unlockBadge = (id, title) => {
+  if (unlockedBadges[id]) return;
+  unlockedBadges[id] = true;
+  localStorage.setItem('daase404_badges', JSON.stringify(unlockedBadges));
+  checkBadgeUI();
+  
+  const toast = document.getElementById('toast-notify');
+  const toastText = document.getElementById('toast-text');
+  if (toast && toastText) {
+    toastText.textContent = `Achievement Unlocked: ${title}!`;
+    toast.classList.add('show');
+    playSfx('badge');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+  }
+};
+
 /* ══════════════════════════════════════════
    HIGH-PERFORMANCE DEEP SPACE STARFIELD (NO FLARE CONES, NO AURORAS)
 ══════════════════════════════════════════ */
 const bgC=document.getElementById('bg-canvas'),bgX=bgC.getContext('2d');
 let mx={x:-9999,y:-9999},strs=[],shts=[],nebs=[],rips=[],trails=[],bT=0;
 
-const SC=['rgba(255,255,255,','rgba(215,230,255,','rgba(180,210,255,','rgba(96,165,250,','rgba(167,139,250,','rgba(255,235,190,','rgba(255,200,160,'];
-const NP=[[29,78,216],[139,92,246],[16,185,129],[236,72,153]];
+const SC=['rgba(30,58,138,','rgba(37,99,235,','rgba(2,132,199,','rgba(124,58,237,','rgba(15,23,42,','rgba(71,85,105,'];
+const NP=[[147,197,253],[196,181,253],[167,243,208],[249,168,212]];
 
 let satTransit={x:-100,y:-100,vx:0,vy:0,active:false};
 
 const mS=(w,h)=>{
-  const b=Math.random()<0.02; // 2% brightest primary stars
+  const b=Math.random()<0.03; // 3% brightest primary stars
   return {
     x:Math.random()*w, y:Math.random()*h,
     s:b? Math.random()*0.8+1.4 : Math.random()*0.9+0.4,
     c:SC[Math.random()*SC.length|0],
-    o:b? Math.random()*0.3+0.65 : Math.random()*0.4+0.15,
+    o:b? Math.random()*0.35+0.65 : Math.random()*0.4+0.25,
     ts:b? Math.random()*0.008+0.003 : Math.random()*0.025+0.008,
     to:Math.random()*Math.PI*2,
     dx:(Math.random()-0.5)*0.06, dy:(Math.random()-0.5)*0.03+0.01,
@@ -391,7 +743,7 @@ const initBg=()=>{
   bgX.setTransform(d,0,0,d,0,0);
   const W=innerWidth,H=innerHeight;
   strs=Array.from({length:Math.min(280, Math.floor(W*H/3200))},()=>mS(W,H));
-  nebs=Array.from({length:6},(_,i)=>({x:Math.random()*W,y:Math.random()*H,r:160+Math.random()*280,ci:i%4,cp:Math.random()*Math.PI*2,cs:0.001+Math.random()*0.0012,dx:(Math.random()-0.5)*0.018,dy:(Math.random()-0.5)*0.012,ps:0.002+Math.random()*0.003,po:Math.random()*Math.PI*2,ba:0.015+Math.random()*0.015}));
+  nebs=Array.from({length:6},(_,i)=>({x:Math.random()*W,y:Math.random()*H,r:160+Math.random()*280,ci:i%4,cp:Math.random()*Math.PI*2,cs:0.001+Math.random()*0.0012,dx:(Math.random()-0.5)*0.018,dy:(Math.random()-0.5)*0.012,ps:0.002+Math.random()*0.003,po:Math.random()*Math.PI*2,ba:0.03+Math.random()*0.03}));
 };
 initBg();
 let bRT;addEventListener('resize',()=>{clearTimeout(bRT);bRT=setTimeout(initBg,200)});
@@ -422,16 +774,14 @@ const bgAnim=()=>{
   const W=innerWidth,H=innerHeight;
   bT++;bgX.clearRect(0,0,W,H);
 
-  // 1. Milky Way Galactic Dust Stream
+  // 1. Celestial Daybreak Sky Gradient
   const mwGrad=bgX.createLinearGradient(0,0,W,H);
-  mwGrad.addColorStop(0,'rgba(15,23,42,0.4)');
-  mwGrad.addColorStop(0.35,'rgba(30,58,138,0.06)');
-  mwGrad.addColorStop(0.5,'rgba(88,28,135,0.05)');
-  mwGrad.addColorStop(0.65,'rgba(15,23,42,0.04)');
-  mwGrad.addColorStop(1,'rgba(2,6,23,0.4)');
+  mwGrad.addColorStop(0,'#F8FAFC');
+  mwGrad.addColorStop(0.5,'#F1F5F9');
+  mwGrad.addColorStop(1,'#E2E8F0');
   bgX.fillStyle=mwGrad;bgX.fillRect(0,0,W,H);
 
-  // 2. Cosmic Nebulas
+  // 2. Soft Cosmic Nebulas
   for(const n of nebs){
     n.x+=n.dx;n.y+=n.dy;n.cp+=n.cs;
     if(n.x<-n.r)n.x=W+n.r;if(n.x>W+n.r)n.x=-n.r;
@@ -447,7 +797,7 @@ const bgAnim=()=>{
   // 3. Subtle Interactive Mouse Aura
   if(mx.x>0){
     const ag=bgX.createRadialGradient(mx.x,mx.y,0,mx.x,mx.y,220);
-    ag.addColorStop(0,'rgba(255,217,122,0.05)');ag.addColorStop(0.5,'rgba(96,165,250,0.015)');ag.addColorStop(1,'transparent');
+    ag.addColorStop(0,'rgba(37,99,235,0.06)');ag.addColorStop(0.5,'rgba(2,132,199,0.02)');ag.addColorStop(1,'transparent');
     bgX.fillStyle=ag;bgX.beginPath();bgX.arc(mx.x,mx.y,220,0,Math.PI*2);bgX.fill();
   }
 
@@ -456,7 +806,7 @@ const bgAnim=()=>{
     const t=trails[i];
     t.y-=0.2;t.alpha-=t.decay;
     if(t.alpha<=0){trails.splice(i,1);continue}
-    bgX.fillStyle=`rgba(255,217,122,${t.alpha.toFixed(2)})`;
+    bgX.fillStyle=`rgba(37,99,235,${t.alpha.toFixed(2)})`;
     bgX.beginPath();bgX.arc(t.x,t.y,t.r*t.alpha,0,Math.PI*2);bgX.fill();
   }
 
@@ -554,13 +904,13 @@ const hudHigh=document.getElementById('hud-high');
 const hintEl=document.getElementById('game-hint');
 const btnPause=document.getElementById('btn-game-pause');
 
-let GW, GH, activeGame='runner', isPaused=false;
+const GW = 800, GH = 440;
+let activeGame='runner', isPaused=false;
 
 const resizeGame=()=>{
-  const r=gc.parentElement.clientWidth;GW=r;GH=Math.min(380,Math.max(240,r*0.48));
-  const dpr=Math.min(devicePixelRatio||1, 1.5);
-  gc.width=GW*dpr;gc.height=GH*dpr;
-  gc.style.height=GH+'px';
+  const dpr=Math.min(window.devicePixelRatio||1, 2);
+  gc.width=GW*dpr;
+  gc.height=GH*dpr;
   gx.setTransform(dpr,0,0,dpr,0,0);
 };
 resizeGame();
@@ -596,31 +946,52 @@ const drawAstronaut=(x,y,w,h,frame,duck,jump)=>{
   const sc=duck?0.55:1, ah=h*sc, ay=y+h-ah;
   gx.save();gx.translate((x+w/2)|0,(ay+ah/2)|0);
   if(jump)gx.rotate(-0.1);
-  gx.fillStyle='#64748B';gx.fillRect(-w/2-4,-ah*0.25,4,ah*0.35);
+  
+  // Jetpack Oxygen Tank
+  gx.fillStyle='#334155';gx.strokeStyle='#0F172A';gx.lineWidth=1.2;
+  gx.beginPath();gx.roundRect(-w/2-5,-ah*0.25,5,ah*0.4,2);gx.fill();gx.stroke();
+  
   if(jump){
-    gx.fillStyle='#ffd97a';gx.beginPath();
-    gx.moveTo(-w/2-4,ah*0.1);gx.lineTo(-w/2-2,ah*0.1+10);gx.lineTo(-w/2-7,ah*0.1);gx.fill();
+    gx.fillStyle='#F59E0B';gx.beginPath();
+    gx.moveTo(-w/2-5,ah*0.15);gx.lineTo(-w/2-2,ah*0.15+12);gx.lineTo(-w/2-8,ah*0.15);gx.fill();
   }
-  gx.fillStyle='#E2E8F0';gx.beginPath();gx.roundRect(-w/2,-ah*0.3,w,ah*0.5,3);gx.fill();
-  gx.fillStyle='#ffd97a';gx.fillRect(-3,-ah*0.15,6,4);
-  gx.fillStyle='#94A3B8';gx.fillRect(-w/2,ah*0.15,w,2);
+  
+  // Bold Suit Body
+  gx.fillStyle='#2563EB';gx.strokeStyle='#0F172A';gx.lineWidth=1.5;
+  gx.beginPath();gx.roundRect(-w/2,-ah*0.3,w,ah*0.52,4);gx.fill();gx.stroke();
+  
+  // Chest Controls & Stripe
+  gx.fillStyle='#F59E0B';gx.fillRect(-4,-ah*0.15,8,5);
+  gx.fillStyle='#FFFFFF';gx.fillRect(-w/2+2,ah*0.15,w-4,2);
+  
+  // Arms
+  gx.fillStyle='#1D4ED8';
   if(!duck){
-    gx.fillStyle='#E2E8F0';
-    gx.save();gx.translate(-w/4,ah*0.17);gx.rotate(Math.sin(frame*0.4)*0.3);gx.fillRect(-2.5,0,5,ah*0.25);gx.restore();
-    gx.save();gx.translate(w/4,ah*0.17);gx.rotate(-Math.sin(frame*0.4)*0.3);gx.fillRect(-2.5,0,5,ah*0.25);gx.restore();
+    gx.save();gx.translate(-w/4,ah*0.17);gx.rotate(Math.sin(frame*0.4)*0.3);gx.fillRect(-3,0,6,ah*0.26);gx.restore();
+    gx.save();gx.translate(w/4,ah*0.17);gx.rotate(-Math.sin(frame*0.4)*0.3);gx.fillRect(-3,0,6,ah*0.26);gx.restore();
   } else {
-    gx.fillStyle='#E2E8F0';gx.fillRect(-w/2,ah*0.17,w,4);
+    gx.fillRect(-w/2,ah*0.17,w,5);
   }
-  gx.fillStyle='#F1F5F9';gx.beginPath();gx.arc(0,-ah*0.3-1,w*0.45,0,Math.PI*2);gx.fill();
-  gx.fillStyle='#0F172A';gx.beginPath();gx.arc(2,-ah*0.33,w*0.28,0,Math.PI*2);gx.fill();
-  gx.fillStyle='rgba(96,165,250,0.6)';gx.beginPath();gx.arc(4,-ah*0.38,2.5,0,Math.PI*2);gx.fill();
+  
+  // Helmet (Brilliant White with Dark Outline)
+  gx.fillStyle='#FFFFFF';gx.strokeStyle='#0F172A';gx.lineWidth=1.5;
+  gx.beginPath();gx.arc(0,-ah*0.3-2,w*0.46,0,Math.PI*2);gx.fill();gx.stroke();
+  
+  // Helmet Visor (Electric Gold & Cyan Reflective Visor)
+  gx.fillStyle='#0284C7';gx.strokeStyle='#0F172A';gx.lineWidth=1;
+  gx.beginPath();gx.arc(2,-ah*0.33,w*0.3,0,Math.PI*2);gx.fill();gx.stroke();
+  
+  // Visor Specular Reflection
+  gx.fillStyle='#FFFFFF';gx.beginPath();gx.arc(4,-ah*0.38,3,0,Math.PI*2);gx.fill();
+  
   gx.restore();
 };
 
 const drawObstacle=(o)=>{
   gx.save();gx.translate((o.x+o.w/2)|0,(o.y+o.h/2)|0);gx.rotate(o.rot||0);
   if(o.type==='asteroid'){
-    gx.fillStyle='#6B7280';gx.beginPath();
+    gx.fillStyle='#334155';gx.strokeStyle='#0F172A';gx.lineWidth=1.5;
+    gx.beginPath();
     if(!o.verts){
       o.verts=[];
       for(let i=0;i<8;i++){
@@ -631,29 +1002,35 @@ const drawObstacle=(o)=>{
     for(let i=0;i<o.verts.length;i++){
       i===0?gx.moveTo(o.verts[i].x,o.verts[i].y):gx.lineTo(o.verts[i].x,o.verts[i].y);
     }
-    gx.closePath();gx.fill();
+    gx.closePath();gx.fill();gx.stroke();
   } else if(o.type==='satellite'){
-    gx.fillStyle='#94A3B8';gx.fillRect(-o.w*0.15,-o.h*0.4,o.w*0.3,o.h*0.8);
-    gx.fillStyle='#3B82F6';gx.fillRect(-o.w/2,-o.h*0.15,o.w*0.35,o.h*0.3);gx.fillRect(o.w*0.15,-o.h*0.15,o.w*0.35,o.h*0.3);
+    gx.fillStyle='#1E293B';gx.strokeStyle='#0F172A';gx.lineWidth=1.2;
+    gx.fillRect(-o.w*0.15,-o.h*0.4,o.w*0.3,o.h*0.8);gx.strokeRect(-o.w*0.15,-o.h*0.4,o.w*0.3,o.h*0.8);
+    gx.fillStyle='#2563EB';gx.fillRect(-o.w/2,-o.h*0.15,o.w*0.35,o.h*0.3);gx.fillRect(o.w*0.15,-o.h*0.15,o.w*0.35,o.h*0.3);
   } else if(o.type==='blackhole'){
-    gx.fillStyle='rgba(139,92,246,0.35)';gx.beginPath();gx.arc(0,0,o.w/2+2,0,Math.PI*2);gx.fill();
-    gx.fillStyle='#020617';gx.beginPath();gx.arc(0,0,o.w/2*0.7,0,Math.PI*2);gx.fill();
+    gx.fillStyle='rgba(124,58,237,0.45)';gx.beginPath();gx.arc(0,0,o.w/2+4,0,Math.PI*2);gx.fill();
+    gx.fillStyle='#0F172A';gx.beginPath();gx.arc(0,0,o.w/2*0.7,0,Math.PI*2);gx.fill();
   }
   gx.restore();
 };
 
 const drawStar=(s)=>{
   gx.save();gx.translate(s.x|0,s.y|0);gx.rotate(s.rot);
-  gx.fillStyle='#ffd97a';
+  gx.fillStyle='#F59E0B';gx.strokeStyle='#B45309';gx.lineWidth=1;
   gx.beginPath();for(let i=0;i<5;i++){const a=Math.PI*2/5*i-Math.PI/2;gx.lineTo(Math.cos(a)*s.r,Math.sin(a)*s.r);const a2=a+Math.PI/5;gx.lineTo(Math.cos(a2)*s.r*0.4,Math.sin(a2)*s.r*0.4)}
-  gx.closePath();gx.fill();gx.restore();
+  gx.closePath();gx.fill();gx.stroke();gx.restore();
 };
 
 const rInit=()=>{
   R.groundY=GH-45;R.p.x=GW*0.12;R.p.y=R.groundY-R.p.h;R.p.vy=0;
   R.p.jumping=false;R.p.ducking=false;R.p.lives=5;R.p.inv=0;R.p.runFrame=0;
   R.obs=[];R.stars=[];R.speed=3.2;R.score=0;R.frame=0;R.spawnT=0;R.starT=0;particles=[];
-  R.state='idle';isPaused=false;btnPause.textContent='⏸ PAUSE';btnPause.style.background='rgba(255,217,122,0.15)';
+  // Persist total star count across sessions
+  R.starCount=parseInt(localStorage.getItem('daase404_starCount')||'0');
+  // Refresh SKA progress display
+  const progSka=document.getElementById('prog-ska');
+  if(progSka&&!unlockedBadges.ska) progSka.textContent=`(${R.starCount}/25)`;
+  R.state='idle';isPaused=false;btnPause.textContent='⏸ PAUSE';btnPause.style.background='rgba(219,234,254,0.8)';
 };
 
 const rSpawnObs=()=>{
@@ -689,7 +1066,7 @@ const rUpdate=()=>{
     if(o.x+o.w<-20){R.obs.splice(i,1);continue}
     const ph=p.ducking?p.h*0.55:p.h;const py=p.ducking?R.groundY-ph:p.y;
     if(p.inv<=0&&rCollide({x:p.x+6,y:py+6,w:p.w-12,h:ph-12},o)){
-      addP(p.x+p.w/2,py+ph/2,'#EF4444',12,3,0.8);
+      addP(p.x+p.w/2,py+ph/2,'#DC2626',12,3,0.8);
       p.lives--;p.inv=90;
       if(p.lives<=0){R.state='gameover';if(R.score>R.high){R.high=R.score;localStorage.setItem('daase404_runHigh',R.high)}}
       R.obs.splice(i,1);
@@ -701,17 +1078,31 @@ const rUpdate=()=>{
     if(s.x+s.r<-10){R.stars.splice(i,1);continue}
     const ph=R.p.ducking?R.p.h*0.55:R.p.h;const py=R.p.ducking?R.groundY-ph:R.p.y;
     if(rCollide({x:R.p.x-5,y:py-5,w:R.p.w+10,h:ph+10},{x:s.x-s.r,y:s.y-s.r,w:s.r*2,h:s.r*2})){
-      addP(s.x,s.y,'#ffd97a',10,3,0.8);R.score+=100;R.stars.splice(i,1);
+      addP(s.x,s.y,'#F59E0B',10,3,0.8);
+      R.score+=100;
+      R.starCount=(R.starCount||0)+1;
+      localStorage.setItem('daase404_starCount', R.starCount); // persist across games
+      R.stars.splice(i,1);
+      playSfx('star');
+      // Update SKA star progress counter
+      const progSka = document.getElementById('prog-ska');
+      if(progSka && !unlockedBadges.ska) progSka.textContent = `(${R.starCount}/25)`;
+      if(R.starCount>=25) unlockBadge('ska','SKA Operator');
     }
   }
+
+  // Event Horizon: 1000+ score
+  if(R.score>=1000) unlockBadge('horizon','Event Horizon');
+  // Warp Speed: survive until speed hits max (9.0+)
+  if(R.speed>=9.0) unlockBadge('warp','Warp Speed');
 };
 
 const rDraw=()=>{
-  const sg=gx.createLinearGradient(0,0,0,GH);sg.addColorStop(0,'#020617');sg.addColorStop(1,'#0a1628');gx.fillStyle=sg;gx.fillRect(0,0,GW,GH);
+  const sg=gx.createLinearGradient(0,0,0,GH);sg.addColorStop(0,'#F8FAFC');sg.addColorStop(1,'#EFF6FF');gx.fillStyle=sg;gx.fillRect(0,0,GW,GH);
 
-  gx.fillStyle='#0f172a';gx.fillRect(0,R.groundY,GW,GH-R.groundY);
-  gx.strokeStyle='rgba(96,165,250,0.2)';gx.lineWidth=1;gx.beginPath();gx.moveTo(0,R.groundY);gx.lineTo(GW,R.groundY);gx.stroke();
-  gx.strokeStyle='rgba(96,165,250,0.05)';
+  gx.fillStyle='#DBEAFE';gx.fillRect(0,R.groundY,GW,GH-R.groundY);
+  gx.strokeStyle='#1E3A8A';gx.lineWidth=1.5;gx.beginPath();gx.moveTo(0,R.groundY);gx.lineTo(GW,R.groundY);gx.stroke();
+  gx.strokeStyle='rgba(37,99,235,0.12)';
   for(let i=0;i<12;i++){const lx=(i*65-R.frame*R.speed*0.5%65+65)%GW-30;gx.beginPath();gx.moveTo(lx,R.groundY);gx.lineTo(lx-18,GH);gx.stroke()}
 
   for(const s of R.stars)drawStar(s);
@@ -724,34 +1115,34 @@ const rDraw=()=>{
 
   updateP();
 
-  gx.fillStyle='rgba(255,217,122,0.4)';gx.font='bold 10px Orbitron';gx.textAlign='right';
+  gx.fillStyle='#0F172A';gx.font='bold 11px Orbitron';gx.textAlign='right';
   gx.fillText(`SPEED ${R.speed.toFixed(1)}`,GW-12,18);
 
   if(isPaused){
-    gx.fillStyle='rgba(2,6,23,0.85)';gx.fillRect(0,0,GW,GH);
-    gx.fillStyle='#FFD97A';gx.font='bold 22px Poppins';gx.textAlign='center';
+    gx.fillStyle='rgba(255,255,255,0.95)';gx.fillRect(0,0,GW,GH);
+    gx.fillStyle='#0F172A';gx.font='bold 22px Poppins';gx.textAlign='center';
     gx.fillText('⏸ GAME PAUSED',GW/2,GH/2-10);
-    gx.fillStyle='#CBD5E1';gx.font='13px Poppins';
+    gx.fillStyle='#334155';gx.font='13px Poppins';
     gx.fillText('Press P or click Resume to continue',GW/2,GH/2+18);
   }
 
   if(R.state==='idle'){
-    gx.fillStyle='rgba(0,0,0,0.5)';gx.fillRect(0,0,GW,GH);
-    gx.fillStyle='#F0F4FF';gx.font='bold 24px Poppins';gx.textAlign='center';
+    gx.fillStyle='rgba(255,255,255,0.92)';gx.fillRect(0,0,GW,GH);
+    gx.fillStyle='#0F172A';gx.font='bold 24px Poppins';gx.textAlign='center';
     gx.fillText('COSMONAUT RUN',GW/2,GH/2-25);
-    gx.fillStyle='#94A3B8';gx.font='14px Poppins';
+    gx.fillStyle='#334155';gx.font='14px Poppins';
     gx.fillText('Click or Tap screen to start',GW/2,GH/2+10);
-    gx.fillStyle='#ffd97a';gx.font='bold 12px Orbitron';
+    gx.fillStyle='#1D4ED8';gx.font='bold 13px Orbitron';
     gx.fillText(`HIGH SCORE: ${R.high}`,GW/2,GH/2+42);
   }
   if(R.state==='gameover'){
-    gx.fillStyle='rgba(0,0,0,0.6)';gx.fillRect(0,0,GW,GH);
-    gx.fillStyle='#EF4444';gx.font='bold 28px Orbitron';gx.textAlign='center';
+    gx.fillStyle='rgba(255,255,255,0.95)';gx.fillRect(0,0,GW,GH);
+    gx.fillStyle='#DC2626';gx.font='bold 28px Orbitron';gx.textAlign='center';
     gx.fillText('GAME OVER',GW/2,GH/2-30);
-    gx.fillStyle='#F0F4FF';gx.font='bold 16px Orbitron';
+    gx.fillStyle='#0F172A';gx.font='bold 16px Orbitron';
     gx.fillText(`SCORE: ${R.score}`,GW/2,GH/2+5);
-    if(R.score>=R.high&&R.score>0){gx.fillStyle='#ffd97a';gx.font='bold 13px Poppins';gx.fillText('🌟 NEW HIGH SCORE! 🌟',GW/2,GH/2+32)}
-    gx.fillStyle='#94A3B8';gx.font='12px Poppins';
+    if(R.score>=R.high&&R.score>0){gx.fillStyle='#1D4ED8';gx.font='bold 13px Poppins';gx.fillText('🌟 NEW HIGH SCORE! 🌟',GW/2,GH/2+32)}
+    gx.fillStyle='#334155';gx.font='12px Poppins';
     gx.fillText('Tap to play again',GW/2,GH/2+60);
   }
 };
@@ -762,7 +1153,7 @@ const B={
   frame:0,lives:7,spawnT:0,sat:{x:0,y:0,r:16,rot:0},rocks:[],crosshair:{x:0,y:0}
 };
 
-const bInit=()=>{B.sat.x=GW/2;B.sat.y=GH/2;B.rocks=[];B.score=0;B.lives=7;B.frame=0;B.spawnT=0;particles=[];B.state='idle';isPaused=false;btnPause.textContent='⏸ PAUSE';};
+const bInit=()=>{B.sat.x=GW/2;B.sat.y=GH/2;B.rocks=[];B.score=0;B.lives=7;B.frame=0;B.spawnT=0;particles=[];B.state='idle';isPaused=false;btnPause.textContent='⏸ PAUSE';btnPause.style.background='rgba(219,234,254,0.8)';};
 
 const bSpawn=()=>{
   const edge=Math.random()*4|0;let x,y;
@@ -787,7 +1178,7 @@ const bUpdate=()=>{
     const r=B.rocks[i];r.x+=r.vx;r.y+=r.vy;r.rot+=r.rotS;
     const dist=Math.hypot(r.x-B.sat.x,r.y-B.sat.y);
     if(dist<B.sat.r+r.r*0.3){
-      addP(r.x,r.y,'#EF4444',12,3,0.8);B.lives--;B.rocks.splice(i,1);
+      addP(r.x,r.y,'#DC2626',12,3,0.8);B.lives--;B.rocks.splice(i,1);
       if(B.lives<=0){B.state='gameover';if(B.score>B.high){B.high=B.score;localStorage.setItem('daase404_blastHigh',B.high)}}
     }
   }
@@ -795,7 +1186,7 @@ const bUpdate=()=>{
 
 const drawRock=(r)=>{
   gx.save();gx.translate(r.x|0,r.y|0);gx.rotate(r.rot);
-  gx.fillStyle='#6B7280';
+  gx.fillStyle='#334155';gx.strokeStyle='#0F172A';gx.lineWidth=1.2;
   if(!r.verts){
     r.verts=[];
     for(let i=0;i<7;i++){
@@ -807,54 +1198,56 @@ const drawRock=(r)=>{
   for(let i=0;i<r.verts.length;i++){
     i===0?gx.moveTo(r.verts[i].x,r.verts[i].y):gx.lineTo(r.verts[i].x,r.verts[i].y);
   }
-  gx.closePath();gx.fill();
+  gx.closePath();gx.fill();gx.stroke();
   gx.restore();
 };
 
 const drawSatellite=(s)=>{
   gx.save();gx.translate(s.x|0,s.y|0);gx.rotate(s.rot);
-  gx.fillStyle='#CBD5E1';gx.fillRect(-7,-10,14,20);
-  gx.fillStyle='#3B82F6';gx.fillRect(-30,-5,20,10);gx.fillRect(10,-5,20,10);
+  gx.fillStyle='#0F172A';gx.fillRect(-7,-10,14,20);
+  gx.fillStyle='#2563EB';gx.fillRect(-30,-5,20,10);gx.fillRect(10,-5,20,10);
   gx.restore();
 };
 
 const bDraw=()=>{
-  gx.fillStyle='#020617';gx.fillRect(0,0,GW,GH);
-  gx.strokeStyle='rgba(96,165,250,0.04)';gx.lineWidth=0.5;
+  gx.fillStyle='#F8FAFC';gx.fillRect(0,0,GW,GH);
+  gx.strokeStyle='rgba(37,99,235,0.08)';gx.lineWidth=0.5;
   for(let x=0;x<GW;x+=40){gx.beginPath();gx.moveTo(x,0);gx.lineTo(x,GH);gx.stroke()}
   for(let y=0;y<GH;y+=40){gx.beginPath();gx.moveTo(0,y);gx.lineTo(GW,y);gx.stroke()}
 
   for(const r of B.rocks)drawRock(r);
   drawSatellite(B.sat);
 
-  gx.strokeStyle='rgba(255,217,122,0.4)';gx.lineWidth=1;
+  gx.strokeStyle='#DC2626';gx.lineWidth=1.5;
   gx.beginPath();gx.arc(B.crosshair.x,B.crosshair.y,10,0,Math.PI*2);gx.stroke();
 
   updateP();
 
   if(isPaused){
-    gx.fillStyle='rgba(2,6,23,0.85)';gx.fillRect(0,0,GW,GH);
-    gx.fillStyle='#FFD97A';gx.font='bold 22px Poppins';gx.textAlign='center';
-gx.fillText('Press P or click Resume to continue',GW/2,GH/2+18);
+    gx.fillStyle='rgba(255,255,255,0.95)';gx.fillRect(0,0,GW,GH);
+    gx.fillStyle='#0F172A';gx.font='bold 22px Poppins';gx.textAlign='center';
+    gx.fillText('⏸ GAME PAUSED',GW/2,GH/2-10);
+    gx.fillStyle='#334155';gx.font='13px Poppins';
+    gx.fillText('Press P or click Resume to continue',GW/2,GH/2+18);
   }
 
   if(B.state==='idle'){
-    gx.fillStyle='rgba(0,0,0,0.5)';gx.fillRect(0,0,GW,GH);
-    gx.fillStyle='#F0F4FF';gx.font='bold 24px Poppins';gx.textAlign='center';
+    gx.fillStyle='rgba(255,255,255,0.92)';gx.fillRect(0,0,GW,GH);
+    gx.fillStyle='#0F172A';gx.font='bold 24px Poppins';gx.textAlign='center';
     gx.fillText('ASTEROID DEFENSE',GW/2,GH/2-25);
-    gx.fillStyle='#94A3B8';gx.font='14px Poppins';
+    gx.fillStyle='#334155';gx.font='14px Poppins';
     gx.fillText('Tap asteroids to destroy them!',GW/2,GH/2+10);
-    gx.fillStyle='#ffd97a';gx.font='bold 12px Orbitron';
+    gx.fillStyle='#1D4ED8';gx.font='bold 13px Orbitron';
     gx.fillText(`HIGH SCORE: ${B.high}`,GW/2,GH/2+42);
   }
   if(B.state==='gameover'){
-    gx.fillStyle='rgba(0,0,0,0.6)';gx.fillRect(0,0,GW,GH);
-    gx.fillStyle='#EF4444';gx.font='bold 28px Orbitron';gx.textAlign='center';
+    gx.fillStyle='rgba(255,255,255,0.95)';gx.fillRect(0,0,GW,GH);
+    gx.fillStyle='#DC2626';gx.font='bold 28px Orbitron';gx.textAlign='center';
     gx.fillText('SATELLITE DESTROYED',GW/2,GH/2-30);
-    gx.fillStyle='#F0F4FF';gx.font='bold 16px Orbitron';
+    gx.fillStyle='#0F172A';gx.font='bold 16px Orbitron';
     gx.fillText(`SCORE: ${B.score}`,GW/2,GH/2+5);
-    if(B.score>=B.high&&B.score>0){gx.fillStyle='#ffd97a';gx.font='bold 13px Poppins';gx.fillText('🌟 NEW HIGH SCORE! 🌟',GW/2,GH/2+32)}
-    gx.fillStyle='#94A3B8';gx.font='12px Poppins';
+    if(B.score>=B.high&&B.score>0){gx.fillStyle='#1D4ED8';gx.font='bold 13px Poppins';gx.fillText('🌟 NEW HIGH SCORE! 🌟',GW/2,GH/2+32)}
+    gx.fillStyle='#334155';gx.font='12px Poppins';
     gx.fillText('Tap to try again',GW/2,GH/2+60);
   }
 };
@@ -863,7 +1256,7 @@ gx.fillText('Press P or click Resume to continue',GW/2,GH/2+18);
 const startGame=()=>{
   isPaused=false;
   btnPause.textContent='⏸ PAUSE';
-  btnPause.style.background='rgba(255,217,122,0.15)';
+  btnPause.style.background='rgba(219,234,254,0.8)';
   if(activeGame==='runner'){
     rInit();
     R.state='playing';
@@ -882,7 +1275,7 @@ const togglePause=()=>{
   if(g.state==='playing'){
     isPaused=!isPaused;
     btnPause.textContent=isPaused?'▶ RESUME':'⏸ PAUSE';
-    btnPause.style.background=isPaused?'rgba(96,165,250,0.35)':'rgba(255,217,122,0.15)';
+    btnPause.style.background=isPaused?'rgba(191,219,254,1)':'rgba(219,234,254,0.8)';
   }
 };
 
@@ -908,9 +1301,9 @@ const gameLoop=()=>{
       btnPause.textContent=isPaused?'▶ RESUME':'⏸ PAUSE';
     }
 
-    // Mobile & Tablet controls appear when actively playing on touch/tablet/mobile devices
+    // Mobile & Tablet controls appear ONLY when actively playing Cosmonaut Run on touch/mobile devices
     const isTouchDev=('ontouchstart' in window)||(navigator.maxTouchPoints>0)||(window.innerWidth<=1024);
-    if(g.state==='playing'&&!isPaused&&isTouchDev){
+    if(activeGame==='runner'&&g.state==='playing'&&!isPaused&&isTouchDev){
       mobileControls.style.display='flex';
     } else {
       mobileControls.style.display='none';
@@ -929,6 +1322,7 @@ const rJump=()=>{
   if(!R.p.jumping&&!R.p.ducking){
     R.p.vy=-12.0;
     R.p.jumping=true;
+    playSfx('jump');
   }
 };
 const rDuck=(v)=>{if(R.state==='playing')R.p.ducking=v};
@@ -939,7 +1333,7 @@ const handleCanvasInteraction=(e)=>{
   if(isPaused){
     isPaused=false;
     btnPause.textContent='⏸ PAUSE';
-    btnPause.style.background='rgba(255,217,122,0.15)';
+    btnPause.style.background='rgba(219,234,254,0.8)';
     return;
   }
   if(g.state==='idle'||g.state==='gameover'){
@@ -957,7 +1351,14 @@ const handleCanvasInteraction=(e)=>{
     B.crosshair.x=sx;B.crosshair.y=sy;
     for(let i=B.rocks.length-1;i>=0;i--){
       const r=B.rocks[i];if(Math.hypot(r.x-sx,r.y-sy)<r.r+32){
-        addP(r.x,r.y,'#ffd97a',12,3,0.8);B.score+=20;B.rocks.splice(i,1);
+        addP(r.x,r.y,'#F59E0B',12,3,0.8);
+        B.score+=20;
+        B.rocks.splice(i,1);
+        playSfx('blast');
+        // Satellite Savior: 750+ score
+        if(B.score>=750) unlockBadge('sat','Satellite Savior');
+        // Untouchable: 1000+ score with all 7 lives still intact
+        if(B.score>=1000 && B.lives===7) unlockBadge('untouchable','Untouchable');
         break;
       }
     }
@@ -971,6 +1372,7 @@ gc.addEventListener('touchstart', handleCanvasInteraction, {passive:false});
 const btnJump=document.getElementById('btn-mobile-jump');
 const btnDuck=document.getElementById('btn-mobile-duck');
 
+btnJump.addEventListener('touchstart',e=>{e.preventDefault();e.stopPropagation();rJump()},{passive:false});
 btnJump.addEventListener('click',e=>{e.stopPropagation();rJump()});
 btnDuck.addEventListener('touchstart',e=>{e.preventDefault();rDuck(true)},{passive:false});
 btnDuck.addEventListener('touchend',e=>{e.preventDefault();rDuck(false)},{passive:false});
@@ -997,7 +1399,7 @@ addEventListener('keydown',e=>{
     if(isPaused){
       isPaused=false;
       btnPause.textContent='⏸ PAUSE';
-      btnPause.style.background='rgba(255,217,122,0.15)';
+      btnPause.style.background='rgba(219,234,254,0.8)';
       return;
     }
     if(activeGame==='runner')rJump();
@@ -1019,6 +1421,13 @@ document.querySelectorAll('.game-tab').forEach(tab=>{
     this.classList.add('active');
     const g=this.getAttribute('data-game');
     activeGame=g;particles=[];
+    
+    const mobControls = document.getElementById('mobile-controls');
+    if(mobControls) {
+      // Hide mobile jump/duck buttons when not in runner mode
+      mobControls.style.display = (g === 'runner') ? '' : 'none';
+    }
+
     if(g==='runner'){
       rInit();
       hintEl.innerHTML='<kbd>P</kbd> / <kbd>Space</kbd> / <kbd>Tap</kbd> to Play & Jump · <kbd>↓</kbd> to duck';
@@ -1080,7 +1489,30 @@ const ud=()=>{
   }
   requestAnimationFrame(ud);
 };
-requestAnimationFrame(ud);
+// Space Fact Rotator
+const spaceFacts = [
+  {icon:'🌌', text:'The observable universe contains an estimated 2 trillion galaxies.'},
+  {icon:'☀️', text:'One million Earths could fit inside the Sun.'},
+  {icon:'📡', text:'The Square Kilometre Array (SKA) will be 50 times more sensitive than any radio telescope today.'},
+  {icon:'🪐', text:'A day on Venus is longer than a year on Venus (243 Earth days vs 225 Earth days).'},
+  {icon:'🛰️', text:'The International Space Station orbits Earth every 90 minutes at 28,000 km/h.'},
+  {icon:'🕳️', text:'The nearest known black hole to Earth is Gaia BH1, located 1,560 light-years away.'},
+  {icon:'⭐', text:'Neutron stars are so dense that a single teaspoon would weigh 6 billion tons on Earth.'}
+];
+const factTextEl = document.getElementById('fact-text');
+const factIconEl = document.getElementById('fact-icon');
+if(factTextEl && factIconEl){
+  let fi = 0;
+  setInterval(()=>{
+    factTextEl.classList.add('fading');
+    setTimeout(()=>{
+      fi = (fi + 1) % spaceFacts.length;
+      factTextEl.textContent = spaceFacts[fi].text;
+      factIconEl.textContent = spaceFacts[fi].icon;
+      factTextEl.classList.remove('fading');
+    }, 500);
+  }, 6000);
+}
 
 })();
 </script>

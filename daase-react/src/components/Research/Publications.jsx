@@ -28,7 +28,7 @@ export default function Publications() {
 
   return (
     <div className="publications-section">
-      <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 40px' }}>
+      <div style={{ maxWidth: 'clamp(1240px, 88vw, 1800px)', margin: '0 auto', padding: '0 clamp(24px, 4vw, 56px)' }}>
         <div className="publications-header">
           <div>
             <span className="pub-eyebrow">✦ Latest Research</span>
