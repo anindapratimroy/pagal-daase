@@ -989,11 +989,12 @@ nav.nav-scrolled.nav-hidden {
 .hero-main {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: calc(100vh - var(--nav-h) - 40px);
+  min-height: clamp(620px, calc(100vh - var(--nav-h) - 40px), 880px);
   align-items: flex-start;
-  max-width: clamp(1440px, 96vw, 2200px);
+  max-width: 1560px;
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
 }
 
 .hero-left {
@@ -3466,19 +3467,18 @@ a.sc-email:hover {
 @media(max-width:1550px) {
   nav { padding: 0 16px; }
   nav.nav-scrolled {
-    left: 16px;
-    right: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(calc(100% - 32px), 1440px);
     padding: 0 16px 0 20px;
   }
-  .nav-brand-main { font-size: 17px; }
-  .nav-brand-sub { font-size: 11px; max-width: 270px; }
+  .nav-brand-main { font-size: 16px; }
+  .nav-brand-sub { font-size: 11px; max-width: 250px; }
   .nav-links button { font-size: 12.5px; padding: 6px 4px; }
   .nav-cta-btn { padding: 6px 10px !important; }
 }
 
-@media(max-width:1400px) {
-  /* No need to hide nav-links because we've already permanently moved items to hamburger. 
-     Wait, do we want to hide everything at 1400px? Yes, we hide the visible ones too! */
+@media(max-width:1150px) {
   .nav-links button, .nav-dropdown, .nav-cta-btn, .nav-divider-vertical {
     display: none;
   }
@@ -3488,21 +3488,15 @@ a.sc-email:hover {
   }
 }
 
-@media(max-width:600px) {
-  .mobile-menu {
-    width: 100vw;
-    border-left: none;
-  }
-}
-
 @media(max-width:1100px) {
   nav {
     padding: 0 16px;
   }
   nav.nav-scrolled {
     top: 12px;
-    left: 12px;
-    right: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 24px);
     border-radius: 24px;
   }
 
@@ -3620,6 +3614,10 @@ a.sc-email:hover {
 
 @media(max-width:640px) {
   /* --- Mobile Optimization Fixes --- */
+  .mobile-menu {
+    width: 100vw;
+    border-left: none;
+  }
   
   .hero-top-strip {
     font-size: 11.5px !important;
