@@ -1,38 +1,62 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 export default function TiltCard({ children, className = '', style = {}, ...props }) {
   const cardRef = useRef(null);
-  const [rotate, setRotate] = useState({ x: 0, y: 0 });
-  const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
-  const [isHovered, setIsHovered] = useState(false);
+  const innerRef = useRef(null);
+  const glareRef = useRef(null);
+  const frameRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    };
+  }, []);
 
   const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    // Only run tilt on devices with hover/pointer support
+    if (window.matchMedia && !window.matchMedia('(hover: hover)').matches) return;
+    if (!cardRef.current || !innerRef.current) return;
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+    if (frameRef.current) cancelAnimationFrame(frameRef.current);
 
-    // Subtle tilt — max ±5 degrees
-    const rotateX = -((y - centerY) / centerY) * 5;
-    const rotateY = ((x - centerX) / centerX) * 5;
+    frameRef.current = requestAnimationFrame(() => {
+      if (!cardRef.current || !innerRef.current) return;
+      const rect = cardRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
 
-    // Glare position as percentage
-    const glareX = (x / rect.width) * 100;
-    const glareY = (y / rect.height) * 100;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
 
-    setRotate({ x: rotateX, y: rotateY });
-    setGlare({ x: glareX, y: glareY, opacity: 0.1 });
+      // Subtle, elegant 3D tilt (max ±4deg)
+      const rotateX = -((y - centerY) / centerY) * 4;
+      const rotateY = ((x - centerX) / centerX) * 4;
+
+      innerRef.current.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translate3d(0, -6px, 0)`;
+
+      if (glareRef.current) {
+        const glareX = ((x / rect.width) * 100).toFixed(1);
+        const glareY = ((y / rect.height) * 100).toFixed(1);
+        glareRef.current.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 65%)`;
+        glareRef.current.style.opacity = '1';
+      }
+    });
   };
 
-  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseEnter = () => {
+    if (!innerRef.current) return;
+    innerRef.current.style.transition = 'transform 0.15s ease-out, box-shadow 0.3s ease';
+  };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
-    setRotate({ x: 0, y: 0 });
-    setGlare(g => ({ ...g, opacity: 0 }));
+    if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    if (innerRef.current) {
+      innerRef.current.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 0.5s cubic-bezier(0.2, 0.9, 0.2, 1)';
+      innerRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0)';
+    }
+    if (glareRef.current) {
+      glareRef.current.style.opacity = '0';
+    }
   };
 
   return (
@@ -44,36 +68,38 @@ export default function TiltCard({ children, className = '', style = {}, ...prop
       onMouseLeave={handleMouseLeave}
       style={{
         ...style,
-        perspective: '1000px',
-        transformStyle: 'preserve-3d',
-        transform: isHovered ? 'scale(1.05) translateY(-10px)' : 'scale(1) translateY(0)',
-        transition: 'transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1)',
+        position: 'relative',
       }}
       {...props}
     >
       <div
+        ref={innerRef}
         className={`tilt-card-inner ${className}`}
         style={{
-          transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
-          transition: 'transform 0.1s ease-out',
           height: '100%',
           width: '100%',
           willChange: 'transform',
+          transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0)',
+          transformStyle: 'preserve-3d',
+          backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden',
+          transition: 'transform 0.5s cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 0.5s cubic-bezier(0.2, 0.9, 0.2, 1)',
           position: 'relative',
-          overflow: 'hidden',
         }}
       >
         {children}
-        {/* iOS-style glare highlight that follows the mouse */}
+        {/* Soft specular sheen */}
         <div
+          ref={glareRef}
           aria-hidden="true"
           style={{
             position: 'absolute',
             inset: 0,
             pointerEvents: 'none',
-            background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,${glare.opacity}) 0%, rgba(255,255,255,0) 65%)`,
-            transition: 'opacity 0.2s ease',
+            opacity: 0,
+            transition: 'opacity 0.3s ease',
             borderRadius: 'inherit',
+            zIndex: 3,
           }}
         />
       </div>
