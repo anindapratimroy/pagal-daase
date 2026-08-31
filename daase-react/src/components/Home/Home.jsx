@@ -98,7 +98,7 @@ export default function Home({ onNav, news, events }) {
         </div>
 
         <div className="hero-right" data-aos="fade-left">
-          <div className="news-feed-container anim-fadein glass-card" style={{ animationDelay: '0.2s' }}>
+          <div className="news-feed-container anim-fadein" style={{ animationDelay: '0.2s' }}>
             <h2 className="news-feed-title">News &amp; <span>Events</span></h2>
 
             <div className="vertical-marquee-container">
