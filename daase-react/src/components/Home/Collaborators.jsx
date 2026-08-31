@@ -1,6 +1,20 @@
 import React from 'react';
 
-// Using the 16 successfully downloaded logos, plus names and official links
+// Eagerly bundle all collaborator images via Vite's asset pipeline
+const logoModules = import.meta.glob('../../assets/collaborators/*.{png,jpg,jpeg,svg}', {
+  eager: true,
+  import: 'default'
+});
+
+const getLogoSrc = (imgName) => {
+  const matchingKey = Object.keys(logoModules).find(k => k.endsWith(`/${imgName}`));
+  if (matchingKey && logoModules[matchingKey]) {
+    return logoModules[matchingKey];
+  }
+  return `./images/collaborators/${imgName}`;
+};
+
+// Using the 29 logos, plus names and official links
 const LOGOS = [
   { img: 'mcgill.png', name: 'McGill University', url: 'https://www.mcgill.ca/' },
   { img: 'unimelb.png', name: 'University of Melbourne', url: 'https://www.unimelb.edu.au/' },
@@ -43,7 +57,23 @@ export default function Collaborators() {
           {[...LOGOS, ...LOGOS].map((logo, idx) => (
             <a href={logo.url} target="_blank" rel="noopener noreferrer" className="collab-logo-wrapper" key={idx}>
               <div className="collab-img-box">
-                <img src={`./images/collaborators/${logo.img}`} alt={logo.name} loading="lazy" />
+                <img
+                  src={getLogoSrc(logo.img)}
+                  alt={logo.name}
+                  loading="lazy"
+                  onError={(e) => {
+                    // Fallback to static folder paths if bundled asset failed
+                    if (!e.target.dataset.retried) {
+                      e.target.dataset.retried = '1';
+                      e.target.src = `images/collaborators/${logo.img}`;
+                    } else if (e.target.dataset.retried === '1') {
+                      e.target.dataset.retried = '2';
+                      e.target.src = `./images/collaborators/${logo.img}`;
+                    } else {
+                      e.target.style.display = 'none';
+                    }
+                  }}
+                />
               </div>
               <span className="collab-name">{logo.name}</span>
             </a>
