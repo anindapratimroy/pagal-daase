@@ -7,7 +7,7 @@ import TiltCard from '../Layout/TiltCard';
 export default function Research({ onNav }) {
   return (
     <div className="research-page fade-in">
-      <div style={{ maxWidth: 'clamp(1240px, 88vw, 1800px)', margin: '0 auto', padding: '48px clamp(24px, 4vw, 56px) 32px' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '48px clamp(24px, 4vw, 48px) 32px' }}>
         <div className="section-header center" data-aos="fade-up">
           <span className="section-eyebrow">✦ Science &amp; Discovery</span>
           <h1 className="section-title">Research <span>Areas</span></h1>
@@ -19,7 +19,7 @@ export default function Research({ onNav }) {
         <div data-aos="fade-up" data-aos-delay="100" style={{
           position: 'relative',
           width: '100%',
-          maxWidth: 'clamp(880px, 70vw, 1200px)',
+          maxWidth: '960px',
           margin: '36px auto 0 auto',
           borderRadius: '16px',
           overflow: 'hidden',
@@ -42,7 +42,7 @@ export default function Research({ onNav }) {
       <Publications />
 
       {/* Research Area Cards */}
-      <div style={{ maxWidth: 'clamp(1240px, 88vw, 1800px)', margin: '0 auto', padding: '40px clamp(24px, 4vw, 56px) 56px' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '40px clamp(24px, 4vw, 48px) 56px' }}>
         <div className="research-grid">
           {RESEARCH_AREAS.map((r, i) => (
             <div data-aos="fade-up" data-aos-delay={i * 50} key={i}>
