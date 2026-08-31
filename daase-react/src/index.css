@@ -819,18 +819,14 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .section-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 56px clamp(24px, 4vw, 48px) 72px;
   width: 100%;
+  padding: 56px clamp(20px, 5%, 80px) 72px;
   box-sizing: border-box;
 }
 
 .people-section-inner {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 56px clamp(24px, 4vw, 48px) 72px;
   width: 100%;
+  padding: 56px clamp(20px, 5%, 80px) 72px;
   box-sizing: border-box;
 }
 
@@ -991,9 +987,6 @@ nav.nav-scrolled.nav-hidden {
   grid-template-columns: 1fr 1fr;
   min-height: clamp(620px, calc(100vh - var(--nav-h) - 40px), 880px);
   align-items: flex-start;
-  max-width: 1560px;
-  margin-left: auto;
-  margin-right: auto;
   width: 100%;
 }
 
@@ -1449,11 +1442,8 @@ a.news-feed-headline:hover {
 /* ── Header ── */
 .about-hdr {
   text-align: center;
-  padding: 0 clamp(24px, 8vw, 120px);
+  padding: 0 clamp(20px, 5%, 80px);
   margin-bottom: 56px;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .about-eyebrow {
@@ -1492,13 +1482,10 @@ a.news-feed-headline:hover {
 /* ── 3-column info cards ── */
 .about-info-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 0 clamp(24px, 5vw, 72px);
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 24px;
+  padding: 0 clamp(20px, 5%, 80px);
   margin-bottom: 32px;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .about-info-card {
@@ -1567,13 +1554,10 @@ a.news-feed-headline:hover {
 /* ── 4 Highlight badges ── */
 .about-badges-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
-  padding: 0 clamp(24px, 5vw, 72px);
+  padding: 0 clamp(20px, 5%, 80px);
   margin-bottom: 52px;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .about-badge {
@@ -1627,11 +1611,8 @@ a.news-feed-headline:hover {
 
 /* ── Horizontal Timeline ── */
 .about-timeline-wrap {
-  padding: 0 clamp(24px, 5vw, 72px);
+  padding: 0 clamp(20px, 5%, 80px);
   position: relative;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .about-timeline-track {
@@ -1706,8 +1687,8 @@ a.news-feed-headline:hover {
 ============================================================ */
 .research-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 28px;
 }
 
 .rc {
@@ -2074,9 +2055,9 @@ a.news-feed-headline:hover {
 ============================================================ */
 .faculty-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 28px;
+  margin-bottom: 28px;
   align-items: stretch;
 }
 
@@ -2549,8 +2530,8 @@ a.sc-email:hover {
 ============================================================ */
 .events-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 28px;
 }
 
 .event-card {
@@ -2957,10 +2938,7 @@ a.sc-email:hover {
 .contact-hdr {
   text-align: center;
   margin-bottom: 24px;
-  padding: 0 clamp(24px, 8vw, 120px);
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
+  padding: 0 clamp(20px, 5%, 80px);
 }
 
 .contact-main-title {
@@ -2981,10 +2959,7 @@ a.sc-email:hover {
   grid-template-columns: 2fr 3fr;
   gap: 0;
   width: 100%;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 clamp(24px, 5vw, 72px) 40px;
+  padding: 0 clamp(20px, 5%, 80px) 40px;
   align-items: stretch;
   min-height: 320px;
 }
@@ -3287,8 +3262,7 @@ a.sc-email:hover {
   border-left: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
   color: #fff;
-  max-width: 1400px;
-  margin: 0 auto 32px;
+  margin: 0 clamp(20px, 5%, 80px) 32px;
   padding: 24px 32px;
   box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.2), 0 16px 40px -8px rgba(0, 0, 0, 0.6);
   transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);

@@ -7,7 +7,7 @@ import TiltCard from '../Layout/TiltCard';
 export default function Research({ onNav }) {
   return (
     <div className="research-page fade-in">
-      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '48px clamp(24px, 4vw, 48px) 32px' }}>
+      <div style={{ width: '100%', padding: '48px clamp(20px, 5%, 80px) 32px', boxSizing: 'border-box' }}>
         <div className="section-header center" data-aos="fade-up">
           <span className="section-eyebrow">✦ Science &amp; Discovery</span>
           <h1 className="section-title">Research <span>Areas</span></h1>
@@ -42,7 +42,7 @@ export default function Research({ onNav }) {
       <Publications />
 
       {/* Research Area Cards */}
-      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '40px clamp(24px, 4vw, 48px) 56px' }}>
+      <div style={{ width: '100%', padding: '40px clamp(20px, 5%, 80px) 56px', boxSizing: 'border-box' }}>
         <div className="research-grid">
           {RESEARCH_AREAS.map((r, i) => (
             <div data-aos="fade-up" data-aos-delay={i * 50} key={i}>
