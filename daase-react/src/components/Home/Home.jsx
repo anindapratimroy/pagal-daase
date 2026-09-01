@@ -272,24 +272,12 @@ export default function Home({ onNav, news, events, publications = [] }) {
             <div className="about-info-card-icon">🔬</div>
             <h3 className="about-info-card-title">Labs &amp; Facilities</h3>
             <ul className="about-info-list">
-              <li className="is-interactive" onClick={() => onNav('facilities')} title="View Labs & Facilities">
-                Radio Frequency (RF) Lab — testing up to 60 GHz <span className="arrow">↗</span>
-              </li>
-              <li className="is-interactive" onClick={() => onNav('facilities')} title="View Labs & Facilities">
-                Optics Lab &amp; Precision Measurement Systems <span className="arrow">↗</span>
-              </li>
-              <li className="is-interactive" onClick={() => onNav('facilities')} title="View Labs & Facilities">
-                IoT, Drone &amp; Remote Sensing Lab <span className="arrow">↗</span>
-              </li>
-              <li className="is-interactive" onClick={() => onNav('facilities')} title="View Labs & Facilities">
-                Plasma Lab &amp; Helmholtz Cages <span className="arrow">↗</span>
-              </li>
-              <li className="is-interactive" onClick={() => onNav('facilities')} title="View Labs & Facilities">
-                IITI Radio Interferometer Observatory <span className="arrow">↗</span>
-              </li>
-              <li className="is-interactive" onClick={() => onNav('facilities')} title="View Labs & Facilities">
-                Arctic Station Himadri (active since 2022) <span className="arrow">↗</span>
-              </li>
+              <li>Radio Frequency (RF) Lab — testing up to 60 GHz</li>
+              <li>Optics Lab &amp; Precision Measurement Systems</li>
+              <li>IoT, Drone &amp; Remote Sensing Lab</li>
+              <li>Plasma Lab &amp; Helmholtz Cages</li>
+              <li>IITI Radio Interferometer Observatory</li>
+              <li>Arctic Station Himadri (active since 2022)</li>
             </ul>
           </div>
         </div>
