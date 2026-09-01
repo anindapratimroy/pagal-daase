@@ -168,7 +168,7 @@ export default function Events({ events = [], outreach = [] }) {
           <div className="title-bar" />
         </div>
 
-        <div className="events-grid">
+        <div className={`events-grid count-${sortedUpcoming.length}`}>
           {sortedUpcoming.length > 0 ? (
             sortedUpcoming.map((ev, i) => (
               <EventCard
@@ -194,7 +194,7 @@ export default function Events({ events = [], outreach = [] }) {
           <div className="title-bar" />
         </div>
 
-        <div className="events-grid">
+        <div className={`events-grid count-${sortedPast.length}`}>
           {sortedPast.length > 0 ? (
             sortedPast.map((ev, i) => (
               <EventCard
@@ -221,7 +221,7 @@ export default function Events({ events = [], outreach = [] }) {
               <p className="section-desc">Public talks, stargazing sessions, and astronomy popularization events.</p>
               <div className="title-bar" />
             </div>
-            <div className="events-grid">
+            <div className={`events-grid count-${outreach.length}`}>
               {outreach.map((ev, i) => (
                 <EventCard
                   key={`out-${i}`}
