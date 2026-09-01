@@ -47,7 +47,7 @@ const PROGRAMS = {
       'Thesis-based with strong industry & ISRO linkages',
     ],
     highlights: [
-      { num: '2021', text: 'Two specializations: Space Engineering and AOLT' },
+      { num: '2021', text: 'M.Tech. in Space Engineering program launched' },
       { num: '15+', text: 'Graduates in ISRO, space startups & research institutes' },
       { num: '10+', text: 'Specialized lab facilities for hands-on space engineering' },
     ],
