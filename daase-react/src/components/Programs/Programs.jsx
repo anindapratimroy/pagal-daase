@@ -53,7 +53,7 @@ const PROGRAMS = {
     ],
   },
   ms: {
-    label: 'MS Research',
+    label: 'M.S. (Research)',
     badge: "Research Master's · 2 Years",
     title: 'M.S. (Research) in Space Engineering (SSE)',
     desc: 'Launched in 2021, designed for students who wish to pursue comprehensive research before starting a Ph.D. Students work closely with faculty on cutting-edge projects in space science and engineering.',
@@ -64,8 +64,8 @@ const PROGRAMS = {
       'Ph.D. programs across India and abroad',
     ],
     highlights: [
-      { num: '9', text: 'Current MS Research students (2024 & 2025 batches)' },
-      { num: '7+', text: 'Alumni from MS Research program' },
+      { num: '9', text: 'Current M.S. (Research) students (2024 & 2025 batches)' },
+      { num: '7+', text: 'Alumni from M.S. (Research) program' },
       { num: '100%', text: 'Thesis-based; all students assigned faculty supervisors' },
     ],
   },
