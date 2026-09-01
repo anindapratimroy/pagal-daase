@@ -1199,7 +1199,7 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .vertical-marquee-container {
-  height: 250px;
+  height: 310px;
   overflow: hidden;
   position: relative;
   margin: 0 -20px;
@@ -1336,6 +1336,7 @@ a.news-feed-headline:hover {
   overflow: hidden;
   transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
   will-change: transform, box-shadow;
+  /* dark context overrides */
   --navy: #7BAEE8;
   --text-primary: #F0F4FF;
   --text-body: #CBD5E1;
@@ -1385,7 +1386,7 @@ a.news-feed-headline:hover {
 }
 
 .home-pub-marquee-container {
-  height: 250px;
+  height: 310px;
   overflow: hidden;
   position: relative;
   margin: 0 -20px;
