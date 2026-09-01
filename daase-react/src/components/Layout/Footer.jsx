@@ -150,7 +150,7 @@ export default function Footer({ onNav }) {
         {/* ── Bottom Bar (Copyright & Credits) ── */}
         <div className="footer-bottom-bar">
           <div className="footer-copyright-text">
-            © {new Date().getFullYear()} Department of Astronomy, Astrophysics and Space Engineering (DAASE), IIT Indore. All rights reserved.
+            © {new Date().getFullYear()} Department of Astronomy, Astrophysics and Space Engineering (AASE), IIT Indore. All rights reserved.
           </div>
           <div className="footer-credits-text">
             Webmaster: <a href="https://www.linkedin.com/in/aninda-pratim-roy" target="_blank" rel="noopener noreferrer">Aninda Pratim Roy</a>
