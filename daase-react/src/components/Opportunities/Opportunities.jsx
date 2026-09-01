@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Footer from '../Layout/Footer';
 import TiltCard from '../Layout/TiltCard';
 
@@ -13,12 +14,32 @@ const FUNDERS = [
   { icon: '🔭', label: 'Astronomical Society of India (ASI)', href: 'https://astron-soc.in' },
 ];
 
+const TABS = [
+  { id: 'students', label: 'For Students', icon: '🎓' },
+  { id: 'faculty',  label: 'For Faculty',  icon: '👨‍🏫' },
+];
+
 export default function Opportunities({ opportunities = [] }) {
-  // Only show active opportunities
+  const [activeTab, setActiveTab] = useState('students');
+
+  // Only active opportunities
   const activeOpps = opportunities.filter(o => {
     const s = (o.status || '').toString().toLowerCase().trim();
     return s === 'active';
   });
+
+  // Split by type field ('student'/'faculty'). Default to 'students' if unspecified.
+  const studentOpps = activeOpps.filter(o => {
+    const t = (o.type || o.audience || '').toString().toLowerCase().trim();
+    return t === '' || t === 'student' || t === 'students';
+  });
+
+  const facultyOpps = activeOpps.filter(o => {
+    const t = (o.type || o.audience || '').toString().toLowerCase().trim();
+    return t === 'faculty';
+  });
+
+  const displayOpps = activeTab === 'students' ? studentOpps : facultyOpps;
 
   const formatDate = (dateStr) => {
     if (!dateStr) return '';
@@ -40,16 +61,39 @@ export default function Opportunities({ opportunities = [] }) {
           <div className="title-bar" />
         </div>
 
+        {/* ── Tab Switcher ── */}
+        <div className="opp-tabs-row">
+          {TABS.map(tab => (
+            <button
+              key={tab.id}
+              type="button"
+              className={`opp-tab-btn${activeTab === tab.id ? ' opp-tab-btn--active' : ''}`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              <span className="opp-tab-icon">{tab.icon}</span>
+              <span>{tab.label}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* ── Opportunity Cards ── */}
         <div className="opp-grid">
-          {/* Dynamic Opportunities */}
-          <div className="opp-list-container" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            {activeOpps.length > 0 ? activeOpps.map((opp, idx) => (
+          <div className="opp-list-container">
+            {displayOpps.length > 0 ? displayOpps.map((opp, idx) => (
               <TiltCard key={idx} className="opp-card anim-fadeup" style={{ animationDelay: `${0.1 * idx}s` }}>
                 {opp.tag && (
-                  <div className="opp-badge">🎓 &nbsp;{opp.tag}</div>
+                  <div className="opp-badge">
+                    {activeTab === 'faculty' ? '👨‍🏫' : '🎓'}&nbsp;&nbsp;{opp.tag}
+                  </div>
                 )}
                 <h3 className="opp-title">{opp.title}</h3>
                 <p className="opp-desc">{opp.desc}</p>
+                {opp.eligibility && (
+                  <div className="opp-eligibility">
+                    <span className="opp-eligibility-label">Eligibility</span>
+                    <span className="opp-eligibility-val">{opp.eligibility}</span>
+                  </div>
+                )}
                 {opp.lastDate && (
                   <div className="opp-deadline">
                     <div>
@@ -75,21 +119,27 @@ export default function Opportunities({ opportunities = [] }) {
                 )}
               </TiltCard>
             )) : (
-              <div className="opp-card anim-fadeup" style={{ textAlign: 'center', padding: '40px' }}>
-                <h3 className="opp-title">No Open Opportunities</h3>
-                <p className="opp-desc" style={{ marginBottom: 0 }}>Please check back later for new openings.</p>
+              <div className="opp-empty-state">
+                <div className="opp-empty-icon">
+                  {activeTab === 'faculty' ? '👨‍🏫' : '🎓'}
+                </div>
+                <h3 className="opp-empty-title">
+                  No Open Opportunities {activeTab === 'faculty' ? 'for Faculty' : 'for Students'} Right Now
+                </h3>
+                <p className="opp-empty-desc">
+                  Please check back soon. New openings are posted when available and will appear here automatically.
+                </p>
               </div>
             )}
           </div>
         </div>
 
-        {/* Full-width Funding & Research Support Scroller (Left to Right) */}
+        {/* Full-width Funding & Research Support Scroller */}
         <div className="funders-scroller-section">
           <div className="funders-header">
             <span className="section-eyebrow">✦ Support &amp; Grants</span>
             <h3 className="funders-scroller-title">Funding &amp; <span>Research Support</span></h3>
           </div>
-          
           <div className="funders-marquee-container">
             <div className="funders-marquee-content">
               {[...FUNDERS, ...FUNDERS].map((f, idx) => (
@@ -114,3 +164,5 @@ export default function Opportunities({ opportunities = [] }) {
     </div>
   );
 }
+
+
