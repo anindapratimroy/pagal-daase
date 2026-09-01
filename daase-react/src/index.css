@@ -1009,9 +1009,9 @@ nav.nav-scrolled.nav-hidden {
 .hero-main {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: clamp(620px, calc(100vh - var(--nav-h) - 40px), 880px);
   align-items: flex-start;
   width: 100%;
+  margin-bottom: 0;
 }
 
 .hero-left {
@@ -4122,11 +4122,11 @@ a.sc-email:hover {
 
 /* ── COLLABORATIONS MARQUEE ─────────────────────────────────────────────────── */
 .collaborators-section {
-  margin-top: 16px;
+  margin-top: -16px;
   margin-bottom: 24px;
-  padding: 24px 0 16px 0;
+  padding: 10px 0 10px 0;
   position: relative;
-  height: 240px;
+  height: 220px;
   overflow: hidden;
   width: 100%;
 }
@@ -4135,7 +4135,7 @@ a.sc-email:hover {
   text-align: center;
   font-size: 22px;
   font-weight: 800;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   margin-top: 0;
   background: linear-gradient(135deg, #ffd97a 0%, #fff4c2 50%, #ffd97a 100%);
   -webkit-background-clip: text;
@@ -4147,7 +4147,7 @@ a.sc-email:hover {
 
 .collab-marquee-container {
   position: absolute;
-  top: 64px;
+  top: 50px;
   left: 0;
   width: 100%;
   display: flex;
