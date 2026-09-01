@@ -86,7 +86,7 @@ export default function Navbar({ current, onNav }) {
         </div>
 
         <div className="nav-brand" onClick={() => handleNav('home')}>
-          <div className="nav-brand-sub">Dept. of Astronomy, Astrophysics &amp; Space Engineering</div>
+          <div className="nav-brand-sub">Astronomy Astrophysics and Space Engineering</div>
         </div>
 
         <div className="nav-links">
