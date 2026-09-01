@@ -153,7 +153,7 @@ export default function Footer({ onNav }) {
             © {new Date().getFullYear()} Department of Astronomy, Astrophysics and Space Engineering (DAASE), IIT Indore. All rights reserved.
           </div>
           <div className="footer-credits-text">
-            Website created by <a href="https://www.linkedin.com/in/aninda-pratim-roy" target="_blank" rel="noopener noreferrer">Aninda Pratim Roy</a> &amp; <a href="https://www.linkedin.com/in/vidhan-thakur27" target="_blank" rel="noopener noreferrer">Vidhan Thakur</a>
+            Webmaster: <a href="https://www.linkedin.com/in/aninda-pratim-roy" target="_blank" rel="noopener noreferrer">Aninda Pratim Roy</a>
             <span className="footer-credits-sep">|</span>
             <button className="footer-credits-trigger" onClick={() => setShowCredits(true)}>
               Credits
