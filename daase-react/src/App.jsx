@@ -16,7 +16,6 @@ import Events from './components/Events/Events';
 import Alumni from './components/Alumni/Alumni';
 import Gallery from './components/Gallery/Gallery';
 import Opportunities from './components/Opportunities/Opportunities';
-import Placements from './components/Placements/Placements';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -180,7 +179,6 @@ export default function App() {
       case 'events':     return <Events events={data.events} outreach={data.outreach} />;
       case 'gallery':    return <Gallery />;
       case 'opportunities': return <Opportunities opportunities={data.opportunities} />;
-      case 'placements': return <Placements />;
       // Legacy routes kept for safety
       case 'faculty':    return (
         <Faculty

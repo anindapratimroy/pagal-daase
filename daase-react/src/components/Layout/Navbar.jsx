@@ -14,7 +14,6 @@ const PEOPLE_ITEMS = [
 const NAV_ITEMS = [
   { id: 'home',       label: 'Home' },
   { id: 'programs',   label: 'Programs' },
-  { id: 'placements', label: 'Placements' },
   { id: 'events',     label: 'Events' },
   { id: 'gallery',    label: 'Gallery' },
 ];

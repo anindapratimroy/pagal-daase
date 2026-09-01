@@ -50,7 +50,7 @@ const LOGOS = [
 export default function Collaborators() {
   return (
     <div className="collaborators-section">
-      <h3 className="collab-marquee-title">Collaborations &amp; Placements</h3>
+      <h3 className="collab-marquee-title">Academic &amp; Research Collaborations</h3>
       <div className="collab-marquee-container">
         <div className="collab-marquee-content">
           {/* Duplicate the array to create a seamless loop */}
