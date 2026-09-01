@@ -125,7 +125,7 @@ export default function ResearchAreaDetail({ areaId, onNav }) {
         </div>
       </div>
 
-      <Footer />
+      <Footer onNav={onNav} />
     </div>
   );
 }

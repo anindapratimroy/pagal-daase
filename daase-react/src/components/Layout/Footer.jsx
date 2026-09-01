@@ -1,17 +1,36 @@
 import { useState, useRef, useCallback } from 'react';
 
-const COLLABS = [
-  { href: 'https://www.ncra.tifr.res.in/skaindia', label: 'SKA-IC' },
-  { href: 'https://www.grss-ieee.org', label: 'GRSS-IEEE' },
-  { href: 'https://ieeeaps.org', label: 'APS-IEEE' },
-  { href: 'https://astron-soc.in', label: 'ASI' },
-  { href: 'https://www.iau.org', label: 'IAU' },
-  { href: 'https://www.isro.gov.in', label: 'ISRO Missions' },
-  { href: 'https://www.nasa.gov', label: 'NASA Collaborations' },
-  { href: 'https://www.mpg.de/en', label: 'Max Planck Group' },
+const QUICK_LINKS = [
+  { id: 'home',           label: 'Home' },
+  { id: 'people-faculty', label: 'Faculty & Researchers' },
+  { id: 'people-staff',   label: 'Technical & Office Staff' },
+  { id: 'people-phd',     label: 'Ph.D. Scholars' },
+  { id: 'programs',       label: 'Degree Programs' },
+  { id: 'research',       label: 'Research Areas' },
+  { id: 'facilities',     label: 'Labs & Facilities' },
+  { id: 'events',         label: 'Events & Workshops' },
+  { id: 'gallery',        label: 'Photo Gallery' },
+  { id: 'opportunities',  label: 'Opportunities & Openings' },
 ];
 
-export default function Footer() {
+const INSTITUTE_PORTALS = [
+  { href: 'https://www.iiti.ac.in',               label: 'IIT Indore Main Website ↗' },
+  { href: 'https://academic.iiti.ac.in',          label: 'Academic Affairs Portal ↗' },
+  { href: 'https://academic.iiti.ac.in/phdadvt.php', label: 'Ph.D. Admissions Portal ↗' },
+  { href: 'https://library.iiti.ac.in',           label: 'Learning Resource Center ↗' },
+  { href: 'https://tpo.iiti.ac.in',               label: 'Training & Placement Cell ↗' },
+];
+
+const COLLABS = [
+  { href: 'https://www.ncra.tifr.res.in/skaindia', label: 'SKA-India Consortium (SKA-IC)' },
+  { href: 'https://www.isro.gov.in',               label: 'ISRO Missions & Science' },
+  { href: 'https://www.nasa.gov',                  label: 'NASA Collaborations' },
+  { href: 'https://www.mpg.de/en',                 label: 'Max Planck Society (MPG)' },
+  { href: 'https://astron-soc.in',                 label: 'Astronomical Society of India' },
+  { href: 'https://www.iau.org',                   label: 'International Astronomical Union' },
+];
+
+export default function Footer({ onNav }) {
   const [showCredits, setShowCredits] = useState(false);
   const mapRetryCount = useRef(0);
   const mapIframeRef = useRef(null);
@@ -35,9 +54,19 @@ export default function Footer() {
     mapRetryCount.current = 0;
   }, []);
 
+  const handleInternalNav = (e, id) => {
+    e.preventDefault();
+    if (onNav) {
+      onNav(id);
+    } else {
+      window.location.hash = id;
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <>
-      {/* ── Contact Us — Redesigned ── */}
+      {/* ── Contact Us & Location Section ── */}
       <div className="contact-section">
 
         {/* Header */}
@@ -47,7 +76,7 @@ export default function Footer() {
           <div className="title-bar" style={{ margin: '0 auto 0' }} />
         </div>
 
-        {/* Main grid */}
+        {/* Contact info + Map grid */}
         <div className="contact-redesign-grid">
 
           {/* Left — unified info card */}
@@ -72,7 +101,7 @@ export default function Footer() {
             <div className="contact-block">
               <div className="contact-block-icon">📧</div>
               <div className="contact-block-body">
-                <div className="contact-block-label">Email</div>
+                <div className="contact-block-label">Email Contacts</div>
                 <div className="contact-block-value">
                   <div className="contact-email-row">
                     <a href="mailto:hodaase@iiti.ac.in">hodaase@iiti.ac.in</a>
@@ -88,17 +117,20 @@ export default function Footer() {
 
             <div className="contact-divider" />
 
-            {/* Quick links */}
+            {/* Quick Institute Links */}
             <div className="contact-block">
               <div className="contact-block-icon">🌐</div>
               <div className="contact-block-body">
-                <div className="contact-block-label">Institute</div>
+                <div className="contact-block-label">Institute Portals</div>
                 <div className="contact-links-row">
                   <a href="https://www.iiti.ac.in" target="_blank" rel="noopener noreferrer" className="contact-link-pill">
                     www.iiti.ac.in ↗
                   </a>
                   <a href="https://academic.iiti.ac.in" target="_blank" rel="noopener noreferrer" className="contact-link-pill">
                     academic.iiti.ac.in ↗
+                  </a>
+                  <a href="https://academic.iiti.ac.in/phdadvt.php" target="_blank" rel="noopener noreferrer" className="contact-link-pill">
+                    PhD Admissions ↗
                   </a>
                 </div>
               </div>
@@ -141,6 +173,68 @@ export default function Footer() {
           </div>
 
         </div> {/* End of contact-redesign-grid */}
+
+        {/* ── Multi-Column Quick Links & Resources ── */}
+        <div className="footer-links-container anim-fadeup d3">
+          <div className="footer-links-grid">
+            
+            {/* Column 1: Department Info */}
+            <div className="footer-col">
+              <div className="footer-brand-title">
+                DAASE · <span>IIT Indore</span>
+              </div>
+              <p className="footer-brand-desc">
+                Department of Astronomy, Astrophysics and Space Engineering (DAASE) is dedicated to frontier research in multi-frequency astrophysics, space payload technologies, ionospheric science, and advanced instrumentation.
+              </p>
+              <div className="footer-dept-tag">
+                ✦ Established Dec 2015 · Full Department May 2018
+              </div>
+            </div>
+
+            {/* Column 2: Department Quick Links */}
+            <div className="footer-col">
+              <h4 className="footer-col-heading">Quick Links</h4>
+              <ul className="footer-nav-list">
+                {QUICK_LINKS.map(link => (
+                  <li key={link.id}>
+                    <a href={`#${link.id}`} onClick={(e) => handleInternalNav(e, link.id)}>
+                      <span className="footer-bullet">›</span> {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 3: Institute Portals */}
+            <div className="footer-col">
+              <h4 className="footer-col-heading">Institute Portals</h4>
+              <ul className="footer-nav-list">
+                {INSTITUTE_PORTALS.map((portal, idx) => (
+                  <li key={idx}>
+                    <a href={portal.href} target="_blank" rel="noopener noreferrer">
+                      <span className="footer-bullet">›</span> {portal.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 4: Key Collaborations */}
+            <div className="footer-col">
+              <h4 className="footer-col-heading">Major Collaborations</h4>
+              <ul className="footer-nav-list">
+                {COLLABS.map((collab, idx) => (
+                  <li key={idx}>
+                    <a href={collab.href} target="_blank" rel="noopener noreferrer">
+                      <span className="footer-bullet">›</span> {collab.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+        </div>
 
         {/* Footer Separator */}
         <div className="footer-separator" />

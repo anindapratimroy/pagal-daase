@@ -161,7 +161,7 @@ export default function Programs({ initialProg = 'btech', onNav }) {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer onNav={onNav} />
     </div>
   );
 }

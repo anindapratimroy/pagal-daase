@@ -376,7 +376,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
         </div>
       )}
 
-      <Footer />
+      <Footer onNav={onNav} />
     </div>
   );
 }

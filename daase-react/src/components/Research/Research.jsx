@@ -73,7 +73,7 @@ export default function Research({ onNav }) {
         </div>
       </div>
 
-      <Footer />
+      <Footer onNav={onNav} />
     </div>
   );
 }

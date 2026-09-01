@@ -342,7 +342,7 @@ export default function Home({ onNav, news, events, publications = [] }) {
       </div>
 
 
-      <Footer />
+      <Footer onNav={onNav} />
     </div>
   );
 }
