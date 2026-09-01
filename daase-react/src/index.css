@@ -3343,7 +3343,7 @@ a.sc-email:hover {
 }
 
 .footer-brand-heading {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 900;
   color: var(--gold-light);
   letter-spacing: 0.04em;
@@ -3352,7 +3352,7 @@ a.sc-email:hover {
 }
 
 .footer-brand-subheading {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: #93C5FD;
   letter-spacing: 0.12em;
@@ -3360,9 +3360,9 @@ a.sc-email:hover {
 }
 
 .footer-dept-full-name {
-  font-size: 13.5px;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 16px;
 }
 
@@ -3374,15 +3374,15 @@ a.sc-email:hover {
 }
 
 .footer-address-icon {
-  font-size: 18px;
+  font-size: 19px;
   margin-top: 2px;
   flex-shrink: 0;
 }
 
 .footer-address-text {
-  font-size: 13px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.75);
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .footer-map-action-btn {
@@ -3394,7 +3394,7 @@ a.sc-email:hover {
   border: 1px solid rgba(255, 217, 122, 0.25);
   border-radius: 8px;
   color: #ffd97a;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   text-decoration: none;
   width: fit-content;
@@ -3411,7 +3411,7 @@ a.sc-email:hover {
 
 /* Headings & Lists */
 .footer-heading {
-  font-size: 15px;
+  font-size: 16.5px;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -3427,31 +3427,31 @@ a.sc-email:hover {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 10px;
 }
 
 .footer-links-list li a {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.78);
+  font-size: 15.5px;
+  color: rgba(255, 255, 255, 0.84);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   transition: all 0.2s ease;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .footer-link-arrow {
   color: var(--gold);
-  font-size: 15px;
+  font-size: 16.5px;
   font-weight: bold;
   transition: transform 0.2s ease;
 }
 
 .footer-ext-icon {
-  font-size: 12px;
+  font-size: 13px;
   color: #93C5FD;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .footer-links-list li a:hover {
@@ -3473,23 +3473,23 @@ a.sc-email:hover {
 }
 
 .footer-contact-icon {
-  font-size: 18px;
+  font-size: 19px;
   margin-top: 2px;
   flex-shrink: 0;
 }
 
 .footer-contact-badge {
   display: block;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #ffd97a;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .footer-contact-link {
-  font-size: 14px;
+  font-size: 15.5px;
   color: #93C5FD;
   text-decoration: none;
   transition: color 0.2s ease;
@@ -3566,13 +3566,13 @@ a.sc-email:hover {
 }
 
 .footer-copyright-text {
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.65);
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .footer-credits-text {
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.75);
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.85);
   display: inline-flex;
   align-items: center;
   gap: 6px;
