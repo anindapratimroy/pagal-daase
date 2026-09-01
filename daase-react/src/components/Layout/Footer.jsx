@@ -68,15 +68,6 @@ export default function Footer({ onNav }) {
                 Madhya Pradesh, India
               </div>
             </div>
-
-            <a 
-              href="https://maps.google.com/maps?q=22.528688,75.923391" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="footer-map-action-btn"
-            >
-              🗺️ Open in Google Maps ↗
-            </a>
           </div>
 
           {/* Column 2: Department Navigation */}
@@ -131,7 +122,13 @@ export default function Footer({ onNav }) {
               </div>
             </div>
 
-            <div className="footer-map-preview-card">
+            <a 
+              href="https://maps.google.com/maps?q=22.528688,75.923391" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="footer-map-preview-card"
+              title="Open IIT Indore in Google Maps"
+            >
               <iframe
                 src="https://maps.google.com/maps?q=22.528688,75.923391&t=k&z=15&ie=UTF8&iwloc=&output=embed"
                 title="IIT Indore Satellite Map"
@@ -140,9 +137,9 @@ export default function Footer({ onNav }) {
                 className="footer-mini-map"
               />
               <div className="footer-map-pin-pill">
-                <span>📍 DAASE, IIT Indore</span>
+                <span>📍 DAASE, IIT Indore ↗</span>
               </div>
-            </div>
+            </a>
           </div>
 
         </div>
