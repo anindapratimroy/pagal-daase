@@ -1893,7 +1893,7 @@ a.news-feed-headline:hover {
 ============================================================ */
 .research-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 28px;
 }
 
@@ -2261,7 +2261,7 @@ a.news-feed-headline:hover {
 ============================================================ */
 .faculty-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 340px));
   gap: 28px;
   margin-bottom: 28px;
   align-items: stretch;
@@ -2570,7 +2570,7 @@ a.news-feed-headline:hover {
 
 .students-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 270px));
   gap: 16px;
   align-items: stretch;
 }
@@ -2698,7 +2698,7 @@ a.sc-email:hover {
 ============================================================ */
 .facilities-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
 }
 
