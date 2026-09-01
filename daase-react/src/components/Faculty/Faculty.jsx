@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Footer from '../Layout/Footer';
 import { drivePhotoUrl } from '../../data/fallback';
 import { imageMap } from '../../data/imageMap';
@@ -172,8 +172,14 @@ function AlumniSection({ alumni }) {
 }
 
 // ─── Main Component ───────────────────────────────────────────────────────────
-export default function Faculty({ initialTab = 'faculty', faculty, visiting, staff, phd, pg, ug, alumni }) {
+export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiting, staff, phd, pg, ug, alumni }) {
   const [activeTab, setActiveTab] = useState(initialTab);
+
+  useEffect(() => {
+    if (initialTab) {
+      setActiveTab(initialTab);
+    }
+  }, [initialTab]);
 
   const sortedFaculty = sortFacultyByName(faculty);
   const sortedVisiting = sortFacultyByName(visiting);
@@ -212,7 +218,10 @@ export default function Faculty({ initialTab = 'faculty', faculty, visiting, sta
               <button
                 key={tab.id}
                 className={`people-tab${activeTab === tab.id ? ' active' : ''}`}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => {
+                  setActiveTab(tab.id);
+                  if (onNav) onNav(`people-${tab.id}`);
+                }}
               >
                 {tab.label}
               </button>

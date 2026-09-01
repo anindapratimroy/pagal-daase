@@ -31,6 +31,13 @@ const PEOPLE_TAB_MAP = {
   'people-pg':      'pg',
   'people-ug':      'ug',
   'people-alumni':  'alumni',
+  'faculty':        'faculty',
+  'staff':          'staff',
+  'phd':            'phd',
+  'pg':             'pg',
+  'ug':             'ug',
+  'alumni':         'alumni',
+  'people':         'faculty',
 };
 
 export default function App() {
@@ -101,10 +108,19 @@ export default function App() {
 
   const handleNav = (id, detailId = null) => {
     if (id === 'research-detail') {
+      setResearchAreaId(detailId);
+      setView('research-detail');
       window.location.hash = `research-detail/${detailId}`;
+    } else if (PEOPLE_TAB_MAP[id]) {
+      const targetTab = PEOPLE_TAB_MAP[id];
+      setPeopleTab(targetTab);
+      setView('people');
+      window.location.hash = id.startsWith('people-') ? id : `people-${id}`;
     } else {
+      setView(id);
       window.location.hash = id;
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // Compute what the "current" value is for Navbar highlighting
@@ -123,6 +139,7 @@ export default function App() {
         <Faculty
           key={peopleTab}  /* remount when tab changes from navbar */
           initialTab={peopleTab}
+          onNav={handleNav}
           faculty={data.faculty}
           visiting={data.visiting}
           staff={data.staff}
@@ -141,6 +158,7 @@ export default function App() {
       case 'faculty':    return (
         <Faculty
           initialTab="faculty"
+          onNav={handleNav}
           faculty={data.faculty} visiting={data.visiting} staff={data.staff}
           phd={data.phd} pg={data.pg} ug={data.ug} alumni={data.alumni}
         />
