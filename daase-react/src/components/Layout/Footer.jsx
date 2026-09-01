@@ -18,7 +18,7 @@ const INSTITUTE_LINKS = [
   { href: 'https://academic.iiti.ac.in',          label: 'Academic Affairs Portal' },
   { href: 'https://academic.iiti.ac.in/phdadvt.php', label: 'PhD Admissions Portal' },
   { href: 'https://library.iiti.ac.in',           label: 'Learning Resource Center' },
-  { href: 'https://tpo.iiti.ac.in',               label: 'Training & Placements' },
+  { href: 'https://placement.iiti.ac.in',         label: 'Training & Placements Portal' },
 ];
 
 export default function Footer({ onNav }) {
