@@ -133,9 +133,11 @@ export default function Home({ onNav, news, events }) {
               </div>
             </div>
           </div>
-          <Collaborators />
         </div>
       </div>
+
+      {/* Collaborations & Placements — Full Width Across Screen */}
+      <Collaborators />
 
       {/* About — Full redesign */}
       <div className="about-strip">
