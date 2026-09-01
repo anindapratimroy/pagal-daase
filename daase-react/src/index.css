@@ -1131,7 +1131,7 @@ nav.nav-scrolled.nav-hidden {
   background: transparent;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 26px;
 }
 
 .hero-stats-grid {
@@ -1199,7 +1199,7 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .vertical-marquee-container {
-  height: 310px;
+  height: 360px;
   overflow: hidden;
   position: relative;
   margin: 0 -20px;
