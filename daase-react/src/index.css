@@ -350,12 +350,36 @@ nav.nav-scrolled.nav-hidden {
   transform: translateY(-150%) !important;
 }
 
+@keyframes cosmicTextGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(255, 217, 122, 0.45)) drop-shadow(0 0 22px rgba(96, 165, 250, 0.25));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px rgba(255, 217, 122, 0.8)) drop-shadow(0 0 32px rgba(96, 165, 250, 0.5));
+  }
+}
+
+@keyframes logoPulseGlow {
+  0%, 100% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255, 217, 122, 0.5)) drop-shadow(0 0 18px rgba(96, 165, 250, 0.3));
+  }
+  50% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 14px rgba(255, 217, 122, 0.85)) drop-shadow(0 0 28px rgba(96, 165, 250, 0.6));
+  }
+}
+
 .nav-logos {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-right: 20px;
+  margin-right: 18px;
   flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.nav-logos:hover {
+  transform: scale(1.05);
 }
 
 .nav-logo-img {
@@ -363,8 +387,14 @@ nav.nav-scrolled.nav-hidden {
   width: auto;
   max-width: 100%;
   object-fit: contain;
-  filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255, 217, 122, 0.5)) drop-shadow(0 0 18px rgba(96, 165, 250, 0.3));
+  animation: logoPulseGlow 4s ease-in-out infinite;
   flex-shrink: 0;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.nav-logos:hover .nav-logo-img {
+  filter: brightness(0) invert(1) drop-shadow(0 0 16px rgba(255, 217, 122, 0.95)) drop-shadow(0 0 32px rgba(96, 165, 250, 0.7));
 }
 
 #black-logo {}
@@ -397,6 +427,13 @@ nav.nav-scrolled.nav-hidden {
   min-width: 0;
   margin-right: 24px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: transform 0.25s ease;
+}
+
+.nav-brand:hover {
+  transform: translateY(-1px);
 }
 
 .nav-brand-main {
@@ -410,12 +447,21 @@ nav.nav-scrolled.nav-hidden {
 
 .nav-brand-sub {
   font-size: clamp(13px, 1.15vw, 16.5px);
-  color: rgba(255, 255, 255, 0.95);
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  font-weight: 800;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   white-space: nowrap;
   line-height: 1.25;
+  background: linear-gradient(100deg, #ffffff 0%, #fff6db 25%, #ffd97a 50%, #93c5fd 80%, #ffffff 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: cosmicTextGlow 4s ease-in-out infinite, cosmicShimmer 8s linear infinite;
+  transition: all 0.3s ease;
+}
+
+.nav-brand:hover .nav-brand-sub {
+  filter: drop-shadow(0 0 18px rgba(255, 217, 122, 0.9)) drop-shadow(0 0 36px rgba(96, 165, 250, 0.65));
 }
 
 .nav-links {
