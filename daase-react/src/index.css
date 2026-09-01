@@ -4557,7 +4557,7 @@ a.sc-email:hover {
 
 /* ── COLLABORATIONS MARQUEE ─────────────────────────────────────────────────── */
 .collaborators-section {
-  margin-top: -38px;
+  margin-top: 20px;
   margin-bottom: 0px;
   padding: 0;
   position: relative;
