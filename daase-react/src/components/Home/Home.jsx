@@ -105,7 +105,7 @@ export default function Home({ onNav, news, events, publications = [] }) {
             <CounterStat target={100} suffix="+" label="+ Alumni" delay="0.24s" />
           </div>
 
-          <div className="scroll-hint" data-aos="fade-in" data-aos-delay="300">Scroll to explore</div>
+
         </div>
 
         <div className="hero-right" data-aos="fade-left">
