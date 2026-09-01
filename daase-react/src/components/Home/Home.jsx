@@ -232,7 +232,7 @@ export default function Home({ onNav, news, events, publications = [] }) {
                 M.Tech. in Space Engineering <span className="arrow">↗</span>
               </li>
               <li className="is-interactive" onClick={() => onNav('programs', 'ms')} title="View M.S. (Research) Program">
-                M.S. (Research) in Space Science &amp; Engineering <span className="arrow">↗</span>
+                M.S. (Research) in Space Engineering (SSE) <span className="arrow">↗</span>
               </li>
               <li className="is-interactive" onClick={() => onNav('programs', 'btech')} title="View B.Tech. Program">
                 B.Tech. in Space Science &amp; Engineering <span className="arrow">↗</span>

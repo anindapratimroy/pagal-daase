@@ -55,13 +55,13 @@ const PROGRAMS = {
   ms: {
     label: 'MS Research',
     badge: "Research Master's · 2 Years",
-    title: 'M.S. (Research) in Space Science & Engineering',
-    desc: 'Launched in 2021, designed for students who wish to pursue intensive research before a Ph.D. Students work closely with faculty on cutting-edge projects in space science and engineering.',
+    title: 'M.S. (Research) in Space Engineering (SSE)',
+    desc: 'Launched in 2021, designed for students who wish to pursue comprehensive research before starting a Ph.D. Students work closely with faculty on cutting-edge projects in space science and engineering.',
     details: [
       'Research-intensive: majority of time on original research',
-      'Covers radio astronomy, ionospheric science, atmospheric physics',
-      'Access to all DAASE research facilities and collaborations',
-      'Strong pathway to Ph.D. programs nationally and internationally',
+      'Covers diverse branches in astronomy & astrophysics',
+      'Megasciences collaborations',
+      'Ph.D. programs across India and abroad',
     ],
     highlights: [
       { num: '9', text: 'Current MS Research students (2024 & 2025 batches)' },
