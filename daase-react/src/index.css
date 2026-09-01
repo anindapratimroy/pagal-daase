@@ -1208,8 +1208,8 @@ nav.nav-scrolled.nav-hidden {
 
 .hero-stats-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
 }
 
 /* News & Events Feed */
@@ -1586,7 +1586,7 @@ a.news-feed-headline:hover {
   border-left: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.2), 0 16px 40px -8px rgba(0, 0, 0, 0.6);
   border-radius: 16px;
-  padding: 28px 20px;
+  padding: 18px 10px;
   text-align: center;
   animation: countUp 0.6s var(--ease-out) both;
   transition: var(--tr);
@@ -1603,22 +1603,23 @@ a.news-feed-headline:hover {
 }
 
 .hero-stat-num {
-  
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(22px, 2.5vw, 34px);
   font-weight: 900;
   color: var(--gold-light);
   display: block;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .hero-stat-label {
-  font-size: 13.5px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-on-dark-muted);
-  margin-top: 8px;
+  margin-top: 6px;
   display: block;
+  line-height: 1.3;
 }
 
 .hero-quick-links {
@@ -1681,6 +1682,181 @@ a.news-feed-headline:hover {
 }
 
 /* About dark strip */
+/* ═══════════════════════════════════════════════════
+   ABOUT DAASE + MESSAGE FROM THE HEAD
+═══════════════════════════════════════════════════ */
+
+.hod-about-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 60px clamp(20px, 5%, 80px);
+  width: 100%;
+  box-sizing: border-box;
+  align-items: start;
+}
+
+/* ── Left: About DAASE ── */
+.hod-about-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hod-about-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  display: block;
+}
+
+.hod-about-heading {
+  font-size: clamp(22px, 2.5vw, 34px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.hod-about-heading span {
+  color: var(--gold-light);
+}
+
+.hod-about-body {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.hod-about-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.hod-about-hl {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hod-about-hl-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* ── Right: Message from the Head ── */
+.hod-about-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.hod-message-card {
+  background: linear-gradient(130deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0.04) 100%);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 217, 122, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 20px;
+  padding: 28px 30px;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 20px 50px -12px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hod-message-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.hod-message-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 217, 122, 0.15);
+  border: 2px solid rgba(255, 217, 122, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.hod-message-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.hod-message-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.hod-message-role {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hod-message-badge {
+  background: rgba(255, 217, 122, 0.15);
+  border: 1px solid rgba(255, 217, 122, 0.4);
+  color: #ffd97a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.hod-message-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 217, 122, 0.35) 40%, rgba(255, 255, 255, 0.15) 100%);
+}
+
+.hod-message-quote {
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+  padding: 0;
+  border: none;
+  quotes: "\201C" "\201D";
+}
+
+.hod-message-sig {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 900px) {
+  .hod-about-section {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 40px clamp(16px, 4%, 48px);
+  }
+}
+
 /* ═══════════════════════════════════════════════════
    ABOUT DAASE — Redesigned
 ═══════════════════════════════════════════════════ */

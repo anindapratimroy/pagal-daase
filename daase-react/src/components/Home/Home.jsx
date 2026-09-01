@@ -96,11 +96,13 @@ export default function Home({ onNav, news, events, publications = [] }) {
             </button>
           </div>
 
-          <div className="hero-stats-grid" style={{ marginTop: '48px' }}>
-            <CounterStat target={7} label="Research Areas" delay="0.06s" />
-            <CounterStat target={5} label="Degree Programs" delay="0.12s" />
-            <CounterStat target={13} label="Faculty Members" delay="0.18s" />
-            <CounterStat target={100} label="+ Alumni" delay="0.23s" />
+          <div className="hero-stats-grid" style={{ marginTop: '32px' }}>
+            <CounterStat target={45} suffix="+" label="No of Projects" delay="0.04s" />
+            <CounterStat target={100} suffix="%" label="Placement Percentage" delay="0.08s" />
+            <CounterStat target={15} prefix="₹" suffix=" Cr+" label="Project Grants" delay="0.12s" />
+            <CounterStat target={250} suffix="+" label="Publications" delay="0.16s" />
+            <CounterStat target={13} label="Faculty Members" delay="0.20s" />
+            <CounterStat target={100} suffix="+" label="+ Alumni" delay="0.24s" />
           </div>
 
           <div className="scroll-hint" data-aos="fade-in" data-aos-delay="300">Scroll to explore</div>
@@ -201,6 +203,63 @@ export default function Home({ onNav, news, events, publications = [] }) {
 
       {/* Collaborations & Placements — Full Width Across Screen */}
       <Collaborators />
+
+      {/* ── About DAASE + Message from the Head ── */}
+      <div className="hod-about-section" data-aos="fade-up">
+        <div className="hod-about-left">
+          <span className="hod-about-eyebrow">✦ &nbsp;About DAASE</span>
+          <h2 className="hod-about-heading">
+            Department of <span>Astronomy, Astrophysics</span><br />
+            &amp; Space Engineering
+          </h2>
+          <p className="hod-about-body">
+            India's only dedicated department of its kind across all IITs — a comprehensive academic
+            and research ecosystem spanning the cosmos to cutting-edge space engineering.
+            Founded as a Centre for Astronomy in December 2015, elevated to a full Department in
+            May 2018, and backed by DST-FIST, SKA-IC, ISRO &amp; NASA.
+          </p>
+          <div className="hod-about-highlights">
+            <div className="hod-about-hl">
+              <span className="hod-about-hl-icon">🏛️</span>
+              <span>Established 2015 · IIT Indore</span>
+            </div>
+            <div className="hod-about-hl">
+              <span className="hod-about-hl-icon">🌍</span>
+              <span>DST-FIST · SKA-IC · ISRO · NASA</span>
+            </div>
+            <div className="hod-about-hl">
+              <span className="hod-about-hl-icon">🎓</span>
+              <span>5 Degree Programs · 7 Research Areas</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="hod-about-right">
+          <div className="hod-message-card">
+            <div className="hod-message-header">
+              <div className="hod-message-avatar">
+                <span>👨‍🔬</span>
+              </div>
+              <div className="hod-message-meta">
+                <div className="hod-message-name">Prof. Abhirup Datta</div>
+                <div className="hod-message-role">Head of Department</div>
+              </div>
+              <div className="hod-message-badge">Message from the Head</div>
+            </div>
+            <div className="hod-message-divider" />
+            <blockquote className="hod-message-quote">
+              "Welcome to the Department of Astronomy, Astrophysics and Space Engineering at IIT Indore.
+              We are a young and dynamic department, uniquely placed among all IITs, dedicated to the
+              pursuit of knowledge across the cosmos and engineering the future of space exploration.
+              Our faculty, students, and collaborators are united by a deep curiosity about the universe
+              and a commitment to scientific excellence."
+            </blockquote>
+            <div className="hod-message-sig">
+              — Prof. Abhirup Datta, HoD, AASE · IIT Indore
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* About — Full redesign */}
       <div className="about-strip">
