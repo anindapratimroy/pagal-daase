@@ -142,6 +142,9 @@ export default function Footer() {
 
         </div> {/* End of contact-redesign-grid */}
 
+        {/* Footer Separator */}
+        <div className="footer-separator" />
+
         {/* Integrated Premium Glass Footer */}
         <div className="section-footer">
           <div className="footer-inner">

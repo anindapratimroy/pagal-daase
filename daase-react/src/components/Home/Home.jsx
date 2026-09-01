@@ -57,13 +57,6 @@ export default function Home({ onNav, news, events }) {
 
   return (
     <div>
-      {/* Top strip */}
-      <div className="hero-top-strip">
-        Department of Astronomy, Astrophysics &amp; Space Engineering &nbsp;·&nbsp;{' '}
-        <span><a href="https://www.iiti.ac.in" target="_blank" rel="noopener noreferrer">Indian Institute of Technology Indore</a></span>
-        &nbsp;·&nbsp; Est. 2015
-      </div>
-
       {/* Hero main */}
       <div className="hero-main">
         <div className="hero-left" data-aos="fade-right">
@@ -99,7 +92,7 @@ export default function Home({ onNav, news, events }) {
 
         <div className="hero-right" data-aos="fade-left">
           <div className="news-feed-container anim-fadein" style={{ animationDelay: '0.2s' }}>
-            <h2 className="news-feed-title">News &amp; <span>Events</span></h2>
+            <h2 className="news-feed-title">Recent <span>Updates</span></h2>
 
             <div className="vertical-marquee-container">
               <div className="vertical-marquee-content">

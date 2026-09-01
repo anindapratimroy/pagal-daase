@@ -83,19 +83,21 @@ export default function Navbar({ current, onNav }) {
           <img src="images/IITI_Logo.svg" alt="IIT Indore" className="nav-logo-img"
             onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
           <div className="logo-placeholder" style={{ display: 'none' }}>IITI</div>
-          <div className="nav-divider" />
-          <img src="images/daase.png" alt="DAASE" className="nav-logo-img"
-            style={{ filter: 'brightness(0) invert(1)' }}
-            onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
-          <div className="logo-placeholder" style={{ display: 'none' }}>DAASE</div>
         </div>
 
         <div className="nav-brand" onClick={() => handleNav('home')}>
-          <div className="nav-brand-main">DAASE IIT Indore</div>
           <div className="nav-brand-sub">Dept. of Astronomy, Astrophysics &amp; Space Engineering</div>
         </div>
 
         <div className="nav-links">
+          {/* Home */}
+          <button
+            className={current === 'home' ? 'active' : ''}
+            onClick={() => handleNav('home')}
+          >
+            Home
+          </button>
+
           {/* People dropdown */}
           <div className={`nav-dropdown${openDropdown === 'people' ? ' open' : ''}`} onClick={(e) => toggleDropdown('people', e)}>
             <button className={`nav-dropdown-trigger${isPeopleActive(current) || openDropdown === 'people' ? ' active' : ''}`}>

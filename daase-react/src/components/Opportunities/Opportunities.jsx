@@ -1,22 +1,6 @@
 import Footer from '../Layout/Footer';
 import TiltCard from '../Layout/TiltCard';
 
-const FUNDERS = [
-  { href: 'https://www.education.gov.in', label: 'Ministry of Education (MoE) ↗' },
-  { href: 'https://www.ugc.gov.in', label: 'UGC ↗' },
-  { href: 'https://anrf.gov.in', label: 'ANRF / SERB ↗' },
-  { href: 'https://dst.gov.in', label: 'DST (DST-FIST) ↗' },
-  { href: 'https://moes.gov.in', label: 'MoES ↗' },
-  { href: 'https://www.csir.res.in', label: 'CSIR ↗' },
-  { href: 'https://sparc.iitkgp.ac.in', label: 'SPARC ↗' },
-  { href: 'https://dae.gov.in', label: 'DAE ↗' },
-  { href: 'https://www.isro.gov.in', label: 'ISRO ↗' },
-  { href: 'https://www.mpg.de', label: 'Max Planck Partner Group ↗' },
-  { href: 'https://www.asemduo.org', label: 'ASEM-DUO ↗' },
-];
-
-
-
 export default function Opportunities({ opportunities = [] }) {
   // Only show active opportunities
   const activeOpps = opportunities.filter(o => {
@@ -85,18 +69,6 @@ export default function Opportunities({ opportunities = [] }) {
               </div>
             )}
           </div>
-
-          {/* Funding card */}
-          <TiltCard className="funding-card anim-fadeup d2">
-            <div className="funding-title">Funding &amp; Support</div>
-            <div className="funder-list">
-              {FUNDERS.map(f => (
-                <a key={f.href} href={f.href} target="_blank" rel="noopener noreferrer" className="funder-item">
-                  {f.label}
-                </a>
-              ))}
-            </div>
-          </TiltCard>
         </div>
 
 
