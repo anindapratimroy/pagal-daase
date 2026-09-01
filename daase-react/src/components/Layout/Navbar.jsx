@@ -125,7 +125,7 @@ export default function Navbar({ current, onNav }) {
                 className={current === 'research' ? 'active' : ''}
                 onClick={(e) => { e.stopPropagation(); handleNav('research'); }}
               >
-                Research Overview
+                Research Areas
               </button>
               <button
                 className={current === 'facilities' ? 'active' : ''}
@@ -213,7 +213,7 @@ export default function Navbar({ current, onNav }) {
         <div style={{ padding: '6px 12px 2px', fontSize: '10px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--text-light)', marginTop: '8px' }}>
           Research
         </div>
-        <button style={{ paddingLeft: '24px' }} className={current === 'research' ? 'active' : ''} onClick={() => handleNav('research')}>Research Overview</button>
+        <button style={{ paddingLeft: '24px' }} className={current === 'research' ? 'active' : ''} onClick={() => handleNav('research')}>Research Areas</button>
         <button style={{ paddingLeft: '24px' }} className={current === 'facilities' ? 'active' : ''} onClick={() => handleNav('facilities')}>Research Facilities</button>
 
         <button className={current === 'programs' ? 'active' : ''} onClick={() => handleNav('programs')}>Programs</button>
