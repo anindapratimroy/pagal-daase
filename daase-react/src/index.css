@@ -3655,9 +3655,13 @@ a.sc-email:hover {
   font-size: 14.5px;
   font-weight: 600;
   cursor: pointer;
-  padding: 0;
+  padding: 2px 4px;
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+  pointer-events: auto;
+  position: relative;
+  z-index: 50;
 }
 
 .footer-credits-trigger:hover {
@@ -4890,72 +4894,95 @@ a.sc-email:hover {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(2, 6, 23, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  z-index: 99999;
+  background: rgba(1, 4, 15, 0.6);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  z-index: 999999;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: fadeIn 0.3s ease;
+  animation: fadeIn 0.25s ease;
+  pointer-events: auto;
 }
 
 .credits-modal-content {
   position: relative;
-  background: rgba(0, 5, 15, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 40px 60px;
-  border-radius: 12px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,215,0,0.05);
+  background: rgba(3, 8, 26, 0.75);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-top: 1px solid rgba(255, 217, 122, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 36px 48px;
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.3);
   text-align: center;
   min-width: 320px;
-  animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: 90vw;
+  z-index: 1000000;
+  pointer-events: auto;
+  animation: slideUpFade 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .credits-modal-close-icon {
   position: absolute;
-  top: 15px;
-  right: 18px;
+  top: 14px;
+  right: 16px;
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.5);
   font-size: 26px;
   line-height: 1;
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
+  padding: 4px 8px;
 }
 
 .credits-modal-close-icon:hover {
   color: #fff;
+  transform: scale(1.1);
 }
 
 .credits-modal-title {
   color: #fff;
-  
-  font-style: italic;
-  font-size: 26px;
-  margin-bottom: 24px;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 15px;
+  padding-bottom: 12px;
+  letter-spacing: 0.02em;
 }
 
 .credits-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  align-items: center;
 }
 
 .credits-link {
   color: var(--gold-light) !important;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 16.5px;
   text-decoration: none;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.3);
-  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .credits-link:hover {
-  text-shadow: 0 0 15px rgba(255, 215, 0, 1), 0 0 30px rgba(255, 215, 0, 0.8);
+  color: #ffffff !important;
+  background: rgba(255, 217, 122, 0.18);
+  border-color: rgba(255, 217, 122, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 @keyframes slideUpFade {

@@ -154,11 +154,19 @@ export default function Footer({ onNav }) {
             © {new Date().getFullYear()} Department of Astronomy, Astrophysics and Space Engineering (AASE), IIT Indore. All rights reserved.
           </div>
           <div className="footer-credits-text">
-            <button className="footer-credits-trigger" onClick={() => setShowWebmaster(true)}>
+            <button 
+              type="button" 
+              className="footer-credits-trigger" 
+              onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowWebmaster(true); }}
+            >
               Webmaster
             </button>
             <span className="footer-credits-sep">|</span>
-            <button className="footer-credits-trigger" onClick={() => setShowCredits(true)}>
+            <button 
+              type="button" 
+              className="footer-credits-trigger" 
+              onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowCredits(true); }}
+            >
               Credits
             </button>
           </div>
@@ -170,12 +178,18 @@ export default function Footer({ onNav }) {
       {showWebmaster && (
         <div className="credits-modal-overlay" onClick={() => setShowWebmaster(false)}>
           <div className="credits-modal-content" onClick={e => e.stopPropagation()}>
-            <button className="credits-modal-close-icon" onClick={() => setShowWebmaster(false)} aria-label="Close">
+            <button type="button" className="credits-modal-close-icon" onClick={() => setShowWebmaster(false)} aria-label="Close">
               &times;
             </button>
             <h3 className="credits-modal-title">Webmaster</h3>
             <div className="credits-list">
-              <a href="https://www.linkedin.com/in/aninda-pratim-roy" target="_blank" rel="noopener noreferrer" className="credits-link">
+              <a 
+                href="https://www.linkedin.com/in/aninda-pratim-roy" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="credits-link"
+                onClick={e => e.stopPropagation()}
+              >
                 Aninda Pratim Roy ↗
               </a>
             </div>
@@ -187,12 +201,18 @@ export default function Footer({ onNav }) {
       {showCredits && (
         <div className="credits-modal-overlay" onClick={() => setShowCredits(false)}>
           <div className="credits-modal-content" onClick={e => e.stopPropagation()}>
-            <button className="credits-modal-close-icon" onClick={() => setShowCredits(false)} aria-label="Close">
+            <button type="button" className="credits-modal-close-icon" onClick={() => setShowCredits(false)} aria-label="Close">
               &times;
             </button>
             <h3 className="credits-modal-title">Additional Credits</h3>
             <div className="credits-list">
-              <a href="https://www.linkedin.com/in/chitrashri-bhargava" target="_blank" rel="noopener noreferrer" className="credits-link">
+              <a 
+                href="https://www.linkedin.com/in/chitrashri-bhargava" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="credits-link"
+                onClick={e => e.stopPropagation()}
+              >
                 Chitrashri Bhargava ↗
               </a>
             </div>
