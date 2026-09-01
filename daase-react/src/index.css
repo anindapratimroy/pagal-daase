@@ -1041,7 +1041,7 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .hero-left {
-  padding: 20px 52px 50px 40px;
+  padding: 20px 52px 10px 40px;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   animation: slideRight 0.7s var(--ease-out) 0.1s both;
 }
@@ -1178,7 +1178,7 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .hero-right {
-  padding: 20px 40px 50px 52px;
+  padding: 20px 40px 10px 52px;
   background: transparent;
   display: flex;
   flex-direction: column;
@@ -1636,7 +1636,7 @@ a.news-feed-headline:hover {
 .about-strip {
   background: transparent;
   color: #fff;
-  padding: 80px 0 60px;
+  padding: 24px 0 60px;
   width: 100%;
 }
 
@@ -1644,7 +1644,7 @@ a.news-feed-headline:hover {
 .about-hdr {
   text-align: center;
   padding: 0 clamp(20px, 5%, 80px);
-  margin-bottom: 56px;
+  margin-bottom: 36px;
 }
 
 .about-eyebrow {
@@ -4209,20 +4209,20 @@ a.sc-email:hover {
 
 /* ── COLLABORATIONS MARQUEE ─────────────────────────────────────────────────── */
 .collaborators-section {
-  margin-top: -16px;
-  margin-bottom: 24px;
-  padding: 10px 0 10px 0;
+  margin-top: -38px;
+  margin-bottom: 0px;
+  padding: 0;
   position: relative;
-  height: 220px;
+  height: 180px;
   overflow: hidden;
   width: 100%;
 }
 
 .collab-marquee-title {
   text-align: center;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   margin-top: 0;
   background: linear-gradient(135deg, #ffd97a 0%, #fff4c2 50%, #ffd97a 100%);
   -webkit-background-clip: text;
@@ -4234,7 +4234,7 @@ a.sc-email:hover {
 
 .collab-marquee-container {
   position: absolute;
-  top: 50px;
+  top: 36px;
   left: 0;
   width: 100%;
   display: flex;
