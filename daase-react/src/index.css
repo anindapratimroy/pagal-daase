@@ -985,7 +985,7 @@ nav.nav-scrolled.nav-hidden {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: clamp(620px, calc(100vh - var(--nav-h) - 40px), 880px);
-  align-items: stretch;
+  align-items: flex-start;
   width: 100%;
 }
 
@@ -1131,8 +1131,7 @@ nav.nav-scrolled.nav-hidden {
   background: transparent;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  justify-content: space-between;
+  gap: 20px;
 }
 
 .hero-stats-grid {
@@ -1143,9 +1142,6 @@ nav.nav-scrolled.nav-hidden {
 
 /* News & Events Feed */
 .news-feed-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
   background: linear-gradient(110deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 15%, rgba(255, 255, 255, 0) 85%, rgba(255, 255, 255, 0.04) 100%);
   backdrop-filter: blur(8px) saturate(140%);
   -webkit-backdrop-filter: blur(8px) saturate(140%);
@@ -1203,9 +1199,7 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .vertical-marquee-container {
-  flex: 1;
-  min-height: 280px;
-  height: clamp(280px, 32vh, 360px);
+  height: 250px;
   overflow: hidden;
   position: relative;
   margin: 0 -20px;
@@ -1329,9 +1323,6 @@ a.news-feed-headline:hover {
 
 /* Home Recent Publications Box */
 .home-pub-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
   background: linear-gradient(110deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 15%, rgba(255, 255, 255, 0) 85%, rgba(255, 255, 255, 0.04) 100%);
   backdrop-filter: blur(8px) saturate(140%);
   -webkit-backdrop-filter: blur(8px) saturate(140%);
@@ -1394,9 +1385,7 @@ a.news-feed-headline:hover {
 }
 
 .home-pub-marquee-container {
-  flex: 1;
-  min-height: 280px;
-  height: clamp(280px, 32vh, 360px);
+  height: 250px;
   overflow: hidden;
   position: relative;
   margin: 0 -20px;

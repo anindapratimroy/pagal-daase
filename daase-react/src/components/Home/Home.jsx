@@ -2,6 +2,7 @@ import CounterStat from './CounterStat';
 import Footer from '../Layout/Footer';
 import NewsTicker from './NewsTicker';
 import Collaborators from './Collaborators';
+import { PUBLICATIONS_FB } from '../../data/fallback';
 
 // Ensure link has protocol prefix for external, but respect internal links
 function normalizeLink(link) {
@@ -68,7 +69,7 @@ export default function Home({ onNav, news, events, publications = [] }) {
   // Prioritize upcoming events first, then active news, and then past events
   const combinedUpdates = [...upcomingEvents, ...activeNews, ...pastEvents].slice(0, 15);
 
-  const pubsList = Array.isArray(publications) ? publications : [];
+  const pubsList = (publications && publications.length > 0) ? publications : PUBLICATIONS_FB;
 
   return (
     <div>
