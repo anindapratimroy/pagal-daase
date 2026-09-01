@@ -21,15 +21,6 @@ const INSTITUTE_LINKS = [
   { href: 'https://tpo.iiti.ac.in',               label: 'Training & Placements' },
 ];
 
-const PARTNERS = [
-  { name: 'SKA-India (SKA-IC)', url: 'https://www.ncra.tifr.res.in/skaindia' },
-  { name: 'ISRO Missions', url: 'https://www.isro.gov.in' },
-  { name: 'NASA Collaborations', url: 'https://www.nasa.gov' },
-  { name: 'Max Planck Society', url: 'https://www.mpg.de/en' },
-  { name: 'Astronomical Society of India', url: 'https://astron-soc.in' },
-  { name: 'DST-FIST', url: 'https://dst.gov.in' },
-];
-
 export default function Footer({ onNav }) {
   const [showCredits, setShowCredits] = useState(false);
 
@@ -154,24 +145,6 @@ export default function Footer({ onNav }) {
             </div>
           </div>
 
-        </div>
-
-        {/* ── Partner & Consortium Strip ── */}
-        <div className="footer-partner-strip">
-          <div className="partner-strip-label">✦ Research &amp; Funding Alliances</div>
-          <div className="partner-strip-items">
-            {PARTNERS.map((p, idx) => (
-              <a 
-                key={idx} 
-                href={p.url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="partner-strip-pill"
-              >
-                {p.name}
-              </a>
-            ))}
-          </div>
         </div>
 
         {/* ── Footer Divider ── */}

@@ -3447,49 +3447,6 @@ a.sc-email:hover {
   pointer-events: none;
 }
 
-/* ── Partner & Consortium Strip ── */
-.footer-partner-strip {
-  margin-top: 36px;
-  padding-top: 22px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.partner-strip-label {
-  font-size: 11.5px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold-light);
-}
-
-.partner-strip-items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.partner-strip-pill {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 6px;
-  padding: 6px 14px;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.partner-strip-pill:hover {
-  background: rgba(255, 217, 122, 0.12);
-  border-color: rgba(255, 217, 122, 0.4);
-  color: #ffd97a;
-  transform: translateY(-2px);
-}
-
 /* ── Footer Bottom Divider ── */
 .footer-bottom-divider {
   width: 100%;
