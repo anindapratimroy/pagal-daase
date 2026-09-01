@@ -237,9 +237,6 @@ export default function Home({ onNav, news, events, publications = [] }) {
               <li className="is-interactive" onClick={() => onNav('programs', 'btech')} title="View B.Tech. Program">
                 B.Tech. in Space Science &amp; Engineering <span className="arrow">↗</span>
               </li>
-              <li className="is-interactive" onClick={() => onNav('programs', 'btech')} title="View Minor Program">
-                Minor in Astronomy &amp; Space Science (for IIT Indore UG students) <span className="arrow">↗</span>
-              </li>
             </ul>
           </div>
 

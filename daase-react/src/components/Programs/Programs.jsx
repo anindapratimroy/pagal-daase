@@ -11,7 +11,6 @@ const PROGRAMS = {
       'Space science fundamentals: orbital mechanics, rocket propulsion, remote sensing',
       'Engineering applications: instrumentation, satellite systems, RF systems',
       'Data science, computational methods, and hands-on lab training',
-      'Minor in Astronomy & Space Science available for IIT Indore students',
     ],
     highlights: [
       { num: '2022', text: 'First B.Tech. in Space Science & Engineering across all IITs' },
