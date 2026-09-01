@@ -323,7 +323,7 @@ export default function Home({ onNav, news, events, publications = [] }) {
               { year: 'Dec 2015', title: 'Founded as Centre for Astronomy', sub: 'Ph.D. program launched · Founding SKA-IC member' },
               { year: 'May 2018', title: 'Upgraded to Full Department', sub: 'M.Sc. Astronomy — first & only in IITs' },
               { year: '2021', title: 'Space Engineering Programs', sub: 'M.Tech. Space Engineering · M.S. (Research) launched' },
-              { year: '2022', title: 'B.Tech. Space Science & Engg.', sub: "First B.Tech of it's kind in IIT System. Arctic Research Facility" },
+              { year: '2023', title: 'B.Tech. Space Science & Engg.', sub: "First B.Tech of it's kind in IIT System. Arctic Research Facility" },
               { year: 'Present', title: '100+ Alumni · World-Class Labs', sub: 'Alumni at prestigious institutes & industries globally' },
             ].map((t, i) => (
               <div className="about-tl-item" key={i}>

@@ -6,14 +6,14 @@ const PROGRAMS = {
     label: 'B.Tech.',
     badge: 'Undergraduate · 4 Years',
     title: 'B.Tech. in Space Science & Engineering',
-    desc: 'A pioneering program — the first B.Tech. of its kind in the IIT system (2022). Integrates rigorous space science fundamentals with engineering applications, preparing graduates for careers in Indian and global space sectors.',
+    desc: 'A pioneering program — the first B.Tech. of its kind in the IIT system (2023). Integrates rigorous space science fundamentals with engineering applications, preparing graduates for careers in Indian and global space sectors.',
     details: [
       'Space science fundamentals: orbital mechanics, rocket propulsion, remote sensing',
       'Engineering applications: instrumentation, satellite systems, RF systems',
       'Data science, computational methods, and hands-on lab training',
     ],
     highlights: [
-      { num: '2022', text: 'First B.Tech. in Space Science & Engineering across all IITs' },
+      { num: '2023', text: 'First B.Tech. in Space Science & Engineering across all IITs' },
       { num: '3', text: 'Active batches (2023, 2024, 2025) currently enrolled' },
       { num: '6+', text: 'State-of-the-art labs for hands-on learning' },
     ],
