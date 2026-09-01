@@ -169,12 +169,15 @@ export default function Navbar({ current, onNav }) {
             Opportunities
           </button>
 
-          <div className="nav-divider-vertical" />
-
-          {/* Permanent Desktop Hamburger */}
-          <div className="hamburger desktop-hamburger" onClick={() => setMobileOpen(o => !o)}>
-            <span /><span /><span />
-          </div>
+          {/* Modern Responsive Menu Toggle — mobile only */}
+          <button 
+            className={`nav-mobile-toggle${mobileOpen ? ' open' : ''}`} 
+            onClick={() => setMobileOpen(o => !o)}
+            aria-label="Toggle Navigation Menu"
+          >
+            <span className="toggle-bar bar-top" />
+            <span className="toggle-bar bar-bot" />
+          </button>
         </div>
       </nav>
 
