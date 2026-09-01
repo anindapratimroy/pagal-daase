@@ -248,13 +248,13 @@ export default function Home({ onNav, news, events, publications = [] }) {
                 Compact Objects &amp; Transients <span className="arrow">↗</span>
               </li>
               <li className="is-interactive" onClick={() => onNav('research-detail', 'cosmology')} title="View Cosmology">
-                Cosmology &amp; Early Universe <span className="arrow">↗</span>
+                Cosmology <span className="arrow">↗</span>
               </li>
               <li className="is-interactive" onClick={() => onNav('research-detail', 'galaxies-agn')} title="View Galaxies & Active Galactic Nuclei">
                 Galaxies &amp; Active Galactic Nuclei <span className="arrow">↗</span>
               </li>
               <li className="is-interactive" onClick={() => onNav('research-detail', 'sun-heliosphere')} title="View Sun & Heliosphere">
-                Sun &amp; Heliosphere (Solar Physics) <span className="arrow">↗</span>
+                Sun &amp; Heliosphere <span className="arrow">↗</span>
               </li>
               <li className="is-interactive" onClick={() => onNav('research-detail', 'space-weather')} title="View Space Weather & Atmospheric Science">
                 Space Weather &amp; Atmospheric Science <span className="arrow">↗</span>
@@ -263,7 +263,7 @@ export default function Home({ onNav, news, events, publications = [] }) {
                 Communication, Navigation &amp; Remote Sensing <span className="arrow">↗</span>
               </li>
               <li className="is-interactive" onClick={() => onNav('research-detail', 'data-science')} title="View Data Science & ML in Astrophysics">
-                Data Science &amp; AI-Driven Techniques <span className="arrow">↗</span>
+                Data Science &amp; ML in Astrophysics <span className="arrow">↗</span>
               </li>
             </ul>
           </div>
