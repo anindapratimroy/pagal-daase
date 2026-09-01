@@ -409,10 +409,10 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .nav-brand-sub {
-  font-size: clamp(10px, 0.85vw, 13px);
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 500;
-  letter-spacing: 0.06em;
+  font-size: clamp(13px, 1.15vw, 16.5px);
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   white-space: nowrap;
   line-height: 1.25;
@@ -3651,7 +3651,7 @@ a.sc-email:hover {
     padding: 0 20px 0 24px;
   }
   .nav-brand-main { font-size: 15px; }
-  .nav-brand-sub { font-size: 10.5px; white-space: nowrap; }
+  .nav-brand-sub { font-size: 13.5px; white-space: nowrap; }
   .nav-links button { font-size: 12px; padding: 5px 6px; }
   .nav-cta-btn { padding: 6px 12px !important; }
 }
@@ -3667,7 +3667,7 @@ a.sc-email:hover {
     margin-left: auto;
   }
   .nav-brand-sub {
-    font-size: 10.5px;
+    font-size: 14px;
     white-space: nowrap;
   }
 }
