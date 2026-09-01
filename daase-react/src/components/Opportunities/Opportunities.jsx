@@ -1,6 +1,18 @@
 import Footer from '../Layout/Footer';
 import TiltCard from '../Layout/TiltCard';
 
+const FUNDERS = [
+  { icon: '🏛️', label: 'Ministry of Education (MoE)', href: 'https://www.education.gov.in' },
+  { icon: '🔬', label: 'SERB — Science & Engineering Research Board', href: 'https://serb.gov.in' },
+  { icon: '🏆', label: 'DST-FIST Research Grants', href: 'https://dst.gov.in' },
+  { icon: '🚀', label: 'ISRO — RESPOND & Space Science', href: 'https://www.isro.gov.in' },
+  { icon: '📡', label: 'SKA-India Consortium (SKA-IC)', href: 'https://www.ncra.tifr.res.in/skaindia' },
+  { icon: '🌌', label: 'Max Planck Society (MPG)', href: 'https://www.mpg.de/en' },
+  { icon: '🪐', label: 'NASA Planetary Science Division', href: 'https://www.nasa.gov' },
+  { icon: '📡', label: 'IEEE Geoscience & Remote Sensing (GRSS)', href: 'https://www.grss-ieee.org' },
+  { icon: '🔭', label: 'Astronomical Society of India (ASI)', href: 'https://astron-soc.in' },
+];
+
 export default function Opportunities({ opportunities = [] }) {
   // Only show active opportunities
   const activeOpps = opportunities.filter(o => {
@@ -71,6 +83,31 @@ export default function Opportunities({ opportunities = [] }) {
           </div>
         </div>
 
+        {/* Full-width Funding & Research Support Scroller (Left to Right) */}
+        <div className="funders-scroller-section">
+          <div className="funders-header">
+            <span className="section-eyebrow">✦ Support &amp; Grants</span>
+            <h3 className="funders-scroller-title">Funding &amp; <span>Research Support</span></h3>
+          </div>
+          
+          <div className="funders-marquee-container">
+            <div className="funders-marquee-content">
+              {[...FUNDERS, ...FUNDERS].map((f, idx) => (
+                <a
+                  key={idx}
+                  href={f.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="funder-pill"
+                >
+                  <span className="funder-pill-icon">{f.icon}</span>
+                  <span className="funder-pill-name">{f.label}</span>
+                  <span className="funder-pill-arrow">↗</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
 
       </div>
       <Footer />
