@@ -844,13 +844,13 @@ nav.nav-scrolled.nav-hidden {
 
 .section-inner {
   width: 100%;
-  padding: 56px clamp(20px, 5%, 80px) 72px;
+  padding: 36px clamp(20px, 5%, 80px) 64px;
   box-sizing: border-box;
 }
 
 .people-section-inner {
   width: 100%;
-  padding: 56px clamp(20px, 5%, 80px) 72px;
+  padding: 36px clamp(20px, 5%, 80px) 64px;
   box-sizing: border-box;
 }
 
@@ -1015,7 +1015,7 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .hero-left {
-  padding: 60px 52px 60px 40px;
+  padding: 20px 52px 50px 40px;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   animation: slideRight 0.7s var(--ease-out) 0.1s both;
 }
@@ -1152,7 +1152,7 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .hero-right {
-  padding: 60px 40px 60px 52px;
+  padding: 20px 40px 50px 52px;
   background: transparent;
   display: flex;
   flex-direction: column;
