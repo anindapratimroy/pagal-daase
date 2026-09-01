@@ -1,6 +1,5 @@
 import React from 'react';
 import { RESEARCH_AREAS } from '../../data/fallback';
-import Publications from './Publications';
 import Footer from '../Layout/Footer';
 import TiltCard from '../Layout/TiltCard';
 
@@ -36,9 +35,6 @@ export default function Research({ onNav }) {
           />
         </div>
       </div>
-
-      {/* Publications Scroller — below the video */}
-      <Publications />
 
       {/* Research Area Cards */}
       <div style={{ width: '100%', padding: '40px clamp(20px, 5%, 80px) 56px', boxSizing: 'border-box' }}>

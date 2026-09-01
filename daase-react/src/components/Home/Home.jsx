@@ -36,7 +36,20 @@ function isExternal(link) {
   return link.startsWith('http://') || link.startsWith('https://') || link.startsWith('www.');
 }
 
-export default function Home({ onNav, news, events }) {
+function getPubText(pub) {
+  if (typeof pub === 'string') return pub;
+  return pub.text || pub.title || pub.citation || '';
+}
+
+function getPubUrl(pub) {
+  if (typeof pub === 'string') {
+    const m = pub.match(/(https?:\/\/[^\s]+)/);
+    return m ? m[1] : null;
+  }
+  return pub.url || pub.doi || pub.link || null;
+}
+
+export default function Home({ onNav, news, events, publications = [] }) {
   // Filter only active news, normalize 'text' field to 'title'
 
   console.log("EVENTS:", events);
@@ -54,6 +67,8 @@ export default function Home({ onNav, news, events }) {
 
   // Prioritize upcoming events first, then active news, and then past events
   const combinedUpdates = [...upcomingEvents, ...activeNews, ...pastEvents].slice(0, 15);
+
+  const pubsList = Array.isArray(publications) ? publications : [];
 
   return (
     <div>
@@ -91,14 +106,13 @@ export default function Home({ onNav, news, events }) {
         </div>
 
         <div className="hero-right" data-aos="fade-left">
+          {/* 1. Recent Updates */}
           <div className="news-feed-container anim-fadein" style={{ animationDelay: '0.2s' }}>
             <h2 className="news-feed-title">Recent <span>Updates</span></h2>
 
             <div className="vertical-marquee-container">
               <div className="vertical-marquee-content">
                 {combinedUpdates.length > 0 ? (() => {
-                  // Ensure we always have enough items to fill the container height
-                  // so the marquee doesn't jump when we have less data.
                   const copiesNeeded = Math.max(2, Math.ceil(12 / combinedUpdates.length) * 2);
                   const displayUpdates = [];
                   for (let i = 0; i < copiesNeeded; i++) displayUpdates.push(...combinedUpdates);
@@ -130,6 +144,54 @@ export default function Home({ onNav, news, events }) {
                   <div className="news-feed-empty">No updates to show right now.</div>
                 )}
 
+              </div>
+            </div>
+          </div>
+
+          {/* 2. Recent Publications */}
+          <div className="home-pub-container anim-fadein" style={{ animationDelay: '0.32s' }}>
+            <div className="home-pub-header">
+              <h2 className="news-feed-title" style={{ margin: 0 }}>Recent <span>Publications</span></h2>
+              <button
+                className="home-pub-view-all"
+                onClick={() => onNav('research')}
+                title="View research areas"
+              >
+                Explore Areas ↗
+              </button>
+            </div>
+
+            <div className="home-pub-marquee-container">
+              <div className="home-pub-marquee-content">
+                {(pubsList.length > 0 ? (() => {
+                  const copiesNeeded = Math.max(2, Math.ceil(8 / pubsList.length) * 2);
+                  const displayPubs = [];
+                  for (let i = 0; i < copiesNeeded; i++) displayPubs.push(...pubsList);
+                  return displayPubs;
+                })() : []).map((pub, idx) => {
+                  const text = getPubText(pub);
+                  const url = getPubUrl(pub);
+                  const displayText = text.replace(/(https?:\/\/[^\s]+)/g, '').trim();
+                  const realNum = (idx % pubsList.length) + 1;
+
+                  const ItemTag = url ? 'a' : 'div';
+                  const props = url ? {
+                    href: url,
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                    title: 'Open paper'
+                  } : {};
+
+                  return (
+                    <ItemTag key={idx} className={`home-pub-item${url ? ' is-linked' : ''}`} {...props}>
+                      <span className="home-pub-num">{realNum.toString().padStart(2, '0')}.</span>
+                      <div className="home-pub-body">
+                        <span className="home-pub-text">{displayText || text}</span>
+                        {url && <span className="home-pub-arrow">↗</span>}
+                      </div>
+                    </ItemTag>
+                  );
+                })}
               </div>
             </div>
           </div>

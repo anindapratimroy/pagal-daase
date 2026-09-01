@@ -115,7 +115,7 @@ export default function App() {
 
   const renderView = () => {
     switch (view) {
-      case 'home':       return <Home onNav={handleNav} news={data.news} events={data.events} />;
+      case 'home':       return <Home onNav={handleNav} news={data.news} events={data.events} publications={data.publications} />;
       case 'research':   return <Research onNav={handleNav} />;
       case 'research-detail': return <ResearchAreaDetail areaId={researchAreaId} onNav={handleNav} />;
       case 'programs':   return <Programs />;
@@ -147,7 +147,7 @@ export default function App() {
       );
       case 'students':   return <Students pg={data.pg} ug={data.ug} phd={data.phd} interns={data.interns} />;
       case 'alumni':     return <Alumni alumni={data.alumni} />;
-      default:           return <Home onNav={handleNav} news={data.news} events={data.events} />;
+      default:           return <Home onNav={handleNav} news={data.news} events={data.events} publications={data.publications} />;
     }
   };
 
