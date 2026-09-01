@@ -244,22 +244,25 @@ export default function Home({ onNav, news, events, publications = [] }) {
             <div className="about-info-card-icon">🔭</div>
             <h3 className="about-info-card-title">Research Areas</h3>
             <ul className="about-info-list">
-              <li className="is-interactive" onClick={() => onNav('research-detail', 'radio-astronomy')} title="View Radio Astronomy">
-                Radio Astronomy &amp; Instrumentation <span className="arrow">↗</span>
-              </li>
-              <li className="is-interactive" onClick={() => onNav('research-detail', 'heliophysics')} title="View Heliophysics">
-                Heliophysics &amp; Solar Physics <span className="arrow">↗</span>
-              </li>
-              <li className="is-interactive" onClick={() => onNav('research-detail', 'remote-sensing')} title="View Remote Sensing">
-                Remote Sensing &amp; Atmospheric Physics <span className="arrow">↗</span>
-              </li>
-              <li className="is-interactive" onClick={() => onNav('research-detail', 'space-engineering')} title="View Space Engineering">
-                CubeSat, Drone &amp; Spacecraft Technologies <span className="arrow">↗</span>
+              <li className="is-interactive" onClick={() => onNav('research-detail', 'compact-objects')} title="View Compact Objects & Transients">
+                Compact Objects &amp; Transients <span className="arrow">↗</span>
               </li>
               <li className="is-interactive" onClick={() => onNav('research-detail', 'cosmology')} title="View Cosmology">
-                High-Energy Astrophysics &amp; Observational Cosmology <span className="arrow">↗</span>
+                Cosmology &amp; Early Universe <span className="arrow">↗</span>
               </li>
-              <li className="is-interactive" onClick={() => onNav('research-detail', 'data-science')} title="View Data Science">
+              <li className="is-interactive" onClick={() => onNav('research-detail', 'galaxies-agn')} title="View Galaxies & Active Galactic Nuclei">
+                Galaxies &amp; Active Galactic Nuclei <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('research-detail', 'sun-heliosphere')} title="View Sun & Heliosphere">
+                Sun &amp; Heliosphere (Solar Physics) <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('research-detail', 'space-weather')} title="View Space Weather & Atmospheric Science">
+                Space Weather &amp; Atmospheric Science <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('research-detail', 'instrumentation')} title="View Communication, Navigation & Remote Sensing">
+                Communication, Navigation &amp; Remote Sensing <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('research-detail', 'data-science')} title="View Data Science & ML in Astrophysics">
                 Data Science &amp; AI-Driven Techniques <span className="arrow">↗</span>
               </li>
             </ul>

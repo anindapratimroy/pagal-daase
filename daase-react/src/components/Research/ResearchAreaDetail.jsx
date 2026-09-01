@@ -40,8 +40,23 @@ function RichText({ text }) {
   );
 }
 
+const ALIAS_MAP = {
+  'radio-astronomy': 'cosmology',
+  'heliophysics': 'sun-heliosphere',
+  'remote-sensing': 'space-weather',
+  'space-engineering': 'instrumentation',
+  'cosmology': 'cosmology',
+  'data-science': 'data-science',
+  'compact-objects': 'compact-objects',
+  'galaxies-agn': 'galaxies-agn',
+  'sun-heliosphere': 'sun-heliosphere',
+  'space-weather': 'space-weather',
+  'instrumentation': 'instrumentation',
+};
+
 export default function ResearchAreaDetail({ areaId, onNav }) {
-  const area = RESEARCH_AREAS.find(r => r.id === areaId);
+  const resolvedId = ALIAS_MAP[areaId] || areaId;
+  const area = RESEARCH_AREAS.find(r => r.id === resolvedId || r.id === areaId);
 
   useEffect(() => {
     const mainContent = document.getElementById('main-content');
