@@ -28,16 +28,16 @@ export default function TiltCard({ children, className = '', style = {}, ...prop
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      // Subtle, elegant 3D tilt (max ±4deg)
-      const rotateX = -((y - centerY) / centerY) * 4;
-      const rotateY = ((x - centerX) / centerX) * 4;
+      // Subtle, buttery 3D tilt (max ±2.5deg)
+      const rotateX = -((y - centerY) / centerY) * 2.5;
+      const rotateY = ((x - centerX) / centerX) * 2.5;
 
-      innerRef.current.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translate3d(0, -6px, 0)`;
+      innerRef.current.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translate3d(0, -4px, 0)`;
 
       if (glareRef.current) {
         const glareX = ((x / rect.width) * 100).toFixed(1);
         const glareY = ((y / rect.height) * 100).toFixed(1);
-        glareRef.current.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 65%)`;
+        glareRef.current.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0) 65%)`;
         glareRef.current.style.opacity = '1';
       }
     });
@@ -45,13 +45,13 @@ export default function TiltCard({ children, className = '', style = {}, ...prop
 
   const handleMouseEnter = () => {
     if (!innerRef.current) return;
-    innerRef.current.style.transition = 'transform 0.15s ease-out, box-shadow 0.3s ease';
+    innerRef.current.style.transition = 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
   };
 
   const handleMouseLeave = () => {
     if (frameRef.current) cancelAnimationFrame(frameRef.current);
     if (innerRef.current) {
-      innerRef.current.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 0.5s cubic-bezier(0.2, 0.9, 0.2, 1)';
+      innerRef.current.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.65s cubic-bezier(0.16, 1, 0.3, 1)';
       innerRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0)';
     }
     if (glareRef.current) {
