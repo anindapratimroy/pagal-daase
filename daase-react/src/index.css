@@ -1683,12 +1683,12 @@ a.news-feed-headline:hover {
 }
 
 .about-info-list li {
-  
   font-size: 16px;
   color: rgba(255, 255, 255, 0.82);
   line-height: 1.55;
   padding-left: 18px;
   position: relative;
+  transition: all 0.25s ease;
 }
 
 .about-info-list li::before {
@@ -1699,6 +1699,37 @@ a.news-feed-headline:hover {
   font-weight: 700;
   font-size: 16px;
   line-height: 1.4;
+  transition: transform 0.2s ease;
+}
+
+.about-info-list li.is-interactive {
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.about-info-list li.is-interactive:hover {
+  color: #ffd97a;
+  transform: translateX(4px);
+}
+
+.about-info-list li.is-interactive:hover::before {
+  color: #fff;
+  transform: translateX(2px);
+}
+
+.about-info-list li .arrow {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--gold);
+  margin-left: 4px;
+  transition: transform 0.2s ease;
+  opacity: 0.8;
+}
+
+.about-info-list li.is-interactive:hover .arrow {
+  opacity: 1;
+  transform: translateX(2px) translateY(-2px);
+  color: #fff;
 }
 
 /* ── 4 Highlight badges ── */

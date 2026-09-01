@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Footer from '../Layout/Footer';
 
 const PROGRAMS = {
@@ -89,8 +89,15 @@ const PROGRAMS = {
   },
 };
 
-export default function Programs() {
-  const [active, setActive] = useState('btech');
+export default function Programs({ initialProg = 'btech', onNav }) {
+  const [active, setActive] = useState(initialProg);
+
+  useEffect(() => {
+    if (initialProg && PROGRAMS[initialProg]) {
+      setActive(initialProg);
+    }
+  }, [initialProg]);
+
   const prog = PROGRAMS[active];
 
   return (
@@ -108,7 +115,10 @@ export default function Programs() {
             <button
               key={key}
               className={`prog-tab${active === key ? ' active' : ''}`}
-              onClick={() => setActive(key)}
+              onClick={() => {
+                setActive(key);
+                if (onNav) onNav('programs', key);
+              }}
             >
               {p.label}
             </button>

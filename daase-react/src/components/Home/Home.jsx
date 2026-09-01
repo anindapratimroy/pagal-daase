@@ -222,12 +222,24 @@ export default function Home({ onNav, news, events, publications = [] }) {
             <div className="about-info-card-icon">🎓</div>
             <h3 className="about-info-card-title">Academic Programs</h3>
             <ul className="about-info-list">
-              <li>Ph.D. in Astronomy, Astrophysics &amp; Space Engineering</li>
-              <li>M.Sc. in Astronomy — first &amp; only in IITs</li>
-              <li>M.Tech. in Space Engineering</li>
-              <li>M.S. (Research) in Space Science &amp; Engineering</li>
-              <li>B.Tech. in Space Science &amp; Engineering</li>
-              <li>Minor in Astronomy &amp; Space Science (for IIT Indore UG students)</li>
+              <li className="is-interactive" onClick={() => onNav('programs', 'phd')} title="View Ph.D. Program">
+                Ph.D. in Astronomy, Astrophysics &amp; Space Engineering <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('programs', 'msc')} title="View M.Sc. Program">
+                M.Sc. in Astronomy — first &amp; only in IITs <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('programs', 'mtech')} title="View M.Tech. Program">
+                M.Tech. in Space Engineering <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('programs', 'ms')} title="View M.S. (Research) Program">
+                M.S. (Research) in Space Science &amp; Engineering <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('programs', 'btech')} title="View B.Tech. Program">
+                B.Tech. in Space Science &amp; Engineering <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('programs', 'btech')} title="View Minor Program">
+                Minor in Astronomy &amp; Space Science (for IIT Indore UG students) <span className="arrow">↗</span>
+              </li>
             </ul>
           </div>
 
@@ -235,12 +247,24 @@ export default function Home({ onNav, news, events, publications = [] }) {
             <div className="about-info-card-icon">🔭</div>
             <h3 className="about-info-card-title">Research Areas</h3>
             <ul className="about-info-list">
-              <li>Radio Astronomy &amp; Instrumentation</li>
-              <li>Heliophysics &amp; Solar Physics</li>
-              <li>Remote Sensing &amp; Atmospheric Physics</li>
-              <li>CubeSat, Drone &amp; Spacecraft Technologies</li>
-              <li>High-Energy Astrophysics &amp; Observational Cosmology</li>
-              <li>Data Science &amp; AI-Driven Techniques</li>
+              <li className="is-interactive" onClick={() => onNav('research-detail', 'radio-astronomy')} title="View Radio Astronomy">
+                Radio Astronomy &amp; Instrumentation <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('research-detail', 'heliophysics')} title="View Heliophysics">
+                Heliophysics &amp; Solar Physics <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('research-detail', 'remote-sensing')} title="View Remote Sensing">
+                Remote Sensing &amp; Atmospheric Physics <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('research-detail', 'space-engineering')} title="View Space Engineering">
+                CubeSat, Drone &amp; Spacecraft Technologies <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('research-detail', 'cosmology')} title="View Cosmology">
+                High-Energy Astrophysics &amp; Observational Cosmology <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('research-detail', 'data-science')} title="View Data Science">
+                Data Science &amp; AI-Driven Techniques <span className="arrow">↗</span>
+              </li>
             </ul>
           </div>
 
@@ -248,12 +272,24 @@ export default function Home({ onNav, news, events, publications = [] }) {
             <div className="about-info-card-icon">🔬</div>
             <h3 className="about-info-card-title">Labs &amp; Facilities</h3>
             <ul className="about-info-list">
-              <li>Radio Frequency (RF) Lab — testing up to 60 GHz</li>
-              <li>Optics Lab &amp; Precision Measurement Systems</li>
-              <li>IoT, Drone &amp; Remote Sensing Lab</li>
-              <li>Plasma Lab &amp; Helmholtz Cages</li>
-              <li>IITI Radio Interferometer Observatory</li>
-              <li>Arctic Station Himadri (active since 2022)</li>
+              <li className="is-interactive" onClick={() => onNav('facilities')} title="View Labs & Facilities">
+                Radio Frequency (RF) Lab — testing up to 60 GHz <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('facilities')} title="View Labs & Facilities">
+                Optics Lab &amp; Precision Measurement Systems <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('facilities')} title="View Labs & Facilities">
+                IoT, Drone &amp; Remote Sensing Lab <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('facilities')} title="View Labs & Facilities">
+                Plasma Lab &amp; Helmholtz Cages <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('facilities')} title="View Labs & Facilities">
+                IITI Radio Interferometer Observatory <span className="arrow">↗</span>
+              </li>
+              <li className="is-interactive" onClick={() => onNav('facilities')} title="View Labs & Facilities">
+                Arctic Station Himadri (active since 2022) <span className="arrow">↗</span>
+              </li>
             </ul>
           </div>
         </div>

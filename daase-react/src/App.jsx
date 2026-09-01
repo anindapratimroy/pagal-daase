@@ -40,9 +40,22 @@ const PEOPLE_TAB_MAP = {
   'people':         'faculty',
 };
 
+const PROG_TAB_MAP = {
+  'programs-btech': 'btech',
+  'programs-msc':   'msc',
+  'programs-mtech': 'mtech',
+  'programs-ms':    'ms',
+  'programs-phd':   'phd',
+  'btech':          'btech',
+  'msc':            'msc',
+  'mtech':          'mtech',
+  'ms':             'ms',
+};
+
 export default function App() {
   const [view, setView] = useState('home');
   const [peopleTab, setPeopleTab] = useState('faculty'); // active tab inside People page
+  const [progTab, setProgTab] = useState('btech'); // active tab inside Programs page
   const [researchAreaId, setResearchAreaId] = useState(null); // active research area
   const [minTimePassed, setMinTimePassed] = useState(false);
   const [showBackTop, setShowTop] = useState(false);
@@ -74,6 +87,12 @@ export default function App() {
       if (hash.startsWith('research-detail/')) {
         setResearchAreaId(hash.split('/')[1]);
         setView('research-detail');
+      } else if (hash.startsWith('programs/')) {
+        setProgTab(hash.split('/')[1]);
+        setView('programs');
+      } else if (PROG_TAB_MAP[hash]) {
+        setProgTab(PROG_TAB_MAP[hash]);
+        setView('programs');
       } else if (PEOPLE_TAB_MAP[hash]) {
         setPeopleTab(PEOPLE_TAB_MAP[hash]);
         setView('people');
@@ -111,6 +130,14 @@ export default function App() {
       setResearchAreaId(detailId);
       setView('research-detail');
       window.location.hash = `research-detail/${detailId}`;
+    } else if (id === 'programs') {
+      if (detailId) {
+        setProgTab(detailId);
+        window.location.hash = `programs/${detailId}`;
+      } else {
+        window.location.hash = 'programs';
+      }
+      setView('programs');
     } else if (PEOPLE_TAB_MAP[id]) {
       const targetTab = PEOPLE_TAB_MAP[id];
       setPeopleTab(targetTab);
@@ -134,7 +161,7 @@ export default function App() {
       case 'home':       return <Home onNav={handleNav} news={data.news} events={data.events} publications={data.publications} />;
       case 'research':   return <Research onNav={handleNav} />;
       case 'research-detail': return <ResearchAreaDetail areaId={researchAreaId} onNav={handleNav} />;
-      case 'programs':   return <Programs />;
+      case 'programs':   return <Programs initialProg={progTab} onNav={handleNav} />;
       case 'people':     return (
         <Faculty
           key={peopleTab}  /* remount when tab changes from navbar */
