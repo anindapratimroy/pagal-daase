@@ -3442,12 +3442,20 @@ a.sc-email:hover {
 .footer-map-preview-card {
   position: relative;
   width: 100%;
-  height: 120px;
-  border-radius: 12px;
+  height: 190px;
+  border-radius: 14px;
   overflow: hidden;
   border: 1px solid rgba(255, 217, 122, 0.3);
-  margin-top: 10px;
+  margin-top: 14px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.footer-map-preview-card:hover {
+  border-color: rgba(255, 217, 122, 0.6);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
+  transform: translateY(-2px);
 }
 
 .footer-mini-map {
