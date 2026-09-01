@@ -23,6 +23,7 @@ const INSTITUTE_LINKS = [
 
 export default function Footer({ onNav }) {
   const [showCredits, setShowCredits] = useState(false);
+  const [showWebmaster, setShowWebmaster] = useState(false);
 
   const handleInternalNav = (e, id) => {
     e.preventDefault();
@@ -153,7 +154,9 @@ export default function Footer({ onNav }) {
             © {new Date().getFullYear()} Department of Astronomy, Astrophysics and Space Engineering (AASE), IIT Indore. All rights reserved.
           </div>
           <div className="footer-credits-text">
-            Webmaster: <a href="https://www.linkedin.com/in/aninda-pratim-roy" target="_blank" rel="noopener noreferrer">Aninda Pratim Roy</a>
+            <button className="footer-credits-trigger" onClick={() => setShowWebmaster(true)}>
+              Webmaster
+            </button>
             <span className="footer-credits-sep">|</span>
             <button className="footer-credits-trigger" onClick={() => setShowCredits(true)}>
               Credits
@@ -162,6 +165,23 @@ export default function Footer({ onNav }) {
         </div>
 
       </div>
+
+      {/* Webmaster Modal */}
+      {showWebmaster && (
+        <div className="credits-modal-overlay" onClick={() => setShowWebmaster(false)}>
+          <div className="credits-modal-content" onClick={e => e.stopPropagation()}>
+            <button className="credits-modal-close-icon" onClick={() => setShowWebmaster(false)} aria-label="Close">
+              &times;
+            </button>
+            <h3 className="credits-modal-title">Webmaster</h3>
+            <div className="credits-list">
+              <a href="https://www.linkedin.com/in/aninda-pratim-roy" target="_blank" rel="noopener noreferrer" className="credits-link">
+                Aninda Pratim Roy ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Credits Modal */}
       {showCredits && (
@@ -173,7 +193,7 @@ export default function Footer({ onNav }) {
             <h3 className="credits-modal-title">Additional Credits</h3>
             <div className="credits-list">
               <a href="https://www.linkedin.com/in/chitrashri-bhargava" target="_blank" rel="noopener noreferrer" className="credits-link">
-                Chitrashri Bhargava
+                Chitrashri Bhargava ↗
               </a>
             </div>
           </div>
