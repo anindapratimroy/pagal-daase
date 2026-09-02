@@ -2287,11 +2287,10 @@ nav.nav-scrolled.nav-hidden {
   border: none;
   border-bottom: 3px solid transparent;
   margin-bottom: -2px;
-  
   font-size: 18px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-transform: none;
   cursor: pointer;
   transition: var(--tr);
   color: var(--text-on-dark-muted);
