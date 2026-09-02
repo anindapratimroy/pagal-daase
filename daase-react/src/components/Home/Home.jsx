@@ -221,12 +221,14 @@ export default function Home({ onNav, news, events, publications = [] }) {
         <div className="hod-about-right">
           <div className="hod-message-card">
             <div className="hod-message-header">
-              <div className="hod-message-avatar">
-                <span>👨‍🔬</span>
-              </div>
-              <div className="hod-message-meta">
-                <div className="hod-message-name">Dr. Saurabh Das</div>
-                <div className="hod-message-role">Head of Department</div>
+              <div className="hod-message-profile">
+                <div className="hod-message-avatar">
+                  <span>👨‍🔬</span>
+                </div>
+                <div className="hod-message-meta">
+                  <div className="hod-message-name">Dr. Saurabh Das</div>
+                  <div className="hod-message-role">Head of Department</div>
+                </div>
               </div>
               <div className="hod-message-badge">Message from the Head</div>
             </div>
