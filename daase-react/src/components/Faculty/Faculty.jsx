@@ -249,7 +249,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
                 </div>
 
                 <div className="faculty-divider">
-                  Visiting &amp; Distinguished Faculty <span className="visiting-badge">Visiting Members</span>
+                  Visiting &amp; Distinguished Faculty
                   <span className="email-id-hint">
                     — add @iiti.ac.in to email ID
                   </span>
