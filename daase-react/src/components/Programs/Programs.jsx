@@ -285,7 +285,6 @@ export default function Programs({ initialProg = 'btech', onNav }) {
               <div className="prog-contact-card">
                 <div className="prog-contact-label">Program Coordinator</div>
                 <a href={`mailto:${prog.email}`} className="prog-contact-email">{prog.email}</a>
-                <div className="prog-contact-dept">Dept. of Astronomy, Astrophysics &amp; Space Engineering<br />IIT Indore</div>
               </div>
             </div>
 
