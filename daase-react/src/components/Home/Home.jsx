@@ -251,8 +251,9 @@ export default function Home({ onNav, news, events, publications = [] }) {
         {/* ── 3-column info cards ── */}
         <div className="about-info-grid">
           <div className="about-info-card" data-aos="fade-up" data-aos-delay="100">
-            <div className="about-info-card-icon">🎓</div>
-            <h3 className="about-info-card-title">Academic Programs</h3>
+            <h3 className="about-info-card-title">
+              <span className="about-info-card-icon">🎓</span> Academic Programs
+            </h3>
             <ul className="about-info-list">
               <li className="is-interactive" onClick={() => onNav('programs', 'phd')} title="View Ph.D. Program">
                 Ph.D. in Astronomy, Astrophysics &amp; Space Engineering <span className="arrow">↗</span>
@@ -273,8 +274,9 @@ export default function Home({ onNav, news, events, publications = [] }) {
           </div>
 
           <div className="about-info-card" data-aos="fade-up" data-aos-delay="200">
-            <div className="about-info-card-icon">🔭</div>
-            <h3 className="about-info-card-title">Research Areas</h3>
+            <h3 className="about-info-card-title">
+              <span className="about-info-card-icon">🔭</span> Research Areas
+            </h3>
             <ul className="about-info-list">
               <li className="is-interactive" onClick={() => onNav('research-detail', 'compact-objects')} title="View Compact Objects & Transients">
                 Compact Objects &amp; Transients <span className="arrow">↗</span>
@@ -301,8 +303,9 @@ export default function Home({ onNav, news, events, publications = [] }) {
           </div>
 
           <div className="about-info-card" data-aos="fade-up" data-aos-delay="300">
-            <div className="about-info-card-icon">🔬</div>
-            <h3 className="about-info-card-title">Labs &amp; Facilities</h3>
+            <h3 className="about-info-card-title">
+              <span className="about-info-card-icon">🔬</span> Labs &amp; Facilities
+            </h3>
             <ul className="about-info-list">
               <li>Radio Frequency (RF) Lab — testing up to 60 GHz</li>
               <li>Optics Lab &amp; Precision Measurement Systems</li>

@@ -1939,18 +1939,23 @@ a.news-feed-headline:hover {
 }
 
 .about-info-card-icon {
-  font-size: 32px;
-  margin-bottom: 12px;
+  font-size: 24px;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .about-info-card-title {
-  
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 20px;
   font-weight: 700;
   color: var(--gold-light);
   margin-bottom: 14px;
-  padding-bottom: 10px;
+  padding-bottom: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -3652,7 +3657,6 @@ a.sc-email:hover {
   box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
   color: #fff;
   box-sizing: border-box;
-  overflow: hidden;
 }
 
 .site-footer-inner {
