@@ -207,31 +207,15 @@ export default function Home({ onNav, news, events, publications = [] }) {
       {/* ── About DAASE + Message from the Head ── */}
       <div className="hod-about-section" data-aos="fade-up">
         <div className="hod-about-left">
-          <span className="hod-about-eyebrow">✦ &nbsp;About DAASE</span>
+          <span className="about-eyebrow">✦ &nbsp;Established 2015 &nbsp;·&nbsp; IIT Indore</span>
           <h2 className="hod-about-heading">
-            Department of <span>Astronomy, Astrophysics</span><br />
-            &amp; Space Engineering
+            About <span>DAASE</span>
           </h2>
           <p className="hod-about-body">
-            India's only dedicated department of its kind across all IITs — a comprehensive academic
-            and research ecosystem spanning the cosmos to cutting-edge space engineering.
-            Founded as a Centre for Astronomy in December 2015, elevated to a full Department in
-            May 2018, and backed by DST-FIST, SKA-IC, ISRO &amp; NASA.
+            India's only dedicated department of its kind across all IITs — a comprehensive academic and research
+            ecosystem spanning the cosmos to cutting-edge space engineering. Founded as a Centre for Astronomy in
+            December 2015, elevated to a full Department in May 2018, and backed by DST-FIST, SKA-IC, ISRO &amp; NASA.
           </p>
-          <div className="hod-about-highlights">
-            <div className="hod-about-hl">
-              <span className="hod-about-hl-icon">🏛️</span>
-              <span>Established 2015 · IIT Indore</span>
-            </div>
-            <div className="hod-about-hl">
-              <span className="hod-about-hl-icon">🌍</span>
-              <span>DST-FIST · SKA-IC · ISRO · NASA</span>
-            </div>
-            <div className="hod-about-hl">
-              <span className="hod-about-hl-icon">🎓</span>
-              <span>5 Degree Programs · 7 Research Areas</span>
-            </div>
-          </div>
         </div>
 
         <div className="hod-about-right">
@@ -241,7 +225,7 @@ export default function Home({ onNav, news, events, publications = [] }) {
                 <span>👨‍🔬</span>
               </div>
               <div className="hod-message-meta">
-                <div className="hod-message-name">Prof. Abhirup Datta</div>
+                <div className="hod-message-name">Dr. Saurabh Das</div>
                 <div className="hod-message-role">Head of Department</div>
               </div>
               <div className="hod-message-badge">Message from the Head</div>
@@ -255,7 +239,7 @@ export default function Home({ onNav, news, events, publications = [] }) {
               and a commitment to scientific excellence."
             </blockquote>
             <div className="hod-message-sig">
-              — Prof. Abhirup Datta, HoD, AASE · IIT Indore
+              — Dr. Saurabh Das, HoD, AASE · IIT Indore
             </div>
           </div>
         </div>
@@ -263,17 +247,6 @@ export default function Home({ onNav, news, events, publications = [] }) {
 
       {/* About — Full redesign */}
       <div className="about-strip">
-
-        {/* ── Header ── */}
-        <div className="about-hdr" data-aos="fade-up">
-          <span className="about-eyebrow">✦ &nbsp;Established 2015 &nbsp;·&nbsp; IIT Indore</span>
-          <h2 className="about-main-title">About <span>DAASE</span></h2>
-          <p className="about-intro-text">
-            India's only dedicated department of its kind across all IITs — a comprehensive academic and research
-            ecosystem spanning the cosmos to cutting-edge space engineering. Founded as a Centre for Astronomy in
-            December 2015, elevated to a full Department in May 2018, and backed by DST-FIST, SKA-IC, ISRO &amp; NASA.
-          </p>
-        </div>
 
         {/* ── 3-column info cards ── */}
         <div className="about-info-grid">
