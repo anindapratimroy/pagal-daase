@@ -338,8 +338,8 @@ export default function Home({ onNav, news, events, publications = [] }) {
           </a>
           <a href="https://www.isro.gov.in" target="_blank" rel="noopener noreferrer" className="about-badge">
             <span className="about-badge-icon">🚀</span>
-            <span className="about-badge-label">ISRO &amp; NASA</span>
-            <span className="about-badge-desc">Active faculty contributions to major space missions</span>
+            <span className="about-badge-label">Space Research</span>
+            <span className="about-badge-desc">Active Collaboration with NASA, ISRO and JAXA</span>
           </a>
         </div>
 
