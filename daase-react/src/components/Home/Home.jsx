@@ -306,7 +306,7 @@ export default function Home({ onNav, news, events, publications = [] }) {
 
           <div className="about-info-card" data-aos="fade-up" data-aos-delay="300">
             <h3 className="about-info-card-title">
-              <span className="about-info-card-icon">🔬</span> Labs &amp; Facilities
+              <span className="about-info-card-icon">🔬</span> Significant Labs and Facilities
             </h3>
             <ul className="about-info-list">
               <li>Radio Frequency (RF) Lab — testing up to 60 GHz</li>
@@ -314,7 +314,7 @@ export default function Home({ onNav, news, events, publications = [] }) {
               <li>IoT, Drone &amp; Remote Sensing Lab</li>
               <li>Plasma Lab &amp; Helmholtz Cages</li>
               <li>IITI Radio Interferometer Observatory</li>
-              <li>Arctic Station Himadri (active since 2022)</li>
+              <li>IITI arctic research facility at Himadri</li>
             </ul>
           </div>
         </div>
