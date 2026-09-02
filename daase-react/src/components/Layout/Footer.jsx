@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 const QUICK_LINKS = [
   { id: 'home',           label: 'Home' },
@@ -24,6 +25,20 @@ const INSTITUTE_LINKS = [
 export default function Footer({ onNav }) {
   const [showCredits, setShowCredits] = useState(false);
   const [showWebmaster, setShowWebmaster] = useState(false);
+
+  // Close modals on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setShowWebmaster(false);
+        setShowCredits(false);
+      }
+    };
+    if (showWebmaster || showCredits) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showWebmaster, showCredits]);
 
   const handleInternalNav = (e, id) => {
     e.preventDefault();
@@ -158,7 +173,11 @@ export default function Footer({ onNav }) {
               <button 
                 type="button" 
                 className="footer-credits-trigger" 
-                onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowWebmaster(true); }}
+                onClick={(e) => { 
+                  e.preventDefault(); 
+                  e.stopPropagation(); 
+                  setShowWebmaster(true); 
+                }}
               >
                 Webmaster
               </button>
@@ -166,7 +185,11 @@ export default function Footer({ onNav }) {
               <button 
                 type="button" 
                 className="footer-credits-trigger" 
-                onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowCredits(true); }}
+                onClick={(e) => { 
+                  e.preventDefault(); 
+                  e.stopPropagation(); 
+                  setShowCredits(true); 
+                }}
               >
                 Credits
               </button>
@@ -176,50 +199,78 @@ export default function Footer({ onNav }) {
         </div>
       </footer>
 
-      {/* ── Webmaster Modal — rendered OUTSIDE footer to avoid overflow clipping ── */}
-      {showWebmaster && (
-        <div className="credits-modal-overlay" onClick={() => setShowWebmaster(false)}>
-          <div className="credits-modal-content" onClick={e => e.stopPropagation()}>
-            <button type="button" className="credits-modal-close-icon" onClick={() => setShowWebmaster(false)} aria-label="Close">
+      {/* ── Webmaster Modal via createPortal ── */}
+      {showWebmaster && typeof document !== 'undefined' && createPortal(
+        <div 
+          className="credits-modal-overlay" 
+          onClick={() => setShowWebmaster(false)}
+        >
+          <div 
+            className="credits-modal-content" 
+            onClick={e => e.stopPropagation()}
+            onMouseDown={e => e.stopPropagation()}
+          >
+            <button 
+              type="button" 
+              className="credits-modal-close-icon" 
+              onClick={() => setShowWebmaster(false)} 
+              aria-label="Close"
+            >
               &times;
             </button>
             <h3 className="credits-modal-title">Webmaster</h3>
+            <p className="credits-modal-subtitle">Website Designed &amp; Developed by</p>
             <div className="credits-list">
               <a 
                 href="https://www.linkedin.com/in/aninda-pratim-roy" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="credits-link"
-                onClick={e => e.stopPropagation()}
               >
-                Aninda Pratim Roy ↗
+                <span>Aninda Pratim Roy</span>
+                <span className="credits-link-arrow">↗</span>
               </a>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
-      {/* ── Credits Modal — rendered OUTSIDE footer to avoid overflow clipping ── */}
-      {showCredits && (
-        <div className="credits-modal-overlay" onClick={() => setShowCredits(false)}>
-          <div className="credits-modal-content" onClick={e => e.stopPropagation()}>
-            <button type="button" className="credits-modal-close-icon" onClick={() => setShowCredits(false)} aria-label="Close">
+      {/* ── Credits Modal via createPortal ── */}
+      {showCredits && typeof document !== 'undefined' && createPortal(
+        <div 
+          className="credits-modal-overlay" 
+          onClick={() => setShowCredits(false)}
+        >
+          <div 
+            className="credits-modal-content" 
+            onClick={e => e.stopPropagation()}
+            onMouseDown={e => e.stopPropagation()}
+          >
+            <button 
+              type="button" 
+              className="credits-modal-close-icon" 
+              onClick={() => setShowCredits(false)} 
+              aria-label="Close"
+            >
               &times;
             </button>
-            <h3 className="credits-modal-title">Additional Credits</h3>
+            <h3 className="credits-modal-title">Credits</h3>
+            <p className="credits-modal-subtitle">Additional Acknowledgments</p>
             <div className="credits-list">
               <a 
                 href="https://www.linkedin.com/in/chitrashri-bhargava" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="credits-link"
-                onClick={e => e.stopPropagation()}
               >
-                Chitrashri Bhargava ↗
+                <span>Chitrashri Bhargava</span>
+                <span className="credits-link-arrow">↗</span>
               </a>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
