@@ -2314,6 +2314,287 @@ nav.nav-scrolled.nav-hidden {
   animation: fadeUp 0.3s var(--ease-out) both;
 }
 
+/* ── Redesigned Programs Card v2 ── */
+.prog-card-v2 {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 36px;
+  align-items: start;
+}
+
+/* Left column */
+.prog-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Meta pills row */
+.prog-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.prog-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.prog-meta-type {
+  background: rgba(255, 217, 122, 0.12);
+  color: #ffd97a;
+  border-color: rgba(255, 217, 122, 0.25);
+}
+
+.prog-meta-dur,
+.prog-meta-yr,
+.prog-meta-adm {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Title */
+.prog-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+  margin: 0 0 14px;
+}
+
+/* Desc */
+.prog-desc {
+  font-size: 15.5px;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.8;
+  margin: 0 0 28px;
+}
+
+/* Sections */
+.prog-section {
+  margin-bottom: 26px;
+}
+
+.prog-section-label {
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffd97a;
+  margin: 0 0 12px;
+}
+
+.prog-section-body {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.80);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* Specialization grid */
+.prog-spec-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.prog-spec-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(96, 165, 250, 0.07);
+  border: 1px solid rgba(96, 165, 250, 0.18);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  color: #E2EEFF;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.prog-spec-item:hover {
+  background: rgba(96, 165, 250, 0.14);
+}
+
+.prog-spec-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.prog-spec-text {
+  line-height: 1.4;
+}
+
+/* Curriculum list */
+.prog-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.prog-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.65;
+}
+
+.prog-list-bullet {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+/* Career pathways */
+.prog-careers {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-left: 3px solid var(--gold);
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+
+.prog-careers-label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffd97a;
+  margin-bottom: 8px;
+}
+
+.prog-careers-body {
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.80);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Action buttons */
+.prog-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.prog-btn {
+  padding: 10px 22px !important;
+  font-size: 14px !important;
+}
+
+/* Right column */
+.prog-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 100px;
+}
+
+.prog-highlights-header {
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffd97a;
+  margin-bottom: 4px;
+}
+
+.prog-highlights-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.prog-highlight-item {
+  background: rgba(96, 165, 250, 0.08);
+  border: 1px solid rgba(96, 165, 250, 0.18);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.prog-highlight-item:hover {
+  background: rgba(96, 165, 250, 0.14);
+  border-color: rgba(96, 165, 250, 0.3);
+}
+
+.prog-hl-num {
+  font-size: 20px;
+  font-weight: 800;
+  color: #93C5FD;
+  line-height: 1;
+  flex-shrink: 0;
+  min-width: 80px;
+}
+
+.prog-hl-text {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.80);
+  line-height: 1.4;
+}
+
+/* Contact card */
+.prog-contact-card {
+  background: rgba(255, 217, 122, 0.06);
+  border: 1px solid rgba(255, 217, 122, 0.2);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-top: 4px;
+}
+
+.prog-contact-label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffd97a;
+  margin-bottom: 8px;
+}
+
+.prog-contact-email {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #93C5FD;
+  text-decoration: none;
+  word-break: break-all;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+
+.prog-contact-email:hover {
+  color: #fff;
+}
+
+.prog-contact-dept {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.55;
+}
+
 .prog-card {
   background: rgba(8, 16, 48, 0.72);
   backdrop-filter: blur(14px);
@@ -4264,6 +4545,19 @@ a.sc-email:hover {
   .prog-card {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  .prog-card-v2 {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .prog-right {
+    position: static;
+  }
+
+  .prog-spec-grid {
+    grid-template-columns: 1fr;
   }
 
   .opp-grid {
