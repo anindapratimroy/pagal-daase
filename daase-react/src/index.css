@@ -1470,7 +1470,7 @@ a.news-feed-headline:hover {
 }
 
 .home-pub-marquee-container {
-  height: 310px;
+  height: 400px;
   overflow: hidden;
   position: relative;
   margin: 0 -20px;
