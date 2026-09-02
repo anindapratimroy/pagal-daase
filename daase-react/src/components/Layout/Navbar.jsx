@@ -84,8 +84,11 @@ export default function Navbar({ current, onNav }) {
           <div className="logo-placeholder" style={{ display: 'none' }}>IITI</div>
         </div>
 
-        <div className="nav-brand" onClick={() => handleNav('home')}>
-          <div className="nav-brand-sub">Astronomy Astrophysics and Space Engineering</div>
+        <div className="nav-brand" onClick={() => handleNav('home')} title="DAASE — Astronomy, Astrophysics and Space Engineering · IIT Indore">
+          <span className="nav-brand-mobile-title">DAASE</span>
+          <span className="nav-brand-mobile-sep">|</span>
+          <span className="nav-brand-mobile-sub">IIT Indore</span>
+          <span className="nav-brand-desktop-full">Astronomy Astrophysics and Space Engineering</span>
         </div>
 
         <div className="nav-links">
@@ -189,8 +192,11 @@ export default function Navbar({ current, onNav }) {
       {/* Side Drawer Menu */}
       <div className={`mobile-menu${mobileOpen ? ' open' : ''}`}>
         <div className="drawer-header">
-          <span className="drawer-title">Navigation</span>
-          <button className="drawer-close" onClick={() => setMobileOpen(false)}>✕</button>
+          <div className="drawer-brand" onClick={() => { handleNav('home'); setMobileOpen(false); }}>
+            <span className="drawer-title">DAASE</span>
+            <span className="drawer-sub">IIT Indore</span>
+          </div>
+          <button className="drawer-close" onClick={() => setMobileOpen(false)} aria-label="Close menu">✕</button>
         </div>
 
         <button className={current === 'home' ? 'active' : ''} onClick={() => handleNav('home')}>Home</button>

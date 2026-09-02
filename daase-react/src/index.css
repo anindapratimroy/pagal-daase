@@ -422,16 +422,7 @@ nav.nav-scrolled.nav-hidden {
   opacity: 0.92;
 }
 
-.nav-brand-main {
-  font-size: clamp(14px, 1.2vw, 17px);
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.04em;
-  line-height: 1.2;
-  white-space: nowrap;
-}
-
-.nav-brand-sub {
+.nav-brand-desktop-full {
   font-size: clamp(13px, 1.15vw, 16.5px);
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -441,10 +432,17 @@ nav.nav-scrolled.nav-hidden {
   color: #ffffff;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
   transition: color 0.25s ease;
+  display: block;
 }
 
-.nav-brand:hover .nav-brand-sub {
+.nav-brand:hover .nav-brand-desktop-full {
   color: #ffd97a;
+}
+
+.nav-brand-mobile-title,
+.nav-brand-mobile-sep,
+.nav-brand-mobile-sub {
+  display: none;
 }
 
 .nav-links {
@@ -742,16 +740,31 @@ nav.nav-scrolled.nav-hidden {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.drawer-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  cursor: pointer;
 }
 
 .drawer-title {
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-light);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.drawer-sub {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffd97a;
+  letter-spacing: 0.04em;
+  padding-left: 8px;
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .drawer-close {
@@ -1307,16 +1320,13 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .news-feed-item {
-  padding: 14px 18px;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-left: 3px solid rgba(255, 217, 122, 0.3);
+  padding: 13px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-left: 3.5px solid rgba(255, 217, 122, 0.4);
   border-radius: 12px;
-  margin: 0 16px 10px 16px;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  margin: 0 16px 8px 16px;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -1330,11 +1340,11 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .news-feed-item:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
-  border-left-color: #ffd97a;
-  transform: translate3d(4px, 0, 0);
-  box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.5), inset 1px 1px 2px rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  border-left-color: #ffd97a !important;
+  transform: translate3d(6px, 0, 0) !important;
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.25), 0 12px 28px -4px rgba(0, 0, 0, 0.6), 0 0 18px rgba(255, 217, 122, 0.12) !important;
 }
 
 .news-feed-item .arrow {
@@ -1342,6 +1352,7 @@ nav.nav-scrolled.nav-hidden {
   font-size: 13px;
   color: #ffd97a;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-left: 4px;
 }
 
 .news-feed-item:hover .arrow {
@@ -1356,44 +1367,47 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .type-badge {
-  font-size: 16px;
+  font-size: 10.5px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 4px 10px;
-  border-radius: 20px;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  line-height: 1.2;
 }
 
 .type-badge.news {
-  background: var(--navy-light);
-  color: var(--navy);
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
 }
 
 .type-badge.event {
-  background: var(--gold-bg);
-  color: var(--gold);
-  border: 1px solid var(--gold-border);
+  background: rgba(255, 217, 122, 0.12) !important;
+  color: #ffd97a !important;
+  border: 1px solid rgba(255, 217, 122, 0.35) !important;
 }
 
 .news-feed-date {
-  font-size: 16px;
-  color: var(--text-on-dark-muted);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .news-feed-headline {
-  font-size: 19px;
+  font-size: 13.5px;
   color: var(--text-on-dark-body);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.45;
   display: block;
   text-decoration: none;
-  transition: var(--tr);
+  transition: color 0.25s ease;
 }
 
-a.news-feed-headline:hover {
-  color: #ffd97a;
-  text-decoration: underline;
+.news-feed-item:hover .news-feed-headline {
+  color: #ffffff !important;
+  text-decoration: none;
 }
 
 .news-feed-empty {
@@ -4187,16 +4201,40 @@ a.sc-email:hover {
 }
 
 @media(max-width:900px) {
-  .nav-brand-sub {
-    display: none;
+  .nav-brand-desktop-full {
+    display: none !important;
   }
 
-  .nav-brand-main {
-    white-space: normal;
+  .nav-brand-mobile-title {
+    display: inline-block !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    letter-spacing: 0.08em !important;
+    line-height: 1 !important;
+  }
+
+  .nav-brand-mobile-sep {
+    display: inline-block !important;
+    font-size: 14px !important;
+    color: rgba(255, 255, 255, 0.35) !important;
+    margin: 0 6px !important;
+    line-height: 1 !important;
+  }
+
+  .nav-brand-mobile-sub {
+    display: inline-block !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: #ffd97a !important;
+    letter-spacing: 0.04em !important;
+    line-height: 1 !important;
   }
 
   .nav-brand {
-    margin-right: 16px;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
   }
 
   .hero-stats-grid {
@@ -4345,26 +4383,6 @@ a.sc-email:hover {
     margin-top: 6px !important;
   }
 
-  /* 2. Fix lag by turning off expensive effects on mobile (glassmorphism/filters) */
-  .student-card, .event-card, .faculty-card, .hod-card, .rc, .prog-card,
-  .news-card, .facility-card, .opp-card, .funding-card, .contact-item,
-  .collab-tag, .news-feed-item, .hero-stat, .collab-logo-wrapper, .about-hl {
-    -webkit-backdrop-filter: none !important;
-    backdrop-filter: none !important;
-    background-color: rgba(18, 38, 75, 0.9) !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
-    transition: transform 0.2s ease-out !important;
-  }
-
-  /* 3. Turn off sheen animation to save GPU/Battery */
-  .student-card::before, .event-card::before, .faculty-card::before,
-  .hod-card::before, .rc::before, .prog-card::before, .news-card::before,
-  .facility-card::before, .opp-card::before, .funding-card::before,
-  .contact-item::before, .collab-tag::before, .news-feed-item::before,
-  .hero-stat::before, .collab-logo-wrapper::before, .about-hl::before {
-    display: none !important;
-  }
-
   /* 4. Disable heavy background planet/satellite animations on small screens */
   .cool-bg-container .bg-satellite,
   .cool-bg-container .bg-planet,
@@ -4396,7 +4414,7 @@ a.sc-email:hover {
   }
 
   .nav-logos {
-    margin-right: 12px;
+    margin-right: 10px;
     gap: 8px;
   }
 
@@ -4409,12 +4427,12 @@ a.sc-email:hover {
     margin-right: 0;
   }
 
-  .nav-brand-main {
-    font-size: 13px;
+  .nav-brand-mobile-title {
+    font-size: 15px !important;
   }
 
-  .nav-brand-sub {
-    display: none;
+  .nav-brand-mobile-sub {
+    font-size: 11.5px !important;
   }
 
   .hamburger {
