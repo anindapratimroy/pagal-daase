@@ -247,6 +247,30 @@ export default function Home({ onNav, news, events, publications = [] }) {
         </div>
       </div>
 
+      {/* ── 4 Highlight badges (Moved just after About DAASE) ── */}
+      <div className="about-badges-row" data-aos="fade-up" data-aos-offset="50">
+        <a href="http://www.fist-dst.org" target="_blank" rel="noopener noreferrer" className="about-badge">
+          <span className="about-badge-icon">🏆</span>
+          <span className="about-badge-label">DST-FIST Funded</span>
+          <span className="about-badge-desc">Research excellence grant · 2022</span>
+        </a>
+        <a href="https://skaindia.ncra.tifr.res.in" target="_blank" rel="noopener noreferrer" className="about-badge">
+          <span className="about-badge-icon">📡</span>
+          <span className="about-badge-label">SKA-IC Founding Member</span>
+          <span className="about-badge-desc">Global radio telescope consortium · Since 2015</span>
+        </a>
+        <a href="https://www.ncpor.res.in/arctica/index_page-175.html" target="_blank" rel="noopener noreferrer" className="about-badge">
+          <span className="about-badge-icon">🧊</span>
+          <span className="about-badge-label">Arctic Research</span>
+          <span className="about-badge-desc">Station Himadri · Atmospheric science · Since 2022</span>
+        </a>
+        <a href="https://www.isro.gov.in" target="_blank" rel="noopener noreferrer" className="about-badge">
+          <span className="about-badge-icon">🚀</span>
+          <span className="about-badge-label">Space Research</span>
+          <span className="about-badge-desc">Active Collaboration with NASA, ISRO and JAXA</span>
+        </a>
+      </div>
+
       {/* About — Full redesign */}
       <div className="about-strip">
 
@@ -317,30 +341,6 @@ export default function Home({ onNav, news, events, publications = [] }) {
               <li>IITI arctic research facility at Himadri</li>
             </ul>
           </div>
-        </div>
-
-        {/* ── 4 Highlight badges ── */}
-        <div className="about-badges-row" data-aos="fade-up" data-aos-offset="50">
-          <a href="http://www.fist-dst.org" target="_blank" rel="noopener noreferrer" className="about-badge">
-            <span className="about-badge-icon">🏆</span>
-            <span className="about-badge-label">DST-FIST Funded</span>
-            <span className="about-badge-desc">Research excellence grant · 2022</span>
-          </a>
-          <a href="https://skaindia.ncra.tifr.res.in" target="_blank" rel="noopener noreferrer" className="about-badge">
-            <span className="about-badge-icon">📡</span>
-            <span className="about-badge-label">SKA-IC Founding Member</span>
-            <span className="about-badge-desc">Global radio telescope consortium · Since 2015</span>
-          </a>
-          <a href="https://www.ncpor.res.in/arctica/index_page-175.html" target="_blank" rel="noopener noreferrer" className="about-badge">
-            <span className="about-badge-icon">🧊</span>
-            <span className="about-badge-label">Arctic Research</span>
-            <span className="about-badge-desc">Station Himadri · Atmospheric science · Since 2022</span>
-          </a>
-          <a href="https://www.isro.gov.in" target="_blank" rel="noopener noreferrer" className="about-badge">
-            <span className="about-badge-icon">🚀</span>
-            <span className="about-badge-label">Space Research</span>
-            <span className="about-badge-desc">Active Collaboration with NASA, ISRO and JAXA</span>
-          </a>
         </div>
 
         {/* ── Horizontal Timeline ── */}
