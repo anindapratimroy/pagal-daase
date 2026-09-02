@@ -2283,11 +2283,11 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .prog-tab {
-  padding: 11px 24px;
+  padding: 12px 26px;
   border: none;
   border-bottom: 3px solid transparent;
   margin-bottom: -2px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: none;
@@ -2317,8 +2317,8 @@ nav.nav-scrolled.nav-hidden {
 /* ── Redesigned Programs Card v2 ── */
 .prog-card-v2 {
   display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 36px;
+  grid-template-columns: 1fr 350px;
+  gap: 38px;
   align-items: start;
 }
 
@@ -2333,69 +2333,69 @@ nav.nav-scrolled.nav-hidden {
 .prog-meta-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 22px;
 }
 
 .prog-meta-pill {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-size: 11.5px;
+  gap: 6px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  padding: 4px 12px;
+  letter-spacing: 0.05em;
+  padding: 5px 14px;
   border-radius: 99px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .prog-meta-type {
-  background: rgba(255, 217, 122, 0.12);
+  background: rgba(255, 217, 122, 0.14);
   color: #ffd97a;
-  border-color: rgba(255, 217, 122, 0.25);
+  border-color: rgba(255, 217, 122, 0.3);
 }
 
 .prog-meta-dur,
 .prog-meta-yr,
 .prog-meta-adm {
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.82);
 }
 
 /* Title */
 .prog-title {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 800;
   color: #ffffff;
   line-height: 1.25;
-  margin: 0 0 14px;
+  margin: 0 0 16px;
 }
 
 /* Desc */
 .prog-desc {
-  font-size: 15.5px;
-  color: rgba(255, 255, 255, 0.78);
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.82);
   line-height: 1.8;
   margin: 0 0 28px;
 }
 
 /* Sections */
 .prog-section {
-  margin-bottom: 26px;
+  margin-bottom: 28px;
 }
 
 .prog-section-label {
-  font-size: 11.5px;
+  font-size: 13.5px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #ffd97a;
-  margin: 0 0 12px;
+  margin: 0 0 14px;
 }
 
 .prog-section-body {
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.80);
+  font-size: 16.5px;
+  color: rgba(255, 255, 255, 0.84);
   line-height: 1.75;
   margin: 0;
 }
@@ -2404,29 +2404,29 @@ nav.nav-scrolled.nav-hidden {
 .prog-spec-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 12px;
 }
 
 .prog-spec-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  background: rgba(96, 165, 250, 0.07);
-  border: 1px solid rgba(96, 165, 250, 0.18);
+  gap: 12px;
+  background: rgba(96, 165, 250, 0.08);
+  border: 1px solid rgba(96, 165, 250, 0.2);
   border-radius: 10px;
-  padding: 10px 14px;
-  font-size: 13.5px;
+  padding: 12px 16px;
+  font-size: 15px;
   color: #E2EEFF;
   font-weight: 500;
   transition: background 0.2s ease;
 }
 
 .prog-spec-item:hover {
-  background: rgba(96, 165, 250, 0.14);
+  background: rgba(96, 165, 250, 0.15);
 }
 
 .prog-spec-icon {
-  font-size: 18px;
+  font-size: 20px;
   flex-shrink: 0;
 }
 
@@ -2441,15 +2441,15 @@ nav.nav-scrolled.nav-hidden {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .prog-list-item {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  font-size: 14.5px;
-  color: rgba(255, 255, 255, 0.82);
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.85);
   line-height: 1.65;
 }
 
@@ -2459,7 +2459,7 @@ nav.nav-scrolled.nav-hidden {
   border-radius: 50%;
   background: var(--gold);
   flex-shrink: 0;
-  margin-top: 7px;
+  margin-top: 8px;
 }
 
 /* Career pathways */
@@ -2468,12 +2468,12 @@ nav.nav-scrolled.nav-hidden {
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-left: 3px solid var(--gold);
   border-radius: 10px;
-  padding: 16px 18px;
+  padding: 18px 20px;
 }
 
 .prog-careers-label {
   display: block;
-  font-size: 11.5px;
+  font-size: 13.5px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -2482,8 +2482,8 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .prog-careers-body {
-  font-size: 14.5px;
-  color: rgba(255, 255, 255, 0.80);
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.84);
   line-height: 1.7;
   margin: 0;
 }
@@ -2491,27 +2491,27 @@ nav.nav-scrolled.nav-hidden {
 /* Action buttons */
 .prog-actions {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   flex-wrap: wrap;
   margin-top: 28px;
 }
 
 .prog-btn {
-  padding: 10px 22px !important;
-  font-size: 14px !important;
+  padding: 11px 24px !important;
+  font-size: 15.5px !important;
 }
 
 /* Right column */
 .prog-right {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
   position: sticky;
   top: 100px;
 }
 
 .prog-highlights-header {
-  font-size: 11.5px;
+  font-size: 13.5px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -2522,14 +2522,14 @@ nav.nav-scrolled.nav-hidden {
 .prog-highlights-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .prog-highlight-item {
   background: rgba(96, 165, 250, 0.08);
   border: 1px solid rgba(96, 165, 250, 0.18);
   border-radius: 12px;
-  padding: 16px 18px;
+  padding: 18px 20px;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -2542,18 +2542,18 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .prog-hl-num {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
   color: #93C5FD;
   line-height: 1;
   flex-shrink: 0;
-  min-width: 80px;
+  min-width: 85px;
 }
 
 .prog-hl-text {
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.80);
-  line-height: 1.4;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.84);
+  line-height: 1.45;
 }
 
 /* Contact card */
@@ -2561,12 +2561,12 @@ nav.nav-scrolled.nav-hidden {
   background: rgba(255, 217, 122, 0.06);
   border: 1px solid rgba(255, 217, 122, 0.2);
   border-radius: 12px;
-  padding: 18px 20px;
+  padding: 20px 22px;
   margin-top: 4px;
 }
 
 .prog-contact-label {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -2576,7 +2576,7 @@ nav.nav-scrolled.nav-hidden {
 
 .prog-contact-email {
   display: block;
-  font-size: 13.5px;
+  font-size: 15.5px;
   font-weight: 700;
   color: #93C5FD;
   text-decoration: none;
