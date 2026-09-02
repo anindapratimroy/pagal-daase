@@ -178,7 +178,7 @@ export default function App() {
       case 'facilities': return <Facilities facilities={data.facilities} />;
       case 'events':     return <Events events={data.events} outreach={data.outreach} />;
       case 'gallery':    return <Gallery />;
-      case 'opportunities': return <Opportunities opportunities={data.opportunities} />;
+      case 'opportunities': return <Opportunities opportunities={data.opportunities} onNav={handleNav} />;
       // Legacy routes kept for safety
       case 'faculty':    return (
         <Faculty
