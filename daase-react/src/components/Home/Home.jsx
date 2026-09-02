@@ -223,7 +223,13 @@ export default function Home({ onNav, news, events, publications = [] }) {
             <div className="hod-message-header">
               <div className="hod-message-profile">
                 <div className="hod-message-avatar">
-                  <span>👨‍🔬</span>
+                  <img
+                    src="people_images/Faculty/Dr._Saurabh_Das.jpg"
+                    alt="Dr. Saurabh Das"
+                    className="hod-message-avatar-img"
+                    onError={e => { e.target.style.display = 'none'; if (e.target.nextSibling) e.target.nextSibling.style.display = 'inline'; }}
+                  />
+                  <span style={{ display: 'none' }}>👨‍🔬</span>
                 </div>
                 <div className="hod-message-meta">
                   <div className="hod-message-name">Dr. Saurabh Das</div>
