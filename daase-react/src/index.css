@@ -339,15 +339,15 @@ nav.nav-scrolled {
   left: 5%;
   right: 5%;
   width: 90%;
-  background: rgba(3, 7, 20, 0.18);
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-top: 1px solid rgba(255, 255, 255, 0.35);
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(6, 12, 28, 0.94);
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-top: 1px solid rgba(255, 217, 122, 0.35);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 40px;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 16px 36px -6px rgba(0, 0, 0, 0.45);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 16px 36px -6px rgba(0, 0, 0, 0.7);
   padding: 0 28px 0 36px;
 }
 
@@ -1222,7 +1222,7 @@ nav.nav-scrolled.nav-hidden {
 .hero-stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 14px;
 }
 
 /* News & Events Feed */
@@ -1284,7 +1284,7 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .vertical-marquee-container {
-  height: 395px;
+  height: 335px;
   overflow: hidden;
   position: relative;
   margin: 0 -20px;
@@ -1484,7 +1484,7 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .home-pub-marquee-container {
-  height: 395px;
+  height: 335px;
   overflow: hidden;
   position: relative;
   margin: 0 -20px;
@@ -1605,6 +1605,10 @@ nav.nav-scrolled.nav-hidden {
   animation: countUp 0.6s var(--ease-out) both;
   transition: var(--tr);
   cursor: default;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-stat:hover {
@@ -2543,10 +2547,21 @@ nav.nav-scrolled.nav-hidden {
 /* ============================================================
    FACULTY SECTION
 ============================================================ */
+.email-id-hint {
+  color: #ffd97a !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  opacity: 1 !important;
+  margin-left: 10px !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  display: inline-block !important;
+}
+
 .faculty-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 340px));
-  gap: 28px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
   margin-bottom: 28px;
   align-items: stretch;
 }
@@ -2854,8 +2869,8 @@ nav.nav-scrolled.nav-hidden {
 
 .students-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 270px));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 18px;
   align-items: stretch;
 }
 
@@ -4118,6 +4133,34 @@ a.sc-email:hover {
   .nav-cta-btn { padding: 6px 12px !important; }
 }
 
+@media(max-width:1440px) {
+  .hero-left {
+    padding: 18px 40px 10px 32px;
+  }
+
+  .hero-right {
+    padding: 18px 32px 10px 40px;
+    gap: 20px;
+  }
+
+  .hero-stats-grid {
+    gap: 12px;
+  }
+
+  .hero-stat {
+    padding: 18px 14px;
+  }
+
+  .hero-stat-num {
+    font-size: clamp(24px, 2.6vw, 34px);
+  }
+
+  .news-feed-container,
+  .home-pub-container {
+    padding: 20px 6px 12px 6px;
+  }
+}
+
 @media(max-width:1280px) {
   .nav-links button:not(.nav-mobile-toggle), 
   .nav-dropdown, 
@@ -4132,6 +4175,15 @@ a.sc-email:hover {
     font-size: 14px;
     white-space: nowrap;
   }
+
+  .hero-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .hero-stat {
+    padding: 16px 12px;
+  }
 }
 
 @media(max-width:1100px) {
@@ -4144,6 +4196,10 @@ a.sc-email:hover {
     right: 2%;
     width: 96%;
     border-radius: 24px;
+    background: rgba(6, 12, 28, 0.96) !important;
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.85) !important;
   }
 
   .nav-logos {

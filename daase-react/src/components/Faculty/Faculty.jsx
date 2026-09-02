@@ -100,7 +100,7 @@ function StudentBatch({ batch, list, type, onImageClick }) {
     <div className="batch-section">
       <div className="batch-title">
         {batch} <span className="batch-count">{list.length}</span>
-        <span style={{ fontWeight: 600, fontSize: '13px', color: '#ffd97a', opacity: 0.9, marginLeft: '8px' }}>
+        <span className="email-id-hint">
           — add @iiti.ac.in to email ID
         </span>
       </div>
@@ -236,7 +236,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
               <>
                 <div className="faculty-divider" style={{ marginTop: '0' }}>
                   Core Faculty
-                  <span style={{ color: 'white', fontWeight: 400, fontSize: '13px', marginLeft: '12px', textTransform: 'none', letterSpacing: 'normal' }}>
+                  <span className="email-id-hint">
                     — add @iiti.ac.in to email ID
                   </span>
                 </div>
@@ -250,7 +250,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
 
                 <div className="faculty-divider">
                   Visiting &amp; Distinguished Faculty <span className="visiting-badge">Visiting Members</span>
-                  <span style={{ fontWeight: 400, fontSize: '13px', color: 'var(--text-muted)', marginLeft: '12px', textTransform: 'none', letterSpacing: 'normal' }}>
+                  <span className="email-id-hint">
                     — add @iiti.ac.in to email ID
                   </span>
                 </div>
@@ -272,7 +272,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
                   <>
                     <div className="faculty-divider" style={{ marginTop: '0' }}>
                       Technical &amp; Support Staff <span className="visiting-badge" style={{ background: 'var(--navy)', color: '#fff', borderColor: 'var(--navy)' }}>HOD Office</span>
-                      <span style={{ fontWeight: 600, fontSize: '13px', color: '#ffd97a', opacity: 0.9, marginLeft: '8px' }}>
+                      <span className="email-id-hint">
                         — add @iiti.ac.in to email ID
                       </span>
                     </div>
@@ -289,7 +289,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
                     <div key={category} data-aos="fade-up">
                       <div className="faculty-divider" style={{ marginTop: catIndex === 0 ? '0' : '40px' }}>
                         {category} <span className="visiting-badge" style={{ background: 'var(--navy)', color: '#fff', borderColor: 'var(--navy)' }}>HOD Office</span>
-                        <span style={{ fontWeight: 600, fontSize: '13px', color: '#ffd97a', opacity: 0.9, marginLeft: '8px' }}>
+                        <span className="email-id-hint">
                           — add @iiti.ac.in to email ID
                         </span>
                       </div>

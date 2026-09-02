@@ -9,7 +9,7 @@ function StudentBatch({ batch, list, onImageClick, type }) {
     <div className="batch-section">
       <div className="batch-title">
         {batch} <span className="batch-count">{list.length} </span>
-        <span style={{ color: '#ffd97a', fontSize: '0.82em', fontWeight: 600, opacity: 0.9 }}>
+        <span className="email-id-hint">
           — add @iiti.ac.in to email ID
         </span>
       </div>
