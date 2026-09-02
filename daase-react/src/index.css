@@ -1284,7 +1284,7 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .vertical-marquee-container {
-  height: 290px;
+  height: 200px;
   overflow: hidden;
   position: relative;
   margin: 0 -14px;
@@ -1484,7 +1484,7 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .home-pub-marquee-container {
-  height: 290px;
+  height: 200px;
   overflow: hidden;
   position: relative;
   margin: 0 -14px;
@@ -4426,7 +4426,7 @@ a.sc-email:hover {
 
   .hero-right {
     padding: 18px 32px 10px 40px;
-    gap: 20px;
+    gap: 16px;
   }
 
   .hero-stats-grid {
@@ -4443,7 +4443,12 @@ a.sc-email:hover {
 
   .news-feed-container,
   .home-pub-container {
-    padding: 20px 6px 12px 6px;
+    padding: 18px 6px 12px 6px;
+  }
+
+  .vertical-marquee-container,
+  .home-pub-marquee-container {
+    height: 190px;
   }
 }
 
@@ -4469,6 +4474,11 @@ a.sc-email:hover {
 
   .hero-stat {
     padding: 16px 12px;
+  }
+
+  .vertical-marquee-container,
+  .home-pub-marquee-container {
+    height: 185px;
   }
 }
 
