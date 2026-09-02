@@ -4129,18 +4129,19 @@ a.sc-email:hover {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 4px;
 }
 
 .footer-links-list li a {
-  font-size: 15.5px;
+  font-size: 15px;
   color: rgba(255, 255, 255, 0.84);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 7px;
   transition: all 0.2s ease;
-  line-height: 1.45;
+  line-height: 1.35;
+  padding: 2px 0;
 }
 
 .footer-link-arrow {
