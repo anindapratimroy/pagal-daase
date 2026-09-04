@@ -3,14 +3,11 @@ import { createPortal } from 'react-dom';
 
 const QUICK_LINKS = [
   { id: 'home',           label: 'Home' },
-  { id: 'people-faculty', label: 'Faculty & Researchers' },
-  { id: 'people-staff',   label: 'Technical & Office Staff' },
-  { id: 'people-phd',     label: 'Ph.D. Scholars' },
-  { id: 'programs',       label: 'Degree Programs' },
+  { id: 'people-faculty', label: 'Faculty' },
+  { id: 'programs',       label: 'Programs' },
   { id: 'research',       label: 'Research Areas' },
-  { id: 'facilities',     label: 'Labs & Facilities' },
-  { id: 'events',         label: 'Events & Workshops' },
-  { id: 'gallery',        label: 'Photo Gallery' },
+  { id: 'facilities',     label: 'Research Facilities' },
+  { id: 'events',         label: 'Events' },
   { id: 'opportunities',  label: 'Opportunities' },
 ];
 
