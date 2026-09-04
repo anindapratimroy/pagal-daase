@@ -87,7 +87,7 @@
 
 /* ── Title ──────────────────────────────────────────────────── */
 .rd-title {
-  font-family: 'Merriweather', serif;
+  font-family: inherit;
   font-size: 3.2rem;
   font-weight: 700;
   margin: 0;
@@ -125,7 +125,7 @@
 }
 
 .rd-section-title {
-  font-family: 'Merriweather', serif;
+  font-family: inherit;
   color: #fff;
   font-size: 2rem;
   margin: 0 0 8px 0;
@@ -170,7 +170,7 @@
 }
 
 .rd-sub-heading {
-  font-family: 'Merriweather', serif;
+  font-family: inherit;
   font-size: 1.2rem;
   font-weight: 700;
   color: #ffd97a;
@@ -227,7 +227,7 @@
 
 .rd-sidebar-title {
   margin: 0 0 8px 0;
-  font-family: 'Merriweather', serif;
+  font-family: inherit;
   color: #fff;
   font-size: 1.35rem;
   font-weight: 800;
