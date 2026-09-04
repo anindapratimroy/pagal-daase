@@ -131,22 +131,38 @@ function FacultyCard({ f }) {
       <div className="fc-body">
         {f.isHOD && <div className="hod-badge">Head of Department</div>}
         <div className="fc-name">{f.name}</div>
-        {f.research && <div className="fc-research">{f.research}</div>}
 
-        {(f.chamber || f.phoneExt) && (
-          <div className="fc-office-row">
-            {f.chamber && (
-              <span className="fc-office-badge" title={`Chamber / Room: ${f.chamber}`}>
-                🏢 Room {f.chamber}
-              </span>
-            )}
-            {f.phoneExt && (
-              <span className="fc-office-badge" title={`Telephone Extension: ${f.phoneExt}`}>
-                📞 Ext. {f.phoneExt}
-              </span>
-            )}
-          </div>
-        )}
+        {(f.chamber || f.phoneExt || f.office || f.phone) && (() => {
+          const chamberVal = (f.chamber || f.chamber_no || f.office || '').toString().trim();
+          const phoneExtVal = (f.phoneExt || f.extension || f.phone || '').toString().trim();
+          if (!chamberVal && !phoneExtVal) return null;
+          const displayChamber = chamberVal.toLowerCase().startsWith('room') || chamberVal.toLowerCase().startsWith('chamber')
+            ? chamberVal
+            : `Room ${chamberVal}`;
+          const displayExt = phoneExtVal.toLowerCase().startsWith('ext')
+            ? phoneExtVal
+            : `Ext. ${phoneExtVal}`;
+
+          return (
+            <div className="fc-office-strip">
+              {chamberVal && (
+                <span className="fc-office-item" title={`Office / Chamber: ${chamberVal}`}>
+                  <span className="fc-office-icon">🏢</span>
+                  <span>{displayChamber}</span>
+                </span>
+              )}
+              {chamberVal && phoneExtVal && <span className="fc-office-dot">•</span>}
+              {phoneExtVal && (
+                <span className="fc-office-item" title={`Telephone Extension: ${phoneExtVal}`}>
+                  <span className="fc-office-icon">📞</span>
+                  <span>{displayExt}</span>
+                </span>
+              )}
+            </div>
+          );
+        })()}
+
+        {f.research && <div className="fc-research">{f.research}</div>}
 
         {f.email
           ? <div className="fc-email">✉ {f.email.split('@')[0]}</div>
