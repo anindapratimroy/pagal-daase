@@ -445,8 +445,63 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
     return scored.map(s => s.item);
   }, [query, fullIndex]);
 
-  // Category counts
-  const categoryCounts = useMemo(() => {
+  // Curated spotlight recommendations shown on initial open
+  const spotlightItems = useMemo(() => {
+    const picks = [];
+    // 1. Head of Department
+    const hod = fullIndex.find(i => i.isHOD);
+    if (hod) picks.push(hod);
+
+    // 2. Core Senior Faculty (e.g. Prof. Abhirup Datta)
+    const fac2 = fullIndex.find(i => i.category === 'Faculty' && !i.isHOD && i.title.toLowerCase().includes('abhirup'));
+    if (fac2) picks.push(fac2);
+
+    // 3. Flagship B.Tech. Program
+    const btech = fullIndex.find(i => i.id === 'prog-btech');
+    if (btech) picks.push(btech);
+
+    // 4. Premier M.Sc. Astronomy
+    const msc = fullIndex.find(i => i.id === 'prog-msc');
+    if (msc) picks.push(msc);
+
+    // 5. Flagship Research: Cosmology
+    const cosmo = fullIndex.find(i => i.category === 'Research' && i.title.toLowerCase().includes('cosmo'));
+    if (cosmo) picks.push(cosmo);
+
+    // 6. Flagship Facility: Himadri Arctic Station
+    const arctic = fullIndex.find(i => i.category === 'Facilities' && i.title.toLowerCase().includes('himadri'));
+    if (arctic) picks.push(arctic);
+
+    // 7. Compact Objects & High Energy
+    const compact = fullIndex.find(i => i.category === 'Research' && i.title.toLowerCase().includes('compact'));
+    if (compact) picks.push(compact);
+
+    // 8. Ph.D. Program
+    const phd = fullIndex.find(i => i.id === 'prog-phd');
+    if (phd) picks.push(phd);
+
+    // 9. Open Opportunities
+    const opp = fullIndex.find(i => i.category === 'Opportunities');
+    if (opp) picks.push(opp);
+
+    // 10. Faculty Directory Page
+    const facDir = fullIndex.find(i => i.id === 'page-people-faculty');
+    if (facDir) picks.push(facDir);
+
+    return picks.filter(Boolean);
+  }, [fullIndex]);
+
+  // Overall database category counts
+  const allCategoryCounts = useMemo(() => {
+    const counts = { All: fullIndex.length };
+    fullIndex.forEach(item => {
+      counts[item.category] = (counts[item.category] || 0) + 1;
+    });
+    return counts;
+  }, [fullIndex]);
+
+  // Search match counts
+  const searchCategoryCounts = useMemo(() => {
     const counts = { All: searchResults.length };
     searchResults.forEach(item => {
       counts[item.category] = (counts[item.category] || 0) + 1;
@@ -454,39 +509,50 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
     return counts;
   }, [searchResults]);
 
-  // Filtered by selected category
-  const filteredResults = useMemo(() => {
-    if (activeCategory === 'All') return searchResults;
-    return searchResults.filter(item => item.category === activeCategory);
-  }, [searchResults, activeCategory]);
+  const activeCategoryCounts = query.trim() ? searchCategoryCounts : allCategoryCounts;
 
-  // Reset selected index when results change
+  // Active items currently displayed in the list (never empty on initial open!)
+  const displayItems = useMemo(() => {
+    const q = query.trim();
+    if (!q) {
+      if (activeCategory === 'All') {
+        return spotlightItems;
+      }
+      return fullIndex.filter(item => item.category === activeCategory);
+    }
+    if (activeCategory === 'All') {
+      return searchResults;
+    }
+    return searchResults.filter(item => item.category === activeCategory);
+  }, [query, activeCategory, spotlightItems, fullIndex, searchResults]);
+
+  // Reset selected index when search query or category changes
   useEffect(() => {
     setSelectedIndex(0);
   }, [query, activeCategory]);
 
-  // Keyboard navigation
+  // Keyboard navigation across displayItems
   const handleKeyDown = (e) => {
     if (e.key === 'Escape') {
       onClose();
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
       setSelectedIndex(prev => {
-        const next = prev < filteredResults.length - 1 ? prev + 1 : 0;
+        const next = prev < displayItems.length - 1 ? prev + 1 : 0;
         scrollRowIntoView(next);
         return next;
       });
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       setSelectedIndex(prev => {
-        const next = prev > 0 ? prev - 1 : filteredResults.length - 1;
+        const next = prev > 0 ? prev - 1 : displayItems.length - 1;
         scrollRowIntoView(next);
         return next;
       });
     } else if (e.key === 'Enter') {
       e.preventDefault();
-      if (filteredResults[selectedIndex]) {
-        handleSelectItem(filteredResults[selectedIndex]);
+      if (displayItems[selectedIndex]) {
+        handleSelectItem(displayItems[selectedIndex]);
       }
     }
   };
@@ -516,11 +582,45 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
 
   if (!isOpen) return null;
 
-  const categoriesWithResults = ['All', 'Faculty', 'Students', 'Research', 'Programs', 'Events', 'Facilities', 'Opportunities', 'Alumni', 'Staff', 'Pages'].filter(
-    cat => (categoryCounts[cat] || 0) > 0
-  );
+  const ALL_FILTER_TABS = [
+    'All',
+    'Faculty',
+    'Programs',
+    'Research',
+    'Facilities',
+    'Opportunities',
+    'Students',
+    'Events',
+    'Staff',
+    'Pages'
+  ];
 
-  const selectedItem = filteredResults[selectedIndex] || null;
+  const visibleFilterTabs = ALL_FILTER_TABS.filter(cat => (activeCategoryCounts[cat] || 0) > 0);
+
+  const selectedItem = displayItems[selectedIndex] || displayItems[0] || null;
+
+  const getCtaLabel = (item) => {
+    if (!item) return 'Locate on Page';
+    if (item.category === 'Faculty' || item.category === 'Students' || item.category === 'Staff' || item.category === 'Alumni') {
+      return '📍 Locate & Highlight Profile';
+    }
+    if (item.category === 'Programs') {
+      return '🎓 View Program Curriculum & Overview';
+    }
+    if (item.category === 'Research') {
+      return '🔬 Explore Research Domain';
+    }
+    if (item.category === 'Facilities') {
+      return '🔭 View Research Facility';
+    }
+    if (item.category === 'Opportunities') {
+      return '🌟 View Open Opportunities';
+    }
+    if (item.category === 'Events') {
+      return '📅 View Department Events';
+    }
+    return '↗ Open Page';
+  };
 
   return (
     <div className="global-search-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-label="Global Search">
@@ -573,17 +673,20 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
           </button>
         </div>
 
-        {/* Category Filter Pills (when searching) */}
-        {query.trim() && categoriesWithResults.length > 1 && (
+        {/* Category Filter Tabs (always visible for easy 1-click filtering) */}
+        {visibleFilterTabs.length > 1 && (
           <div className="power-search-categories">
-            {categoriesWithResults.map(cat => (
+            {visibleFilterTabs.map(cat => (
               <button
                 key={cat}
                 type="button"
                 className={`power-cat-pill${activeCategory === cat ? ' active' : ''}`}
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => {
+                  setActiveCategory(cat);
+                  setSelectedIndex(0);
+                }}
               >
-                {cat} <span className="pill-count">({categoryCounts[cat]})</span>
+                {cat} <span className="pill-count">({activeCategoryCounts[cat] || 0})</span>
               </button>
             ))}
           </div>
@@ -592,124 +695,139 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
         {/* Split-View Workspace */}
         <div className="power-search-workspace">
 
-          {/* Left Column: Results List */}
+          {/* Left Column: Results / Spotlight List */}
           <div className="power-search-list-col" ref={listRef}>
-            {query.trim().length === 0 ? (
-              /* Pre-Search Recommendations */
-              <div className="power-presearch">
-                <div className="power-subhead">Quick Search Recommendations</div>
-                <div className="power-recs-grid">
-                  {[
-                    { label: 'Dr. Saurabh Das', desc: 'Associate Professor & HoD', icon: '👨‍🏫' },
-                    { label: 'Prof. Abhirup Datta', desc: 'Radio Astronomy & SKA', icon: '👨‍🏫' },
-                    { label: 'Cosmology', desc: 'Epoch of Reionization & 21-cm', icon: '🔬' },
-                    { label: 'B.Tech. Space Science', desc: 'Undergraduate Program', icon: '🚀' },
-                    { label: 'M.Sc. Astronomy', desc: 'Postgraduate Program', icon: '⭐' },
-                    { label: 'Himadri Arctic Station', desc: 'DAASE Arctic Facility', icon: '🔭' },
-                    { label: 'Compact Objects', desc: 'Black Holes & Neutron Stars', icon: '🌌' },
-                    { label: 'Ph.D. Scholars', desc: 'Doctoral Candidates & Research', icon: '🧑‍🎓' },
-                  ].map(rec => (
-                    <button
-                      key={rec.label}
-                      type="button"
-                      className="power-rec-btn"
-                      onClick={() => {
-                        setQuery(rec.label);
-                        if (inputRef.current) inputRef.current.focus();
-                      }}
-                    >
-                      <span className="rec-icon">{rec.icon}</span>
-                      <div className="rec-text">
-                        <span className="rec-label">{rec.label}</span>
-                        <span className="rec-desc">{rec.desc}</span>
-                      </div>
-                    </button>
-                  ))}
+            {displayItems.length > 0 ? (
+              <>
+                <div className="power-subhead-row">
+                  <span className="power-subhead">
+                    {!query.trim()
+                      ? activeCategory === 'All'
+                        ? '⭐ Featured Spotlight & Recommendations'
+                        : `Department ${activeCategory}`
+                      : `Search Results`}
+                  </span>
+                  <span className="power-subhead-badge">
+                    {displayItems.length} {displayItems.length === 1 ? 'item' : 'items'}
+                  </span>
                 </div>
 
-                <div className="power-subhead" style={{ marginTop: '24px' }}>Quick Department Navigation</div>
-                <div className="power-nav-pills">
-                  {QUICK_PAGES.map(p => (
-                    <button
-                      key={p.title}
-                      type="button"
-                      className="power-nav-pill-btn"
-                      onClick={() => handleSelectItem({ action: () => onNav(p.view) })}
-                    >
-                      <span>{p.icon}</span> {p.title}
-                    </button>
-                  ))}
+                <div className="power-results-list" role="listbox">
+                  {displayItems.map((item, idx) => {
+                    const isSelected = idx === selectedIndex;
+                    return (
+                      <div
+                        key={item.id}
+                        role="option"
+                        aria-selected={isSelected}
+                        className={`power-result-row${isSelected ? ' selected' : ''}`}
+                        onClick={() => handleSelectItem(item)}
+                        onMouseEnter={() => setSelectedIndex(idx)}
+                      >
+                        {/* Avatar / Icon */}
+                        <div className="row-avatar">
+                          {item.photo ? (
+                            <img
+                              src={item.photo}
+                              alt={item.title}
+                              onError={e => {
+                                e.target.style.display = 'none';
+                                if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
+                              }}
+                            />
+                          ) : null}
+                          <span
+                            className="row-avatar-fallback"
+                            style={{ display: item.photo ? 'none' : 'flex' }}
+                          >
+                            {item.icon}
+                          </span>
+                        </div>
+
+                        {/* Content */}
+                        <div className="row-body">
+                          <div className="row-title-bar">
+                            <span className="row-title">
+                              <HighlightMatch text={item.title} query={query} />
+                            </span>
+                            <span className={`row-badge badge-${item.category.toLowerCase().replace(/\s+/g, '-')}`}>
+                              {item.badge || item.category}
+                            </span>
+                          </div>
+                          <div className="row-sub">
+                            <HighlightMatch text={item.sub} query={query} />
+                          </div>
+                        </div>
+
+                        {/* Jump hint */}
+                        <div className="row-action-arrow">
+                          <span>→</span>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
-              </div>
-            ) : filteredResults.length > 0 ? (
-              /* Search Results List */
-              <div className="power-results-list" role="listbox">
-                {filteredResults.map((item, idx) => {
-                  const isSelected = idx === selectedIndex;
-                  return (
-                    <div
-                      key={item.id}
-                      role="option"
-                      aria-selected={isSelected}
-                      className={`power-result-row${isSelected ? ' selected' : ''}`}
-                      onClick={() => handleSelectItem(item)}
-                      onMouseEnter={() => setSelectedIndex(idx)}
-                    >
-                      {/* Avatar / Icon */}
-                      <div className="row-avatar">
-                        {item.photo ? (
-                          <img
-                            src={item.photo}
-                            alt={item.title}
-                            onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
-                          />
-                        ) : null}
-                        <span className="row-avatar-fallback" style={{ display: item.photo ? 'none' : 'flex' }}>
-                          {item.icon}
-                        </span>
-                      </div>
 
-                      {/* Content */}
-                      <div className="row-body">
-                        <div className="row-title-bar">
-                          <span className="row-title">
-                            <HighlightMatch text={item.title} query={query} />
-                          </span>
-                          <span className={`row-badge badge-${item.category.toLowerCase().replace(/\s+/g, '-')}`}>
-                            {item.badge || item.category}
-                          </span>
-                        </div>
-                        <div className="row-sub">
-                          <HighlightMatch text={item.sub} query={query} />
-                        </div>
-                      </div>
-
-                      {/* Jump hint */}
-                      <div className="row-action-arrow">
-                        <span>→</span>
-                      </div>
+                {/* Quick Department Navigation (shown when All and not searching) */}
+                {!query.trim() && activeCategory === 'All' && (
+                  <div className="power-nav-section">
+                    <div className="power-subhead" style={{ marginTop: '22px', marginBottom: '10px' }}>
+                      ⚡ Quick Department Navigation
                     </div>
-                  );
-                })}
-              </div>
+                    <div className="power-nav-pills">
+                      {QUICK_PAGES.map(p => (
+                        <button
+                          key={p.title}
+                          type="button"
+                          className="power-nav-pill-btn"
+                          onClick={() => handleSelectItem({ action: () => onNav(p.view) })}
+                        >
+                          <span>{p.icon}</span> {p.title}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </>
             ) : (
-              /* Empty state */
+              /* Empty state when search returns 0 matches */
               <div className="power-empty-box">
                 <div className="empty-icon">🪐</div>
                 <div className="empty-title">No matches found for "{query}"</div>
                 <p className="empty-desc">
                   We checked faculty profiles, research fields, students, events, programs, and facilities across the entire department.
                 </p>
-                <div style={{ marginTop: '16px' }}>
+                <div style={{ marginTop: '16px', display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap' }}>
                   <button
                     type="button"
                     className="power-clear-link"
                     onClick={() => {
                       setQuery('');
+                      setActiveCategory('All');
                       if (inputRef.current) inputRef.current.focus();
                     }}
                   >
-                    Clear Search Query
+                    Clear Search
+                  </button>
+                  <button
+                    type="button"
+                    className="power-clear-link"
+                    onClick={() => {
+                      setQuery('');
+                      setActiveCategory('Faculty');
+                    }}
+                  >
+                    Browse Faculty
+                  </button>
+                  <button
+                    type="button"
+                    className="power-clear-link"
+                    onClick={() => {
+                      setQuery('');
+                      setActiveCategory('Programs');
+                    }}
+                  >
+                    Browse Programs
                   </button>
                 </div>
               </div>
@@ -892,17 +1010,49 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
                     className="preview-jump-cta"
                     onClick={() => handleSelectItem(selectedItem)}
                   >
-                    <span>📍 Locate &amp; Highlight on Page</span>
+                    <span>{getCtaLabel(selectedItem)}</span>
                     <span className="cta-arrow">→</span>
                   </button>
                 </div>
 
               </div>
             ) : (
-              /* Placeholder when no item is selected */
-              <div className="power-preview-placeholder">
-                <span className="placeholder-icon">🔍</span>
-                <p>Select any person, research area, or program to view full profile details and quick actions.</p>
+              /* Guide card when query has no matches */
+              <div className="power-discovery-card">
+                <div className="discovery-header">
+                  <span className="discovery-icon">💡</span>
+                  <div className="discovery-title">Search Tips &amp; Popular Queries</div>
+                </div>
+                <p className="discovery-desc">
+                  You can search by professor name, room/chamber number, 4-digit telephone extension, academic program, or research domain.
+                </p>
+                <div className="discovery-subhead">Popular Queries</div>
+                <div className="discovery-chips-grid">
+                  {[
+                    'Dr. Saurabh Das',
+                    'Prof. Abhirup Datta',
+                    'B.Tech Space Science',
+                    'M.Sc Astronomy',
+                    'Cosmology',
+                    'Himadri Arctic',
+                    'Opportunities',
+                    'Room 407',
+                    'Radio Astronomy',
+                  ].map(term => (
+                    <button
+                      key={term}
+                      type="button"
+                      className="discovery-chip-btn"
+                      onClick={() => {
+                        setQuery(term);
+                        setActiveCategory('All');
+                        if (inputRef.current) inputRef.current.focus();
+                      }}
+                    >
+                      <span>🔍</span> {term}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -913,13 +1063,13 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
         <div className="power-search-footer">
           <div className="footer-keys-hints">
             <span><kbd>↑</kbd> <kbd>↓</kbd> Navigate</span>
-            <span><kbd>↵</kbd> Locate on Page</span>
+            <span><kbd>↵</kbd> Select / View</span>
             <span><kbd>ESC</kbd> Close</span>
           </div>
           <div className="footer-status-text">
             {query.trim()
-              ? `Showing ${filteredResults.length} ${filteredResults.length === 1 ? 'match' : 'matches'}`
-              : 'DAASE Command Palette · IIT Indore'}
+              ? `Showing ${displayItems.length} ${displayItems.length === 1 ? 'match' : 'matches'}`
+              : `${displayItems.length} items · DAASE Command Palette · IIT Indore`}
           </div>
         </div>
 
