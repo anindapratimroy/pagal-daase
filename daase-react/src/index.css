@@ -4232,23 +4232,22 @@ a.sc-email:hover {
   transform: translateY(-1px);
 }
 
-.footer-map-preview-card {
+.footer-map-strip {
   position: relative;
   width: 100%;
-  height: 250px;
+  height: 160px;
   border-radius: 14px;
   overflow: hidden;
-  border: 1px solid rgba(255, 217, 122, 0.3);
-  margin-top: 14px;
+  border: 1px solid rgba(255, 217, 122, 0.25);
+  margin-top: 28px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
   display: block;
   transition: all 0.3s ease;
 }
 
-.footer-map-preview-card:hover {
-  border-color: rgba(255, 217, 122, 0.6);
+.footer-map-strip:hover {
+  border-color: rgba(255, 217, 122, 0.5);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
-  transform: translateY(-2px);
 }
 
 .footer-mini-map {

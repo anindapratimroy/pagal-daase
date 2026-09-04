@@ -147,28 +147,29 @@ export default function Footer({ onNav }) {
                   </div>
                 </div>
               </div>
-
-              <a 
-                href="https://maps.google.com/maps?q=22.528688,75.923391" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="footer-map-preview-card"
-                title="Open IIT Indore in Google Maps"
-              >
-                <iframe
-                  src="https://maps.google.com/maps?q=22.528688,75.923391&t=k&z=15&ie=UTF8&iwloc=&output=embed"
-                  title="IIT Indore Satellite Map"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="footer-mini-map"
-                />
-                <div className="footer-map-pin-pill">
-                  <span>📍 DAASE, IIT Indore ↗</span>
-                </div>
-              </a>
             </div>
 
           </div>
+
+          {/* ── Full-Width Map Strip ── */}
+          <a 
+            href="https://maps.google.com/maps?q=22.528688,75.923391" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="footer-map-strip"
+            title="Open IIT Indore in Google Maps"
+          >
+            <iframe
+              src="https://maps.google.com/maps?q=22.528688,75.923391&t=k&z=15&ie=UTF8&iwloc=&output=embed"
+              title="IIT Indore Satellite Map"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="footer-mini-map"
+            />
+            <div className="footer-map-pin-pill">
+              <span>📍 DAASE, IIT Indore — Click to open in Google Maps ↗</span>
+            </div>
+          </a>
 
           {/* ── Footer Divider ── */}
           <div className="footer-bottom-divider" />
