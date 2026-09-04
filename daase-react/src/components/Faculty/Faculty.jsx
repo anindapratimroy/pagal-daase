@@ -105,6 +105,29 @@ function filterAlumniArray(alumni, q) {
   return { filtered, count };
 }
 
+// Phone dial helpers for IIT Indore extensions (+91-731-660-XXXX)
+const getFullTelNumber = (rawExt) => {
+  if (!rawExt) return '';
+  const digits = String(rawExt).replace(/\D/g, '');
+  if (!digits) return '';
+  if (digits.length >= 10) {
+    return digits.startsWith('91') ? `+${digits}` : `+91${digits.replace(/^0+/, '')}`;
+  }
+  return `+91731660${digits}`;
+};
+
+const getDisplayFullTel = (rawExt) => {
+  if (!rawExt) return '';
+  const digits = String(rawExt).replace(/\D/g, '');
+  if (digits.length === 4) {
+    return `+91-731-660-${digits}`;
+  }
+  if (digits.length >= 10) {
+    return `+${digits}`;
+  }
+  return `+91-731-660-${digits || rawExt}`;
+};
+
 // ─── Faculty Card ────────────────────────────────────────────────────────────
 function FacultyCard({ f }) {
   const normalizedUrl = normalizeLink(f.url);
@@ -153,7 +176,26 @@ function FacultyCard({ f }) {
               )}
               {chamberVal && phoneExtVal && <span className="fc-office-dot">•</span>}
               {phoneExtVal && (
-                <span className="fc-office-item" title={`Telephone Extension: ${phoneExtVal}`}>
+                <span
+                  className="fc-office-item fc-office-clickable"
+                  role="button"
+                  tabIndex={0}
+                  title={`Click to call ${getDisplayFullTel(phoneExtVal)}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const tel = getFullTelNumber(phoneExtVal);
+                    if (tel) window.location.href = `tel:${tel}`;
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const tel = getFullTelNumber(phoneExtVal);
+                      if (tel) window.location.href = `tel:${tel}`;
+                    }
+                  }}
+                >
                   <span className="fc-office-icon">📞</span>
                   <span>{displayExt}</span>
                 </span>

@@ -4364,6 +4364,26 @@ nav.nav-scrolled.nav-hidden {
   white-space: nowrap;
 }
 
+.fc-office-clickable {
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.fc-office-clickable:hover {
+  background: rgba(255, 217, 122, 0.22);
+  color: #ffffff !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.fc-office-clickable:focus-visible {
+  outline: 2px solid #ffd97a;
+  outline-offset: 1px;
+}
+
 .fc-office-icon {
   font-size: 11.5px;
   line-height: 1;

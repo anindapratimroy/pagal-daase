@@ -69,6 +69,29 @@ function getAnchorId(name) {
   return `person-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 }
 
+// Phone dial helpers for IIT Indore extensions (+91-731-660-XXXX)
+const getFullTelNumber = (rawExt) => {
+  if (!rawExt) return '';
+  const digits = String(rawExt).replace(/\D/g, '');
+  if (!digits) return '';
+  if (digits.length >= 10) {
+    return digits.startsWith('91') ? `+${digits}` : `+91${digits.replace(/^0+/, '')}`;
+  }
+  return `+91731660${digits}`;
+};
+
+const getDisplayFullTel = (rawExt) => {
+  if (!rawExt) return '';
+  const digits = String(rawExt).replace(/\D/g, '');
+  if (digits.length === 4) {
+    return `+91-731-660-${digits}`;
+  }
+  if (digits.length >= 10) {
+    return `+${digits}`;
+  }
+  return `+91-731-660-${digits || rawExt}`;
+};
+
 function HighlightMatch({ text, query }) {
   if (!query || !text) return text;
   const terms = query.trim().split(/\s+/).filter(Boolean);
@@ -821,9 +844,26 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
                           </span>
                         )}
                         {selectedItem.phoneExt && (
-                          <span className="meta-tag" style={{ background: 'rgba(96, 165, 250, 0.12)', color: '#93c5fd', borderColor: 'rgba(96, 165, 250, 0.35)', fontWeight: 600 }}>
-                            📞 Telephone Ext: {selectedItem.phoneExt}
-                          </span>
+                          <a
+                            href={`tel:${getFullTelNumber(selectedItem.phoneExt)}`}
+                            className="meta-tag"
+                            style={{
+                              background: 'rgba(96, 165, 250, 0.15)',
+                              color: '#93c5fd',
+                              borderColor: 'rgba(96, 165, 250, 0.4)',
+                              fontWeight: 600,
+                              textDecoration: 'none',
+                              cursor: 'pointer',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                              transition: 'all 0.2s ease'
+                            }}
+                            title={`Click to call ${getDisplayFullTel(selectedItem.phoneExt)}`}
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            📞 Tel: {getDisplayFullTel(selectedItem.phoneExt)}
+                          </a>
                         )}
                       </div>
                     </div>
