@@ -4338,6 +4338,29 @@ nav.nav-scrolled.nav-hidden {
   flex: 1;
 }
 
+.fc-office-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
+
+.fc-office-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: rgba(255, 217, 122, 0.12);
+  color: #ffd97a;
+  border: 1px solid rgba(255, 217, 122, 0.28);
+  letter-spacing: 0.02em;
+}
+
 .fc-email {
   
   font-size: 10.5px;

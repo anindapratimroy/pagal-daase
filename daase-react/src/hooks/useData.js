@@ -5,7 +5,7 @@ import {
   ALUMNI_FB, EVENTS_FB, PHD_FB, INTERNS_FB, NEWS_FB, OUTREACH_FB, STAFF_FB
 } from '../data/fallback';
 
-const CACHE_KEY = 'daase_v8_data';
+const CACHE_KEY = 'daase_v9_data';
 const CACHE_TTL = 30 * 60 * 1000; // 30 min
 
 function getCached(ignoreTTL = false) {
@@ -88,8 +88,22 @@ function resolveData(d) {
   };
 
   return {
-    faculty:    has('faculty')   ? d.faculty.map(f => ({ ...f, photo: drivePhotoUrl(f.photo) || f.photo })) : FACULTY_FB,
-    visiting:   has('visiting')  ? d.visiting.map(f => ({ ...f, photo: drivePhotoUrl(f.photo) || f.photo })) : VISITING_FB,
+    faculty: has('faculty')
+      ? d.faculty.map(f => ({
+          ...f,
+          photo: drivePhotoUrl(f.photo) || f.photo,
+          chamber: (f.chamber || f.chamber_no || f.chamber_number || f.room || f.room_no || f.office || '').toString().trim(),
+          phoneExt: (f.phoneExt || f.phone_ext || f.extension || f.extension_no || f.ext || f.phone || '').toString().trim(),
+        }))
+      : FACULTY_FB,
+    visiting: has('visiting')
+      ? d.visiting.map(f => ({
+          ...f,
+          photo: drivePhotoUrl(f.photo) || f.photo,
+          chamber: (f.chamber || f.chamber_no || f.room || f.office || '').toString().trim(),
+          phoneExt: (f.phoneExt || f.phone_ext || f.extension || f.ext || f.phone || '').toString().trim(),
+        }))
+      : VISITING_FB,
     pg: (() => {
       if (!has('pg_students')) return PG_FB;
       const filtered = {};
@@ -123,7 +137,13 @@ function resolveData(d) {
     news:       has('news')      ? d.news         : NEWS_FB,
     outreach:   has('outreach')  ? d.outreach     : OUTREACH_FB,
     publications: has('publications') ? d.publications : PUBLICATIONS_FB,
-    opportunities: has('opportunities') ? d.opportunities : [],
+    student_opportunities: has('student_opportunities')
+      ? d.student_opportunities
+      : (has('opportunities') ? d.opportunities : []),
+    teacher_opportunities: has('teacher_opportunities') ? d.teacher_opportunities : [],
+    opportunities: has('opportunities')
+      ? d.opportunities
+      : (has('student_opportunities') ? d.student_opportunities : []),
     staff: (() => {
       if (has('non_teaching_staff')) return d.non_teaching_staff;
       if (has('staff')) return [...d.staff].sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));

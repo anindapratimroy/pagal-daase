@@ -26,7 +26,9 @@ function filterFacultyItem(f, q) {
     matchesQuery(f.name, q) ||
     matchesQuery(f.designation, q) ||
     matchesQuery(f.research, q) ||
-    matchesQuery(f.email, q)
+    matchesQuery(f.email, q) ||
+    matchesQuery(f.chamber, q) ||
+    matchesQuery(f.phoneExt, q)
   );
 }
 
@@ -130,6 +132,22 @@ function FacultyCard({ f }) {
         {f.isHOD && <div className="hod-badge">Head of Department</div>}
         <div className="fc-name">{f.name}</div>
         {f.research && <div className="fc-research">{f.research}</div>}
+
+        {(f.chamber || f.phoneExt) && (
+          <div className="fc-office-row">
+            {f.chamber && (
+              <span className="fc-office-badge" title={`Chamber / Room: ${f.chamber}`}>
+                🏢 Room {f.chamber}
+              </span>
+            )}
+            {f.phoneExt && (
+              <span className="fc-office-badge" title={`Telephone Extension: ${f.phoneExt}`}>
+                📞 Ext. {f.phoneExt}
+              </span>
+            )}
+          </div>
+        )}
+
         {f.email
           ? <div className="fc-email">✉ {f.email.split('@')[0]}</div>
           : <div className="fc-email" style={{ color: 'var(--text-light)' }}>✉ Contact via Dept. Office</div>

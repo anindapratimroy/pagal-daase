@@ -227,7 +227,14 @@ export default function App() {
       case 'facilities': return <Facilities facilities={data.facilities} onNav={handleNav} />;
       case 'events':     return <Events events={data.events} outreach={data.outreach} onNav={handleNav} />;
       case 'gallery':    return <Gallery />;
-      case 'opportunities': return <Opportunities opportunities={data.opportunities} onNav={handleNav} />;
+      case 'opportunities': return (
+        <Opportunities
+          opportunities={data.opportunities}
+          studentOpportunities={data.student_opportunities}
+          teacherOpportunities={data.teacher_opportunities}
+          onNav={handleNav}
+        />
+      );
       // Legacy routes kept for safety
       case 'faculty':    return (
         <Faculty

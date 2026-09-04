@@ -171,21 +171,26 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
       const photoSrc = imageMap[f.name] || (f.photo ? (drivePhotoUrl(f.photo) || f.photo) : '');
       const fullEmail = f.email ? (f.email.includes('@') ? f.email : `${f.email}@iiti.ac.in`) : '';
       const anchor = getAnchorId(f.name);
+      const chamberText = f.chamber ? `Room ${f.chamber}` : '';
+      const extText = f.phoneExt ? `Ext. ${f.phoneExt}` : '';
+      const officeInfo = [chamberText, extText].filter(Boolean).join(' · ');
 
       items.push({
         id: `faculty-${idx}-${f.name}`,
         title: f.name,
         category: 'Faculty',
         badge: isHOD ? 'Head of Department' : (isVisiting ? 'Visiting Faculty' : 'Core Faculty'),
-        sub: `${f.designation}${isHOD ? ' (HoD)' : ''}`,
+        sub: `${f.designation}${isHOD ? ' (HoD)' : ''}${officeInfo ? ` · ${officeInfo}` : ''}`,
         designation: f.designation,
         isHOD,
         email: fullEmail,
+        chamber: f.chamber,
+        phoneExt: f.phoneExt,
         url: f.url,
         photo: photoSrc,
         research: f.research,
         icon: '👨‍🏫',
-        keywords: `${f.name} ${f.designation} ${fullEmail} ${f.research || ''} faculty professor teacher hod`,
+        keywords: `${f.name} ${f.designation} ${fullEmail} ${f.chamber || ''} ${f.phoneExt || ''} ${f.research || ''} faculty professor teacher hod room chamber extension ext`,
         action: () => onNav('people-faculty', null, anchor),
       });
     });
@@ -292,18 +297,51 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
       });
     });
 
-    // 9. Opportunities
-    (data.opportunities || []).forEach((opp, idx) => {
+    // 9. Opportunities (Students and Teachers)
+    const studentOpps = Array.isArray(data.student_opportunities) && data.student_opportunities.length > 0
+      ? data.student_opportunities
+      : (data.opportunities || []).filter(o => {
+          const t = (o.type || o.audience || '').toString().toLowerCase();
+          return t === '' || t.includes('student');
+        });
+
+    const teacherOpps = Array.isArray(data.teacher_opportunities) && data.teacher_opportunities.length > 0
+      ? data.teacher_opportunities
+      : (data.opportunities || []).filter(o => {
+          const t = (o.type || o.audience || '').toString().toLowerCase();
+          return t.includes('faculty') || t.includes('teacher');
+        });
+
+    studentOpps.forEach((opp, idx) => {
+      const deadline = opp.lastDate || opp.deadline;
       items.push({
-        id: `opp-${idx}-${opp.title}`,
+        id: `opp-s-${idx}-${opp.title}`,
         title: opp.title,
         category: 'Opportunities',
-        badge: opp.category || 'Admission / Career',
-        sub: `${opp.deadline ? `Deadline: ${opp.deadline}` : 'Open Application'}`,
-        deadline: opp.deadline,
-        url: opp.link || opp.url,
-        icon: '🚀',
-        keywords: `${opp.title} ${opp.category || ''} ${opp.description || ''} opportunity job fellowship internship admission`,
+        badge: opp.tag || 'Student Opportunity',
+        sub: `${deadline ? `Deadline: ${deadline}` : 'Open Application'}${opp.eligibility ? ` · ${opp.eligibility}` : ''}`,
+        deadline,
+        overview: opp.desc || opp.description,
+        url: opp.applyLink || opp.link || opp.url,
+        icon: '🎓',
+        keywords: `${opp.title} ${opp.tag || ''} ${opp.desc || ''} ${opp.eligibility || ''} student opportunity admission phd internship research`,
+        action: () => onNav('opportunities'),
+      });
+    });
+
+    teacherOpps.forEach((opp, idx) => {
+      const deadline = opp.lastDate || opp.deadline;
+      items.push({
+        id: `opp-t-${idx}-${opp.title}`,
+        title: opp.title,
+        category: 'Opportunities',
+        badge: opp.tag || 'Faculty Recruitment',
+        sub: `${deadline ? `Deadline: ${deadline}` : 'Faculty Recruitment'}${opp.eligibility ? ` · ${opp.eligibility}` : ''}`,
+        deadline,
+        overview: opp.desc || opp.description,
+        url: opp.applyLink || opp.link || opp.url,
+        icon: '👨‍🏫',
+        keywords: `${opp.title} ${opp.tag || ''} ${opp.desc || ''} ${opp.eligibility || ''} faculty teacher professor opportunity opening career recruitment`,
         action: () => onNav('opportunities'),
       });
     });
@@ -768,6 +806,25 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
                             ✉ Send
                           </a>
                         </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Chamber & Telephone Extension (if faculty) */}
+                  {(selectedItem.chamber || selectedItem.phoneExt) && (
+                    <div className="preview-meta-group">
+                      <div className="meta-label">Chamber &amp; Phone Extension</div>
+                      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                        {selectedItem.chamber && (
+                          <span className="meta-tag" style={{ background: 'rgba(255, 217, 122, 0.12)', color: '#ffd97a', borderColor: 'rgba(255, 217, 122, 0.35)', fontWeight: 600 }}>
+                            🏢 Room / Chamber: {selectedItem.chamber}
+                          </span>
+                        )}
+                        {selectedItem.phoneExt && (
+                          <span className="meta-tag" style={{ background: 'rgba(96, 165, 250, 0.12)', color: '#93c5fd', borderColor: 'rgba(96, 165, 250, 0.35)', fontWeight: 600 }}>
+                            📞 Telephone Ext: {selectedItem.phoneExt}
+                          </span>
+                        )}
                       </div>
                     </div>
                   )}
