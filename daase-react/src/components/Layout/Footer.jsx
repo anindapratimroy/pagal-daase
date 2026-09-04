@@ -151,25 +151,23 @@ export default function Footer({ onNav }) {
 
           </div>
 
-          {/* ── Full-Width Map Strip ── */}
-          <a 
-            href="https://maps.google.com/maps?q=22.528688,75.923391" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="footer-map-strip"
-            title="Open IIT Indore in Google Maps"
-          >
-            <iframe
-              src="https://maps.google.com/maps?q=22.528688,75.923391&t=k&z=15&ie=UTF8&iwloc=&output=embed"
-              title="IIT Indore Satellite Map"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="footer-mini-map"
-            />
-            <div className="footer-map-pin-pill">
-              <span>📍 DAASE, IIT Indore — Click to open in Google Maps ↗</span>
+          {/* ── Find Us Banner ── */}
+          <div className="footer-find-us-banner">
+            <div className="footer-find-us-left">
+              <span className="footer-find-us-label">📍 Find Us</span>
+              <span className="footer-find-us-address">
+                Indian Institute of Technology Indore, Khandwa Road, Simrol, Indore 453552, Madhya Pradesh, India
+              </span>
             </div>
-          </a>
+            <a
+              href="https://maps.google.com/maps?q=22.528688,75.923391"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-find-us-btn"
+            >
+              Open in Google Maps ↗
+            </a>
+          </div>
 
           {/* ── Footer Divider ── */}
           <div className="footer-bottom-divider" />

@@ -4232,45 +4232,74 @@ a.sc-email:hover {
   transform: translateY(-1px);
 }
 
-.footer-map-strip {
-  position: relative;
+.footer-find-us-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
   width: 100%;
-  height: 160px;
-  border-radius: 14px;
-  overflow: hidden;
+  margin-top: 32px;
+  padding: 18px 28px;
+  border-radius: 12px;
   border: 1px solid rgba(255, 217, 122, 0.25);
-  margin-top: 28px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  display: block;
-  transition: all 0.3s ease;
+  background: rgba(255, 217, 122, 0.04);
+  flex-wrap: wrap;
 }
 
-.footer-map-strip:hover {
-  border-color: rgba(255, 217, 122, 0.5);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
+.footer-find-us-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  min-width: 0;
+  flex-wrap: wrap;
 }
 
-.footer-mini-map {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
-}
-
-.footer-map-pin-pill {
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
-  background: rgba(5, 15, 50, 0.85);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 217, 122, 0.4);
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 11.5px;
+.footer-find-us-label {
+  font-size: 13px;
   font-weight: 700;
-  color: #fff;
-  pointer-events: none;
+  color: var(--gold, #ffd97a);
+  white-space: nowrap;
+  letter-spacing: 0.04em;
 }
+
+.footer-find-us-address {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.5;
+}
+
+.footer-find-us-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 217, 122, 0.5);
+  color: var(--gold, #ffd97a);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.footer-find-us-btn:hover {
+  background: rgba(255, 217, 122, 0.12);
+  border-color: rgba(255, 217, 122, 0.8);
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .footer-find-us-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 18px;
+  }
+}
+
+
 
 /* ── Footer Bottom Divider ── */
 .footer-bottom-divider {
