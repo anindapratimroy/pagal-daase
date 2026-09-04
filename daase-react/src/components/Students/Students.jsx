@@ -3,6 +3,7 @@ import Footer from '../Layout/Footer';
 import TiltCard from '../Layout/TiltCard';
 import { drivePhotoUrl } from '../../data/fallback';
 import { imageMap } from '../../data/imageMap';
+import { resolvePhoto } from '../../utils/photoResolver';
 
 function StudentBatch({ batch, list, onImageClick, type }) {
   return (
@@ -15,7 +16,7 @@ function StudentBatch({ batch, list, onImageClick, type }) {
       </div>
       <div className="students-grid">
         {list.map((s, i) => {
-          let photoSrc = imageMap[s.name] || drivePhotoUrl(s.photo);
+          let photoSrc = resolvePhoto(s.name, type || 'ug', s.photo);
           if (!photoSrc) {
             if (type === 'interns') {
               photoSrc = `people_images/Intern/${s.name}.png`;

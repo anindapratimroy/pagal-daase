@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import Footer from '../Layout/Footer';
 import { drivePhotoUrl } from '../../data/fallback';
 import { imageMap } from '../../data/imageMap';
+import { resolvePhoto } from '../../utils/photoResolver';
 import TiltCard from '../Layout/TiltCard';
 import SearchBar from '../Layout/SearchBar';
 
@@ -129,10 +130,10 @@ const getDisplayFullTel = (rawExt) => {
 };
 
 // ─── Faculty Card ────────────────────────────────────────────────────────────
-function FacultyCard({ f }) {
+function FacultyCard({ f, category = 'faculty' }) {
   const normalizedUrl = normalizeLink(f.url);
   const hasUrl = !!normalizedUrl;
-  const photoSrc = imageMap[f.name] || (f.photo ? (drivePhotoUrl(f.photo) || f.photo) : '');
+  const photoSrc = resolvePhoto(f.name, category, f.photo) || (f.photo ? (drivePhotoUrl(f.photo) || f.photo) : '');
   const anchorId = `person-${(f.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 
   const inner = (
@@ -264,7 +265,7 @@ const PEOPLE_TABS = [
 ];
 
 // ─── Student sub-sections ─────────────────────────────────────────────────────
-function StudentBatch({ batch, list, onImageClick }) {
+function StudentBatch({ batch, list, onImageClick, category = 'phd' }) {
   if (!list || !list.length) return null;
   return (
     <div className="batch-section">
@@ -276,7 +277,7 @@ function StudentBatch({ batch, list, onImageClick }) {
       </div>
       <div className="students-grid">
         {list.map((s, i) => {
-          const photoSrc = imageMap[s.name] || drivePhotoUrl(s.photo) || `images/students/${s.email}.jpg`;
+          const photoSrc = resolvePhoto(s.name, category, s.photo) || (s.email ? `images/students/${s.email}.jpg` : '');
           const sAnchorId = `person-${(s.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
           return (
             <div id={sAnchorId} key={i} style={{ height: '100%' }}>
@@ -623,7 +624,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
                       <div className="faculty-grid">
                         {filteredStaff.map((f, i) => (
                           <div key={i} className="anim-fadeup">
-                            <FacultyCard f={f} />
+                            <FacultyCard f={f} category="staff" />
                           </div>
                         ))}
                       </div>
@@ -634,7 +635,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
                           <div className="faculty-grid">
                             {list.map((f, i) => (
                               <div key={i} className="anim-fadeup">
-                                <FacultyCard f={f} />
+                                <FacultyCard f={f} category="staff" />
                               </div>
                             ))}
                           </div>
@@ -652,7 +653,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
                       <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
                     </div>
                     {Object.entries(filteredPhd).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
-                      <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+                      <StudentBatch key={batch} batch={batch} list={list} category="phd" onImageClick={handleImageClick} />
                     ))}
                   </div>
                 )}
@@ -665,7 +666,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
                       <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
                     </div>
                     {Object.entries(filteredPg).map(([batch, list]) => (
-                      <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+                      <StudentBatch key={batch} batch={batch} list={list} category="pg" onImageClick={handleImageClick} />
                     ))}
                   </div>
                 )}
@@ -678,7 +679,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
                       <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
                     </div>
                     {Object.entries(filteredUg).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
-                      <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+                      <StudentBatch key={batch} batch={batch} list={list} category="ug" onImageClick={handleImageClick} />
                     ))}
                   </div>
                 )}
@@ -754,7 +755,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
                       <div className="faculty-grid" style={{ marginBottom: '40px' }}>
                         {sortedStaff.map((f, i) => (
                           <div key={i} className="anim-fadeup" style={{ animationDelay: `${0.06 + i * 0.06}s` }}>
-                            <FacultyCard f={f} />
+                            <FacultyCard f={f} category="staff" />
                           </div>
                         ))}
                       </div>
@@ -769,7 +770,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
                         <div className="faculty-grid" style={{ marginBottom: '40px' }}>
                           {sortStaff(list).map((f, i) => (
                             <div key={i} className="anim-fadeup" style={{ animationDelay: `${0.06 + i * 0.06}s` }}>
-                              <FacultyCard f={f} />
+                              <FacultyCard f={f} category="staff" />
                             </div>
                           ))}
                         </div>
@@ -783,7 +784,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
               {activeTab === 'phd' && (
                 <div className="anim-fadein">
                   {phd ? Object.entries(phd).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
-                    <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+                    <StudentBatch key={batch} batch={batch} list={list} category="phd" onImageClick={handleImageClick} />
                   )) : (
                     <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px', fontSize: '15px' }}>
                       Ph.D. student data will appear here once added to the database.
@@ -805,7 +806,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
                     const diff = getPriority(lA) - getPriority(lB);
                     return diff !== 0 ? diff : b.localeCompare(a);
                   }).map(([batch, list]) => (
-                    <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+                    <StudentBatch key={batch} batch={batch} list={list} category="pg" onImageClick={handleImageClick} />
                   )) : (
                     <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px', fontSize: '15px' }}>
                       Post Graduate student data will appear here once added to the database.
@@ -818,7 +819,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
               {activeTab === 'ug' && (
                 <div className="anim-fadein">
                   {ug ? Object.entries(ug).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
-                    <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+                    <StudentBatch key={batch} batch={batch} list={list} category="ug" onImageClick={handleImageClick} />
                   )) : (
                     <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px', fontSize: '15px' }}>
                       Under Graduate student data will appear here once added to the database.

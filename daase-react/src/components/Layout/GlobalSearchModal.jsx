@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { drivePhotoUrl, RESEARCH_AREAS } from '../../data/fallback';
 import { imageMap } from '../../data/imageMap';
+import { resolvePhoto } from '../../utils/photoResolver';
 
 const PROGRAMS_DATA = [
   {
@@ -193,7 +194,7 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
     facultyList.forEach((f, idx) => {
       const isHOD = Boolean(f.isHOD);
       const isVisiting = Boolean(f.designation?.toLowerCase().includes('visiting'));
-      const photoSrc = imageMap[f.name] || (f.photo ? (drivePhotoUrl(f.photo) || f.photo) : '');
+      const photoSrc = resolvePhoto(f.name, 'faculty', f.photo) || (f.photo ? (drivePhotoUrl(f.photo) || f.photo) : '');
       const fullEmail = f.email ? (f.email.includes('@') ? f.email : `${f.email}@iiti.ac.in`) : '';
       const anchor = getAnchorId(f.name);
       const chamberText = f.chamber ? `Room ${f.chamber}` : '';
@@ -225,7 +226,7 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
       ? data.staff
       : Object.values(data.staff || {}).flat();
     staffList.forEach((st, idx) => {
-      const photoSrc = imageMap[st.name] || (st.photo ? (drivePhotoUrl(st.photo) || st.photo) : '');
+      const photoSrc = resolvePhoto(st.name, 'staff', st.photo) || (st.photo ? (drivePhotoUrl(st.photo) || st.photo) : '');
       const fullEmail = st.email ? (st.email.includes('@') ? st.email : `${st.email}@iiti.ac.in`) : '';
       const anchor = getAnchorId(st.name);
 
@@ -247,9 +248,10 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
     // 6. Students (Ph.D., PG, UG)
     const addStudentGroup = (obj, category, badge, navTab, icon) => {
       if (!obj) return;
+      const catKey = category.toLowerCase().includes('ph.d') ? 'phd' : (category.toLowerCase().includes('post') ? 'pg' : 'ug');
       Object.entries(obj).forEach(([batch, list]) => {
         (list || []).forEach((s, idx) => {
-          const photoSrc = imageMap[s.name] || drivePhotoUrl(s.photo) || (s.email ? `images/students/${s.email}.jpg` : '');
+          const photoSrc = resolvePhoto(s.name, catKey, s.photo) || (s.email ? `images/students/${s.email}.jpg` : '');
           const fullEmail = s.email ? (s.email.includes('@') ? s.email : `${s.email}@iiti.ac.in`) : '';
           const anchor = getAnchorId(s.name);
 

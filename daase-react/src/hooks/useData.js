@@ -4,6 +4,7 @@ import {
   PUBLICATIONS_FB, FACULTY_FB, VISITING_FB, PG_FB, UG_FB, 
   ALUMNI_FB, EVENTS_FB, PHD_FB, INTERNS_FB, NEWS_FB, OUTREACH_FB, STAFF_FB
 } from '../data/fallback';
+import { loadPhotoManifest } from '../utils/photoResolver';
 
 const CACHE_KEY = 'daase_v9_data';
 const CACHE_TTL = 30 * 60 * 1000; // 30 min
@@ -26,6 +27,15 @@ export function useData() {
   // if a cache exists, preventing a visual jump when live data finishes fetching.
   const [data, setData] = useState(() => getCached(false) || null);
   const [loading, setLoading] = useState(true);
+  const [, setManifestReady] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+    loadPhotoManifest().then(() => {
+      if (mounted) setManifestReady(true);
+    });
+    return () => { mounted = false; };
+  }, []);
 
   useEffect(() => {
     let mounted = true;
