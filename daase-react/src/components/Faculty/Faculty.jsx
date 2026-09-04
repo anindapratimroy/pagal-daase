@@ -203,7 +203,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
     <div>
       <div className="section-inner people-section-inner">
         <div className="section-header">
-          <span className="section-eyebrow">✦ Our People</span>
+
           <h1 className="section-title">People at <span>DAASE</span></h1>
           <p className="section-desc">Meet the researchers, educators, and students that form the heart of our department.</p>
           <div className="title-bar" />

@@ -96,7 +96,7 @@ export default function Students({ pg, ug, phd, interns }) {
     <div style={{ background: 'transparent' }}>
       <div className="section-inner">
         <div className="section-header">
-          <span className="section-eyebrow">✦ Current Students</span>
+
           <h1 className="section-title">Our <span>Students</span></h1>
           <p className="section-desc">Meet our brilliant community of researchers and learners across all programs.</p>
           <div className="title-bar" />

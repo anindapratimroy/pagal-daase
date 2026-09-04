@@ -39,7 +39,7 @@ export default function Gallery() {
     <div style={{ background: 'transparent' }}>
       <div className="section-inner">
         <div className="section-header">
-          <span className="section-eyebrow">✦ Life at DAASE</span>
+
           <h1 className="section-title">Photo <span>Gallery</span></h1>
           <p className="section-desc">Glimpses of research, events, outreach, and life at DAASE, IIT Indore.</p>
           <div className="title-bar" />

@@ -8,7 +8,7 @@ export default function Research({ onNav }) {
     <div className="research-page fade-in">
       <div style={{ width: '100%', padding: '48px clamp(20px, 5%, 80px) 32px', boxSizing: 'border-box' }}>
         <div className="section-header center" data-aos="fade-up">
-          <span className="section-eyebrow">✦ Science &amp; Discovery</span>
+
           <h1 className="section-title">Research <span>Areas</span></h1>
           <p className="section-desc">DAASE covers the full spectrum — from Heliophysics to Cosmology, from Earth observations to black holes.</p>
           <div className="title-bar" />

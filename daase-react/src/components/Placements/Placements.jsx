@@ -7,7 +7,6 @@ export default function Placements() {
     <div style={{ background: 'transparent' }}>
       <div className="section-inner">
         <div className="section-header">
-          <span className="section-eyebrow">✦ Career & Outcomes</span>
           <h1 className="section-title">Student <span>Placements</span></h1>
           <p className="section-desc">Our graduates go on to work at top research institutions, tech companies, and space agencies worldwide.</p>
           <div className="title-bar" />

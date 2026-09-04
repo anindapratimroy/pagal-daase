@@ -65,7 +65,7 @@ export default function Facilities({ facilities }) {
 
       <div className="section-inner">
         <div className="section-header">
-          <span className="section-eyebrow">✦ Infrastructure</span>
+
           <h1 className="section-title">Research <span>Facilities</span></h1>
           <p className="section-desc">State-of-the-art laboratories enabling cutting-edge research, including a facility at the Indian Arctic Research Station Himadri.</p>
           <div className="title-bar" />

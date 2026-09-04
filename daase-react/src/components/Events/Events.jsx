@@ -163,7 +163,7 @@ export default function Events({ events = [], outreach = [] }) {
       <div className="section-inner">
         {/* Section 1: Upcoming Events */}
         <div className="section-header">
-          <span className="section-eyebrow">✦ Academic Life</span>
+
           <h1 className="section-title">Upcoming <span>Events</span></h1>
           <div className="title-bar" />
         </div>
@@ -189,7 +189,7 @@ export default function Events({ events = [], outreach = [] }) {
 
         {/* Section 2: Past Events */}
         <div className="section-header" style={{ marginTop: '72px' }}>
-          <span className="section-eyebrow">✦ Archive</span>
+
           <h2 className="section-title">Past <span>Events</span></h2>
           <div className="title-bar" />
         </div>
@@ -216,7 +216,7 @@ export default function Events({ events = [], outreach = [] }) {
         {outreach && outreach.length > 0 && (
           <>
             <div className="section-header" style={{ marginTop: '72px' }}>
-              <span className="section-eyebrow">✦ Community &amp; Science</span>
+
               <h2 className="section-title">DAASE Outreach <span>Series</span></h2>
               <p className="section-desc">Public talks, stargazing sessions, and astronomy popularization events.</p>
               <div className="title-bar" />

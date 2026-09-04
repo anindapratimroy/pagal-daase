@@ -174,7 +174,7 @@ export default function Programs({ initialProg = 'btech', onNav }) {
     <div style={{ background: 'transparent' }}>
       <div className="section-inner">
         <div className="section-header">
-          <span className="section-eyebrow anim-fadeup d1">✦ Academic Pathways</span>
+
           <h1 className="section-title anim-fadeup d2">Degree <span>Programs</span></h1>
           <p className="section-desc anim-fadeup d3">
             The only IIT department offering M.Sc. Astronomy, and the first IIT with B.Tech. in Space Science &amp; Engineering.

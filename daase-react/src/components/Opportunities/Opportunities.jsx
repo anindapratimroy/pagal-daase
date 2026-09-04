@@ -36,7 +36,7 @@ export default function Opportunities({ opportunities = [], onNav }) {
       <div className="section-inner">
         {/* Opportunities header */}
         <div className="section-header">
-          <span className="section-eyebrow">✦ Join Us</span>
+
           <h1 className="section-title">Open <span>Opportunities</span></h1>
           <div className="title-bar" />
         </div>
