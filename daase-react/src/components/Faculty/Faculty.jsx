@@ -503,7 +503,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
             setCategoryFilter('all');
           }}
           onClear={handleClearSearch}
-          placeholder="Search people across entire department by name, research area, email, supervisor, batch..."
+          placeholder="Search by name, research, or email..."
           resultCount={isSearching ? totalPeopleMatches : null}
           id="people-search-input"
         />
