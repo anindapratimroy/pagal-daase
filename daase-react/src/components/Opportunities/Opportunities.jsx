@@ -182,7 +182,7 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
                     Faculty &amp; Teaching Positions
                   </h3>
                   <p className="opp-empty-desc" style={{ fontSize: '16px', color: 'rgba(255, 255, 255, 0.85)', maxWidth: '580px', margin: '0 auto 24px', lineHeight: '1.7' }}>
-                    No active faculty openings at this moment. New rolling faculty calls and research fellowships will appear here when announced.
+                    No open positions and connect with the AASE office for more information.
                   </p>
                   <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
                     <a href="mailto:aase-office@iiti.ac.in" className="btn-primary" style={{ padding: '10px 22px', fontSize: '14.5px' }}>
@@ -197,14 +197,24 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
             ) : studentOpps.length > 0 ? (
               renderOppCards(studentOpps, 'STUDENT OPPORTUNITY', false)
             ) : (
-              <div className="opp-empty-state">
-                <div className="opp-empty-icon">🎓</div>
-                <h3 className="opp-empty-title">
-                  No Open Opportunities for Students Right Now
+              <div className="opp-empty-state" style={{ padding: '48px 32px', textAlign: 'center' }}>
+                <div className="opp-empty-icon" style={{ fontSize: '48px', marginBottom: '16px' }}>
+                  🎓
+                </div>
+                <h3 className="opp-empty-title" style={{ fontSize: '22px', fontWeight: 700, color: '#fff', marginBottom: '12px' }}>
+                  Student Opportunities
                 </h3>
-                <p className="opp-empty-desc">
-                  Please check back soon. New student research, project, and internship openings are posted when available.
+                <p className="opp-empty-desc" style={{ fontSize: '16px', color: 'rgba(255, 255, 255, 0.85)', maxWidth: '580px', margin: '0 auto 24px', lineHeight: '1.7' }}>
+                  No open positions and connect with the AASE office for more information.
                 </p>
+                <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                  <a href="mailto:aase-office@iiti.ac.in" className="btn-primary" style={{ padding: '10px 22px', fontSize: '14.5px' }}>
+                    Connect with AASE Office ✉
+                  </a>
+                  <a href="https://academic.iiti.ac.in" target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ padding: '10px 22px', fontSize: '14.5px' }}>
+                    IIT Indore Academic Portal ↗
+                  </a>
+                </div>
               </div>
             )}
           </div>
