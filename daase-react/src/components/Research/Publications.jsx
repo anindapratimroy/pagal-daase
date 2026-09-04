@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useData } from '../../hooks/useData';
+import { sortPublications } from '../../utils/dateUtils';
 import './Publications.css';
 
 /**
@@ -23,8 +24,9 @@ function getPubUrl(pub) {
 
 export default function Publications() {
   const { publications } = useData();
+  const sortedPubs = useMemo(() => sortPublications(publications), [publications]);
 
-  if (!publications || publications.length === 0) return null;
+  if (!sortedPubs || sortedPubs.length === 0) return null;
 
   return (
     <div className="publications-section">
@@ -40,8 +42,8 @@ export default function Publications() {
         <div className="publications-scroller">
           <div className="publications-content">
             {/* Render list twice for seamless infinite scrolling */}
-            {[...publications, ...publications].map((pub, idx) => {
-              const realIdx = idx % publications.length;
+            {[...sortedPubs, ...sortedPubs].map((pub, idx) => {
+              const realIdx = idx % sortedPubs.length;
               const text = getPubText(pub);
               const url = getPubUrl(pub);
 

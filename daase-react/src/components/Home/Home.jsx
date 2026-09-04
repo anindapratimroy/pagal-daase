@@ -1,8 +1,10 @@
+import { useMemo } from 'react';
 import CounterStat from './CounterStat';
 import Footer from '../Layout/Footer';
 import NewsTicker from './NewsTicker';
 import Collaborators from './Collaborators';
 import { PUBLICATIONS_FB } from '../../data/fallback';
+import { sortHomeUpdates, sortPublications } from '../../utils/dateUtils';
 
 // Ensure link has protocol prefix for external, but respect internal links
 function normalizeLink(link) {
@@ -51,25 +53,14 @@ function getPubUrl(pub) {
 }
 
 export default function Home({ onNav, news, events, publications = [] }) {
-  // Filter only active news, normalize 'text' field to 'title'
+  const combinedUpdates = useMemo(() => {
+    return sortHomeUpdates(news, events);
+  }, [news, events]);
 
-  console.log("EVENTS:", events);
-  const activeNews = (news || [])
-    .filter(n => !n.status || n.status.toString().toLowerCase().trim() === 'active')
-    .map(n => ({ type: 'news', title: n.text || n.title, link: normalizeLink(n.link || n.url), date: n.date }));
-
-  // Include events with their link field and raw type
-  const activeEvents = (events || [])
-    .map(e => ({ type: 'event', title: e.title, link: normalizeLink(e.link || e.url || e.Link || e.URL || e.href || ''), date: e.date, rawType: e.type }));
-
-  // Filter events into upcoming and past
-  const upcomingEvents = activeEvents.filter(e => (e.rawType || '').toLowerCase().trim() === 'upcoming');
-  const pastEvents = activeEvents.filter(e => (e.rawType || '').toLowerCase().trim() !== 'upcoming');
-
-  // Prioritize upcoming events first, then active news, and then past events
-  const combinedUpdates = [...upcomingEvents, ...activeNews, ...pastEvents].slice(0, 15);
-
-  const pubsList = (publications && publications.length > 0) ? publications : PUBLICATIONS_FB;
+  const rawPubs = (publications && publications.length > 0) ? publications : PUBLICATIONS_FB;
+  const pubsList = useMemo(() => {
+    return sortPublications(rawPubs);
+  }, [rawPubs]);
 
   return (
     <div>
