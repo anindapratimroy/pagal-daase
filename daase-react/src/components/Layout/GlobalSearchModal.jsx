@@ -116,6 +116,7 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [mobileTab, setMobileTab] = useState('list'); // 'list' | 'preview'
   const inputRef = useRef(null);
   const listRef = useRef(null);
 
@@ -125,6 +126,7 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
       setActiveCategory('All');
       setSelectedIndex(0);
       setCopiedEmail(false);
+      setMobileTab('list');
       document.body.style.overflow = 'hidden';
       setTimeout(() => {
         if (inputRef.current) inputRef.current.focus();
@@ -526,10 +528,30 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
     return searchResults.filter(item => item.category === activeCategory);
   }, [query, activeCategory, spotlightItems, fullIndex, searchResults]);
 
-  // Reset selected index when search query or category changes
+  // Reset selected index and mobile view when search query or category changes
   useEffect(() => {
     setSelectedIndex(0);
+    setMobileTab('list');
   }, [query, activeCategory]);
+
+  const isMobileDevice = () =>
+    typeof window !== 'undefined' && window.innerWidth < 860;
+
+  const handleRowClick = (item, idx) => {
+    if (isMobileDevice()) {
+      if (selectedIndex === idx) {
+        // Second tap on same row → go to preview
+        setMobileTab('preview');
+      } else {
+        // First tap → select and auto-switch to preview after a brief delay
+        setSelectedIndex(idx);
+        setTimeout(() => setMobileTab('preview'), 120);
+      }
+    } else {
+      setSelectedIndex(idx);
+      handleSelectItem(item);
+    }
+  };
 
   // Keyboard navigation across displayItems
   const handleKeyDown = (e) => {
@@ -637,15 +659,19 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
 
           <input
             ref={inputRef}
-            type="text"
+            type="search"
             className="power-search-input"
             value={query}
             onChange={e => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Search people, professors, scholars, research, programs, facilities, events..."
+            placeholder="Search people, programs, research..."
             aria-label="Global DAASE Search"
             autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="none"
             spellCheck="false"
+            inputMode="search"
+            enterKeyHint="search"
           />
 
           {query && (
@@ -668,8 +694,10 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
             className="power-search-esc-badge"
             onClick={onClose}
             title="Close dialog (Esc)"
+            aria-label="Close dialog"
           >
-            ESC
+            <span className="esc-desktop-text">ESC</span>
+            <span className="esc-mobile-icon" aria-hidden="true">✕</span>
           </button>
         </div>
 
@@ -684,6 +712,7 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
                 onClick={() => {
                   setActiveCategory(cat);
                   setSelectedIndex(0);
+                  setMobileTab('list');
                 }}
               >
                 {cat} <span className="pill-count">({activeCategoryCounts[cat] || 0})</span>
@@ -692,8 +721,27 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
           </div>
         )}
 
-        {/* Split-View Workspace */}
-        <div className="power-search-workspace">
+        {/* Mobile View Switcher (< 860px) */}
+        <div className="power-search-mobile-tabs">
+          <button
+            type="button"
+            className={`mobile-tab-btn ${mobileTab === 'list' ? 'active' : ''}`}
+            onClick={() => setMobileTab('list')}
+          >
+            Results
+            <span className="mobile-tab-count">{displayItems.length}</span>
+          </button>
+          <button
+            type="button"
+            className={`mobile-tab-btn ${mobileTab === 'preview' ? 'active' : ''}`}
+            onClick={() => setMobileTab('preview')}
+          >
+            Details
+          </button>
+        </div>
+
+        {/* Split-View Workspace (Desktop side-by-side, Mobile single-pane tabbed) */}
+        <div className={`power-search-workspace mobile-view-${mobileTab}`}>
 
           {/* Left Column: Results / Spotlight List */}
           <div className="power-search-list-col" ref={listRef}>
@@ -721,8 +769,7 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
                         role="option"
                         aria-selected={isSelected}
                         className={`power-result-row${isSelected ? ' selected' : ''}`}
-                        onClick={() => handleSelectItem(item)}
-                        onMouseEnter={() => setSelectedIndex(idx)}
+                        onClick={() => handleRowClick(item, idx)}
                       >
                         {/* Avatar / Icon */}
                         <div className="row-avatar">
@@ -759,10 +806,19 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
                           </div>
                         </div>
 
-                        {/* Jump hint */}
-                        <div className="row-action-arrow">
-                          <span>→</span>
-                        </div>
+                        {/* Jump arrow — separate from the row tap to go directly */}
+                        <button
+                          type="button"
+                          className="row-action-arrow"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleSelectItem(item);
+                          }}
+                          title="Open page directly"
+                          aria-label={`Open ${item.title}`}
+                        >
+                          <span aria-hidden="true">→</span>
+                        </button>
                       </div>
                     );
                   })}
@@ -839,6 +895,16 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
             {selectedItem ? (
               <div className="power-preview-card anim-fadein" key={selectedItem.id}>
                 
+                {/* Mobile Back Button (< 860px) */}
+                <button
+                  type="button"
+                  className="mobile-preview-back-btn"
+                  onClick={() => setMobileTab('list')}
+                  aria-label="Back to results"
+                >
+                  <span aria-hidden="true">←</span> Back to Results
+                </button>
+
                 {/* Photo Header */}
                 <div className="preview-header">
                   {selectedItem.photo ? (
@@ -1070,6 +1136,9 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
             {query.trim()
               ? `Showing ${displayItems.length} ${displayItems.length === 1 ? 'match' : 'matches'}`
               : `${displayItems.length} items · DAASE Command Palette · IIT Indore`}
+          </div>
+          <div className="footer-mobile-hint">
+            <span>Tap item to view details · Tap → to open</span>
           </div>
         </div>
 
