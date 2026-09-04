@@ -71,7 +71,9 @@ export default function Facilities({ facilities }) {
           <div className="title-bar" />
         </div>
         <div className="facilities-grid">
-          {facilities.map((f, i) => {
+          {(facilities || [])
+            .filter(f => !f.name?.toLowerCase().includes('whatsapp image') && !f.name?.toLowerCase().includes('whatsapp_image'))
+            .map((f, i) => {
             const imgSrc = f.image || FAC_IMAGE_MAP[f.name];
             return (
               <TiltCard className="facility-card anim-fadeup" key={i} style={{ animationDelay: `${0.04 + i * 0.03}s`, padding: 0, overflow: 'hidden' }}>
