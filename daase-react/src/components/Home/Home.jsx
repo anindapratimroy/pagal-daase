@@ -328,8 +328,8 @@ export default function Home({ onNav, news, events, publications = [] }) {
               <li className="is-interactive" onClick={() => onNav('research-detail', 'instrumentation')} title="View Communication, Navigation & Remote Sensing">
                 Communication, Navigation &amp; Remote Sensing <span className="arrow">↗</span>
               </li>
-              <li className="is-interactive" onClick={() => onNav('research-detail', 'data-science')} title="View Data Science & ML in Astrophysics">
-                Data Science &amp; ML in Astrophysics <span className="arrow">↗</span>
+              <li className="is-interactive" onClick={() => onNav('research-detail', 'data-science')} title="View Data Science & ML in Space Science">
+                Data Science &amp; ML in Space Science <span className="arrow">↗</span>
               </li>
             </ul>
           </div>

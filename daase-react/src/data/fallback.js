@@ -93,7 +93,7 @@ export const RESEARCH_AREAS = [
   },
   {
     id: 'data-science',
-    title: 'Data Science & ML in Astrophysics',
+    title: 'Data Science & ML in Space Science',
     desc: 'Machine learning, statistical inference, Bayesian analysis, and computational astrophysics.',
     full_description: "Data Science\n• Bayesian Machine Learning\n• Quantum Machine Learning",
     image: 'images/research/Data_Science_ML_in_Astrophysics.png',
