@@ -29,7 +29,8 @@ const USEFUL_LINKS = [
 // Whether the current view is any People sub-page
 const isPeopleActive = (current) => current.startsWith('people-');
 
-export default function Navbar({ current, onNav }) {
+export default function Navbar({ current, onNav, onOpenSearch }) {
+  const isMac = typeof navigator !== 'undefined' && /Mac|iPod|iPhone|iPad/.test(navigator.platform);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -163,12 +164,41 @@ export default function Navbar({ current, onNav }) {
             Gallery
           </button>
 
+          {/* Global Search Button — Desktop */}
+          <button
+            type="button"
+            className="nav-search-btn"
+            onClick={onOpenSearch}
+            title={`Search across DAASE (${isMac ? '⌘K' : 'Ctrl+K'})`}
+            aria-label="Search DAASE website"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <span className="nav-search-btn-label">Search</span>
+            <kbd className="nav-search-kbd">{isMac ? '⌘K' : 'Ctrl+K'}</kbd>
+          </button>
+
           {/* Opportunities CTA */}
           <button
             className={`nav-cta-btn${current === 'opportunities' ? ' active' : ''}`}
             onClick={() => handleNav('opportunities')}
           >
             Opportunities
+          </button>
+
+          {/* Search Icon — Mobile only */}
+          <button
+            type="button"
+            className="nav-mobile-search-btn"
+            onClick={onOpenSearch}
+            aria-label="Search DAASE"
+          >
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
           </button>
 
           {/* Modern Responsive Menu Toggle — mobile only */}
@@ -198,6 +228,19 @@ export default function Navbar({ current, onNav }) {
           </div>
           <button className="drawer-close" onClick={() => setMobileOpen(false)} aria-label="Close menu">✕</button>
         </div>
+
+        {/* Global Search inside Mobile Drawer */}
+        <button
+          type="button"
+          className="mobile-drawer-search-btn"
+          onClick={() => {
+            setMobileOpen(false);
+            if (onOpenSearch) onOpenSearch();
+          }}
+        >
+          <span>🔍 Search DAASE...</span>
+          <span className="mobile-search-badge">{isMac ? '⌘K' : 'Ctrl+K'}</span>
+        </button>
 
         <button className={current === 'home' ? 'active' : ''} onClick={() => handleNav('home')}>Home</button>
 

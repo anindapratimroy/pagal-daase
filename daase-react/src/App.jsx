@@ -16,6 +16,7 @@ import Events from './components/Events/Events';
 import Alumni from './components/Alumni/Alumni';
 import Gallery from './components/Gallery/Gallery';
 import Opportunities from './components/Opportunities/Opportunities';
+import GlobalSearchModal from './components/Layout/GlobalSearchModal';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -58,9 +59,33 @@ export default function App() {
   const [researchAreaId, setResearchAreaId] = useState(null); // active research area
   const [minTimePassed, setMinTimePassed] = useState(false);
   const [showBackTop, setShowTop] = useState(false);
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
   const mainRef = useRef(null);
 
   const data = useData();
+
+  // Global search keyboard shortcuts (Cmd+K / Ctrl+K or '/')
+  useEffect(() => {
+    const handleGlobalKeyDown = (e) => {
+      // ⌘K or Ctrl+K
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setSearchModalOpen(prev => !prev);
+      }
+      // '/' when not in an input, textarea, or contentEditable
+      else if (
+        e.key === '/' &&
+        !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName) &&
+        !document.activeElement?.isContentEditable
+      ) {
+        e.preventDefault();
+        setSearchModalOpen(true);
+      }
+    };
+
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, []);
 
   // Preloader: strictly wait 1.8s minimum for animation to finish.
   // We no longer wait for data fetch to complete so the page loads blazing fast.
@@ -199,7 +224,14 @@ export default function App() {
       <InteractiveBackground />
       <Preloader visible={isLoading} />
 
-      <Navbar current={navCurrent} onNav={handleNav} />
+      <Navbar current={navCurrent} onNav={handleNav} onOpenSearch={() => setSearchModalOpen(true)} />
+
+      <GlobalSearchModal
+        isOpen={searchModalOpen}
+        onClose={() => setSearchModalOpen(false)}
+        onNav={handleNav}
+        data={data}
+      />
 
       <main id="main-content" ref={mainRef}
         style={{ paddingTop: 'var(--nav-h)', minHeight: '100vh', overflowX: 'hidden' }}>
