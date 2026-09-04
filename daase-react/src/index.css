@@ -2796,6 +2796,216 @@ nav.nav-scrolled.nav-hidden {
   font-weight: 700;
 }
 
+/* ── Search Bar Component ── */
+.search-bar-container {
+  max-width: 680px;
+  margin: 0 auto 32px;
+  width: 100%;
+  position: relative;
+  animation: fadeIn 0.4s ease both;
+}
+
+.search-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(13, 27, 62, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(255, 217, 122, 0.35);
+  border-radius: 50px;
+  padding: 10px 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.search-bar-inner:hover {
+  border-color: rgba(255, 217, 122, 0.55);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+}
+
+.search-bar-inner:focus-within {
+  border-color: #ffd97a;
+  background: rgba(13, 27, 62, 0.95);
+  box-shadow: 0 0 0 3px rgba(255, 217, 122, 0.22), 0 12px 32px rgba(0, 0, 0, 0.55);
+}
+
+.search-bar-icon {
+  color: #ffd97a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.search-bar-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  width: 100%;
+}
+
+.search-bar-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+  font-size: 14.5px;
+}
+
+.search-clear-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.search-clear-btn:hover {
+  background: rgba(255, 217, 122, 0.25);
+  color: #ffd97a;
+  border-color: #ffd97a;
+  transform: scale(1.08);
+}
+
+.search-meta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 0 16px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.search-match-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.search-match-count {
+  display: inline-block;
+  background: rgba(255, 217, 122, 0.2);
+  color: #ffd97a;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.search-query-hl {
+  color: #ffd97a;
+  font-weight: 600;
+}
+
+.search-reset-link {
+  color: #ffd97a;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 12px;
+  padding: 0;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.search-reset-link:hover {
+  color: #fff;
+}
+
+/* People tab count pill */
+.people-tab-count {
+  display: inline-block;
+  margin-left: 8px;
+  background: rgba(255, 217, 122, 0.2);
+  color: #ffd97a;
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 11px;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+.people-tab.active .people-tab-count {
+  background: #ffd97a;
+  color: #0b1528;
+}
+
+.people-tab-count.zero {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* Empty search state */
+.search-no-results {
+  text-align: center;
+  padding: 56px 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed rgba(255, 217, 122, 0.25);
+  border-radius: 18px;
+  margin: 16px 0 32px;
+}
+
+.search-no-results-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+  opacity: 0.85;
+}
+
+.search-no-results-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.search-no-results-desc {
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 520px;
+  margin: 0 auto 16px;
+  line-height: 1.5;
+}
+
+.search-switch-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 20px;
+  background: rgba(255, 217, 122, 0.12);
+  border: 1px solid rgba(255, 217, 122, 0.35);
+  color: #ffd97a;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  margin: 4px;
+}
+
+.search-switch-pill:hover {
+  background: #ffd97a;
+  color: #0b1528;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 217, 122, 0.3);
+}
+
 /* The wrapper that holds sidebar + content */
 .people-page-layout {
   display: flex;

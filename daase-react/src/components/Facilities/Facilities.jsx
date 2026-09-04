@@ -17,7 +17,7 @@ const FAC_IMAGE_MAP = {
   'Helmholtz Cage': 'images/facilities/fac_2.jpg',
 };
 
-export default function Facilities({ facilities }) {
+export default function Facilities({ facilities, onNav }) {
   const [selectedImage, setSelectedImage] = useState(null);
 
   // Close on Escape key
@@ -99,7 +99,7 @@ export default function Facilities({ facilities }) {
           })}
         </div>
       </div>
-      <Footer />
+      <Footer onNav={onNav} />
     </div>
   );
 }

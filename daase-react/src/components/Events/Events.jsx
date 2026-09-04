@@ -1,5 +1,7 @@
+import { useState, useMemo } from 'react';
 import Footer from '../Layout/Footer';
 import TiltCard from '../Layout/TiltCard';
+import SearchBar from '../Layout/SearchBar';
 
 // Ensure link has protocol prefix
 function normalizeLink(link) {
@@ -50,6 +52,20 @@ function formatEventDate(rawDate) {
     }
   }
   return trimmed;
+}
+
+function matchesEvent(ev, q) {
+  if (!ev) return false;
+  const match = (str) => Boolean(str && String(str).toLowerCase().includes(q));
+  return (
+    match(ev.title) ||
+    match(ev.date) ||
+    match(ev.type) ||
+    match(ev.desc) ||
+    match(ev.description) ||
+    match(ev.venue) ||
+    match(ev.speaker)
+  );
 }
 
 function EventCard({ ev, i, badgeClass, badgeLabel }) {
@@ -110,7 +126,7 @@ function EventCard({ ev, i, badgeClass, badgeLabel }) {
 
   return (
     <TiltCard
-      className={`event-card past-card anim-fadeup`}
+      className="event-card past-card anim-fadeup"
       style={{
         animationDelay: `${0.06 + i * 0.07}s`,
         cursor: 'default',
@@ -124,7 +140,8 @@ function EventCard({ ev, i, badgeClass, badgeLabel }) {
   );
 }
 
-export default function Events({ events = [], outreach = [] }) {
+export default function Events({ events = [], outreach = [], onNav }) {
+  const [searchQuery, setSearchQuery] = useState('');
   const allEvents = Array.isArray(events) ? events : [];
 
   // Filter into Upcoming and Past
@@ -139,103 +156,180 @@ export default function Events({ events = [], outreach = [] }) {
   });
 
   // Sort upcoming chronologically ascending (soonest first)
-  const sortedUpcoming = [...upcomingEvents].sort((a, b) => {
-    const tsA = parseEventDate(a.date);
-    const tsB = parseEventDate(b.date);
-    if (tsA && tsB) return tsA - tsB;
-    if (tsA) return -1;
-    if (tsB) return 1;
-    return 0;
-  });
+  const sortedUpcoming = useMemo(() => {
+    return [...upcomingEvents].sort((a, b) => {
+      const tsA = parseEventDate(a.date);
+      const tsB = parseEventDate(b.date);
+      if (tsA && tsB) return tsA - tsB;
+      if (tsA) return -1;
+      if (tsB) return 1;
+      return 0;
+    });
+  }, [upcomingEvents]);
 
   // Sort past events chronologically descending (most recent first)
-  const sortedPast = [...pastEvents].sort((a, b) => {
-    const tsA = parseEventDate(a.date);
-    const tsB = parseEventDate(b.date);
-    if (tsA && tsB) return tsB - tsA;
-    if (tsA) return -1;
-    if (tsB) return 1;
-    return 0;
-  });
+  const sortedPast = useMemo(() => {
+    return [...pastEvents].sort((a, b) => {
+      const tsA = parseEventDate(a.date);
+      const tsB = parseEventDate(b.date);
+      if (tsA && tsB) return tsB - tsA;
+      if (tsA) return -1;
+      if (tsB) return 1;
+      return 0;
+    });
+  }, [pastEvents]);
+
+  const q = searchQuery.trim().toLowerCase();
+  const isSearching = q.length > 0;
+
+  // Filtered lists
+  const filteredUpcoming = useMemo(() => {
+    if (!q) return sortedUpcoming;
+    return sortedUpcoming.filter(ev => matchesEvent(ev, q));
+  }, [sortedUpcoming, q]);
+
+  const filteredPast = useMemo(() => {
+    if (!q) return sortedPast;
+    return sortedPast.filter(ev => matchesEvent(ev, q));
+  }, [sortedPast, q]);
+
+  const filteredOutreach = useMemo(() => {
+    if (!outreach || !Array.isArray(outreach)) return [];
+    if (!q) return outreach;
+    return outreach.filter(ev => matchesEvent(ev, q));
+  }, [outreach, q]);
+
+  const totalEventMatches = filteredUpcoming.length + filteredPast.length + filteredOutreach.length;
 
   return (
     <div style={{ background: 'transparent' }}>
       <div className="section-inner">
-        {/* Section 1: Upcoming Events */}
-        <div className="section-header">
-
-          <h1 className="section-title">Upcoming <span>Events</span></h1>
+        {/* Main Section Header */}
+        <div className="section-header" style={{ marginBottom: '28px' }}>
+          <h1 className="section-title">Events at <span>DAASE</span></h1>
+          <p className="section-desc">Conferences, workshops, academic seminars, and outreach initiatives.</p>
           <div className="title-bar" />
         </div>
 
-        <div className={`events-grid count-${sortedUpcoming.length}`}>
-          {sortedUpcoming.length > 0 ? (
-            sortedUpcoming.map((ev, i) => (
-              <EventCard
-                key={`up-${i}`}
-                ev={ev}
-                i={i}
-                badgeClass="upcoming"
-                badgeLabel="⬤ &nbsp;Upcoming"
-              />
-            ))
-          ) : (
-            <div className="event-card past-card anim-fadeup" style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px' }}>
-              <h3 className="event-title">No Upcoming Events</h3>
-              <p className="event-date" style={{ marginTop: '8px' }}>Please check back soon for announcements on upcoming workshops and conferences.</p>
-            </div>
-          )}
-        </div>
+        {/* ── Search Bar ── */}
+        <SearchBar
+          value={searchQuery}
+          onChange={setSearchQuery}
+          onClear={() => setSearchQuery('')}
+          placeholder="Search events by title, keyword, year, or date..."
+          resultCount={isSearching ? totalEventMatches : null}
+          id="events-search-input"
+        />
 
-        {/* Section 2: Past Events */}
-        <div className="section-header" style={{ marginTop: '72px' }}>
-
-          <h2 className="section-title">Past <span>Events</span></h2>
-          <div className="title-bar" />
-        </div>
-
-        <div className={`events-grid count-${sortedPast.length}`}>
-          {sortedPast.length > 0 ? (
-            sortedPast.map((ev, i) => (
-              <EventCard
-                key={`past-${i}`}
-                ev={ev}
-                i={i}
-                badgeClass="past"
-                badgeLabel="✦ &nbsp;Past Event"
-              />
-            ))
-          ) : (
-            <div className="event-card past-card anim-fadeup" style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px' }}>
-              <h3 className="event-title">No Past Events Recorded</h3>
-            </div>
-          )}
-        </div>
-
-        {/* Outreach Series (if any) */}
-        {outreach && outreach.length > 0 && (
+        {/* If searching and zero results anywhere */}
+        {isSearching && totalEventMatches === 0 ? (
+          <div className="search-no-results">
+            <div className="search-no-results-icon">📅</div>
+            <div className="search-no-results-title">No events found</div>
+            <p className="search-no-results-desc">
+              No upcoming, past, or outreach events matched "{searchQuery}". Try searching with a different keyword, event title, or year (e.g. "2025" or "workshop").
+            </p>
+            <button
+              type="button"
+              className="search-switch-pill"
+              onClick={() => setSearchQuery('')}
+            >
+              Clear Search
+            </button>
+          </div>
+        ) : (
           <>
-            <div className="section-header" style={{ marginTop: '72px' }}>
+            {/* Section 1: Upcoming Events */}
+            {(!isSearching || filteredUpcoming.length > 0) && (
+              <div style={{ marginBottom: '56px' }}>
+                <div className="section-header" style={{ marginBottom: '28px' }}>
+                  <h2 className="section-title">
+                    Upcoming <span>Events</span> {isSearching && `(${filteredUpcoming.length})`}
+                  </h2>
+                  <div className="title-bar" />
+                </div>
 
-              <h2 className="section-title">DAASE Outreach <span>Series</span></h2>
-              <p className="section-desc">Public talks, stargazing sessions, and astronomy popularization events.</p>
-              <div className="title-bar" />
-            </div>
-            <div className={`events-grid count-${outreach.length}`}>
-              {outreach.map((ev, i) => (
-                <EventCard
-                  key={`out-${i}`}
-                  ev={ev}
-                  i={i}
-                  badgeClass="past"
-                  badgeLabel="✦ &nbsp;Outreach"
-                />
-              ))}
-            </div>
+                <div className={`events-grid count-${filteredUpcoming.length}`}>
+                  {filteredUpcoming.length > 0 ? (
+                    filteredUpcoming.map((ev, i) => (
+                      <EventCard
+                        key={`up-${i}`}
+                        ev={ev}
+                        i={i}
+                        badgeClass="upcoming"
+                        badgeLabel="⬤ &nbsp;Upcoming"
+                      />
+                    ))
+                  ) : (
+                    <div className="event-card past-card anim-fadeup" style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px' }}>
+                      <h3 className="event-title">No Upcoming Events</h3>
+                      <p className="event-date" style={{ marginTop: '8px' }}>Please check back soon for announcements on upcoming workshops and conferences.</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Section 2: Past Events */}
+            {(!isSearching || filteredPast.length > 0) && (
+              <div style={{ marginBottom: '56px', marginTop: (!isSearching || filteredUpcoming.length > 0) ? '20px' : '0' }}>
+                <div className="section-header" style={{ marginBottom: '28px' }}>
+                  <h2 className="section-title">
+                    Past <span>Events</span> {isSearching && `(${filteredPast.length})`}
+                  </h2>
+                  <div className="title-bar" />
+                </div>
+
+                <div className={`events-grid count-${filteredPast.length}`}>
+                  {filteredPast.length > 0 ? (
+                    filteredPast.map((ev, i) => (
+                      <EventCard
+                        key={`past-${i}`}
+                        ev={ev}
+                        i={i}
+                        badgeClass="past"
+                        badgeLabel="✦ &nbsp;Past Event"
+                      />
+                    ))
+                  ) : (
+                    <div className="event-card past-card anim-fadeup" style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px' }}>
+                      <h3 className="event-title">No Past Events Recorded</h3>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Section 3: Outreach Series */}
+            {(!isSearching && outreach && outreach.length > 0) || (isSearching && filteredOutreach.length > 0) ? (
+              <div style={{ marginBottom: '56px' }}>
+                <div className="section-header" style={{ marginBottom: '28px' }}>
+                  <h2 className="section-title">
+                    DAASE Outreach <span>Series</span> {isSearching && `(${filteredOutreach.length})`}
+                  </h2>
+                  <p className="section-desc">Public talks, stargazing sessions, and astronomy popularization events.</p>
+                  <div className="title-bar" />
+                </div>
+
+                <div className={`events-grid count-${filteredOutreach.length}`}>
+                  {filteredOutreach.map((ev, i) => (
+                    <EventCard
+                      key={`out-${i}`}
+                      ev={ev}
+                      i={i}
+                      badgeClass="past"
+                      badgeLabel="✦ &nbsp;Outreach"
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </>
         )}
       </div>
-      <Footer />
+
+      <Footer onNav={onNav} />
     </div>
   );
 }
+
