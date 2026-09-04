@@ -30,9 +30,17 @@ function RichText({ text }) {
         return (
           <div key={i} className="rd-text-block">
             <h3 className="rd-sub-heading">{heading}</h3>
-            {rest.map((line, j) => (
-              <p key={j} className="rd-desc rd-sub-desc">{line}</p>
-            ))}
+            {rest.map((line, j) => {
+              if (line.startsWith('• ') || line.startsWith('- ')) {
+                return (
+                  <div key={j} className="rd-bullet-item">
+                    <span className="rd-bullet-dot">✦</span>
+                    <span className="rd-desc" style={{ marginBottom: 0 }}>{line.replace(/^[•\-]\s*/, '')}</span>
+                  </div>
+                );
+              }
+              return <p key={j} className="rd-desc rd-sub-desc">{line}</p>;
+            })}
           </div>
         );
       })}

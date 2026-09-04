@@ -194,6 +194,21 @@
   margin-left: 18px;
 }
 
+.rd-bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+  margin-left: 18px;
+}
+
+.rd-bullet-dot {
+  color: var(--gold, #ffd97a);
+  font-size: 11px;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
 /* ── Sidebar Card ───────────────────────────────────────────── */
 .rd-sidebar {}
 
