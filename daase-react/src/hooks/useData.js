@@ -5,7 +5,7 @@ import {
   ALUMNI_FB, EVENTS_FB, PHD_FB, INTERNS_FB, NEWS_FB, OUTREACH_FB, STAFF_FB
 } from '../data/fallback';
 
-const CACHE_KEY = 'daase_v7_data';
+const CACHE_KEY = 'daase_v8_data';
 const CACHE_TTL = 30 * 60 * 1000; // 30 min
 
 function getCached(ignoreTTL = false) {
