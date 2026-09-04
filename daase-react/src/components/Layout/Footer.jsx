@@ -136,6 +136,18 @@ export default function Footer({ onNav }) {
                 </div>
               </div>
 
+              <div className="footer-contact-item">
+                <div className="footer-contact-icon">📞</div>
+                <div>
+                  <span className="footer-contact-badge">Extensions (+91-731-660(xxxx))</span>
+                  <div className="footer-contact-ext-list">
+                    <a href="tel:+917316603575" className="footer-ext-badge" title="Call Extension 3575">3575</a>
+                    <a href="tel:+917316603429" className="footer-ext-badge" title="Call Extension 3429">3429</a>
+                    <a href="tel:+917316605164" className="footer-ext-badge" title="Call Extension 5164">5164</a>
+                  </div>
+                </div>
+              </div>
+
               <a 
                 href="https://maps.google.com/maps?q=22.528688,75.923391" 
                 target="_blank" 

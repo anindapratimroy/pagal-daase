@@ -4203,6 +4203,35 @@ a.sc-email:hover {
   text-decoration: underline;
 }
 
+.footer-contact-ext-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.footer-ext-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(147, 197, 253, 0.12);
+  border: 1px solid rgba(147, 197, 253, 0.3);
+  color: #93C5FD;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.footer-ext-badge:hover {
+  background: rgba(255, 217, 122, 0.2);
+  border-color: #ffd97a;
+  color: #ffd97a;
+  transform: translateY(-1px);
+}
+
 .footer-map-preview-card {
   position: relative;
   width: 100%;
