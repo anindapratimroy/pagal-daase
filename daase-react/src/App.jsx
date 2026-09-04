@@ -149,7 +149,7 @@ export default function App() {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  const handleNav = (id, detailId = null) => {
+  const handleNav = (id, detailId = null, targetAnchor = null) => {
     if (id === 'research-detail') {
       setResearchAreaId(detailId);
       setView('research-detail');
@@ -171,7 +171,31 @@ export default function App() {
       setView(id);
       window.location.hash = id;
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (targetAnchor) {
+      setTimeout(() => {
+        const tryScroll = () => {
+          const el = document.getElementById(targetAnchor);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.classList.remove('target-highlight-pulse');
+            void el.offsetWidth; // trigger DOM reflow
+            el.classList.add('target-highlight-pulse');
+            setTimeout(() => {
+              el.classList.remove('target-highlight-pulse');
+            }, 3500);
+            return true;
+          }
+          return false;
+        };
+
+        if (!tryScroll()) {
+          setTimeout(tryScroll, 200);
+        }
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   // Compute what the "current" value is for Navbar highlighting

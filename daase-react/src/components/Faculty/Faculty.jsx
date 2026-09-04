@@ -108,6 +108,7 @@ function FacultyCard({ f }) {
   const normalizedUrl = normalizeLink(f.url);
   const hasUrl = !!normalizedUrl;
   const photoSrc = imageMap[f.name] || (f.photo ? (drivePhotoUrl(f.photo) || f.photo) : '');
+  const anchorId = `person-${(f.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 
   const inner = (
     <div className="glass-card">
@@ -139,7 +140,7 @@ function FacultyCard({ f }) {
 
   if (hasUrl) {
     return (
-      <a href={normalizedUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'block', height: '100%', textDecoration: 'none' }}>
+      <a id={anchorId} href={normalizedUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'block', height: '100%', textDecoration: 'none' }}>
         <TiltCard className={`faculty-card${f.isHOD ? ' hod-card' : ''}`} style={{ height: '100%' }}>
           {inner}
         </TiltCard>
@@ -147,9 +148,11 @@ function FacultyCard({ f }) {
     );
   }
   return (
-    <TiltCard className={`faculty-card no-link-card${f.isHOD ? ' hod-card' : ''}`} style={{ height: '100%' }}>
-      {inner}
-    </TiltCard>
+    <div id={anchorId} style={{ height: '100%' }}>
+      <TiltCard className={`faculty-card no-link-card${f.isHOD ? ' hod-card' : ''}`} style={{ height: '100%' }}>
+        {inner}
+      </TiltCard>
+    </div>
   );
 }
 
@@ -198,17 +201,20 @@ function StudentBatch({ batch, list, onImageClick }) {
       <div className="students-grid">
         {list.map((s, i) => {
           const photoSrc = imageMap[s.name] || drivePhotoUrl(s.photo) || `images/students/${s.email}.jpg`;
+          const sAnchorId = `person-${(s.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
           return (
-            <TiltCard className="student-card anim-fadeup glass-card" key={i} style={{ animationDelay: `${0.04 + i * 0.03}s`, height: '100%' }}>
-              <div className="sc-avatar" onClick={() => onImageClick && onImageClick(photoSrc, s.name)}>
-                <img src={photoSrc} alt={s.name}
-                  onError={e => { e.target.style.display = 'none'; }} />
-              </div>
-              <div className="sc-name">{s.name}</div>
-              {s.supervisor && <div className="sc-supervisor">{s.supervisor}</div>}
-              {(s.research || s.research_interests) && <div className="sc-research">{s.research || s.research_interests}</div>}
-              {s.email && <div className="sc-email">{s.email}</div>}
-            </TiltCard>
+            <div id={sAnchorId} key={i} style={{ height: '100%' }}>
+              <TiltCard className="student-card anim-fadeup glass-card" style={{ animationDelay: `${0.04 + i * 0.03}s`, height: '100%' }}>
+                <div className="sc-avatar" onClick={() => onImageClick && onImageClick(photoSrc, s.name)}>
+                  <img src={photoSrc} alt={s.name}
+                    onError={e => { e.target.style.display = 'none'; }} />
+                </div>
+                <div className="sc-name">{s.name}</div>
+                {s.supervisor && <div className="sc-supervisor">{s.supervisor}</div>}
+                {(s.research || s.research_interests) && <div className="sc-research">{s.research || s.research_interests}</div>}
+                {s.email && <div className="sc-email">{s.email}</div>}
+              </TiltCard>
+            </div>
           );
         })}
       </div>
@@ -228,7 +234,9 @@ function AlumniSection({ alumni }) {
             <div style={{ marginBottom: '18px' }}>
               <div style={{ fontWeight: 700, color: '#60a5fa', marginBottom: '8px', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Ph.D.</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {yearData.phd.map((n, j) => <span key={j} className="alumni-name-pill">{n}</span>)}
+                {yearData.phd.map((n, j) => (
+                  <span id={`person-${(n || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} key={j} className="alumni-name-pill">{n}</span>
+                ))}
               </div>
             </div>
           )}
@@ -236,7 +244,9 @@ function AlumniSection({ alumni }) {
             <div style={{ marginBottom: '18px' }}>
               <div style={{ fontWeight: 700, color: '#60a5fa', marginBottom: '8px', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>M.Tech.</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {yearData.mtech.map((n, j) => <span key={j} className="alumni-name-pill">{n}</span>)}
+                {yearData.mtech.map((n, j) => (
+                  <span id={`person-${(n || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} key={j} className="alumni-name-pill">{n}</span>
+                ))}
               </div>
             </div>
           )}
@@ -244,7 +254,9 @@ function AlumniSection({ alumni }) {
             <div style={{ marginBottom: '18px' }}>
               <div style={{ fontWeight: 700, color: '#60a5fa', marginBottom: '8px', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>M.S. (Research)</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {yearData.ms.map((n, j) => <span key={j} className="alumni-name-pill">{n}</span>)}
+                {yearData.ms.map((n, j) => (
+                  <span id={`person-${(n || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} key={j} className="alumni-name-pill">{n}</span>
+                ))}
               </div>
             </div>
           )}
@@ -252,7 +264,9 @@ function AlumniSection({ alumni }) {
             <div style={{ marginBottom: '18px' }}>
               <div style={{ fontWeight: 700, color: '#60a5fa', marginBottom: '8px', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>M.Sc.</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {yearData.msc.map((n, j) => <span key={j} className="alumni-name-pill">{n}</span>)}
+                {yearData.msc.map((n, j) => (
+                  <span id={`person-${(n || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} key={j} className="alumni-name-pill">{n}</span>
+                ))}
               </div>
             </div>
           )}
@@ -313,6 +327,7 @@ function NoTabMatches({ tabLabel, query, totalMatches, tabCounts, onSelectTab, o
 export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiting, staff, phd, pg, ug, alumni }) {
   const [activeTab, setActiveTab] = useState(initialTab);
   const [searchQuery, setSearchQuery] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('all');
 
   useEffect(() => {
     if (initialTab) {
@@ -320,21 +335,23 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
     }
   }, [initialTab]);
 
+  const sortedFaculty = sortFacultyByName(faculty);
+  const sortedVisiting = sortFacultyByName(visiting);
+  const sortedStaff = Array.isArray(staff) ? sortStaff(staff) : [];
+
   const q = searchQuery.trim().toLowerCase();
   const isSearching = q.length > 0;
 
   // Filtered Faculty
   const matchingFaculty = useMemo(() => {
-    const sorted = sortFacultyByName(faculty);
-    if (!q) return sorted;
-    return sorted.filter(f => filterFacultyItem(f, q));
-  }, [faculty, q]);
+    if (!q) return sortedFaculty;
+    return sortedFaculty.filter(f => filterFacultyItem(f, q));
+  }, [sortedFaculty, q]);
 
   const matchingVisiting = useMemo(() => {
-    const sorted = sortFacultyByName(visiting);
-    if (!q) return sorted;
-    return sorted.filter(f => filterFacultyItem(f, q));
-  }, [visiting, q]);
+    if (!q) return sortedVisiting;
+    return sortedVisiting.filter(f => filterFacultyItem(f, q));
+  }, [sortedVisiting, q]);
 
   const facultyTotalCount = matchingFaculty.length + matchingVisiting.length;
 
@@ -345,7 +362,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
       const count = Array.isArray(staff)
         ? staff.length
         : Object.values(staff).reduce((acc, list) => acc + (list?.length || 0), 0);
-      return { filteredStaff: Array.isArray(staff) ? sortStaff(staff) : staff, staffCount: count };
+      return { filteredStaff: Array.isArray(staff) ? sortedStaff : staff, staffCount: count };
     }
     if (Array.isArray(staff)) {
       const filtered = sortStaff(staff.filter(f => filterStaffItem(f, q)));
@@ -362,7 +379,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
       }
       return { filteredStaff: filtered, staffCount: count };
     }
-  }, [staff, q]);
+  }, [staff, q, sortedStaff]);
 
   // Filtered Ph.D., PG, UG
   const { filtered: filteredPhd, count: phdCount } = useMemo(() => filterStudentObject(phd, q), [phd, q]);
@@ -374,27 +391,9 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
 
   const totalPeopleMatches = facultyTotalCount + staffCount + phdCount + pgCount + ugCount + alumniCount;
 
-  const tabCounts = {
-    all: totalPeopleMatches,
-    faculty: facultyTotalCount,
-    staff: staffCount,
-    phd: phdCount,
-    pg: pgCount,
-    ug: ugCount,
-    alumni: alumniCount,
-  };
-
-  const getTabLabel = (tabId) => {
-    if (tabId === 'all') return 'All Results';
-    const found = PEOPLE_TABS.find(t => t.id === tabId);
-    return found ? found.label : tabId;
-  };
-
   const handleClearSearch = () => {
     setSearchQuery('');
-    if (activeTab === 'all') {
-      setActiveTab('faculty');
-    }
+    setCategoryFilter('all');
   };
 
   // Image Modal State
@@ -411,10 +410,6 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
     setModalName('');
   };
 
-  const visibleTabs = isSearching
-    ? [{ id: 'all', label: 'All Results' }, ...PEOPLE_TABS]
-    : PEOPLE_TABS;
-
   return (
     <div>
       <div className="section-inner people-section-inner">
@@ -424,243 +419,264 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
           <div className="title-bar" />
         </div>
 
-        {/* ── Search Bar ── */}
+        {/* ── Search Bar: Searches across entire People page ── */}
         <SearchBar
           value={searchQuery}
-          onChange={setSearchQuery}
+          onChange={(val) => {
+            setSearchQuery(val);
+            setCategoryFilter('all');
+          }}
           onClear={handleClearSearch}
-          placeholder="Search people by name, research area, designation, email, supervisor..."
+          placeholder="Search people across entire department by name, research area, email, supervisor, batch..."
           resultCount={isSearching ? totalPeopleMatches : null}
           id="people-search-input"
         />
 
-        {/* ── People Layout: sidebar + content ─────────────────────── */}
-        <div className="people-page-layout">
-
-          {/* LEFT: Tab sidebar */}
-          <div className="people-tabs">
-            {visibleTabs.map(tab => {
-              const count = tabCounts[tab.id] ?? 0;
-              return (
+        {/* ── SEARCH MODE: Results across ENTIRE People Page ── */}
+        {isSearching ? (
+          <div className="people-search-results-full anim-fadein">
+            {/* Quick Category Filter Pills */}
+            {totalPeopleMatches > 0 && (
+              <div className="people-search-filter-pills">
                 <button
-                  key={tab.id}
-                  className={`people-tab${activeTab === tab.id ? ' active' : ''}`}
-                  onClick={() => {
-                    setActiveTab(tab.id);
-                    if (tab.id !== 'all' && onNav) onNav(`people-${tab.id}`);
-                  }}
+                  type="button"
+                  className={`search-filter-pill${categoryFilter === 'all' ? ' active' : ''}`}
+                  onClick={() => setCategoryFilter('all')}
                 >
-                  <span>{tab.label}</span>
-                  {isSearching && (
-                    <span className={`people-tab-count ${count === 0 ? 'zero' : ''}`}>
-                      {count}
-                    </span>
-                  )}
+                  ✦ All People ({totalPeopleMatches})
                 </button>
-              );
-            })}
-          </div>
+                {facultyTotalCount > 0 && (
+                  <button
+                    type="button"
+                    className={`search-filter-pill${categoryFilter === 'faculty' ? ' active' : ''}`}
+                    onClick={() => setCategoryFilter('faculty')}
+                  >
+                    Faculty ({facultyTotalCount})
+                  </button>
+                )}
+                {staffCount > 0 && (
+                  <button
+                    type="button"
+                    className={`search-filter-pill${categoryFilter === 'staff' ? ' active' : ''}`}
+                    onClick={() => setCategoryFilter('staff')}
+                  >
+                    Staff ({staffCount})
+                  </button>
+                )}
+                {phdCount > 0 && (
+                  <button
+                    type="button"
+                    className={`search-filter-pill${categoryFilter === 'phd' ? ' active' : ''}`}
+                    onClick={() => setCategoryFilter('phd')}
+                  >
+                    Ph.D. Students ({phdCount})
+                  </button>
+                )}
+                {pgCount > 0 && (
+                  <button
+                    type="button"
+                    className={`search-filter-pill${categoryFilter === 'pg' ? ' active' : ''}`}
+                    onClick={() => setCategoryFilter('pg')}
+                  >
+                    Post Graduate ({pgCount})
+                  </button>
+                )}
+                {ugCount > 0 && (
+                  <button
+                    type="button"
+                    className={`search-filter-pill${categoryFilter === 'ug' ? ' active' : ''}`}
+                    onClick={() => setCategoryFilter('ug')}
+                  >
+                    Under Graduate ({ugCount})
+                  </button>
+                )}
+                {alumniCount > 0 && (
+                  <button
+                    type="button"
+                    className={`search-filter-pill${categoryFilter === 'alumni' ? ' active' : ''}`}
+                    onClick={() => setCategoryFilter('alumni')}
+                  >
+                    Alumni ({alumniCount})
+                  </button>
+                )}
+              </div>
+            )}
 
-          {/* RIGHT: Tab content */}
-          <div className="people-tab-content">
-
-            {/* ── ALL RESULTS TAB (only during search) ────────────────────── */}
-            {activeTab === 'all' && (
-              <div className="anim-fadein">
-                {totalPeopleMatches === 0 ? (
-                  <div className="search-no-results">
-                    <div className="search-no-results-icon">👥</div>
-                    <div className="search-no-results-title">No people found</div>
-                    <p className="search-no-results-desc">
-                      No faculty, staff, students, or alumni matched "{searchQuery}". Try searching with a different name, email, or research field.
-                    </p>
-                    <button
-                      type="button"
-                      className="search-switch-pill"
-                      onClick={handleClearSearch}
-                    >
-                      Clear Search
-                    </button>
+            {totalPeopleMatches === 0 ? (
+              <div className="search-no-results">
+                <div className="search-no-results-icon">👥</div>
+                <div className="search-no-results-title">No people found</div>
+                <p className="search-no-results-desc">
+                  No faculty, staff, students, or alumni matched "{searchQuery}". Try searching with a different name, email, or research field.
+                </p>
+                <button
+                  type="button"
+                  className="search-switch-pill"
+                  onClick={handleClearSearch}
+                >
+                  Clear Search
+                </button>
+              </div>
+            ) : (
+              <>
+                {/* 1. Faculty Matches */}
+                {(categoryFilter === 'all' || categoryFilter === 'faculty') && facultyTotalCount > 0 && (
+                  <div className="search-section-block">
+                    <div className="faculty-divider" style={{ marginTop: '0' }}>
+                      Faculty ({facultyTotalCount})
+                      <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
+                    </div>
+                    <div className="faculty-grid">
+                      {[...matchingFaculty, ...matchingVisiting].map((f, i) => (
+                        <div key={i} className="anim-fadeup">
+                          <FacultyCard f={f} />
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                ) : (
-                  <>
-                    {/* Faculty matches */}
-                    {facultyTotalCount > 0 && (
-                      <div style={{ marginBottom: '44px' }}>
-                        <div className="faculty-divider" style={{ marginTop: '0' }}>
-                          Faculty ({facultyTotalCount})
-                          <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
-                        </div>
-                        <div className="faculty-grid">
-                          {[...matchingFaculty, ...matchingVisiting].map((f, i) => (
-                            <div key={i} className="anim-fadeup">
-                              <FacultyCard f={f} />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+                )}
 
-                    {/* Staff matches */}
-                    {staffCount > 0 && (
-                      <div style={{ marginBottom: '44px' }}>
-                        <div className="faculty-divider">
-                          Non-Teaching Staff ({staffCount})
-                          <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
-                        </div>
-                        {Array.isArray(filteredStaff) ? (
+                {/* 2. Staff Matches */}
+                {(categoryFilter === 'all' || categoryFilter === 'staff') && staffCount > 0 && (
+                  <div className="search-section-block">
+                    <div className="faculty-divider">
+                      Non-Teaching Staff ({staffCount})
+                      <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
+                    </div>
+                    {Array.isArray(filteredStaff) ? (
+                      <div className="faculty-grid">
+                        {filteredStaff.map((f, i) => (
+                          <div key={i} className="anim-fadeup">
+                            <FacultyCard f={f} />
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      Object.entries(filteredStaff).map(([cat, list]) => (
+                        <div key={cat} style={{ marginBottom: '24px' }}>
+                          <div style={{ fontWeight: 600, color: 'var(--gold)', marginBottom: '12px' }}>{cat}</div>
                           <div className="faculty-grid">
-                            {filteredStaff.map((f, i) => (
+                            {list.map((f, i) => (
                               <div key={i} className="anim-fadeup">
                                 <FacultyCard f={f} />
                               </div>
                             ))}
                           </div>
-                        ) : (
-                          Object.entries(filteredStaff).map(([cat, list]) => (
-                            <div key={cat} style={{ marginBottom: '24px' }}>
-                              <div style={{ fontWeight: 600, color: 'var(--gold)', marginBottom: '12px' }}>{cat}</div>
-                              <div className="faculty-grid">
-                                {list.map((f, i) => (
-                                  <div key={i} className="anim-fadeup">
-                                    <FacultyCard f={f} />
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          ))
-                        )}
-                      </div>
-                    )}
-
-                    {/* Ph.D. matches */}
-                    {phdCount > 0 && filteredPhd && (
-                      <div style={{ marginBottom: '44px' }}>
-                        <div className="faculty-divider">
-                          Ph.D. Students ({phdCount})
-                          <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
                         </div>
-                        {Object.entries(filteredPhd).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
-                          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
-                        ))}
-                      </div>
+                      ))
                     )}
-
-                    {/* Post Graduate matches */}
-                    {pgCount > 0 && filteredPg && (
-                      <div style={{ marginBottom: '44px' }}>
-                        <div className="faculty-divider">
-                          Post Graduate Students ({pgCount})
-                          <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
-                        </div>
-                        {Object.entries(filteredPg).map(([batch, list]) => (
-                          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Under Graduate matches */}
-                    {ugCount > 0 && filteredUg && (
-                      <div style={{ marginBottom: '44px' }}>
-                        <div className="faculty-divider">
-                          Under Graduate Students ({ugCount})
-                          <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
-                        </div>
-                        {Object.entries(filteredUg).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
-                          <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Alumni matches */}
-                    {alumniCount > 0 && (
-                      <div style={{ marginBottom: '44px' }}>
-                        <div className="faculty-divider">
-                          Alumni ({alumniCount})
-                        </div>
-                        <AlumniSection alumni={filteredAlumni} />
-                      </div>
-                    )}
-                  </>
+                  </div>
                 )}
-              </div>
+
+                {/* 3. Ph.D. Student Matches */}
+                {(categoryFilter === 'all' || categoryFilter === 'phd') && phdCount > 0 && filteredPhd && (
+                  <div className="search-section-block">
+                    <div className="faculty-divider">
+                      Ph.D. Students ({phdCount})
+                      <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
+                    </div>
+                    {Object.entries(filteredPhd).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
+                      <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+                    ))}
+                  </div>
+                )}
+
+                {/* 4. Post Graduate Student Matches */}
+                {(categoryFilter === 'all' || categoryFilter === 'pg') && pgCount > 0 && filteredPg && (
+                  <div className="search-section-block">
+                    <div className="faculty-divider">
+                      Post Graduate Students ({pgCount})
+                      <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
+                    </div>
+                    {Object.entries(filteredPg).map(([batch, list]) => (
+                      <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+                    ))}
+                  </div>
+                )}
+
+                {/* 5. Under Graduate Student Matches */}
+                {(categoryFilter === 'all' || categoryFilter === 'ug') && ugCount > 0 && filteredUg && (
+                  <div className="search-section-block">
+                    <div className="faculty-divider">
+                      Under Graduate Students ({ugCount})
+                      <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
+                    </div>
+                    {Object.entries(filteredUg).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
+                      <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+                    ))}
+                  </div>
+                )}
+
+                {/* 6. Alumni Matches */}
+                {(categoryFilter === 'all' || categoryFilter === 'alumni') && alumniCount > 0 && (
+                  <div className="search-section-block">
+                    <div className="faculty-divider">
+                      Alumni ({alumniCount})
+                    </div>
+                    <AlumniSection alumni={filteredAlumni} />
+                  </div>
+                )}
+              </>
             )}
+          </div>
+        ) : (
+          <div className="people-page-layout">
+            <div className="people-tabs">
+              {PEOPLE_TABS.map(tab => (
+                <button
+                  key={tab.id}
+                  className={`people-tab${activeTab === tab.id ? ' active' : ''}`}
+                  onClick={() => {
+                    setActiveTab(tab.id);
+                    if (onNav) onNav(`people-${tab.id}`);
+                  }}
+                >
+                  <span>{tab.label}</span>
+                </button>
+              ))}
+            </div>
 
-            {/* ── FACULTY TAB ─────────────────────────────────────────────── */}
-            {activeTab === 'faculty' && (
-              isSearching && facultyTotalCount === 0 ? (
-                <NoTabMatches
-                  tabLabel={getTabLabel('faculty')}
-                  query={searchQuery}
-                  totalMatches={totalPeopleMatches}
-                  tabCounts={tabCounts}
-                  onSelectTab={setActiveTab}
-                  onClear={handleClearSearch}
-                />
-              ) : (
+            <div className="people-tab-content">
+              {/* FACULTY TAB */}
+              {activeTab === 'faculty' && (
                 <>
-                  {matchingFaculty.length > 0 && (
-                    <>
-                      <div className="faculty-divider" style={{ marginTop: '0' }}>
-                        Core Faculty {isSearching && `(${matchingFaculty.length})`}
-                        <span className="email-id-hint">
-                          — add @iiti.ac.in to email ID
-                        </span>
+                  <div className="faculty-divider" style={{ marginTop: '0' }}>
+                    Core Faculty
+                    <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
+                  </div>
+                  <div className="faculty-grid">
+                    {sortedFaculty.map((f, i) => (
+                      <div key={i} data-aos="fade-up" data-aos-delay={i * 50}>
+                        <FacultyCard f={f} />
                       </div>
-                      <div className="faculty-grid">
-                        {matchingFaculty.map((f, i) => (
-                          <div key={i} data-aos="fade-up" data-aos-delay={i * 50}>
-                            <FacultyCard f={f} />
-                          </div>
-                        ))}
-                      </div>
-                    </>
-                  )}
+                    ))}
+                  </div>
 
-                  {matchingVisiting.length > 0 && (
-                    <>
-                      <div className="faculty-divider" style={{ marginTop: matchingFaculty.length === 0 ? '0' : '40px' }}>
-                        Visiting &amp; Distinguished Faculty {isSearching && `(${matchingVisiting.length})`}
-                        <span className="email-id-hint">
-                          — add @iiti.ac.in to email ID
-                        </span>
+                  <div className="faculty-divider">
+                    Visiting &amp; Distinguished Faculty
+                    <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
+                  </div>
+                  <div className="faculty-grid" style={{ marginBottom: '40px' }}>
+                    {sortedVisiting.map((f, i) => (
+                      <div key={i} data-aos="fade-up" data-aos-delay={i * 50}>
+                        <FacultyCard f={f} />
                       </div>
-                      <div className="faculty-grid" style={{ marginBottom: '40px' }}>
-                        {matchingVisiting.map((f, i) => (
-                          <div key={i} data-aos="fade-up" data-aos-delay={i * 50}>
-                            <FacultyCard f={f} />
-                          </div>
-                        ))}
-                      </div>
-                    </>
-                  )}
+                    ))}
+                  </div>
                 </>
-              )
-            )}
+              )}
 
-            {/* ── NON-TEACHING STAFF TAB ──────────────────────────────────── */}
-            {activeTab === 'staff' && staff && (
-              isSearching && staffCount === 0 ? (
-                <NoTabMatches
-                  tabLabel={getTabLabel('staff')}
-                  query={searchQuery}
-                  totalMatches={totalPeopleMatches}
-                  tabCounts={tabCounts}
-                  onSelectTab={setActiveTab}
-                  onClear={handleClearSearch}
-                />
-              ) : (
+              {/* STAFF TAB */}
+              {activeTab === 'staff' && staff && (
                 <>
-                  {Array.isArray(filteredStaff) ? (
+                  {Array.isArray(staff) ? (
                     <>
                       <div className="faculty-divider" style={{ marginTop: '0' }}>
                         Technical &amp; Support Staff <span className="visiting-badge" style={{ background: 'var(--navy)', color: '#fff', borderColor: 'var(--navy)' }}>HOD Office</span>
-                        <span className="email-id-hint">
-                          — add @iiti.ac.in to email ID
-                        </span>
+                        <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
                       </div>
                       <div className="faculty-grid" style={{ marginBottom: '40px' }}>
-                        {filteredStaff.map((f, i) => (
+                        {sortedStaff.map((f, i) => (
                           <div key={i} className="anim-fadeup" style={{ animationDelay: `${0.06 + i * 0.06}s` }}>
                             <FacultyCard f={f} />
                           </div>
@@ -668,16 +684,14 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
                       </div>
                     </>
                   ) : (
-                    Object.entries(filteredStaff).map(([category, list], catIndex) => (
+                    Object.entries(staff).map(([category, list], catIndex) => (
                       <div key={category} data-aos="fade-up">
                         <div className="faculty-divider" style={{ marginTop: catIndex === 0 ? '0' : '40px' }}>
                           {category} <span className="visiting-badge" style={{ background: 'var(--navy)', color: '#fff', borderColor: 'var(--navy)' }}>HOD Office</span>
-                          <span className="email-id-hint">
-                            — add @iiti.ac.in to email ID
-                          </span>
+                          <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
                         </div>
                         <div className="faculty-grid" style={{ marginBottom: '40px' }}>
-                          {list.map((f, i) => (
+                          {sortStaff(list).map((f, i) => (
                             <div key={i} className="anim-fadeup" style={{ animationDelay: `${0.06 + i * 0.06}s` }}>
                               <FacultyCard f={f} />
                             </div>
@@ -687,116 +701,65 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
                     ))
                   )}
                 </>
-              )
-            )}
+              )}
 
-            {/* ── PH.D. TAB ────────────────────────────────────────────────── */}
-            {activeTab === 'phd' && (
-              isSearching && phdCount === 0 ? (
-                <NoTabMatches
-                  tabLabel={getTabLabel('phd')}
-                  query={searchQuery}
-                  totalMatches={totalPeopleMatches}
-                  tabCounts={tabCounts}
-                  onSelectTab={setActiveTab}
-                  onClear={handleClearSearch}
-                />
-              ) : (
+              {/* PH.D. TAB */}
+              {activeTab === 'phd' && (
                 <div className="anim-fadein">
-                  {filteredPhd && Object.keys(filteredPhd).length > 0 ? (
-                    Object.entries(filteredPhd).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
-                      <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
-                    ))
-                  ) : (
+                  {phd ? Object.entries(phd).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
+                    <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+                  )) : (
                     <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px', fontSize: '15px' }}>
                       Ph.D. student data will appear here once added to the database.
                     </p>
                   )}
                 </div>
-              )
-            )}
+              )}
 
-            {/* ── PG TAB ────────────────────────────────────────────────────── */}
-            {activeTab === 'pg' && (
-              isSearching && pgCount === 0 ? (
-                <NoTabMatches
-                  tabLabel={getTabLabel('pg')}
-                  query={searchQuery}
-                  totalMatches={totalPeopleMatches}
-                  tabCounts={tabCounts}
-                  onSelectTab={setActiveTab}
-                  onClear={handleClearSearch}
-                />
-              ) : (
+              {/* PG TAB */}
+              {activeTab === 'pg' && (
                 <div className="anim-fadein">
-                  {filteredPg && Object.keys(filteredPg).length > 0 ? (
-                    Object.entries(filteredPg).sort(([a], [b]) => {
-                      const lA = a.toLowerCase(), lB = b.toLowerCase();
-                      const getPriority = s => {
-                        if (s.includes('space engineering')) return 1;
-                        if (s.includes('aolt')) return 3;
-                        return 2;
-                      };
-                      const diff = getPriority(lA) - getPriority(lB);
-                      return diff !== 0 ? diff : b.localeCompare(a);
-                    }).map(([batch, list]) => (
-                      <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
-                    ))
-                  ) : (
+                  {pg ? Object.entries(pg).sort(([a], [b]) => {
+                    const lA = a.toLowerCase(), lB = b.toLowerCase();
+                    const getPriority = s => {
+                      if (s.includes('space engineering')) return 1;
+                      if (s.includes('aolt')) return 3;
+                      return 2;
+                    };
+                    const diff = getPriority(lA) - getPriority(lB);
+                    return diff !== 0 ? diff : b.localeCompare(a);
+                  }).map(([batch, list]) => (
+                    <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+                  )) : (
                     <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px', fontSize: '15px' }}>
                       Post Graduate student data will appear here once added to the database.
                     </p>
                   )}
                 </div>
-              )
-            )}
+              )}
 
-            {/* ── UG TAB ────────────────────────────────────────────────────── */}
-            {activeTab === 'ug' && (
-              isSearching && ugCount === 0 ? (
-                <NoTabMatches
-                  tabLabel={getTabLabel('ug')}
-                  query={searchQuery}
-                  totalMatches={totalPeopleMatches}
-                  tabCounts={tabCounts}
-                  onSelectTab={setActiveTab}
-                  onClear={handleClearSearch}
-                />
-              ) : (
+              {/* UG TAB */}
+              {activeTab === 'ug' && (
                 <div className="anim-fadein">
-                  {filteredUg && Object.keys(filteredUg).length > 0 ? (
-                    Object.entries(filteredUg).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
-                      <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
-                    ))
-                  ) : (
+                  {ug ? Object.entries(ug).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
+                    <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} />
+                  )) : (
                     <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px', fontSize: '15px' }}>
                       Under Graduate student data will appear here once added to the database.
                     </p>
                   )}
                 </div>
-              )
-            )}
+              )}
 
-            {/* ── ALUMNI TAB ────────────────────────────────────────────────── */}
-            {activeTab === 'alumni' && (
-              isSearching && alumniCount === 0 ? (
-                <NoTabMatches
-                  tabLabel={getTabLabel('alumni')}
-                  query={searchQuery}
-                  totalMatches={totalPeopleMatches}
-                  tabCounts={tabCounts}
-                  onSelectTab={setActiveTab}
-                  onClear={handleClearSearch}
-                />
-              ) : (
+              {/* ALUMNI TAB */}
+              {activeTab === 'alumni' && (
                 <div className="anim-fadein">
-                  <AlumniSection alumni={filteredAlumni} />
+                  <AlumniSection alumni={alumni} />
                 </div>
-              )
-            )}
-
-          </div>{/* end people-tab-content */}
-        </div>{/* end people-page-layout */}
+              )}
+            </div>
+          </div>
+        )}
 
       </div>
 
