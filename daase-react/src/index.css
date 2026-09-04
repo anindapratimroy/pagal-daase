@@ -4180,21 +4180,317 @@ nav.nav-scrolled.nav-hidden {
   font-size: 14px;
 }
 
-/* Responsive adjustments for Power Search modal */
-@media (max-width: 820px) {
-  .power-search-workspace {
-    grid-template-columns: 1fr;
-    max-height: calc(85vh - 120px);
-  }
-  .power-search-list-col {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    max-height: 45vh;
-  }
-  .power-search-preview-col {
-    max-height: 40vh;
+/* ───────────────────────────────────────────────────────────────
+   RESPONSIVE: Global Search / Command Palette – All Breakpoints
+   ─────────────────────────────────────────────────────────────── */
+
+/* Mobile tab switcher – hidden by default on desktop */
+.power-search-mobile-tabs {
+  display: none;
+}
+.mobile-preview-back-btn {
+  display: none;
+}
+.esc-mobile-icon {
+  display: none;
+}
+.esc-desktop-text {
+  display: inline;
+}
+.footer-mobile-hint {
+  display: none;
+}
+
+/* ── Large Desktop (≥ 1200px): slightly wider modal */
+@media (min-width: 1200px) {
+  .power-search-modal {
+    max-width: 1080px;
   }
 }
+
+/* ── Tablet Portrait + Small Laptop (861px – 1024px) */
+@media (max-width: 1024px) {
+  .power-search-modal {
+    max-width: 860px;
+    border-radius: 16px;
+  }
+  .power-search-workspace {
+    grid-template-columns: 1fr 0.9fr;
+    min-height: 400px;
+    max-height: calc(86vh - 140px);
+  }
+  .power-search-input {
+    font-size: 15.5px;
+  }
+  .preview-name {
+    font-size: 17px;
+  }
+}
+
+/* ── Tablet + Mobile (≤ 860px): Single-pane tabbed layout */
+@media (max-width: 860px) {
+  /* Overlay padding tighter */
+  .global-search-overlay {
+    padding: 8px 8px 8px;
+    align-items: flex-start;
+  }
+
+  /* Modal fills screen almost fully */
+  .power-search-modal {
+    max-width: 100%;
+    border-radius: 14px;
+    max-height: calc(100svh - 16px);
+    margin: 0;
+  }
+
+  /* Header compact */
+  .power-search-header {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+  .power-search-input {
+    font-size: 15px;
+  }
+  .power-search-icon {
+    width: 18px;
+    flex-shrink: 0;
+  }
+  /* Desktop ESC badge → X icon on mobile */
+  .esc-desktop-text { display: none; }
+  .esc-mobile-icon { display: inline; font-size: 14px; }
+  .power-search-esc-badge {
+    padding: 4px 8px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+
+  /* Category pills: scrollable horizontal strip, smaller */
+  .power-search-categories {
+    padding: 8px 12px;
+    gap: 6px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .power-search-categories::-webkit-scrollbar { display: none; }
+  .power-cat-pill {
+    font-size: 11.5px;
+    padding: 4px 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Mobile tab switcher visible */
+  .power-search-mobile-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.3);
+  }
+  .mobile-tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 10px 12px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.65);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+  }
+  .mobile-tab-btn.active {
+    color: #ffd97a;
+    border-bottom-color: #ffd97a;
+    background: rgba(255, 217, 122, 0.06);
+  }
+
+  /* Workspace: stack vertically, single pane visible at a time */
+  .power-search-workspace {
+    display: block;
+    min-height: 0;
+    max-height: calc(100svh - 220px);
+    overflow: hidden;
+  }
+
+  /* Left col full-width, scroll */
+  .power-search-list-col {
+    width: 100%;
+    max-height: calc(100svh - 220px);
+    overflow-y: auto;
+    border-right: none;
+    border-bottom: none;
+    padding: 12px 14px;
+    display: block;
+  }
+
+  /* Right preview col: full-width, scroll */
+  .power-search-preview-col {
+    width: 100%;
+    max-height: calc(100svh - 220px);
+    overflow-y: auto;
+    padding: 14px 14px;
+    background: rgba(13, 24, 52, 0.8);
+    display: none;
+  }
+
+  /* Switch panels by mobileTab attribute on workspace */
+  .power-search-workspace.mobile-view-list .power-search-list-col {
+    display: block;
+  }
+  .power-search-workspace.mobile-view-list .power-search-preview-col {
+    display: none;
+  }
+  .power-search-workspace.mobile-view-preview .power-search-list-col {
+    display: none;
+  }
+  .power-search-workspace.mobile-view-preview .power-search-preview-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Mobile Back Button */
+  .mobile-preview-back-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    cursor: pointer;
+    margin-bottom: 12px;
+    width: 100%;
+    transition: all 0.18s;
+  }
+  .mobile-preview-back-btn:hover {
+    background: rgba(255, 217, 122, 0.12);
+    color: #ffd97a;
+    border-color: rgba(255, 217, 122, 0.4);
+  }
+
+  /* Result rows – slightly more compact */
+  .power-result-row {
+    padding: 9px 10px;
+    gap: 10px;
+  }
+  .row-avatar {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+  .row-avatar-fallback { font-size: 17px; }
+  .row-title { font-size: 13.5px; }
+  .row-sub { font-size: 11.5px; }
+  .row-badge { font-size: 9.5px; padding: 2px 6px; }
+
+  /* Prevent translateX animation from clipping on narrow screens */
+  .power-result-row:hover,
+  .power-result-row.selected {
+    transform: none;
+  }
+
+  /* Preview card */
+  .preview-header {
+    gap: 12px;
+  }
+  .preview-photo-wrap {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+  }
+  .preview-photo-fallback.big {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    font-size: 24px;
+  }
+  .preview-name { font-size: 16px; }
+  .preview-designation { font-size: 12px; }
+  .meta-label { font-size: 10px; }
+  .meta-tag { font-size: 11px; padding: 3px 8px; }
+  .preview-jump-cta { font-size: 13px; padding: 10px 16px; }
+
+  /* Footer: hide keyboard hints, show mobile hint */
+  .power-search-footer {
+    padding: 8px 14px;
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+  .footer-keys-hints { display: none; }
+  .footer-status-text { font-size: 11px; }
+  .footer-mobile-hint {
+    display: block;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.45);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Nav pills wrap tightly */
+  .power-nav-pills { gap: 6px; }
+  .power-nav-pill-btn { font-size: 11.5px; padding: 5px 10px; }
+
+  /* Nav section less top margin */
+  .power-nav-section { margin-top: 14px; padding-top: 12px; }
+
+  /* Subhead row */
+  .power-subhead { font-size: 10.5px; }
+  .power-subhead-badge { font-size: 10px; padding: 2px 6px; }
+
+  /* Discovery card compact */
+  .power-discovery-card { padding: 16px 14px; }
+  .discovery-title { font-size: 14.5px; }
+  .discovery-desc { font-size: 12px; }
+  .discovery-chip-btn { font-size: 11.5px; padding: 5px 10px; }
+
+  /* Email row */
+  .preview-email-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .email-actions { flex-wrap: wrap; gap: 6px; }
+  .preview-mini-btn { font-size: 11.5px; padding: 5px 10px; }
+}
+
+/* ── Small Mobile (≤ 480px) */
+@media (max-width: 480px) {
+  .global-search-overlay {
+    padding: 4px;
+  }
+  .power-search-modal {
+    border-radius: 12px;
+    max-height: calc(100svh - 8px);
+  }
+  .power-search-header {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+  .power-search-input { font-size: 14px; }
+  .power-search-categories { padding: 6px 10px; }
+  .power-cat-pill { font-size: 11px; padding: 3px 8px; }
+  .power-search-list-col,
+  .power-search-preview-col {
+    padding: 10px 12px;
+  }
+  .power-search-workspace {
+    max-height: calc(100svh - 210px);
+  }
+  .power-search-list-col {
+    max-height: calc(100svh - 210px);
+  }
+  .power-search-preview-col {
+    max-height: calc(100svh - 210px);
+  }
+  .power-search-footer {
+    padding: 7px 12px;
+  }
+  .row-title { font-size: 13px; }
+  .row-badge { font-size: 9px; }
+  .preview-name { font-size: 15px; }
+}
+
+
 
 /* The wrapper that holds sidebar + content */
 .people-page-layout {
