@@ -129,14 +129,17 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
       setCopiedEmail(false);
       setMobileTab('list');
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
       setTimeout(() => {
         if (inputRef.current) inputRef.current.focus();
       }, 50);
     } else {
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     }
     return () => {
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     };
   }, [isOpen]);
 

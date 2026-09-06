@@ -84,13 +84,24 @@ export default function Students({ pg, ug, phd, interns }) {
     setModalName('');
   };
 
-  // Close modal on Esc key
+  // Close modal on Esc key and lock background scroll
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === 'Escape') closeImageModal();
     };
-    if (modalImg) window.addEventListener('keydown', handleEsc);
-    return () => window.removeEventListener('keydown', handleEsc);
+    if (modalImg) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleEsc);
+      return () => {
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        window.removeEventListener('keydown', handleEsc);
+      };
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }
   }, [modalImg]);
 
   return (

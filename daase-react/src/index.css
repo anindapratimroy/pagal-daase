@@ -1987,6 +1987,8 @@ nav.nav-scrolled.nav-hidden {
   width: 90%;
   max-height: 85vh;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   padding: 36px 32px;
   position: relative;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.2);
@@ -3341,6 +3343,8 @@ nav.nav-scrolled.nav-hidden {
   padding: clamp(16px, 4vh, 48px) 16px 24px;
   animation: fadeIn 0.2s ease-out;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Power Search Modal (Command Center) */
@@ -3354,6 +3358,7 @@ nav.nav-scrolled.nav-hidden {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  overscroll-behavior: contain;
   max-height: 86vh;
   animation: zoomIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -3489,6 +3494,8 @@ nav.nav-scrolled.nav-hidden {
 /* Left Column: Results List */
 .power-search-list-col {
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   padding: 16px 18px;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   scrollbar-width: thin;
@@ -3819,6 +3826,8 @@ nav.nav-scrolled.nav-hidden {
 /* Right Column: Live Interactive Detail Preview */
 .power-search-preview-col {
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   padding: 20px;
   background: rgba(13, 24, 52, 0.55);
   display: flex;
@@ -6997,6 +7006,8 @@ a.sc-email:hover {
   backdrop-filter: blur(8px);
   animation: fadeIn 0.4s ease-out both;
   cursor: zoom-out;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .student-modal-content {

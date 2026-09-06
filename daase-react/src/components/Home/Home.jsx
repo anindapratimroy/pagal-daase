@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import CounterStat from './CounterStat';
 import Footer from '../Layout/Footer';
 import NewsTicker from './NewsTicker';
@@ -54,6 +54,25 @@ function getPubUrl(pub) {
 
 export default function Home({ onNav, news, events, publications = [] }) {
   const [showHodModal, setShowHodModal] = useState(false);
+
+  useEffect(() => {
+    if (showHodModal) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      const handleKeyDown = (e) => {
+        if (e.key === 'Escape') setShowHodModal(false);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }
+  }, [showHodModal]);
 
   const combinedUpdates = useMemo(() => {
     return sortHomeUpdates(news, events);

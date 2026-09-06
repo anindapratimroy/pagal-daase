@@ -602,6 +602,25 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
     setModalName('');
   };
 
+  useEffect(() => {
+    if (modalImg) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      const handleEsc = (e) => {
+        if (e.key === 'Escape') closeImageModal();
+      };
+      window.addEventListener('keydown', handleEsc);
+      return () => {
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        window.removeEventListener('keydown', handleEsc);
+      };
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }
+  }, [modalImg]);
+
   return (
     <div>
       <div className="section-inner people-section-inner">
