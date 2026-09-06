@@ -62,7 +62,7 @@ const PROGRAMS = {
       { num: '100%', text: 'All students complete supervised thesis research' },
     ],
     curriculumUrl: 'https://academic.iiti.ac.in/app/course_curriculum_list_pg',
-    email: 'coord.msc.astro@iiti.ac.in',
+    email: 'pc-mscse@iiti.ac.in',
   },
   mtech: {
     label: 'M.Tech.',
