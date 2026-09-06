@@ -205,8 +205,32 @@ export default function Home({ onNav, news, events, publications = [] }) {
           <p className="hod-about-body">
             India's only dedicated department of its kind across all IITs — a comprehensive academic and research
             ecosystem spanning the cosmos to cutting-edge space engineering. Founded as a Centre for Astronomy in
-            December 2015, elevated to a full Department in May 2018, and backed by DST-FIST, SKA-IC, ISRO &amp; NASA.
+            December 2015 and elevated to a full Department in May 2018.
           </p>
+          <div className="hod-about-highlights">
+            <div className="hod-about-hl">
+              <span className="hod-about-hl-icon">🏛️</span>
+              <div>
+                <strong style={{ color: 'var(--gold-light)', display: 'block', marginBottom: '2px', fontSize: '13.5px' }}>
+                  Supported by Premier Agencies
+                </strong>
+                <span style={{ fontSize: '13px', color: 'rgba(255, 255, 255, 0.75)', lineHeight: '1.5', display: 'block' }}>
+                  ANRF/SERB, DST (DST-FIST), ISRO, MoE, UGC, MoES, CSIR, SPARC, DAE, Max Planck Partner Group &amp; ASEM-DUO.
+                </span>
+              </div>
+            </div>
+            <div className="hod-about-hl">
+              <span className="hod-about-hl-icon">🌐</span>
+              <div>
+                <strong style={{ color: 'var(--gold-light)', display: 'block', marginBottom: '2px', fontSize: '13.5px' }}>
+                  Professional Societies &amp; Outreach
+                </strong>
+                <span style={{ fontSize: '13px', color: 'rgba(255, 255, 255, 0.75)', lineHeight: '1.5', display: 'block' }}>
+                  Core leadership across GRSS-IEEE, APS-IEEE, ASI, and IAU, with impactful science outreach inspiring school and college students.
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="hod-about-right">
@@ -231,11 +255,7 @@ export default function Home({ onNav, news, events, publications = [] }) {
             </div>
             <div className="hod-message-divider" />
             <blockquote className="hod-message-quote">
-              "Welcome to the Department of Astronomy, Astrophysics and Space Engineering at IIT Indore.
-              We are a young and dynamic department, uniquely placed among all IITs, dedicated to the
-              pursuit of knowledge across the cosmos and engineering the future of space exploration.
-              Our faculty, students, and collaborators are united by a deep curiosity about the universe
-              and a commitment to scientific excellence."
+              "Welcome to DAASE at IIT Indore. We are a young and dynamic department, uniquely positioned within the IIT system to advance our understanding of the cosmos and engineer the future of space exploration through scientific excellence, innovation, and global collaboration."
             </blockquote>
           </div>
         </div>
