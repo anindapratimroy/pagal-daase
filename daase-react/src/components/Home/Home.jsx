@@ -237,9 +237,6 @@ export default function Home({ onNav, news, events, publications = [] }) {
               Our faculty, students, and collaborators are united by a deep curiosity about the universe
               and a commitment to scientific excellence."
             </blockquote>
-            <div className="hod-message-sig">
-              — Dr. Saurabh Das, HoD, AASE · IIT Indore
-            </div>
           </div>
         </div>
       </div>
