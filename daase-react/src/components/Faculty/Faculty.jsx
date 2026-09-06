@@ -299,59 +299,174 @@ function StudentBatch({ batch, list, onImageClick, category = 'phd' }) {
   );
 }
 
-// Alumni section
+// Alumni section – accordion per year, organised by degree category
 function AlumniSection({ alumni }) {
-  if (!alumni || !alumni.length) return <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '40px' }}>No alumni data available.</p>;
+  const sorted = alumni && alumni.length
+    ? [...alumni].sort((a, b) => String(b.year).localeCompare(String(a.year)))
+    : [];
+
+  // Auto-open the most recent year
+  const [openYears, setOpenYears] = useState(() => {
+    if (sorted.length === 0) return new Set();
+    return new Set([String(sorted[0].year)]);
+  });
+
+  const toggleYear = (year) => {
+    setOpenYears(prev => {
+      const next = new Set(prev);
+      if (next.has(String(year))) {
+        next.delete(String(year));
+      } else {
+        next.add(String(year));
+      }
+      return next;
+    });
+  };
+
+  if (!sorted.length) {
+    return <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '40px' }}>No alumni data available.</p>;
+  }
+
+  const DEGREE_ORDER = [
+    { key: 'phd',   label: 'Ph.D.',          icon: '🎓' },
+    { key: 'ms',    label: 'M.S. (Research)', icon: '🔬' },
+    { key: 'mtech', label: 'M.Tech.',         icon: '🏗️' },
+    { key: 'msc',   label: 'M.Sc.',          icon: '🧪' },
+    { key: 'btech', label: 'B.Tech.',         icon: '⚙️' },
+  ];
+
+  const totalCount = sorted.reduce((acc, yr) =>
+    acc + DEGREE_ORDER.reduce((s, d) => s + (yr[d.key]?.length || 0), 0), 0);
+
   return (
-    <>
-      {[...alumni].sort((a, b) => String(b.year).localeCompare(String(a.year))).map((yearData, i) => (
-        <div key={i} className="batch-section">
-          <div className="batch-title">{yearData.year}</div>
-          {yearData.phd?.length > 0 && (
-            <div style={{ marginBottom: '18px' }}>
-              <div style={{ fontWeight: 700, color: '#60a5fa', marginBottom: '8px', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Ph.D.</div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {yearData.phd.map((n, j) => (
-                  <span id={`person-${(n || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} key={j} className="alumni-name-pill">{n}</span>
-                ))}
-              </div>
-            </div>
-          )}
-          {yearData.mtech?.length > 0 && (
-            <div style={{ marginBottom: '18px' }}>
-              <div style={{ fontWeight: 700, color: '#60a5fa', marginBottom: '8px', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>M.Tech.</div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {yearData.mtech.map((n, j) => (
-                  <span id={`person-${(n || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} key={j} className="alumni-name-pill">{n}</span>
-                ))}
-              </div>
-            </div>
-          )}
-          {yearData.ms?.length > 0 && (
-            <div style={{ marginBottom: '18px' }}>
-              <div style={{ fontWeight: 700, color: '#60a5fa', marginBottom: '8px', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>M.S. (Research)</div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {yearData.ms.map((n, j) => (
-                  <span id={`person-${(n || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} key={j} className="alumni-name-pill">{n}</span>
-                ))}
-              </div>
-            </div>
-          )}
-          {yearData.msc?.length > 0 && (
-            <div style={{ marginBottom: '18px' }}>
-              <div style={{ fontWeight: 700, color: '#60a5fa', marginBottom: '8px', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>M.Sc.</div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {yearData.msc.map((n, j) => (
-                  <span id={`person-${(n || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} key={j} className="alumni-name-pill">{n}</span>
-                ))}
-              </div>
-            </div>
-          )}
+    <div>
+      {/* Header summary */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px',
+        marginBottom: '24px',
+        padding: '14px 20px',
+        background: 'rgba(255,217,122,0.08)',
+        border: '1px solid rgba(255,217,122,0.25)',
+        borderRadius: '14px',
+      }}>
+        <span style={{ fontSize: '28px' }}>🎓</span>
+        <div>
+          <div style={{ fontWeight: 800, fontSize: '20px', color: '#fff' }}>
+            {totalCount} Alumni
+          </div>
+          <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.55)', marginTop: '2px' }}>
+            Across {sorted.length} graduation year{sorted.length !== 1 ? 's' : ''}
+          </div>
         </div>
-      ))}
-    </>
+        <div style={{ marginLeft: 'auto', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          {DEGREE_ORDER.map(d => {
+            const cnt = sorted.reduce((s, yr) => s + (yr[d.key]?.length || 0), 0);
+            if (!cnt) return null;
+            return (
+              <span key={d.key} style={{
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid rgba(255,255,255,0.15)',
+                borderRadius: '20px',
+                padding: '4px 12px',
+                fontSize: '12px',
+                color: 'rgba(255,255,255,0.8)',
+                fontWeight: 600,
+              }}>
+                {d.label} · {cnt}
+              </span>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Accordion per year */}
+      <div className="alumni-batches">
+        {sorted.map((yearData) => {
+          const yKey = String(yearData.year);
+          const isOpen = openYears.has(yKey);
+          const yearTotal = DEGREE_ORDER.reduce((s, d) => s + (yearData[d.key]?.length || 0), 0);
+          const degrees = DEGREE_ORDER.filter(d => (yearData[d.key]?.length || 0) > 0);
+
+          return (
+            <div key={yKey} className={`alumni-batch${isOpen ? ' open-batch' : ''}`}>
+              <div
+                className="alumni-batch-header"
+                onClick={() => toggleYear(yKey)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') toggleYear(yKey); }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <span className="alumni-year">{yearData.year}</span>
+                  <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                    {degrees.map(d => (
+                      <span key={d.key} style={{
+                        background: 'rgba(96,165,250,0.15)',
+                        border: '1px solid rgba(96,165,250,0.3)',
+                        borderRadius: '12px',
+                        padding: '2px 10px',
+                        fontSize: '11px',
+                        fontWeight: 700,
+                        color: '#93c5fd',
+                        letterSpacing: '0.04em',
+                      }}>
+                        {d.label} {yearData[d.key].length}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', fontWeight: 600 }}>
+                    {yearTotal} graduate{yearTotal !== 1 ? 's' : ''}
+                  </span>
+                  <span className={`chevron${isOpen ? ' open' : ''}`}>▾</span>
+                </div>
+              </div>
+
+              {isOpen && (
+                <div className="alumni-batch-body">
+                  {degrees.map((d, di) => (
+                    <div key={d.key} className="alumni-category" style={{ marginBottom: di < degrees.length - 1 ? '20px' : '0' }}>
+                      <div className="alumni-cat-title">
+                        <span>{d.icon}</span>
+                        <span>{d.label}</span>
+                        <span style={{
+                          background: 'rgba(96,165,250,0.15)',
+                          border: '1px solid rgba(96,165,250,0.25)',
+                          borderRadius: '10px',
+                          padding: '1px 8px',
+                          fontSize: '11px',
+                          color: '#93c5fd',
+                          fontWeight: 700,
+                        }}>
+                          {yearData[d.key].length}
+                        </span>
+                      </div>
+                      <div className="alumni-names">
+                        {[...yearData[d.key]].sort().map((n, j) => (
+                          <span
+                            id={`person-${(n || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+                            key={j}
+                            className="alumni-name"
+                          >
+                            {n}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
+
 
 // Helper for when a specific tab has 0 matches
 function NoTabMatches({ tabLabel, query, totalMatches, tabCounts, onSelectTab, onClear }) {
