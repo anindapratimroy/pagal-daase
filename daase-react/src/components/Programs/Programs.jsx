@@ -124,7 +124,7 @@ const PROGRAMS = {
       { num: 'Dual Degree', text: 'M.S. (Research) + Ph.D. integrated degree option' },
     ],
     curriculumUrl: 'https://academic.iiti.ac.in/app/course_curriculum_list_pg',
-    email: 'pc-mscse@iiti.ac.in',
+    email: 'pc-ms-sse@iiti.ac.in',
   },
   phd: {
     label: 'Ph.D.',
