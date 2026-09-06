@@ -259,10 +259,6 @@ export default function Home({ onNav, news, events, publications = [] }) {
                 "Welcome to DAASE at IIT Indore. We are a young and dynamic department, uniquely positioned within the IIT system to advance our understanding of the cosmos and engineer the future of space exploration through scientific excellence, innovation, and global collaboration."
               </blockquote>
             </div>
-
-            <div className="hod-message-footer">
-              <span className="hod-message-footer-tag">✦ Department of Astronomy, Astrophysics &amp; Space Engineering</span>
-            </div>
           </div>
         </div>
       </div>

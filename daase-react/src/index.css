@@ -1927,20 +1927,6 @@ nav.nav-scrolled.nav-hidden {
   letter-spacing: 0.04em;
 }
 
-.hod-message-footer {
-  margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.hod-message-footer-tag {
-  font-size: 11px;
-  font-weight: 700;
-  color: rgba(255, 217, 122, 0.7);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 @media (max-width: 900px) {
   .hod-about-section {
     grid-template-columns: 1fr;
