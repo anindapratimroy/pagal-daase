@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import CounterStat from './CounterStat';
 import Footer from '../Layout/Footer';
 import NewsTicker from './NewsTicker';
@@ -53,6 +53,8 @@ function getPubUrl(pub) {
 }
 
 export default function Home({ onNav, news, events, publications = [] }) {
+  const [showHodModal, setShowHodModal] = useState(false);
+
   const combinedUpdates = useMemo(() => {
     return sortHomeUpdates(news, events);
   }, [news, events]);
@@ -256,8 +258,29 @@ export default function Home({ onNav, news, events, publications = [] }) {
               </div>
               <div className="hod-message-divider" style={{ margin: '18px 0' }} />
               <blockquote className="hod-message-quote">
-                "Welcome to DAASE at IIT Indore. We are a young and dynamic department, uniquely positioned within the IIT system to advance our understanding of the cosmos and engineer the future of space exploration through scientific excellence, innovation, and global collaboration."
+                <p>
+                  "Welcome to DAASE at IIT Indore. We are a young and dynamic department, uniquely positioned within the IIT system with a distinctive vision to advance our understanding of the universe while contributing to technologies that shape the future of space exploration."
+                </p>
+                <p>
+                  "At DAASE, we foster an environment where curiosity drives discovery, collaboration enables innovation, and excellence creates impact as India advances toward becoming a leading global space economy."
+                </p>
               </blockquote>
+
+              <div className="hod-pillars-row">
+                <span className="hod-pillar-chip">✦ Curiosity Drives Discovery</span>
+                <span className="hod-pillar-chip">✦ Collaboration Enables Innovation</span>
+                <span className="hod-pillar-chip">✦ Excellence Creates Impact</span>
+              </div>
+            </div>
+
+            <div className="hod-card-bottom">
+              <button
+                type="button"
+                className="hod-read-full-btn"
+                onClick={() => setShowHodModal(true)}
+              >
+                Read Full Welcome Address ↗
+              </button>
             </div>
           </div>
         </div>
@@ -382,6 +405,42 @@ export default function Home({ onNav, news, events, publications = [] }) {
 
       </div>
 
+
+      {/* ── HoD Full Welcome Address Modal ── */}
+      {showHodModal && (
+        <div className="student-modal-overlay" onClick={() => setShowHodModal(false)}>
+          <div className="hod-full-modal-content" onClick={e => e.stopPropagation()}>
+            <button
+              type="button"
+              className="hod-modal-close"
+              onClick={() => setShowHodModal(false)}
+              aria-label="Close"
+            >
+              ✕
+            </button>
+            <div className="hod-modal-header">
+              <img
+                src="people_images/Faculty/Dr._Saurabh_Das.jpg"
+                alt="Dr. Saurabh Das"
+                className="hod-modal-avatar"
+              />
+              <div>
+                <h3 className="hod-modal-title">Welcome Address by the Head of the Department</h3>
+                <p className="hod-modal-subtitle">Dr. Saurabh Das · Head of Department, DAASE, IIT Indore</p>
+              </div>
+            </div>
+            <div className="hod-modal-body">
+              <p>Welcome to the Department of Astronomy, Astrophysics and Space Engineering (DAASE) at IIT Indore.</p>
+              <p>We are a young and dynamic department, uniquely positioned within the IIT system, with a distinctive vision to advance our understanding of the universe while contributing to the technologies that will shape the future of space exploration. Our faculty, students, researchers, and collaborators share a deep curiosity about the cosmos and a collective commitment to scientific excellence, innovation, and interdisciplinary research.</p>
+              <p>Since 2015, DAASE has been a founding member of the Square Kilometre Array – India Consortium (SKA-IC), contributing to one of the world’s most ambitious international astronomical initiatives. Our faculty and researchers are actively involved in major ISRO and NASA missions and collaborate with leading universities and research institutions across the globe. These engagements provide our students and researchers with opportunities to participate in cutting-edge science and technology at both national and international levels.</p>
+              <p>As the only dedicated department of its kind among the IITs, DAASE offers a specialized academic and research ecosystem spanning astronomy, astrophysics, remote sensing, space sciences, and space engineering. Through our undergraduate and postgraduate programs, we strive to nurture the next generation of scientists, engineers, and innovators equipped to address some of the most challenging questions facing humanity.</p>
+              <p>Our commitment extends beyond research and education. Through outreach and engagement initiatives, we seek to communicate the excitement of science and inspire young minds to explore careers in astronomy, astrophysics, and space science and technology.</p>
+              <p>At DAASE, we are committed to fostering an environment where <strong>curiosity drives discovery</strong>, <strong>collaboration enables innovation</strong>, and <strong>excellence creates impact</strong>. As India advances toward becoming a leading global space economy, we aspire to contribute meaningfully to this national vision through world-class research, education, and technological innovation.</p>
+              <p>We warmly invite you to explore our department, engage with our academic community, and join us in our journey of discovering the universe and engineering the future of space exploration.</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer onNav={onNav} />
     </div>
