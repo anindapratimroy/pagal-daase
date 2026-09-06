@@ -198,65 +198,71 @@ export default function Home({ onNav, news, events, publications = [] }) {
       {/* ── About DAASE + Message from the Head ── */}
       <div className="hod-about-section" data-aos="fade-up">
         <div className="hod-about-left">
-          <span className="about-eyebrow">✦ &nbsp;Established 2015 &nbsp;·&nbsp; IIT Indore</span>
-          <h2 className="hod-about-heading">
-            About <span>DAASE</span>
-          </h2>
-          <p className="hod-about-body">
-            India's only dedicated department of its kind across all IITs — a comprehensive academic and research
-            ecosystem spanning the cosmos to cutting-edge space engineering. Founded as a Centre for Astronomy in
-            December 2015 and elevated to a full Department in May 2018.
-          </p>
+          <div>
+            <span className="about-eyebrow">✦ &nbsp;Established 2015 &nbsp;·&nbsp; IIT Indore</span>
+            <h2 className="hod-about-heading">
+              About <span>DAASE</span>
+            </h2>
+            <p className="hod-about-body" style={{ marginTop: '16px' }}>
+              India's only dedicated department of its kind across all IITs — a comprehensive academic and research
+              ecosystem spanning the cosmos to cutting-edge space engineering. Founded as a Centre for Astronomy in
+              December 2015 and elevated to a full Department in May 2018.
+            </p>
+          </div>
+
           <div className="hod-about-highlights">
-            <div className="hod-about-hl">
-              <span className="hod-about-hl-icon">🏛️</span>
-              <div>
-                <strong style={{ color: 'var(--gold-light)', display: 'block', marginBottom: '2px', fontSize: '13.5px' }}>
-                  Supported by Premier Agencies
-                </strong>
-                <span style={{ fontSize: '13px', color: 'rgba(255, 255, 255, 0.75)', lineHeight: '1.5', display: 'block' }}>
-                  ANRF/SERB, DST (DST-FIST), ISRO, MoE, UGC, MoES, CSIR, SPARC, DAE, Max Planck Partner Group &amp; ASEM-DUO.
-                </span>
+            <div className="hod-about-hl-card">
+              <div className="hod-about-hl-header">
+                <span className="hod-about-hl-icon">🏛️</span>
+                <span className="hod-about-hl-title">Premier Funding</span>
               </div>
+              <p className="hod-about-hl-desc">
+                ANRF/SERB · DST-FIST · ISRO · MoE · UGC · MoES · CSIR · SPARC · DAE · Max Planck · ASEM-DUO
+              </p>
             </div>
-            <div className="hod-about-hl">
-              <span className="hod-about-hl-icon">🌐</span>
-              <div>
-                <strong style={{ color: 'var(--gold-light)', display: 'block', marginBottom: '2px', fontSize: '13.5px' }}>
-                  Professional Societies &amp; Outreach
-                </strong>
-                <span style={{ fontSize: '13px', color: 'rgba(255, 255, 255, 0.75)', lineHeight: '1.5', display: 'block' }}>
-                  Core leadership across GRSS-IEEE, APS-IEEE, ASI, and IAU, with impactful science outreach inspiring school and college students.
-                </span>
+
+            <div className="hod-about-hl-card">
+              <div className="hod-about-hl-header">
+                <span className="hod-about-hl-icon">🌐</span>
+                <span className="hod-about-hl-title">Societies &amp; Outreach</span>
               </div>
+              <p className="hod-about-hl-desc">
+                Active in GRSS-IEEE, APS-IEEE, ASI &amp; IAU · Regular school &amp; college student outreach
+              </p>
             </div>
           </div>
         </div>
 
         <div className="hod-about-right">
           <div className="hod-message-card">
-            <div className="hod-message-header">
-              <div className="hod-message-profile">
-                <div className="hod-message-avatar">
-                  <img
-                    src="people_images/Faculty/Dr._Saurabh_Das.jpg"
-                    alt="Dr. Saurabh Das"
-                    className="hod-message-avatar-img"
-                    onError={e => { e.target.style.display = 'none'; if (e.target.nextSibling) e.target.nextSibling.style.display = 'inline'; }}
-                  />
-                  <span style={{ display: 'none' }}>👨‍🔬</span>
+            <div>
+              <div className="hod-message-header">
+                <div className="hod-message-profile">
+                  <div className="hod-message-avatar">
+                    <img
+                      src="people_images/Faculty/Dr._Saurabh_Das.jpg"
+                      alt="Dr. Saurabh Das"
+                      className="hod-message-avatar-img"
+                      onError={e => { e.target.style.display = 'none'; if (e.target.nextSibling) e.target.nextSibling.style.display = 'inline'; }}
+                    />
+                    <span style={{ display: 'none' }}>👨‍🔬</span>
+                  </div>
+                  <div className="hod-message-meta">
+                    <div className="hod-message-name">Dr. Saurabh Das</div>
+                    <div className="hod-message-role">Head of Department</div>
+                  </div>
                 </div>
-                <div className="hod-message-meta">
-                  <div className="hod-message-name">Dr. Saurabh Das</div>
-                  <div className="hod-message-role">Head of Department</div>
-                </div>
+                <div className="hod-message-badge">Message from the Head</div>
               </div>
-              <div className="hod-message-badge">Message from the Head</div>
+              <div className="hod-message-divider" style={{ margin: '18px 0' }} />
+              <blockquote className="hod-message-quote">
+                "Welcome to DAASE at IIT Indore. We are a young and dynamic department, uniquely positioned within the IIT system to advance our understanding of the cosmos and engineer the future of space exploration through scientific excellence, innovation, and global collaboration."
+              </blockquote>
             </div>
-            <div className="hod-message-divider" />
-            <blockquote className="hod-message-quote">
-              "Welcome to DAASE at IIT Indore. We are a young and dynamic department, uniquely positioned within the IIT system to advance our understanding of the cosmos and engineer the future of space exploration through scientific excellence, innovation, and global collaboration."
-            </blockquote>
+
+            <div className="hod-message-footer">
+              <span className="hod-message-footer-tag">✦ Department of Astronomy, Astrophysics &amp; Space Engineering</span>
+            </div>
           </div>
         </div>
       </div>
