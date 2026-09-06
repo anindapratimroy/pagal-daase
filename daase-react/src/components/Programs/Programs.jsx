@@ -31,7 +31,7 @@ const PROGRAMS = {
       { num: '6+ Labs', text: 'Dedicated space engineering laboratory facilities' },
     ],
     curriculumUrl: 'https://academic.iiti.ac.in/app/course_curriculum_list_ug',
-    email: 'hodaase@iiti.ac.in',
+    email: 'naren@iiti.ac.in',
   },
   msc: {
     label: 'M.Sc.',
@@ -93,7 +93,7 @@ const PROGRAMS = {
       { num: 'Dual Degree', text: 'Integrated M.Tech. + Ph.D. doctoral track option' },
     ],
     curriculumUrl: 'https://academic.iiti.ac.in/app/course_curriculum_list_pg',
-    email: 'pc-mtech-se@iiti.ac.in',
+    email: 'pc-se@iiti.ac.in',
   },
   ms: {
     label: 'M.S. (Research)',
@@ -124,7 +124,7 @@ const PROGRAMS = {
       { num: 'Dual Degree', text: 'M.S. (Research) + Ph.D. integrated degree option' },
     ],
     curriculumUrl: 'https://academic.iiti.ac.in/app/course_curriculum_list_pg',
-    email: 'pc-ms-sse@iiti.ac.in',
+    email: 'pc-mscse@iiti.ac.in',
   },
   phd: {
     label: 'Ph.D.',
