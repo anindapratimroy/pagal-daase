@@ -109,16 +109,28 @@ function foldersToSearch(category) {
 
 export const DEFAULT_AVATAR = './images/default-avatar.png';
 
+export const TITLES_REGEX = /^(dr|prof|professor|mr|mrs|ms|miss|sri|shri|smt|col|lt)[\.\s_]+/i;
+
+export function cleanPersonName(rawName) {
+  if (!rawName) return { fullName: '', nameWithoutTitle: '', tokens: [] };
+  const fullName = rawName.trim();
+  const nameWithoutTitle = fullName.replace(TITLES_REGEX, '').trim();
+  const tokens = (nameWithoutTitle || fullName)
+    .replace(/[_\-\.]+/g, ' ')
+    .split(/\s+/)
+    .filter(t => t.length >= 2);
+  return { fullName, nameWithoutTitle, tokens };
+}
+
 /**
  * Generate a smart list of candidate URLs for a person's photo.
  * Prioritized:
- *  1. Exact Full Name (First_Last) in the person's category folder with all extensions
- *  2. Roll Number / Email in category folder & images/students/
- *  3. Exact match from imageMap (if explicitly registered)
- *  4. Dynamic manifest strict match (within person's category folder only)
- *  5. Partial / First-name only (e.g. Shubhangi.jpeg) inside own category folder
- *  6. Google Drive URL
- *  7. Guaranteed Default Avatar
+ *  1. Exact verified path from data or imageMap
+ *  2. Full Name variations (Both WITH title and WITHOUT title) in category folder
+ *  3. Dynamic manifest strict match (within person's category folder only)
+ *  4. Roll Number / Email in category folder & images/students/
+ *  5. Google Drive URL
+ *  6. Guaranteed Default Avatar
  */
 export function getPhotoCandidates(name, category, driveUrl, email) {
   const candidates = [];
@@ -145,63 +157,47 @@ export function getPhotoCandidates(name, category, driveUrl, email) {
     }
   }
 
-  // 2. Exact Full Name (First_Last) variations inside category folder
+  // 2. Full Name variations inside category folder (Both WITH title and WITHOUT title)
   if (name) {
-    const cleanName = name.trim();
-    const tokens = cleanName.split(/\s+/).filter(t => !TITLES.includes(t.toLowerCase()));
-    
-    const fullNameUnderscore = cleanName.replace(/\s+/g, '_');
-    const fullNameSpace = cleanName.replace(/\s+/g, ' ');
-    const fullNameLower = fullNameUnderscore.toLowerCase();
+    const { fullName, nameWithoutTitle, tokens } = cleanPersonName(name);
 
-    for (const ext of exts) {
-      add(`./people_images/${folder}/${fullNameUnderscore}.${ext}`);
-      add(`./people_images/${folder}/${fullNameSpace}.${ext}`);
-      add(`./people_images/${folder}/${fullNameLower}.${ext}`);
+    // a. Full name WITH title (e.g. Dr._Golu.jpg, Dr._Saurabh_Das.jpg)
+    if (fullName) {
+      const fUnder = fullName.replace(/\s+/g, '_');
+      const fSpace = fullName.replace(/\s+/g, ' ');
+      for (const ext of exts) {
+        add(`./people_images/${folder}/${fUnder}.${ext}`);
+        add(`./people_images/${folder}/${fSpace}.${ext}`);
+        add(`./people_images/${folder}/${fUnder.toLowerCase()}.${ext}`);
+      }
     }
 
+    // b. Full name WITHOUT title (e.g. Golu.jpeg, Golu.jpg, Saurabh_Das.jpg)
+    if (nameWithoutTitle && nameWithoutTitle !== fullName) {
+      const nUnder = nameWithoutTitle.replace(/\s+/g, '_');
+      const nSpace = nameWithoutTitle.replace(/\s+/g, ' ');
+      for (const ext of exts) {
+        add(`./people_images/${folder}/${nUnder}.${ext}`);
+        add(`./people_images/${folder}/${nSpace}.${ext}`);
+        add(`./people_images/${folder}/${nUnder.toLowerCase()}.${ext}`);
+      }
+    }
+
+    // c. First + Last (without title)
     if (tokens.length > 1) {
       const firstLast = `${tokens[0]}_${tokens[tokens.length - 1]}`;
-      const firstLastLower = firstLast.toLowerCase();
       for (const ext of exts) {
         add(`./people_images/${folder}/${firstLast}.${ext}`);
-        add(`./people_images/${folder}/${firstLastLower}.${ext}`);
+        add(`./people_images/${folder}/${firstLast.toLowerCase()}.${ext}`);
       }
     }
-  }
 
-  // 3. Roll number / Email variations (Unique to the individual)
-  if (email) {
-    const cleanEmail = email.split('@')[0].trim();
-    for (const ext of exts) {
-      add(`./people_images/${folder}/${cleanEmail}.${ext}`);
-      add(`images/students/${cleanEmail}.${ext}`);
-    }
-  }
-
-  // 4. Manifest fuzzy match (Strictly within person's own category folder only!)
-  if (_manifest && name) {
-    const folders = foldersToSearch(category);
-    for (const f of folders) {
-      const fileList = _manifest[f];
-      if (!fileList?.length) continue;
-      const match = bestMatch(name, fileList);
-      if (match) {
-        add(`./people_images/${f}/${match.file}`);
-      }
-    }
-  }
-
-  // 5. Partial / First Name Only (Secondary fallback, strictly within person's own folder)
-  if (name) {
-    const cleanName = name.trim();
-    const tokens = cleanName.split(/\s+/).filter(t => !TITLES.includes(t.toLowerCase()));
+    // d. First name only (without title e.g. Golu.jpeg, Golu.jpg)
     if (tokens.length > 0) {
-      const firstName = tokens[0];
-      const firstNameLower = firstName.toLowerCase();
+      const first = tokens[0];
       for (const ext of exts) {
-        add(`./people_images/${folder}/${firstName}.${ext}`);
-        add(`./people_images/${folder}/${firstNameLower}.${ext}`);
+        add(`./people_images/${folder}/${first}.${ext}`);
+        add(`./people_images/${folder}/${first.toLowerCase()}.${ext}`);
       }
     }
   }
