@@ -76,6 +76,7 @@ export const imageMap =
   "Dr. Soumavo Ghosh": "./people_images/Faculty/soumavo_ghosh.png",
   "Dr. Priyanka Singh": "./people_images/Faculty/Dr._Priyanka_Singh.png",
   "Dr. Unmesh Khati": "./people_images/Faculty/Dr._Unmesh.png",
+  "Dr. Unmesh Govind Khati": "./people_images/Faculty/Dr._Unmesh.png",
   "Dr. Amit Shukla": "./people_images/Faculty/Dr._Amit_Shukla.png",
   "Jithu J Athalathil": "./people_images/Ph_D_Students/Jithu_J_Athalathil.jpg",
   "Santanu Maity": "./people_images/Ph_D_Students/Santanu_Maity.jpg",

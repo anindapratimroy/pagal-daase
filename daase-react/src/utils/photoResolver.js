@@ -1,6 +1,6 @@
 /**
  * DAASE Smart Photo Resolver
- * Priority: imageMap -> manifest fuzzy match -> Google Drive URL -> null
+ * Priority: Exact path -> imageMap -> manifest fuzzy match -> Candidate patterns -> Google Drive URL -> DEFAULT_AVATAR
  *
  * Staff workflow (zero code changes needed):
  *  1. Upload photo to people_images/<Category>/ via CloudPanel file manager
@@ -10,6 +10,7 @@
 
 import { imageMap } from '../data/imageMap';
 import { drivePhotoUrl } from '../data/fallback';
+import initialManifest from '../data/photos_manifest.json';
 
 // Maps person category -> folder name inside people_images/
 export const CATEGORY_FOLDER = {
@@ -22,24 +23,35 @@ export const CATEGORY_FOLDER = {
   ug:                 'Under_Graduate_Students',
   alumni:             'Alumni',
   interns:            'Intern',
+  intern:             'Intern',
 };
 
-let _manifest = null;
+// Folders to search for a category. Strictly isolates categories except staff/non_teaching_staff which share images.
+export function foldersToSearch(category) {
+  if (!category) return ['Faculty'];
+  const cat = category.toLowerCase();
+  if (cat === 'staff' || cat === 'non_teaching_staff') {
+    return ['Non_Teaching_Staff', 'Staff'];
+  }
+  const primary = CATEGORY_FOLDER[cat];
+  return primary ? [primary] : ['Faculty'];
+}
+
+// Initialized synchronously from bundled manifest so all known images resolve on mount
+let _manifest = initialManifest || {};
 let _manifestLoading = false;
 let _manifestCallbacks = [];
 
 export async function loadPhotoManifest() {
-  if (_manifest) return _manifest;
   if (_manifestLoading) return new Promise(resolve => _manifestCallbacks.push(resolve));
   _manifestLoading = true;
   try {
     const res = await fetch('./photos_manifest.json?t=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     _manifest = await res.json();
-    console.log('[PhotoResolver] Manifest loaded:', Object.keys(_manifest).map(k => k + ':' + (_manifest[k]?.length || 0)).join(', '));
+    console.log('[PhotoResolver] Manifest updated dynamically:', Object.keys(_manifest).map(k => k + ':' + (_manifest[k]?.length || 0)).join(', '));
   } catch (e) {
-    console.warn('[PhotoResolver] Could not load photos_manifest.json:', e.message);
-    _manifest = {};
+    console.warn('[PhotoResolver] Using static manifest (dynamic fetch failed):', e.message);
   }
   _manifestLoading = false;
   _manifestCallbacks.forEach(cb => cb(_manifest));
@@ -47,19 +59,80 @@ export async function loadPhotoManifest() {
   return _manifest;
 }
 
-const TITLES = ['dr', 'prof', 'professor', 'mr', 'mrs', 'ms', 'miss', 'sri', 'shri', 'smt', 'col', 'lt'];
+export const TITLES = ['dr', 'prof', 'professor', 'mr', 'mrs', 'ms', 'miss', 'sri', 'shri', 'smt', 'col', 'lt'];
 
-function tokenise(raw) {
+export const TITLES_REGEX = /^(dr|prof|professor|mr|mrs|ms|miss|sri|shri|smt|col|lt)[\.\s_]+/i;
+
+export function tokenise(raw) {
   if (!raw) return [];
   return raw
     .replace(/\.(jpe?g|png|webp|gif|bmp|avif)$/i, '')
-    .replace(/[_\-\.]+/g, ' ')
+    .replace(/[\._\-,\(\)]+/g, ' ')
     .toLowerCase()
     .split(/\s+/)
-    .filter(t => t.length >= 2 && !TITLES.includes(t));
+    .filter(t => t.length >= 1 && !TITLES.includes(t));
 }
 
-function scoreMatch(nameTokens, filename) {
+export function cleanPersonName(rawName) {
+  if (!rawName) return { fullName: '', nameWithoutTitle: '', title: '', tokens: [] };
+  const fullName = rawName.trim();
+  const match = fullName.match(TITLES_REGEX);
+  const title = match ? match[1].replace(/[\._\s]+$/, '') : '';
+  const nameWithoutTitle = fullName.replace(TITLES_REGEX, '').trim();
+  const tokens = (nameWithoutTitle || fullName)
+    .replace(/[\._\-,\(\)]+/g, ' ')
+    .split(/\s+/)
+    .filter(t => t.length >= 1 && !TITLES.includes(t.toLowerCase()));
+  return { fullName, nameWithoutTitle, title, tokens };
+}
+
+/**
+ * Robust imageMap lookup that handles:
+ *  1. Exact name match
+ *  2. Name with/without title prefixes
+ *  3. Token-based matching (First + Last match, ignoring middle names or extra initials)
+ */
+export function findInImageMap(name) {
+  if (!name) return null;
+  const trimmed = name.trim();
+  if (imageMap[trimmed]) return imageMap[trimmed];
+
+  const { fullName, nameWithoutTitle, tokens } = cleanPersonName(trimmed);
+
+  if (nameWithoutTitle && imageMap[nameWithoutTitle]) {
+    return imageMap[nameWithoutTitle];
+  }
+
+  // Check with common honorifics
+  for (const prefix of ['Dr. ', 'Prof. ', 'Dr._', 'Prof._', 'Dr ', 'Prof ']) {
+    if (imageMap[prefix + nameWithoutTitle]) return imageMap[prefix + nameWithoutTitle];
+  }
+
+  // Token-based match across imageMap keys
+  if (tokens.length >= 2) {
+    const personFirst = tokens[0].toLowerCase();
+    const personLast = tokens[tokens.length - 1].toLowerCase();
+
+    for (const [key, val] of Object.entries(imageMap)) {
+      const keyClean = cleanPersonName(key);
+      if (keyClean.tokens.length >= 2) {
+        const kFirst = keyClean.tokens[0].toLowerCase();
+        const kLast = keyClean.tokens[keyClean.tokens.length - 1].toLowerCase();
+        if (kFirst === personFirst && kLast === personLast) {
+          return val;
+        }
+      }
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Score how well a file matches a person's name tokens.
+ * Returns 0 if there are contradictory tokens (e.g. different person).
+ */
+export function scoreMatch(nameTokens, filename) {
   if (!nameTokens.length) return 0;
   const fileTokens = tokenise(filename);
   if (!fileTokens.length) return 0;
@@ -75,22 +148,35 @@ function scoreMatch(nameTokens, filename) {
     return 0;
   }
 
-  // Full name match (all person's name tokens match the file)
-  if (matchedTokens.length === nameTokens.length) {
-    if (extraTokensInFile.length === 0) return 100; // Perfect exact match
-    return 85; // Extra non-conflicting suffix
+  // Full exact name match (all person's name tokens match the file tokens)
+  if (matchedTokens.length === nameTokens.length && extraTokensInFile.length === 0) {
+    return 100;
   }
 
-  // Only if person has first and last name, but file has only first name (e.g. Shubhangi.jpeg)
-  // ONLY valid if file has NO extra contradictory tokens
-  if (nameTokens.length > 1 && fileTokens.length === 1 && fileTokens[0] === nameTokens[0]) {
-    return 40; // Secondary fallback
+  // All person's tokens matched, file has extra suffix
+  if (matchedTokens.length === nameTokens.length) {
+    return 85;
+  }
+
+  // First and Last match without contradiction (e.g. 'Unmesh Govind Khati' vs 'Dr._Unmesh_Khati.png')
+  if (nameTokens.length >= 2 && fileTokens.includes(nameTokens[0]) && fileTokens.includes(nameTokens[nameTokens.length - 1]) && extraTokensInFile.length === 0) {
+    return 80;
+  }
+
+  // At least 2 tokens matched with zero extra conflicting tokens (e.g. Popat Jeel Hitendrabhai matching Popat_Jeel.jpg)
+  if (matchedTokens.length >= 2 && extraTokensInFile.length === 0) {
+    return 75;
+  }
+
+  // First name only match without contradiction (e.g. 'Dr. Unmesh Govind Khati' vs 'Dr._Unmesh.png', 'Dr. Golu' vs 'Golu.jpeg')
+  if (nameTokens.length >= 1 && fileTokens.length === 1 && fileTokens[0] === nameTokens[0]) {
+    return 60;
   }
 
   return 0;
 }
 
-function bestMatch(personName, fileList, threshold = 35) {
+export function bestMatch(personName, fileList, threshold = 35) {
   const nameTokens = tokenise(personName);
   if (!nameTokens.length || !fileList?.length) return null;
   let best = null, bestScore = 0;
@@ -101,33 +187,14 @@ function bestMatch(personName, fileList, threshold = 35) {
   return bestScore >= threshold ? { file: best, score: bestScore } : null;
 }
 
-// Strictly isolate folders by category. Never search across other categories!
-function foldersToSearch(category) {
-  const primary = CATEGORY_FOLDER[category];
-  return primary ? [primary] : [];
-}
-
 export const DEFAULT_AVATAR = './images/default-avatar.png';
-
-export const TITLES_REGEX = /^(dr|prof|professor|mr|mrs|ms|miss|sri|shri|smt|col|lt)[\.\s_]+/i;
-
-export function cleanPersonName(rawName) {
-  if (!rawName) return { fullName: '', nameWithoutTitle: '', tokens: [] };
-  const fullName = rawName.trim();
-  const nameWithoutTitle = fullName.replace(TITLES_REGEX, '').trim();
-  const tokens = (nameWithoutTitle || fullName)
-    .replace(/[_\-\.]+/g, ' ')
-    .split(/\s+/)
-    .filter(t => t.length >= 2);
-  return { fullName, nameWithoutTitle, tokens };
-}
 
 /**
  * Generate a smart list of candidate URLs for a person's photo.
  * Prioritized:
  *  1. Exact verified path from data or imageMap
- *  2. Full Name variations (Both WITH title and WITHOUT title) in category folder
- *  3. Dynamic manifest strict match (within person's category folder only)
+ *  2. Fuzzy manifest match within the person's category folder
+ *  3. Generated candidate patterns (Title variations, initials, inverted names, etc.)
  *  4. Roll Number / Email in category folder & images/students/
  *  5. Google Drive URL
  *  6. Guaranteed Default Avatar
@@ -142,71 +209,149 @@ export function getPhotoCandidates(name, category, driveUrl, email) {
     candidates.push(url);
   };
 
-  const folder = CATEGORY_FOLDER[category] || 'Post_Graduate_Students';
+  const folders = foldersToSearch(category);
   const exts = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'webp'];
 
-  // 1. Exact verified path from data or imageMap (Highest Priority - 100% accurate for existing people)
+  // 1. Exact verified path from data or imageMap (Highest Priority)
   if (driveUrl && typeof driveUrl === 'string' && (driveUrl.startsWith('./') || driveUrl.startsWith('/') || driveUrl.startsWith('people_images/'))) {
     add(driveUrl);
   }
-  if (name && imageMap[name]) {
-    add(imageMap[name]);
-    const base = imageMap[name].replace(/\.(jpe?g|png|webp|avif)$/i, '');
+
+  const mappedUrl = findInImageMap(name);
+  if (mappedUrl) {
+    add(mappedUrl);
+    const base = mappedUrl.replace(/\.(jpe?g|png|webp|avif)$/i, '');
     for (const ext of exts) {
       add(`${base}.${ext}`);
     }
   }
 
-  // 2. Full Name variations inside category folder (Both WITH title and WITHOUT title)
-  if (name) {
-    const { fullName, nameWithoutTitle, tokens } = cleanPersonName(name);
-
-    // a. Full name WITH title (e.g. Dr._Golu.jpg, Dr._Saurabh_Das.jpg)
-    if (fullName) {
-      const fUnder = fullName.replace(/\s+/g, '_');
-      const fSpace = fullName.replace(/\s+/g, ' ');
-      for (const ext of exts) {
-        add(`./people_images/${folder}/${fUnder}.${ext}`);
-        add(`./people_images/${folder}/${fSpace}.${ext}`);
-        add(`./people_images/${folder}/${fUnder.toLowerCase()}.${ext}`);
-      }
-    }
-
-    // b. Full name WITHOUT title (e.g. Golu.jpeg, Golu.jpg, Saurabh_Das.jpg)
-    if (nameWithoutTitle && nameWithoutTitle !== fullName) {
-      const nUnder = nameWithoutTitle.replace(/\s+/g, '_');
-      const nSpace = nameWithoutTitle.replace(/\s+/g, ' ');
-      for (const ext of exts) {
-        add(`./people_images/${folder}/${nUnder}.${ext}`);
-        add(`./people_images/${folder}/${nSpace}.${ext}`);
-        add(`./people_images/${folder}/${nUnder.toLowerCase()}.${ext}`);
-      }
-    }
-
-    // c. First + Last (without title)
-    if (tokens.length > 1) {
-      const firstLast = `${tokens[0]}_${tokens[tokens.length - 1]}`;
-      for (const ext of exts) {
-        add(`./people_images/${folder}/${firstLast}.${ext}`);
-        add(`./people_images/${folder}/${firstLast.toLowerCase()}.${ext}`);
-      }
-    }
-
-    // d. First name only (without title e.g. Golu.jpeg, Golu.jpg)
-    if (tokens.length > 0) {
-      const first = tokens[0];
-      for (const ext of exts) {
-        add(`./people_images/${folder}/${first}.${ext}`);
-        add(`./people_images/${folder}/${first.toLowerCase()}.${ext}`);
+  // 2. Dynamic / static manifest match within the person's category folder(s)
+  if (_manifest) {
+    for (const folder of folders) {
+      const fileList = _manifest[folder];
+      if (fileList && fileList.length) {
+        const match = bestMatch(name, fileList);
+        if (match && match.file) {
+          add(`./people_images/${folder}/${match.file}`);
+        }
       }
     }
   }
 
-  // 6. Google Drive URL from Sheets
+  // 3. Smart candidate patterns inside category folder(s)
+  if (name) {
+    const { fullName, nameWithoutTitle, tokens } = cleanPersonName(name);
+    const titles = ['Dr.', 'Dr', 'Prof.', 'Prof'];
+
+    for (const folder of folders) {
+      // a. Title + First Name (e.g. Dr._Unmesh.png, Dr_Unmesh.png, Prof._Abhirup.jpg)
+      if (tokens.length > 0) {
+        const first = tokens[0];
+        for (const t of titles) {
+          for (const ext of exts) {
+            add(`./people_images/${folder}/${t}_${first}.${ext}`);
+            add(`./people_images/${folder}/${t}_${first.toLowerCase()}.${ext}`);
+            add(`./people_images/${folder}/${t.toLowerCase()}_${first}.${ext}`);
+            add(`./people_images/${folder}/${t.toLowerCase()}_${first.toLowerCase()}.${ext}`);
+          }
+        }
+      }
+
+      // b. Full name WITH title (e.g. Dr._Saurabh_Das.jpg, Dr._Unmesh_Govind_Khati.png)
+      if (fullName) {
+        const fUnder = fullName.replace(/\s+/g, '_');
+        const fSpace = fullName.replace(/\s+/g, ' ');
+        const fCleanDots = fullName.replace(/\.\s*/g, '_').replace(/_+/g, '_');
+        for (const ext of exts) {
+          add(`./people_images/${folder}/${fUnder}.${ext}`);
+          add(`./people_images/${folder}/${fSpace}.${ext}`);
+          add(`./people_images/${folder}/${fCleanDots}.${ext}`);
+          add(`./people_images/${folder}/${fUnder.toLowerCase()}.${ext}`);
+        }
+      }
+
+      // c. Title + First + Last (e.g. Dr._Unmesh_Khati.png)
+      if (tokens.length >= 2) {
+        const firstLast = `${tokens[0]}_${tokens[tokens.length - 1]}`;
+        for (const t of titles) {
+          for (const ext of exts) {
+            add(`./people_images/${folder}/${t}_${firstLast}.${ext}`);
+            add(`./people_images/${folder}/${t}_${firstLast.toLowerCase()}.${ext}`);
+          }
+        }
+      }
+
+      // d. Full name WITHOUT title (e.g. Saurabh_Das.jpg, Unmesh_Govind_Khati.png)
+      if (nameWithoutTitle && nameWithoutTitle !== fullName) {
+        const nUnder = nameWithoutTitle.replace(/\s+/g, '_');
+        const nSpace = nameWithoutTitle.replace(/\s+/g, ' ');
+        const nCleanDots = nameWithoutTitle.replace(/\.\s*/g, '_').replace(/_+/g, '_');
+        for (const ext of exts) {
+          add(`./people_images/${folder}/${nUnder}.${ext}`);
+          add(`./people_images/${folder}/${nSpace}.${ext}`);
+          add(`./people_images/${folder}/${nCleanDots}.${ext}`);
+          add(`./people_images/${folder}/${nUnder.toLowerCase()}.${ext}`);
+        }
+      }
+
+      // e. First + Last (without title)
+      if (tokens.length >= 2) {
+        const firstLast = `${tokens[0]}_${tokens[tokens.length - 1]}`;
+        for (const ext of exts) {
+          add(`./people_images/${folder}/${firstLast}.${ext}`);
+          add(`./people_images/${folder}/${firstLast.toLowerCase()}.${ext}`);
+        }
+
+        // Inverted: Last + First (e.g. Popat_Jeel.jpg, Waghmare_Pranjal.jpg)
+        const lastFirst = `${tokens[tokens.length - 1]}_${tokens[0]}`;
+        for (const ext of exts) {
+          add(`./people_images/${folder}/${lastFirst}.${ext}`);
+          add(`./people_images/${folder}/${lastFirst.toLowerCase()}.${ext}`);
+        }
+      }
+
+      // f. Single compressed string (e.g. soumavo_ghosh.png, pallavisingh.jpg)
+      if (tokens.length >= 2) {
+        const joined = tokens.join('').toLowerCase();
+        for (const ext of exts) {
+          add(`./people_images/${folder}/${joined}.${ext}`);
+        }
+      }
+
+      // g. First name only (without title e.g. Golu.jpeg, Shubhangi.jpeg)
+      if (tokens.length > 0) {
+        const first = tokens[0];
+        for (const ext of exts) {
+          add(`./people_images/${folder}/${first}.${ext}`);
+          add(`./people_images/${folder}/${first.toLowerCase()}.${ext}`);
+        }
+      }
+    }
+  }
+
+  // 4. Roll number / Email if applicable
+  if (email && typeof email === 'string') {
+    const roll = email.split('@')[0].trim();
+    if (roll) {
+      for (const folder of folders) {
+        for (const ext of exts) {
+          add(`./people_images/${folder}/${roll}.${ext}`);
+          add(`./people_images/${folder}/${roll.toUpperCase()}.${ext}`);
+        }
+      }
+      for (const ext of exts) {
+        add(`./images/students/${roll}.${ext}`);
+        add(`./images/students/${roll.toUpperCase()}.${ext}`);
+      }
+    }
+  }
+
+  // 5. Google Drive URL from Sheets
   const drive = drivePhotoUrl(driveUrl);
   if (drive) add(drive);
 
-  // 7. Universal Terminal Fallback
+  // 6. Universal Terminal Fallback
   add(DEFAULT_AVATAR);
 
   return candidates;
@@ -248,4 +393,5 @@ export function resolvePhoto(name, category, driveUrl, email) {
 export function isManifestReady() {
   return _manifest !== null;
 }
+
 
