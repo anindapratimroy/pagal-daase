@@ -1,8 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import Footer from '../Layout/Footer';
 import { drivePhotoUrl } from '../../data/fallback';
-import { imageMap } from '../../data/imageMap';
-import { resolvePhoto } from '../../utils/photoResolver';
+import { resolvePhoto, getPhotoCandidates, handlePhotoError, DEFAULT_AVATAR } from '../../utils/photoResolver';
 import TiltCard from '../Layout/TiltCard';
 import SearchBar from '../Layout/SearchBar';
 
@@ -277,14 +276,25 @@ function StudentBatch({ batch, list, onImageClick, category = 'phd' }) {
       </div>
       <div className="students-grid">
         {list.map((s, i) => {
-          const photoSrc = resolvePhoto(s.name, category, s.photo) || (s.email ? `images/students/${s.email}.jpg` : '');
+          const candidates = getPhotoCandidates(s.name, category, s.photo, s.email);
+          const photoSrc = candidates[0] || DEFAULT_AVATAR;
           const sAnchorId = `person-${(s.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
           return (
             <div id={sAnchorId} key={i} style={{ height: '100%' }}>
               <TiltCard className="student-card anim-fadeup glass-card" style={{ animationDelay: `${0.04 + i * 0.03}s`, height: '100%' }}>
-                <div className="sc-avatar" onClick={() => onImageClick && onImageClick(photoSrc, s.name)}>
-                  <img src={photoSrc} alt={s.name}
-                    onError={e => { e.target.style.display = 'none'; }} />
+                <div
+                  className="sc-avatar"
+                  onClick={(e) => {
+                    const activeSrc = e.currentTarget.querySelector('img')?.src || photoSrc;
+                    if (onImageClick) onImageClick(activeSrc, s.name);
+                  }}
+                >
+                  <img
+                    src={photoSrc}
+                    alt={s.name}
+                    data-candidate-index="0"
+                    onError={e => handlePhotoError(e, candidates)}
+                  />
                 </div>
                 <div className="sc-name">{s.name}</div>
                 {s.supervisor && <div className="sc-supervisor">{s.supervisor}</div>}
@@ -979,7 +989,14 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
         <div className="student-modal-overlay" onClick={closeImageModal}>
           <div className="student-modal-content" onClick={e => e.stopPropagation()}>
             <div className="close-hint">Click outside to close</div>
-            <img src={modalImg} alt={modalName} onError={e => { e.target.style.display = 'none'; }} />
+            <img
+              src={modalImg}
+              alt={modalName}
+              onError={e => {
+                e.target.onerror = null;
+                e.target.src = DEFAULT_AVATAR;
+              }}
+            />
           </div>
         </div>
       )}

@@ -92,40 +92,130 @@ function foldersToSearch(category) {
   return [primary, ...all.filter(f => f !== primary)];
 }
 
+export const DEFAULT_AVATAR = './images/default-avatar.png';
+
+/**
+ * Generate a smart list of candidate URLs for a person's photo.
+ * This guarantees that:
+ *  - Format/casing differences (.jpg, .jpeg, .png, .webp, .JPG) are automatically tried
+ *  - Name variations (Full_Name, FirstName, roll/email) are automatically tried
+ *  - Manifest fuzzy match & Google Drive URL are checked
+ *  - If nothing is found, DEFAULT_AVATAR is returned as the final fallback
+ */
+export function getPhotoCandidates(name, category, driveUrl, email) {
+  const candidates = [];
+  const seen = new Set();
+
+  const add = (url) => {
+    if (!url || seen.has(url)) return;
+    seen.add(url);
+    candidates.push(url);
+  };
+
+  const folder = CATEGORY_FOLDER[category] || 'Post_Graduate_Students';
+
+  // 1. Exact match from imageMap (highest priority)
+  if (name && imageMap[name]) {
+    add(imageMap[name]);
+    const base = imageMap[name].replace(/\.(jpe?g|png|webp|avif)$/i, '');
+    ['jpeg', 'png', 'JPG', 'JPEG', 'webp'].forEach(ext => {
+      add(`${base}.${ext}`);
+    });
+  }
+
+  // 2. Manifest fuzzy match (if manifest loaded)
+  if (_manifest && name) {
+    const folders = foldersToSearch(category);
+    for (const f of folders) {
+      const fileList = _manifest[f];
+      if (!fileList?.length) continue;
+      const match = bestMatch(name, fileList);
+      if (match) {
+        add(`./people_images/${f}/${match.file}`);
+      }
+    }
+  }
+
+  // 3. Name variations inside category folder
+  if (name) {
+    const cleanName = name.trim();
+    const tokens = cleanName.split(/\s+/).filter(t => !TITLES.includes(t.toLowerCase()));
+    
+    // Core naming patterns used by staff/users
+    const nameVariations = new Set();
+    nameVariations.add(cleanName.replace(/\s+/g, '_'));
+    nameVariations.add(cleanName.replace(/\s+/g, ' '));
+    nameVariations.add(cleanName.replace(/\s+/g, '_').toLowerCase());
+
+    if (tokens.length > 0) {
+      nameVariations.add(tokens[0]); // First name e.g. Shubhangi
+      nameVariations.add(tokens[0].toLowerCase());
+      if (tokens.length > 1) {
+        nameVariations.add(`${tokens[0]}_${tokens[tokens.length - 1]}`);
+      }
+    }
+
+    const exts = ['jpg', 'jpeg', 'png', 'JPG', 'webp'];
+    for (const v of nameVariations) {
+      for (const ext of exts) {
+        add(`./people_images/${folder}/${v}.${ext}`);
+      }
+    }
+  }
+
+  // 4. Email / Roll number variations
+  if (email) {
+    const cleanEmail = email.split('@')[0].trim();
+    ['jpg', 'jpeg', 'png', 'JPG'].forEach(ext => {
+      add(`./people_images/${folder}/${cleanEmail}.${ext}`);
+      add(`images/students/${cleanEmail}.${ext}`);
+    });
+  }
+
+  // 5. Google Drive URL
+  const drive = drivePhotoUrl(driveUrl);
+  if (drive) add(drive);
+
+  // 6. Universal Terminal Fallback
+  add(DEFAULT_AVATAR);
+
+  return candidates;
+}
+
+/**
+ * Handle image error by cycling through candidates until one succeeds,
+ * ultimately settling on DEFAULT_AVATAR.
+ */
+export function handlePhotoError(e, candidates = [], fallback = DEFAULT_AVATAR) {
+  const currentIdx = parseInt(e.target.dataset.candidateIndex || '0', 10);
+  const nextIdx = currentIdx + 1;
+
+  if (candidates && nextIdx < candidates.length) {
+    e.target.dataset.candidateIndex = nextIdx;
+    e.target.src = candidates[nextIdx];
+  } else if (!e.target.src.endsWith('default-avatar.png')) {
+    e.target.dataset.candidateIndex = '999';
+    e.target.src = fallback;
+  } else {
+    // Already tried default avatar and failed; stop to avoid loop
+    e.target.onerror = null;
+  }
+}
+
 /**
  * Resolve the best photo URL for a person.
  * @param {string} name      Full name as it appears in the data
  * @param {string} category  'faculty' | 'phd' | 'pg' | 'ug' | 'staff' | 'alumni' | 'interns'
  * @param {string} driveUrl  Raw Google Drive URL from Sheets (optional)
- * @returns {string|null}    Resolved photo URL or null
+ * @param {string} email     Email / Roll number (optional)
+ * @returns {string}         Resolved photo URL or DEFAULT_AVATAR
  */
-export function resolvePhoto(name, category, driveUrl) {
-  // Priority 1: imageMap exact match (existing, backward compat)
-  if (name && imageMap[name]) return imageMap[name];
-
-  // Priority 2: Manifest fuzzy match (new, for staff-uploaded photos)
-  if (_manifest) {
-    const folders = foldersToSearch(category);
-    let topMatch = null;
-    for (const folder of folders) {
-      const fileList = _manifest[folder];
-      if (!fileList?.length) continue;
-      const match = bestMatch(name, fileList);
-      if (match && (!topMatch || match.score > topMatch.score)) {
-        topMatch = { ...match, folder };
-      }
-      if (topMatch?.score === 100) break;
-    }
-    if (topMatch) return `./people_images/${topMatch.folder}/${topMatch.file}`;
-  }
-
-  // Priority 3: Google Drive URL from Sheets
-  const drive = drivePhotoUrl(driveUrl);
-  if (drive) return drive;
-
-  return null;
+export function resolvePhoto(name, category, driveUrl, email) {
+  const candidates = getPhotoCandidates(name, category, driveUrl, email);
+  return candidates[0] || DEFAULT_AVATAR;
 }
 
 export function isManifestReady() {
   return _manifest !== null;
 }
+
