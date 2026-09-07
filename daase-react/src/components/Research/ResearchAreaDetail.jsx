@@ -5,12 +5,17 @@ import './ResearchAreaDetail.css';
 
 /** Normalize name: strip "Dr." / "Prof." prefix for fuzzy matching */
 function findFaculty(memberName) {
+  if (!memberName) return null;
   // Try exact match first
   let fac = FACULTY_FB.find(f => f.name === memberName);
   if (fac) return fac;
   // Try matching by stripping prefix on both sides
   const normalize = s => s.replace(/^(Dr\.|Prof\.|Professor)\s+/i, '').trim().toLowerCase();
-  return FACULTY_FB.find(f => normalize(f.name) === normalize(memberName)) || null;
+  const target = normalize(memberName);
+  return FACULTY_FB.find(f => {
+    const fn = normalize(f.name);
+    return fn === target || fn.startsWith(target + ' ') || fn.endsWith(' ' + target);
+  }) || null;
 }
 
 /** Render text that has \n\n as proper paragraphs */
