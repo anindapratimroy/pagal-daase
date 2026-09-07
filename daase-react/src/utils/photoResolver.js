@@ -133,7 +133,19 @@ export function getPhotoCandidates(name, category, driveUrl, email) {
   const folder = CATEGORY_FOLDER[category] || 'Post_Graduate_Students';
   const exts = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'webp'];
 
-  // 1. Exact Full Name (First_Last) variations inside category folder (Highest Priority)
+  // 1. Exact verified path from data or imageMap (Highest Priority - 100% accurate for existing people)
+  if (driveUrl && typeof driveUrl === 'string' && (driveUrl.startsWith('./') || driveUrl.startsWith('/') || driveUrl.startsWith('people_images/'))) {
+    add(driveUrl);
+  }
+  if (name && imageMap[name]) {
+    add(imageMap[name]);
+    const base = imageMap[name].replace(/\.(jpe?g|png|webp|avif)$/i, '');
+    for (const ext of exts) {
+      add(`${base}.${ext}`);
+    }
+  }
+
+  // 2. Exact Full Name (First_Last) variations inside category folder
   if (name) {
     const cleanName = name.trim();
     const tokens = cleanName.split(/\s+/).filter(t => !TITLES.includes(t.toLowerCase()));
@@ -158,21 +170,12 @@ export function getPhotoCandidates(name, category, driveUrl, email) {
     }
   }
 
-  // 2. Roll number / Email variations (Unique to the individual)
+  // 3. Roll number / Email variations (Unique to the individual)
   if (email) {
     const cleanEmail = email.split('@')[0].trim();
     for (const ext of exts) {
       add(`./people_images/${folder}/${cleanEmail}.${ext}`);
       add(`images/students/${cleanEmail}.${ext}`);
-    }
-  }
-
-  // 3. Exact match from imageMap (backward compatibility)
-  if (name && imageMap[name]) {
-    add(imageMap[name]);
-    const base = imageMap[name].replace(/\.(jpe?g|png|webp|avif)$/i, '');
-    for (const ext of exts) {
-      add(`${base}.${ext}`);
     }
   }
 

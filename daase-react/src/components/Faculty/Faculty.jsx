@@ -132,21 +132,18 @@ const getDisplayFullTel = (rawExt) => {
 function FacultyCard({ f, category = 'faculty' }) {
   const normalizedUrl = normalizeLink(f.url);
   const hasUrl = !!normalizedUrl;
-  const photoSrc = resolvePhoto(f.name, category, f.photo) || (f.photo ? (drivePhotoUrl(f.photo) || f.photo) : '');
+  const candidates = getPhotoCandidates(f.name, category, f.photo, f.email);
+  const photoSrc = candidates[0] || DEFAULT_AVATAR;
   const anchorId = `person-${(f.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 
   const inner = (
     <div className="glass-card">
       <div className="fc-photo">
         <img
-          src={photoSrc || "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239ca3af'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E"}
+          src={photoSrc}
           alt={f.name}
-          onError={e => {
-            e.target.onerror = null;
-            e.target.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239ca3af'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E";
-            e.target.style.padding = '30px';
-            e.target.style.background = 'transparent';
-          }}
+          data-candidate-index="0"
+          onError={e => handlePhotoError(e, candidates, DEFAULT_AVATAR)}
         />
         <div className="fc-photo-overlay" />
         <div className="fc-designation-badge">{f.designation}</div>
