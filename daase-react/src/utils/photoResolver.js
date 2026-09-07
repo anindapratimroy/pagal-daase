@@ -63,14 +63,30 @@ function scoreMatch(nameTokens, filename) {
   if (!nameTokens.length) return 0;
   const fileTokens = tokenise(filename);
   if (!fileTokens.length) return 0;
-  const matched = nameTokens.filter(nt => fileTokens.some(ft => ft === nt || ft.includes(nt) || nt.includes(ft)));
-  if (matched.length === nameTokens.length) return 100;
-  const hasFirst = fileTokens.some(ft => ft === nameTokens[0] || ft.includes(nameTokens[0]));
-  const hasLast  = nameTokens.length > 1 && fileTokens.some(ft => ft === nameTokens[nameTokens.length - 1] || ft.includes(nameTokens[nameTokens.length - 1]));
-  if (hasFirst && hasLast) return 90;
-  if (hasLast)  return 60;
-  if (hasFirst) return 35;
-  if (matched.length > 0) return 15;
+
+  const matchedTokens = nameTokens.filter(nt => fileTokens.includes(nt));
+  const extraTokensInFile = fileTokens.filter(ft => !nameTokens.includes(ft));
+  const missingTokens = nameTokens.filter(nt => !fileTokens.includes(nt));
+
+  // Contradiction Check:
+  // If the file has name tokens that conflict with the person's name (e.g. file has 'sinha' or 'ananya',
+  // but person is 'shubhangi uikey'), this is a DIFFERENT person -> DISQUALIFIED (0)
+  if (extraTokensInFile.length > 0 && missingTokens.length > 0) {
+    return 0;
+  }
+
+  // Full name match (all person's name tokens match the file)
+  if (matchedTokens.length === nameTokens.length) {
+    if (extraTokensInFile.length === 0) return 100; // Perfect exact match
+    return 85; // Extra non-conflicting suffix
+  }
+
+  // Only if person has first and last name, but file has only first name (e.g. Shubhangi.jpeg)
+  // ONLY valid if file has NO extra contradictory tokens
+  if (nameTokens.length > 1 && fileTokens.length === 1 && fileTokens[0] === nameTokens[0]) {
+    return 40; // Secondary fallback
+  }
+
   return 0;
 }
 
@@ -85,22 +101,24 @@ function bestMatch(personName, fileList, threshold = 35) {
   return bestScore >= threshold ? { file: best, score: bestScore } : null;
 }
 
+// Strictly isolate folders by category. Never search across other categories!
 function foldersToSearch(category) {
   const primary = CATEGORY_FOLDER[category];
-  const all = [...new Set(Object.values(CATEGORY_FOLDER))];
-  if (!primary) return all;
-  return [primary, ...all.filter(f => f !== primary)];
+  return primary ? [primary] : [];
 }
 
 export const DEFAULT_AVATAR = './images/default-avatar.png';
 
 /**
  * Generate a smart list of candidate URLs for a person's photo.
- * This guarantees that:
- *  - Format/casing differences (.jpg, .jpeg, .png, .webp, .JPG) are automatically tried
- *  - Name variations (Full_Name, FirstName, roll/email) are automatically tried
- *  - Manifest fuzzy match & Google Drive URL are checked
- *  - If nothing is found, DEFAULT_AVATAR is returned as the final fallback
+ * Prioritized:
+ *  1. Exact Full Name (First_Last) in the person's category folder with all extensions
+ *  2. Roll Number / Email in category folder & images/students/
+ *  3. Exact match from imageMap (if explicitly registered)
+ *  4. Dynamic manifest strict match (within person's category folder only)
+ *  5. Partial / First-name only (e.g. Shubhangi.jpeg) inside own category folder
+ *  6. Google Drive URL
+ *  7. Guaranteed Default Avatar
  */
 export function getPhotoCandidates(name, category, driveUrl, email) {
   const candidates = [];
@@ -113,17 +131,52 @@ export function getPhotoCandidates(name, category, driveUrl, email) {
   };
 
   const folder = CATEGORY_FOLDER[category] || 'Post_Graduate_Students';
+  const exts = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'webp'];
 
-  // 1. Exact match from imageMap (highest priority)
+  // 1. Exact Full Name (First_Last) variations inside category folder (Highest Priority)
+  if (name) {
+    const cleanName = name.trim();
+    const tokens = cleanName.split(/\s+/).filter(t => !TITLES.includes(t.toLowerCase()));
+    
+    const fullNameUnderscore = cleanName.replace(/\s+/g, '_');
+    const fullNameSpace = cleanName.replace(/\s+/g, ' ');
+    const fullNameLower = fullNameUnderscore.toLowerCase();
+
+    for (const ext of exts) {
+      add(`./people_images/${folder}/${fullNameUnderscore}.${ext}`);
+      add(`./people_images/${folder}/${fullNameSpace}.${ext}`);
+      add(`./people_images/${folder}/${fullNameLower}.${ext}`);
+    }
+
+    if (tokens.length > 1) {
+      const firstLast = `${tokens[0]}_${tokens[tokens.length - 1]}`;
+      const firstLastLower = firstLast.toLowerCase();
+      for (const ext of exts) {
+        add(`./people_images/${folder}/${firstLast}.${ext}`);
+        add(`./people_images/${folder}/${firstLastLower}.${ext}`);
+      }
+    }
+  }
+
+  // 2. Roll number / Email variations (Unique to the individual)
+  if (email) {
+    const cleanEmail = email.split('@')[0].trim();
+    for (const ext of exts) {
+      add(`./people_images/${folder}/${cleanEmail}.${ext}`);
+      add(`images/students/${cleanEmail}.${ext}`);
+    }
+  }
+
+  // 3. Exact match from imageMap (backward compatibility)
   if (name && imageMap[name]) {
     add(imageMap[name]);
     const base = imageMap[name].replace(/\.(jpe?g|png|webp|avif)$/i, '');
-    ['jpeg', 'png', 'JPG', 'JPEG', 'webp'].forEach(ext => {
+    for (const ext of exts) {
       add(`${base}.${ext}`);
-    });
+    }
   }
 
-  // 2. Manifest fuzzy match (if manifest loaded)
+  // 4. Manifest fuzzy match (Strictly within person's own category folder only!)
   if (_manifest && name) {
     const folders = foldersToSearch(category);
     for (const f of folders) {
@@ -136,47 +189,25 @@ export function getPhotoCandidates(name, category, driveUrl, email) {
     }
   }
 
-  // 3. Name variations inside category folder
+  // 5. Partial / First Name Only (Secondary fallback, strictly within person's own folder)
   if (name) {
     const cleanName = name.trim();
     const tokens = cleanName.split(/\s+/).filter(t => !TITLES.includes(t.toLowerCase()));
-    
-    // Core naming patterns used by staff/users
-    const nameVariations = new Set();
-    nameVariations.add(cleanName.replace(/\s+/g, '_'));
-    nameVariations.add(cleanName.replace(/\s+/g, ' '));
-    nameVariations.add(cleanName.replace(/\s+/g, '_').toLowerCase());
-
     if (tokens.length > 0) {
-      nameVariations.add(tokens[0]); // First name e.g. Shubhangi
-      nameVariations.add(tokens[0].toLowerCase());
-      if (tokens.length > 1) {
-        nameVariations.add(`${tokens[0]}_${tokens[tokens.length - 1]}`);
-      }
-    }
-
-    const exts = ['jpg', 'jpeg', 'png', 'JPG', 'webp'];
-    for (const v of nameVariations) {
+      const firstName = tokens[0];
+      const firstNameLower = firstName.toLowerCase();
       for (const ext of exts) {
-        add(`./people_images/${folder}/${v}.${ext}`);
+        add(`./people_images/${folder}/${firstName}.${ext}`);
+        add(`./people_images/${folder}/${firstNameLower}.${ext}`);
       }
     }
   }
 
-  // 4. Email / Roll number variations
-  if (email) {
-    const cleanEmail = email.split('@')[0].trim();
-    ['jpg', 'jpeg', 'png', 'JPG'].forEach(ext => {
-      add(`./people_images/${folder}/${cleanEmail}.${ext}`);
-      add(`images/students/${cleanEmail}.${ext}`);
-    });
-  }
-
-  // 5. Google Drive URL
+  // 6. Google Drive URL from Sheets
   const drive = drivePhotoUrl(driveUrl);
   if (drive) add(drive);
 
-  // 6. Universal Terminal Fallback
+  // 7. Universal Terminal Fallback
   add(DEFAULT_AVATAR);
 
   return candidates;

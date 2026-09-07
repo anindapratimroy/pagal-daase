@@ -87,7 +87,6 @@ export const imageMap =
   "Aman": "./people_images/Under_Graduate_Students/AMAN.jpg",
   "Yash Mani Tiwari": "./people_images/Post_Graduate_Students/Yash_Mani_Tiwari.jpg",
   "Shubhangi Uikey": "./people_images/Post_Graduate_Students/Shubhangi_Uikey.jpg",
-  "Shubhangi": "./people_images/Post_Graduate_Students/Shubhangi_Uikey.jpg",
   "Kartik V. Kambhampati": "./people_images/Post_Graduate_Students/KARTIK_VENKATARAMANA_KAMBHAMPATI.jpg",
   "Anshul Parmar": "./people_images/Post_Graduate_Students/Anshul_Parmar.jpg",
   "Akash Patel": "./people_images/Post_Graduate_Students/Akash_Patel.jpg",
