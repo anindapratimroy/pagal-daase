@@ -87,25 +87,79 @@ export function cleanPersonName(rawName) {
 }
 
 /**
+ * Sanity check to prevent false overrides from imageMap.
+ * Guarantees that a mapped image file actually shares name tokens with the person,
+ * and prevents cross-person collisions even if imageMap contains human typos.
+ */
+export function isImageMapValid(personName, mappedPath) {
+  if (!personName || !mappedPath) return false;
+  const nameTokens = tokenise(personName);
+  const file = mappedPath.split('/').pop();
+  const fileTokens = tokenise(file);
+  if (!nameTokens.length || !fileTokens.length) return false;
+
+  // 1. Must share at least one token or initial
+  const exactMatches = nameTokens.filter(nt => fileTokens.includes(nt));
+  const initialMatches = nameTokens.filter(nt => 
+    fileTokens.some(ft => ft === nt || (nt.length === 1 && ft.startsWith(nt)))
+  );
+  if (exactMatches.length === 0 && initialMatches.length === 0) {
+    return false;
+  }
+
+  // 2. Cross-person collision check:
+  // If person has 2+ tokens and file has 2+ tokens, file cannot have completely contradictory first AND last names
+  if (nameTokens.length >= 2 && fileTokens.length >= 2) {
+    const firstName = nameTokens[0];
+    const lastName = nameTokens[nameTokens.length - 1];
+    const fileFirst = fileTokens[0];
+    const fileLast = fileTokens[fileTokens.length - 1];
+
+    const matchesEndpoints = 
+      fileTokens.includes(lastName) ||
+      (fileFirst === firstName || fileLast === firstName) ||
+      (firstName.length === 1 && fileFirst.startsWith(firstName)) ||
+      (lastName.length === 1 && fileLast.startsWith(lastName));
+
+    if (!matchesEndpoints) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+/**
  * Robust imageMap lookup that handles:
  *  1. Exact name match
  *  2. Name with/without title prefixes
  *  3. Token-based matching (First + Last match, ignoring middle names or extra initials)
+ *  Guarded by isImageMapValid to reject faulty/contradictory mappings automatically.
  */
 export function findInImageMap(name) {
   if (!name) return null;
   const trimmed = name.trim();
-  if (imageMap[trimmed]) return imageMap[trimmed];
+
+  const validate = (url) => (url && isImageMapValid(trimmed, url) ? url : null);
+
+  if (imageMap[trimmed]) {
+    const valid = validate(imageMap[trimmed]);
+    if (valid) return valid;
+  }
 
   const { fullName, nameWithoutTitle, tokens } = cleanPersonName(trimmed);
 
   if (nameWithoutTitle && imageMap[nameWithoutTitle]) {
-    return imageMap[nameWithoutTitle];
+    const valid = validate(imageMap[nameWithoutTitle]);
+    if (valid) return valid;
   }
 
   // Check with common honorifics
   for (const prefix of ['Dr. ', 'Prof. ', 'Dr._', 'Prof._', 'Dr ', 'Prof ']) {
-    if (imageMap[prefix + nameWithoutTitle]) return imageMap[prefix + nameWithoutTitle];
+    if (imageMap[prefix + nameWithoutTitle]) {
+      const valid = validate(imageMap[prefix + nameWithoutTitle]);
+      if (valid) return valid;
+    }
   }
 
   // Token-based match across imageMap keys
@@ -119,7 +173,8 @@ export function findInImageMap(name) {
         const kFirst = keyClean.tokens[0].toLowerCase();
         const kLast = keyClean.tokens[keyClean.tokens.length - 1].toLowerCase();
         if (kFirst === personFirst && kLast === personLast) {
-          return val;
+          const valid = validate(val);
+          if (valid) return valid;
         }
       }
     }

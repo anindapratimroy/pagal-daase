@@ -102,7 +102,7 @@ export const imageMap =
   "Nasmi S Anand": "./people_images/Ph_D_Students/Nasmi_S_Anand.jpg",
   "Sanjay Sugunan": "./people_images/Post_Graduate_Students/Sanjay_Sugunan.jpg",
   "Sougata Bhattacharyya": "./people_images/Post_Graduate_Students/Sougata_Bhattacharyya.jpg",
-  "Riya": "./people_images/Post_Graduate_Students/Unnati_Manohar_Dhingriya.jpg",
+  "Riya": "./people_images/Post_Graduate_Students/Riya.jpg",
   "Seelam Chandra Shekar Vinayak": "./people_images/Under_Graduate_Students/SEELAM_CHANDRA_SHEKAR_VINAYAK.jpg",
   "Yashrajsinh Mahida": "./people_images/Ph_D_Students/Yashrajsinh_Mahida.jpg",
   "K Hari Balan": "./people_images/Under_Graduate_Students/K_HARI_BALAN.jpg",
