@@ -119,9 +119,9 @@ export default function ResearchAreaDetail({ areaId, onNav }) {
         </div>
 
         <div className="rd-sidebar">
-          <div className="rd-card anim-fadeup" style={{ animationDelay: '0.2s' }}>
-            <h3 className="rd-sidebar-title">Faculty Involved</h3>
-            {area.faculty && area.faculty.length > 0 ? (
+          {area.faculty && area.faculty.length > 0 && (
+            <div className="rd-card anim-fadeup" style={{ animationDelay: '0.2s' }}>
+              <h3 className="rd-sidebar-title">Faculty Involved</h3>
               <ul className="rd-faculty-list">
                 {area.faculty.map((member, i) => {
                   const fac = findFaculty(member);
@@ -146,10 +146,8 @@ export default function ResearchAreaDetail({ areaId, onNav }) {
                   );
                 })}
               </ul>
-            ) : (
-              <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.95rem', margin: '8px 0 0 0' }}>No faculty members currently assigned.</p>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
 
