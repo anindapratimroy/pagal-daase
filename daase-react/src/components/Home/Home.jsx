@@ -266,12 +266,6 @@ export default function Home({ onNav, news, events, publications = [] }) {
                   We warmly invite you to explore our department, engage with our academic community, and join us in our journey of discovering the universe and engineering the future of space exploration.
                 </p>
               </div>
-
-              <div className="hod-pillars-row" style={{ marginTop: '16px' }}>
-                <span className="hod-pillar-chip">✦ Curiosity Drives Discovery</span>
-                <span className="hod-pillar-chip">✦ Collaboration Enables Innovation</span>
-                <span className="hod-pillar-chip">✦ Excellence Creates Impact</span>
-              </div>
             </div>
           </div>
         </div>
