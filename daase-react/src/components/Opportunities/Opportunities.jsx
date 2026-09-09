@@ -3,8 +3,8 @@ import Footer from '../Layout/Footer';
 import TiltCard from '../Layout/TiltCard';
 
 const TABS = [
-  { id: 'students', label: 'For Students', icon: '🎓' },
-  { id: 'faculty',  label: 'For Faculty',  icon: '👨‍🏫' },
+  { id: 'students', label: 'Prospective Students', icon: '🎓' },
+  { id: 'faculty',  label: 'Prospective Faculty',  icon: '👨‍🏫' },
 ];
 
 export default function Opportunities({ studentOpportunities, teacherOpportunities, opportunities = [], onNav }) {
@@ -36,8 +36,8 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
   const teacherOpps = rawTeacherList.filter(isActive);
 
   const tabs = [
-    { id: 'students', label: 'For Students', icon: '🎓', count: studentOpps.length },
-    { id: 'faculty',  label: 'For Faculty & Teachers',  icon: '👨‍🏫', count: teacherOpps.length },
+    { id: 'students', label: 'Prospective Students', icon: '🎓', count: studentOpps.length },
+    { id: 'faculty',  label: 'Prospective Faculty',  icon: '👨‍🏫', count: teacherOpps.length },
   ];
 
   const formatDate = (dateStr) => {
@@ -174,16 +174,10 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
                   </div>
                 </>
               ) : (
-                <div className="opp-empty-state" style={{ padding: '48px 32px', textAlign: 'center' }}>
-                  <div className="opp-empty-icon" style={{ fontSize: '48px', marginBottom: '16px' }}>
+                <div className="opp-empty-state" style={{ padding: '60px 32px', textAlign: 'center' }}>
+                  <div className="opp-empty-icon" style={{ fontSize: '48px', marginBottom: '24px' }}>
                     👨‍🏫
                   </div>
-                  <h3 className="opp-empty-title" style={{ fontSize: '22px', fontWeight: 700, color: '#fff', marginBottom: '12px' }}>
-                    Faculty &amp; Teaching Positions
-                  </h3>
-                  <p className="opp-empty-desc" style={{ fontSize: '16px', color: 'rgba(255, 255, 255, 0.85)', maxWidth: '580px', margin: '0 auto 24px', lineHeight: '1.7' }}>
-                    No open positions and connect with the AASE office for more information.
-                  </p>
                   <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
                     <a href="mailto:aase-office@iiti.ac.in" className="btn-primary" style={{ padding: '10px 22px', fontSize: '14.5px' }}>
                       Connect with AASE Office ✉
@@ -202,7 +196,7 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
                   🎓
                 </div>
                 <h3 className="opp-empty-title" style={{ fontSize: '22px', fontWeight: 700, color: '#fff', marginBottom: '12px' }}>
-                  Student Opportunities
+                  Prospective Students
                 </h3>
                 <p className="opp-empty-desc" style={{ fontSize: '16px', color: 'rgba(255, 255, 255, 0.85)', maxWidth: '580px', margin: '0 auto 24px', lineHeight: '1.7' }}>
                   No open positions and connect with the AASE office for more information.

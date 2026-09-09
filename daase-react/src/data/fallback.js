@@ -97,7 +97,7 @@ export const RESEARCH_AREAS = [
     desc: 'Big data analytics, Bayesian machine learning, deep learning, quantum machine learning, and high-dimensional space data visualization.',
     full_description: "Big Data in Astronomy & Space Sciences\nModern astronomical observatories (SKA, LSST, JWST) and space missions generate petabytes of high-dimensional data. Research involves developing scalable big data pipelines, distributed computing workflows, and automated feature extraction tools tailored for astronomical datasets.\n\nBayesian Machine Learning & Statistical Inference\nFormulating robust Bayesian frameworks, Markov Chain Monte Carlo (MCMC) sampling, and likelihood-free inference for parameter estimation in cosmology, gravitational wave astrophysics, and stellar evolution models.\n\nDeep Learning for Space Observations\nDesigning convolutional neural networks (CNNs), vision transformers, and recurrent architectures for astronomical transient classification, Fast Radio Burst detection, solar flare prediction, extreme weather forecasting, and satellite imagery segmentation.\n\nQuantum Machine Learning & Scientific Visualization\nExploring quantum computing algorithms for optimization, quantum machine learning for pattern recognition in complex space datasets, and advanced multidimensional scientific data visualization frameworks.",
     image: 'images/research/Data_Science_ML_in_Astrophysics.png',
-    faculty: ['Dr. Suman Majumdar', 'Dr. Saurabh Das', 'Dr. Bhargav Vaidya']
+    faculty: []
   }
 ];
 

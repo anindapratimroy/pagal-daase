@@ -152,5 +152,5 @@ export function sortHomeUpdates(news = [], events = []) {
     return 0;
   });
 
-  return [...pinnedNews, ...upcomingEvents, ...generalUpdates].slice(0, 15);
+  return [...pinnedNews, ...upcomingEvents, ...generalUpdates].slice(0, 10);
 }

@@ -147,7 +147,7 @@ export default function ResearchAreaDetail({ areaId, onNav }) {
                 })}
               </ul>
             ) : (
-              <p>Various faculty members.</p>
+              <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.95rem', margin: '8px 0 0 0' }}>No faculty members currently assigned.</p>
             )}
           </div>
         </div>

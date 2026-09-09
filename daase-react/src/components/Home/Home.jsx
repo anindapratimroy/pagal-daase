@@ -75,12 +75,12 @@ export default function Home({ onNav, news, events, publications = [] }) {
   }, [showHodModal]);
 
   const combinedUpdates = useMemo(() => {
-    return sortHomeUpdates(news, events);
+    return sortHomeUpdates(news, events).slice(0, 10);
   }, [news, events]);
 
   const rawPubs = (publications && publications.length > 0) ? publications : PUBLICATIONS_FB;
   const pubsList = useMemo(() => {
-    return sortPublications(rawPubs);
+    return sortPublications(rawPubs).slice(0, 10);
   }, [rawPubs]);
 
   return (
@@ -224,31 +224,18 @@ export default function Home({ onNav, news, events, publications = [] }) {
             <h2 className="hod-about-heading">
               About <span>DAASE</span>
             </h2>
-            <p className="hod-about-body" style={{ marginTop: '16px' }}>
-              India's only dedicated department of its kind across all IITs — a comprehensive academic and research
-              ecosystem spanning the cosmos to cutting-edge space engineering. Founded as a Centre for Astronomy in
-              December 2015 and elevated to a full Department in May 2018.
-            </p>
-          </div>
-
-          <div className="hod-about-highlights">
-            <div className="hod-about-hl-card">
-              <div className="hod-about-hl-header">
-                <span className="hod-about-hl-icon">🏛️</span>
-                <span className="hod-about-hl-title">Premier Funding</span>
-              </div>
-              <p className="hod-about-hl-desc">
-                ANRF/SERB · DST-FIST · ISRO · MoE · UGC · MoES · CSIR · SPARC · DAE · Max Planck · ASEM-DUO
+            <div style={{ marginTop: '20px' }}>
+              <p className="hod-about-body" style={{ marginBottom: '16px' }}>
+                The Department of Astronomy, Astrophysics and Space Engineering (DAASE) at IIT Indore commenced its journey in December 2015 as the Centre for Astronomy with the initiation of a Ph.D. program in Astronomy. In May 2018, the Centre transitioned into a full-fledged department by introducing its flagship M.Sc. program in Astronomy, making DAASE the first and only IIT department to offer an M.Sc. in this field. In 2021, DAASE expanded its academic offerings with the M.Tech. in Space Engineering and the M.S. (Research) in Space Science and Engineering. In 2022, the department further broadened its educational scope by launching the flagship B.Tech. program in Space Science and Engineering, a pioneering initiative within the IIT system. DAASE also offers a Minor in Astronomy and Space Science for undergraduate students at IIT Indore and received DST-FIST funding in 2022 in recognition of its research excellence.
               </p>
-            </div>
-
-            <div className="hod-about-hl-card">
-              <div className="hod-about-hl-header">
-                <span className="hod-about-hl-icon">🌐</span>
-                <span className="hod-about-hl-title">Societies &amp; Outreach</span>
-              </div>
-              <p className="hod-about-hl-desc">
-                Active in GRSS-IEEE, APS-IEEE, ASI &amp; IAU · Regular school &amp; college student outreach
+              <p className="hod-about-body" style={{ marginBottom: '16px' }}>
+                DAASE’s teaching and research activities concentrate on four core domains: Astronomy &amp; Astrophysics, Space Science and Instrumentation, Remote Sensing and Atmospheric Physics, and Data Science and Data-Driven Techniques. Our bachelor’s and master’s curricula integrate these domains, providing students with rigorous theoretical knowledge and hands-on experience to promote both academic achievement and innovation.
+              </p>
+              <p className="hod-about-body" style={{ marginBottom: '16px' }}>
+                Faculty members pursue research across a broad spectrum —from Earth observations to black holes and neutron stars; from galaxies and interstellar medium to solar physics; from drone and cubesat technologies to radio astronomical instrumentation; from early universe and observational cosmology to atmospheric and ionospheric modeling; and from computational and high-energy astrophysics to climate modelling. Advanced numerical modelling and statistical inference unite these diverse research areas and drive scientific innovation.
+              </p>
+              <p className="hod-about-body" style={{ marginBottom: '0' }}>
+                DAASE supports research and learning with state-of-the-art cutting-edge facilities for experimental and applied research. Since 2022, the department has participated in the Indian research contingent to the Arctic, maintaining advanced facilities at the Indian Research Station Himadri for atmospheric and space science investigations. National and international agencies, including MoE, UGC, ANRF/SERB, DST, MoES, CSIR, SPARC, DAE, ISRO, Max Planck Partner Group, and ASEM-DUO, provide critical support for our pursuit of research excellence that advances both science and society. DAASE faculty and students also represent the department as core members of various professional organizations, including GRSS-IEEE, APS-IEEE, ASI, and IAU as well as involved in outreach activities targeting the school and college students.
               </p>
             </div>
           </div>
