@@ -1811,10 +1811,12 @@ nav.nav-scrolled.nav-hidden {
   display: flex;
   flex-direction: column;
   height: 100%;
+  min-height: 0;
 }
 
 .hod-message-card {
   height: 100%;
+  min-height: 0;
   box-sizing: border-box;
   background: linear-gradient(130deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0.04) 100%);
   backdrop-filter: blur(16px) saturate(150%);
@@ -1823,11 +1825,11 @@ nav.nav-scrolled.nav-hidden {
   border-top: 1px solid rgba(255, 217, 122, 0.5);
   border-left: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 20px;
-  padding: 28px 30px;
+  padding: 26px 28px;
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 20px 50px -12px rgba(0, 0, 0, 0.7);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
 }
 
 .hod-message-header {
@@ -1909,21 +1911,50 @@ nav.nav-scrolled.nav-hidden {
   background: linear-gradient(90deg, transparent, rgba(255, 217, 122, 0.35) 40%, rgba(255, 255, 255, 0.15) 100%);
 }
 
-.hod-message-quote {
-  font-size: 14.5px;
-  font-style: italic;
-  line-height: 1.75;
-  color: rgba(255, 255, 255, 0.84);
-  margin: 0;
-  padding: 0;
-  border: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.hod-message-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  padding-right: 12px;
+  margin-right: -4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 217, 122, 0.4) rgba(255, 255, 255, 0.03);
 }
 
-.hod-message-quote p {
+.hod-message-scroll-area::-webkit-scrollbar {
+  width: 5px;
+}
+
+.hod-message-scroll-area::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+}
+
+.hod-message-scroll-area::-webkit-scrollbar-thumb {
+  background: rgba(255, 217, 122, 0.35);
+  border-radius: 4px;
+}
+
+.hod-message-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 217, 122, 0.65);
+}
+
+.hod-message-body {
+  font-size: 14.5px;
+  line-height: 1.72;
+  color: rgba(255, 255, 255, 0.86);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hod-message-body p {
   margin: 0;
+}
+
+.hod-message-body strong {
+  color: #ffd97a;
+  font-weight: 600;
 }
 
 .hod-pillars-row {
@@ -1945,142 +1976,14 @@ nav.nav-scrolled.nav-hidden {
   white-space: nowrap;
 }
 
-.hod-card-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-top: 14px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  margin-top: auto;
-}
-
-.hod-read-full-btn {
-  background: transparent;
-  border: 1px solid rgba(255, 217, 122, 0.4);
-  color: #ffd97a;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  padding: 6px 14px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.3s var(--ease);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.hod-read-full-btn:hover {
-  background: rgba(255, 217, 122, 0.15);
-  border-color: #ffd97a;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 217, 122, 0.2);
-}
-
-/* Modal styling */
-.hod-full-modal-content {
-  background: #0b1426;
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
-  border: 1px solid rgba(255, 217, 122, 0.4);
-  border-radius: 20px;
-  max-width: 720px;
-  width: 90%;
-  max-height: 85vh;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
-  padding: 36px 32px;
-  position: relative;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-  animation: modalFadeIn 0.3s var(--ease-out) both;
-}
-
-.hod-modal-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  transition: all 0.2s var(--ease);
-}
-
-.hod-modal-close:hover {
-  background: rgba(255, 217, 122, 0.3);
-  color: #ffd97a;
-  border-color: #ffd97a;
-}
-
-.hod-modal-header {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  margin-bottom: 24px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.hod-modal-avatar {
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  border: 2px solid #ffd97a;
-  object-fit: cover;
-  object-position: center top;
-  flex-shrink: 0;
-}
-
-.hod-modal-title {
-  font-size: 20px;
-  font-weight: 800;
-  color: #fff;
-  margin: 0 0 4px 0;
-}
-
-.hod-modal-subtitle {
-  font-size: 13.5px;
-  color: var(--gold-light);
-  margin: 0;
-  font-weight: 600;
-}
-
-.hod-modal-body {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 15px;
-  line-height: 1.75;
-}
-
-.hod-modal-body p {
-  margin: 0;
-}
-
-.hod-modal-body strong {
-  color: #ffd97a;
-}
-
-.hod-message-sig {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.45);
-  letter-spacing: 0.04em;
-}
-
 @media (max-width: 900px) {
   .hod-about-section {
     grid-template-columns: 1fr;
     gap: 32px;
     padding: 40px clamp(16px, 4%, 48px);
+  }
+  .hod-message-card {
+    max-height: 520px;
   }
 }
 
