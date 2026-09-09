@@ -137,7 +137,6 @@ const PROGRAMS = {
       { num: 'Specialized', text: 'Space Systems Engineering, Operations & Techniques' },
     ],
     curriculumUrl: 'https://academic.iiti.ac.in/app/storage/app/coursecurriculum/nNtSYVKA46yp2B1AeqiovacZ6xEjUWdcndKMWxsO.pdf',
-    placementUrl: 'https://drive.google.com/file/d/1FOOXuPJzrEPT5jV8iLX2uodMuIQRFq_v/view?usp=sharing',
     email: 'pc-se@iiti.ac.in',
   },
   ms: {
