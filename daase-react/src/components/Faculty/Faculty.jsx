@@ -260,9 +260,53 @@ const PEOPLE_TABS = [
   { id: 'alumni', label: 'Alumni' },
 ];
 
+// ─── Batch and Year sorting helpers ───────────────────────────────────────────
+function extractBatchYear(batchStr) {
+  const match = String(batchStr || '').match(/\b(20\d{2})\b/);
+  return match ? parseInt(match[1], 10) : 0;
+}
+
+// Sort batches strictly by extracted year descending (newest batch first)
+function sortBatchesDesc(batchesObj) {
+  if (!batchesObj) return [];
+  return Object.entries(batchesObj).sort(([a], [b]) => {
+    const yA = extractBatchYear(a);
+    const yB = extractBatchYear(b);
+    if (yA !== yB) return yB - yA;
+    return b.localeCompare(a);
+  });
+}
+
+// Priority for PG degree programs: M.Tech Space Engineering -> M.Sc. Astronomy -> M.S. (Research) -> other
+function getPgDegreeOrder(batchName) {
+  const s = String(batchName || '').toLowerCase();
+  if (s.includes('space engineering') || s.includes('m.tech') || s.includes('mtech')) {
+    if (s.includes('aolt')) return 4;
+    return 1;
+  }
+  if (s.includes('m.sc') || s.includes('msc') || s.includes('astronomy')) return 2;
+  if (s.includes('m.s.') || s.includes('ms (research)') || s.includes('ms research')) return 3;
+  return 5;
+}
+
+// For PG: group by degree program, but ensure newest joined batch comes first within each degree
+function sortPgBatches(pgObj) {
+  if (!pgObj) return [];
+  return Object.entries(pgObj).sort(([a], [b]) => {
+    const degA = getPgDegreeOrder(a);
+    const degB = getPgDegreeOrder(b);
+    if (degA !== degB) return degA - degB;
+    const yA = extractBatchYear(a);
+    const yB = extractBatchYear(b);
+    if (yA !== yB) return yB - yA;
+    return b.localeCompare(a);
+  });
+}
+
 // ─── Student sub-sections ─────────────────────────────────────────────────────
 function StudentBatch({ batch, list, onImageClick, category = 'phd' }) {
   if (!list || !list.length) return null;
+  const sortedList = [...list].sort((a, b) => (a.name || '').localeCompare(b.name || ''));
   return (
     <div className="batch-section">
       <div className="batch-title">
@@ -272,7 +316,7 @@ function StudentBatch({ batch, list, onImageClick, category = 'phd' }) {
         </span>
       </div>
       <div className="students-grid">
-        {list.map((s, i) => {
+        {sortedList.map((s, i) => {
           const candidates = getPhotoCandidates(s.name, category, s.photo, s.email);
           const photoSrc = candidates[0] || DEFAULT_AVATAR;
           const sAnchorId = `person-${(s.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
@@ -309,7 +353,12 @@ function StudentBatch({ batch, list, onImageClick, category = 'phd' }) {
 // Alumni section – accordion per year, organised by degree category
 function AlumniSection({ alumni }) {
   const sorted = alumni && alumni.length
-    ? [...alumni].sort((a, b) => String(b.year).localeCompare(String(a.year)))
+    ? [...alumni].sort((a, b) => {
+        const yA = extractBatchYear(a.year);
+        const yB = extractBatchYear(b.year);
+        if (yA !== yB) return yB - yA;
+        return String(b.year).localeCompare(String(a.year));
+      })
     : [];
 
   // Auto-open the most recent year
@@ -793,7 +842,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
                       Ph.D. Students ({phdCount})
                       <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
                     </div>
-                    {Object.entries(filteredPhd).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
+                    {sortBatchesDesc(filteredPhd).map(([batch, list]) => (
                       <StudentBatch key={batch} batch={batch} list={list} category="phd" onImageClick={handleImageClick} />
                     ))}
                   </div>
@@ -806,7 +855,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
                       Post Graduate Students ({pgCount})
                       <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
                     </div>
-                    {Object.entries(filteredPg).map(([batch, list]) => (
+                    {sortPgBatches(filteredPg).map(([batch, list]) => (
                       <StudentBatch key={batch} batch={batch} list={list} category="pg" onImageClick={handleImageClick} />
                     ))}
                   </div>
@@ -819,7 +868,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
                       Under Graduate Students ({ugCount})
                       <span className="email-id-hint">— add @iiti.ac.in to email ID</span>
                     </div>
-                    {Object.entries(filteredUg).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
+                    {sortBatchesDesc(filteredUg).map(([batch, list]) => (
                       <StudentBatch key={batch} batch={batch} list={list} category="ug" onImageClick={handleImageClick} />
                     ))}
                   </div>
@@ -924,7 +973,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
               {/* PH.D. TAB */}
               {activeTab === 'phd' && (
                 <div className="anim-fadein">
-                  {phd ? Object.entries(phd).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
+                  {phd ? sortBatchesDesc(phd).map(([batch, list]) => (
                     <StudentBatch key={batch} batch={batch} list={list} category="phd" onImageClick={handleImageClick} />
                   )) : (
                     <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px', fontSize: '15px' }}>
@@ -937,16 +986,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
               {/* PG TAB */}
               {activeTab === 'pg' && (
                 <div className="anim-fadein">
-                  {pg ? Object.entries(pg).sort(([a], [b]) => {
-                    const lA = a.toLowerCase(), lB = b.toLowerCase();
-                    const getPriority = s => {
-                      if (s.includes('space engineering')) return 1;
-                      if (s.includes('aolt')) return 3;
-                      return 2;
-                    };
-                    const diff = getPriority(lA) - getPriority(lB);
-                    return diff !== 0 ? diff : b.localeCompare(a);
-                  }).map(([batch, list]) => (
+                  {pg ? sortPgBatches(pg).map(([batch, list]) => (
                     <StudentBatch key={batch} batch={batch} list={list} category="pg" onImageClick={handleImageClick} />
                   )) : (
                     <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px', fontSize: '15px' }}>
@@ -959,7 +999,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
               {/* UG TAB */}
               {activeTab === 'ug' && (
                 <div className="anim-fadein">
-                  {ug ? Object.entries(ug).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
+                  {ug ? sortBatchesDesc(ug).map(([batch, list]) => (
                     <StudentBatch key={batch} batch={batch} list={list} category="ug" onImageClick={handleImageClick} />
                   )) : (
                     <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px', fontSize: '15px' }}>
