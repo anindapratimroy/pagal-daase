@@ -417,6 +417,14 @@ export const PG_FB = {
       "research_interests": ""
     }
   ],
+  "M.S. (Research) \u2014 Batch 2026": [
+    {
+      "name": "Aashvik B",
+      "email": "",
+      "supervisor": "Dr. Unmesh Khati",
+      "research_interests": ""
+    }
+  ],
   "M.S. (Research) \u2014 Batch 2025": [
     {
       "name": "Chanchal",

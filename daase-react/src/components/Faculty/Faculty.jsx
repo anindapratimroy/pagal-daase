@@ -285,20 +285,25 @@ function getPgDegreeOrder(batchName) {
     return 1;
   }
   if (s.includes('m.sc') || s.includes('msc') || s.includes('astronomy')) return 2;
-  if (s.includes('m.s.') || s.includes('ms (research)') || s.includes('ms research')) return 3;
+  if (s.includes('m.s.') || s.includes('ms (research)') || s.includes('ms research') || s.includes('ms')) return 3;
   return 5;
 }
 
-// For PG: group by degree program, but ensure newest joined batch comes first within each degree
+// For PG: Year descending ALWAYS takes precedence so the newest joined batch is always at the top!
 function sortPgBatches(pgObj) {
   if (!pgObj) return [];
   return Object.entries(pgObj).sort(([a], [b]) => {
-    const degA = getPgDegreeOrder(a);
-    const degB = getPgDegreeOrder(b);
-    if (degA !== degB) return degA - degB;
+    // 1. Newest batch year ALWAYS comes first (e.g. 2026 before 2025 before 2024)
     const yA = extractBatchYear(a);
     const yB = extractBatchYear(b);
     if (yA !== yB) return yB - yA;
+
+    // 2. Within the same year, group by degree program
+    const degA = getPgDegreeOrder(a);
+    const degB = getPgDegreeOrder(b);
+    if (degA !== degB) return degA - degB;
+
+    // 3. Fallback alphabetical
     return b.localeCompare(a);
   });
 }

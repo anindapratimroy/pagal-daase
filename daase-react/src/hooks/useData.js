@@ -6,7 +6,7 @@ import {
 } from '../data/fallback';
 import { loadPhotoManifest } from '../utils/photoResolver';
 
-const CACHE_KEY = 'daase_v9_data';
+const CACHE_KEY = 'daase_v10_data';
 const CACHE_TTL = 30 * 60 * 1000; // 30 min
 
 function getCached(ignoreTTL = false) {
@@ -119,7 +119,7 @@ function resolveData(d) {
       const filtered = {};
       let hasPg = false;
       for (const [key, val] of Object.entries(d.pg_students)) {
-        if (!key.toLowerCase().startsWith('ph.d.')) {
+        if (!/ph\.?\s*d\.?/i.test(key)) {
           filtered[key] = val;
           hasPg = true;
         }
@@ -133,7 +133,7 @@ function resolveData(d) {
       const filtered = {};
       let hasPhd = false;
       for (const [key, val] of Object.entries(d.pg_students)) {
-        if (key.toLowerCase().startsWith('ph.d.')) {
+        if (/ph\.?\s*d\.?/i.test(key)) {
           filtered[key] = val;
           hasPhd = true;
         }
