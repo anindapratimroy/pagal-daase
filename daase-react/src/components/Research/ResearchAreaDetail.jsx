@@ -27,11 +27,50 @@ function RichText({ text }) {
       {blocks.map((block, i) => {
         // Lines within a block separated by single \n → render as list or sub-paragraphs
         const lines = block.split(/\n/).filter(l => l.trim());
-        if (lines.length === 1) {
-          return <p key={i} className="rd-desc">{lines[0]}</p>;
+        if (lines.length === 0) return null;
+
+        // If all lines are bullets
+        if (lines.every(l => l.startsWith('• ') || l.startsWith('- '))) {
+          return (
+            <div key={i} className="rd-bullet-group" style={{ marginBottom: '16px' }}>
+              {lines.map((line, j) => (
+                <div key={j} className="rd-bullet-item">
+                  <span className="rd-bullet-dot">✦</span>
+                  <span className="rd-desc" style={{ marginBottom: 0 }}>{line.replace(/^[•\-]\s*/, '')}</span>
+                </div>
+              ))}
+            </div>
+          );
         }
-        // First line is usually a heading, rest are content
+
+        if (lines.length === 1) {
+          const l = lines[0];
+          if (l.startsWith('• ') || l.startsWith('- ')) {
+            return (
+              <div key={i} className="rd-bullet-item" style={{ marginBottom: '16px' }}>
+                <span className="rd-bullet-dot">✦</span>
+                <span className="rd-desc" style={{ marginBottom: 0 }}>{l.replace(/^[•\-]\s*/, '')}</span>
+              </div>
+            );
+          }
+          return <p key={i} className="rd-desc">{l}</p>;
+        }
+
+        // First line check
         const [heading, ...rest] = lines;
+        if (heading.startsWith('• ') || heading.startsWith('- ')) {
+          return (
+            <div key={i} className="rd-bullet-group" style={{ marginBottom: '16px' }}>
+              {lines.map((line, j) => (
+                <div key={j} className="rd-bullet-item">
+                  <span className="rd-bullet-dot">✦</span>
+                  <span className="rd-desc" style={{ marginBottom: 0 }}>{line.replace(/^[•\-]\s*/, '')}</span>
+                </div>
+              ))}
+            </div>
+          );
+        }
+
         return (
           <div key={i} className="rd-text-block">
             <h3 className="rd-sub-heading">{heading}</h3>
@@ -61,10 +100,18 @@ const ALIAS_MAP = {
   'cosmology': 'cosmology',
   'data-science': 'data-science',
   'compact-objects': 'compact-objects',
+  'compact-objects-and-transients': 'compact-objects',
+  'compact-objects-transients': 'compact-objects',
   'galaxies-agn': 'galaxies-agn',
+  'galaxies-active-galactic-nuclei': 'galaxies-agn',
+  'galaxies-and-active-galactic-nuclei': 'galaxies-agn',
   'sun-heliosphere': 'sun-heliosphere',
+  'solar-physics-and-space-weather': 'sun-heliosphere',
+  'solar-physics-space-weather': 'sun-heliosphere',
   'space-weather': 'space-weather',
+  'space-weather-atmospheric-science': 'space-weather',
   'instrumentation': 'instrumentation',
+  'communication-navigation-remote-sensing': 'instrumentation',
 };
 
 export default function ResearchAreaDetail({ areaId, onNav }) {
@@ -112,16 +159,28 @@ export default function ResearchAreaDetail({ areaId, onNav }) {
           <img 
             src={`./${area.image}`} 
             alt={area.title} 
-            style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'cover', borderRadius: 'var(--r)', marginBottom: '32px', boxShadow: 'var(--shadow-md)' }} 
+            style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'cover', borderRadius: 'var(--r)', marginBottom: area.image_caption ? '12px' : '32px', boxShadow: 'var(--shadow-md)' }} 
           />
-          <h2 className="rd-section-title">Overview</h2>
+          {area.image_caption && (
+            <p className="rd-image-caption" style={{ 
+              color: 'var(--text-muted, #94a3b8)', 
+              fontSize: '0.85rem', 
+              marginTop: '0', 
+              marginBottom: '32px', 
+              textAlign: 'center',
+              fontStyle: 'italic'
+            }}>
+              {area.image_caption}
+            </p>
+          )}
+          <h2 className="rd-section-title">{area.section_title || 'AREA OF INTEREST'}</h2>
           <RichText text={area.full_description || area.desc} />
         </div>
 
         <div className="rd-sidebar">
           {area.faculty && area.faculty.length > 0 && (
             <div className="rd-card anim-fadeup" style={{ animationDelay: '0.2s' }}>
-              <h3 className="rd-sidebar-title">Faculty Involved</h3>
+              <h3 className="rd-sidebar-title">FACULTY</h3>
               <ul className="rd-faculty-list">
                 {area.faculty.map((member, i) => {
                   const fac = findFaculty(member);

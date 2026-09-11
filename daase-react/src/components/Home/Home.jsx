@@ -334,11 +334,11 @@ export default function Home({ onNav, news, events, publications = [] }) {
               <li className="is-interactive" onClick={() => onNav('research-detail', 'cosmology')} title="View Cosmology">
                 Cosmology <span className="arrow">↗</span>
               </li>
-              <li className="is-interactive" onClick={() => onNav('research-detail', 'galaxies-agn')} title="View Galaxies & Active Galactic Nuclei">
-                Galaxies &amp; Active Galactic Nuclei <span className="arrow">↗</span>
+              <li className="is-interactive" onClick={() => onNav('research-detail', 'galaxies-agn')} title="View Galaxies & Active Galactic nuclei">
+                Galaxies &amp; Active Galactic nuclei <span className="arrow">↗</span>
               </li>
-              <li className="is-interactive" onClick={() => onNav('research-detail', 'sun-heliosphere')} title="View Sun & Heliosphere">
-                Sun &amp; Heliosphere <span className="arrow">↗</span>
+              <li className="is-interactive" onClick={() => onNav('research-detail', 'sun-heliosphere')} title="View Solar Physics and Space Weather">
+                Solar Physics and Space Weather <span className="arrow">↗</span>
               </li>
               <li className="is-interactive" onClick={() => onNav('research-detail', 'space-weather')} title="View Space Weather & Atmospheric Science">
                 Space Weather &amp; Atmospheric Science <span className="arrow">↗</span>
@@ -346,8 +346,8 @@ export default function Home({ onNav, news, events, publications = [] }) {
               <li className="is-interactive" onClick={() => onNav('research-detail', 'instrumentation')} title="View Communication, Navigation & Remote Sensing">
                 Communication, Navigation &amp; Remote Sensing <span className="arrow">↗</span>
               </li>
-              <li className="is-interactive" onClick={() => onNav('research-detail', 'data-science')} title="View Data Science & ML in Space Science">
-                Data Science &amp; ML in Space Science <span className="arrow">↗</span>
+              <li className="is-interactive" onClick={() => onNav('research-detail', 'data-science')} title="View Data Science">
+                Data Science <span className="arrow">↗</span>
               </li>
             </ul>
           </div>
