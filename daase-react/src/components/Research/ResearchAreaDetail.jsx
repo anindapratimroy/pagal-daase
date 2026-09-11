@@ -110,7 +110,11 @@ const ALIAS_MAP = {
   'solar-physics-space-weather': 'sun-heliosphere',
   'space-weather': 'space-weather',
   'space-weather-atmospheric-science': 'space-weather',
+  'remote-sensing-atmospheric-science': 'space-weather',
+  'remote-sensing-and-atmospheric-science': 'space-weather',
   'instrumentation': 'instrumentation',
+  'instrumentation-space-technology': 'instrumentation',
+  'instrumentation-and-space-technology': 'instrumentation',
   'communication-navigation-remote-sensing': 'instrumentation',
 };
 
