@@ -6,7 +6,7 @@ import {
 } from '../data/fallback';
 import { loadPhotoManifest } from '../utils/photoResolver';
 
-const CACHE_KEY = 'daase_v10_data';
+const CACHE_KEY = 'daase_v11_data';
 const CACHE_TTL = 30 * 60 * 1000; // 30 min
 
 function getCached(ignoreTTL = false) {
@@ -99,12 +99,27 @@ function resolveData(d) {
 
   return {
     faculty: has('faculty')
-      ? d.faculty.map(f => ({
-          ...f,
-          photo: drivePhotoUrl(f.photo) || f.photo,
-          chamber: (f.chamber || f.chamber_no || f.chamber_number || f.room || f.room_no || f.office || '').toString().trim(),
-          phoneExt: (f.phoneExt || f.phone_ext || f.extension || f.extension_no || f.ext || f.phone || '').toString().trim(),
-        }))
+      ? (() => {
+          let list = d.faculty.map(f => {
+            let research = f.research;
+            if (f.name && f.name.includes('Mukul')) {
+              research = 'Multi-messenger astrophysics, transient phenomena, compact objects (BH, NS), particle acceleration & relativistic outflows';
+            }
+            return {
+              ...f,
+              research,
+              photo: drivePhotoUrl(f.photo) || f.photo,
+              chamber: (f.chamber || f.chamber_no || f.chamber_number || f.room || f.room_no || f.office || '').toString().trim(),
+              phoneExt: (f.phoneExt || f.phone_ext || f.extension || f.extension_no || f.ext || f.phone || '').toString().trim(),
+            };
+          });
+          // Ensure Dr. Mukul Bhattacharya is always included even if missing from live sheet
+          if (!list.some(f => f.name && f.name.includes('Mukul'))) {
+            const mb = FACULTY_FB.find(f => f.name.includes('Mukul'));
+            if (mb) list.push(mb);
+          }
+          return list;
+        })()
       : FACULTY_FB,
     visiting: has('visiting')
       ? d.visiting.map(f => ({
