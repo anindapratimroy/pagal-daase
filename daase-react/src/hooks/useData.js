@@ -6,7 +6,7 @@ import {
 } from '../data/fallback';
 import { loadPhotoManifest } from '../utils/photoResolver';
 
-const CACHE_KEY = 'daase_v12_data';
+const CACHE_KEY = 'daase_v13_data';
 const CACHE_TTL = 30 * 60 * 1000; // 30 min
 
 export function normalizePubUrl(raw) {
@@ -140,12 +140,13 @@ function resolveData(d) {
     faculty: has('faculty')
       ? (() => {
           let list = d.faculty.map(f => {
-            let research = f.research;
+            let research = (f.research || '').replace(/\s+/g, ' ').trim();
             if (f.name && f.name.includes('Mukul')) {
               research = 'Multi-messenger astrophysics, transient phenomena, compact objects (BH, NS), particle acceleration & relativistic outflows';
             }
             return {
               ...f,
+              name: (f.name || '').replace(/\s+/g, ' ').trim(),
               research,
               photo: drivePhotoUrl(f.photo) || f.photo,
               chamber: (f.chamber || f.chamber_no || f.chamber_number || f.room || f.room_no || f.office || '').toString().trim(),
@@ -163,6 +164,8 @@ function resolveData(d) {
     visiting: has('visiting')
       ? d.visiting.map(f => ({
           ...f,
+          name: (f.name || '').replace(/\s+/g, ' ').trim(),
+          research: (f.research || '').replace(/\s+/g, ' ').trim(),
           photo: drivePhotoUrl(f.photo) || f.photo,
           chamber: (f.chamber || f.chamber_no || f.room || f.office || '').toString().trim(),
           phoneExt: (f.phoneExt || f.phone_ext || f.extension || f.ext || f.phone || '').toString().trim(),
