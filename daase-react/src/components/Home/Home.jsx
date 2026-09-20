@@ -5,6 +5,7 @@ import NewsTicker from './NewsTicker';
 import Collaborators from './Collaborators';
 import { PUBLICATIONS_FB } from '../../data/fallback';
 import { sortHomeUpdates, sortPublications } from '../../utils/dateUtils';
+import { normalizePubUrl } from '../../hooks/useData';
 
 // Ensure link has protocol prefix for external, but respect internal links
 function normalizeLink(link) {
@@ -40,16 +41,15 @@ function isExternal(link) {
 }
 
 function getPubText(pub) {
+  if (!pub) return '';
   if (typeof pub === 'string') return pub;
-  return pub.text || pub.title || pub.citation || '';
+  return pub.text || pub.citation || pub.title || '';
 }
 
 function getPubUrl(pub) {
-  if (typeof pub === 'string') {
-    const m = pub.match(/(https?:\/\/[^\s]+)/);
-    return m ? m[1] : null;
-  }
-  return pub.url || pub.doi || pub.link || null;
+  if (!pub) return null;
+  if (typeof pub === 'object' && pub.url) return normalizePubUrl(pub.url);
+  return normalizePubUrl(pub);
 }
 
 export default function Home({ onNav, news, events, publications = [] }) {
@@ -148,10 +148,10 @@ export default function Home({ onNav, news, events, publications = [] }) {
               <h2 className="news-feed-title" style={{ margin: 0 }}>Recent <span>Publications</span></h2>
               <button
                 className="home-pub-view-all"
-                onClick={() => onNav('research')}
-                title="View research areas"
+                onClick={() => onNav('publications')}
+                title="View all publications"
               >
-                Explore Areas ↗
+                View All ↗
               </button>
             </div>
 
@@ -165,7 +165,15 @@ export default function Home({ onNav, news, events, publications = [] }) {
                 })() : []).map((pub, idx) => {
                   const text = getPubText(pub);
                   const url = getPubUrl(pub);
-                  const displayText = text.replace(/(https?:\/\/[^\s]+)/g, '').trim();
+                  const displayText = text
+                    .replace(/^\d+[\.\)]\s*/, '')
+                    .replace(/\[\s*Link:?\s*https?:\/\/[^\]]+\]/gi, '')
+                    .replace(/\(\s*Link:?\s*https?:\/\/[^\)]+\)/gi, '')
+                    .replace(/\[\s*https?:\/\/[^\]]+\]/gi, '')
+                    .replace(/https?:\/\/[^\s]+$/gi, '')
+                    .trim()
+                    .replace(/[;,]\s*$/, '')
+                    .trim();
                   const realNum = (idx % pubsList.length) + 1;
 
                   const ItemTag = url ? 'a' : 'div';

@@ -120,6 +120,13 @@ export default function App() {
       } else if (PEOPLE_TAB_MAP[hash]) {
         setPeopleTab(PEOPLE_TAB_MAP[hash]);
         setView('people');
+      } else if (hash === 'publications') {
+        setView('research');
+        setTimeout(() => {
+          const el = document.getElementById('publications-section');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
+        return;
       } else {
         setView(hash);
       }
@@ -167,6 +174,14 @@ export default function App() {
       setPeopleTab(targetTab);
       setView('people');
       window.location.hash = id.startsWith('people-') ? id : `people-${id}`;
+    } else if (id === 'publications') {
+      setView('research');
+      window.location.hash = 'publications';
+      setTimeout(() => {
+        const el = document.getElementById('publications-section');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+      return;
     } else {
       setView(id);
       window.location.hash = id;
@@ -207,7 +222,7 @@ export default function App() {
   const renderView = () => {
     switch (view) {
       case 'home':       return <Home onNav={handleNav} news={data.news} events={data.events} publications={data.publications} />;
-      case 'research':   return <Research onNav={handleNav} />;
+      case 'research':   return <Research onNav={handleNav} publications={data.publications} />;
       case 'research-detail': return <ResearchAreaDetail areaId={researchAreaId} onNav={handleNav} />;
       case 'programs':   return <Programs initialProg={progTab} onNav={handleNav} />;
       case 'people':     return (

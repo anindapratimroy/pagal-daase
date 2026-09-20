@@ -1,35 +1,29 @@
 import React, { useMemo } from 'react';
-import { useData } from '../../hooks/useData';
+import { useData, normalizePubUrl } from '../../hooks/useData';
 import { sortPublications } from '../../utils/dateUtils';
 import './Publications.css';
 
-/**
- * Each publication can be:
- *   - a string (fallback)  → shown as text, no link
- *   - an object { text, url, title, doi, ... } (from Google Sheets) → shown as clickable link
- */
 function getPubText(pub) {
+  if (!pub) return '';
   if (typeof pub === 'string') return pub;
-  return pub.text || pub.title || pub.citation || '';
+  return pub.text || pub.citation || pub.title || '';
 }
 
 function getPubUrl(pub) {
-  if (typeof pub === 'string') {
-    // Extract any embedded URL from the string
-    const m = pub.match(/(https?:\/\/[^\s]+)/);
-    return m ? m[1] : null;
-  }
-  return pub.url || pub.doi || pub.link || null;
+  if (!pub) return null;
+  if (typeof pub === 'object' && pub.url) return normalizePubUrl(pub.url);
+  return normalizePubUrl(pub);
 }
 
-export default function Publications() {
-  const { publications } = useData();
-  const sortedPubs = useMemo(() => sortPublications(publications), [publications]);
+export default function Publications({ publications: propPubs }) {
+  const { publications: hookPubs } = useData();
+  const rawPubs = propPubs || hookPubs;
+  const sortedPubs = useMemo(() => sortPublications(rawPubs), [rawPubs]);
 
   if (!sortedPubs || sortedPubs.length === 0) return null;
 
   return (
-    <div className="publications-section">
+    <div id="publications-section" className="publications-section" data-aos="fade-up">
       <div style={{ width: '100%', padding: '0 clamp(20px, 5%, 80px)', boxSizing: 'border-box' }}>
         <div className="publications-header">
           <div>
@@ -48,7 +42,15 @@ export default function Publications() {
               const url = getPubUrl(pub);
 
               // Split the display text to avoid showing raw URLs inline
-              const displayText = text.replace(/(https?:\/\/[^\s]+)/g, '').trim();
+              const displayText = text
+                .replace(/^\d+[\.\)]\s*/, '')
+                .replace(/\[\s*Link:?\s*https?:\/\/[^\]]+\]/gi, '')
+                .replace(/\(\s*Link:?\s*https?:\/\/[^\)]+\)/gi, '')
+                .replace(/\[\s*https?:\/\/[^\]]+\]/gi, '')
+                .replace(/https?:\/\/[^\s]+$/gi, '')
+                .trim()
+                .replace(/[;,]\s*$/, '')
+                .trim();
 
               return (
                 <div key={idx} className={`pub-item${url ? ' pub-item--linked' : ''}`}>
@@ -60,7 +62,7 @@ export default function Publications() {
                         <span className="pub-arrow">↗</span>
                       </a>
                     ) : (
-                      <span className="pub-text">{text}</span>
+                      <span className="pub-text">{displayText || text}</span>
                     )}
                   </div>
                 </div>

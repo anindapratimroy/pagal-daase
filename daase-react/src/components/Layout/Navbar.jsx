@@ -121,7 +121,7 @@ export default function Navbar({ current, onNav, onOpenSearch }) {
 
           {/* Research dropdown */}
           <div className={`nav-dropdown${openDropdown === 'research' ? ' open' : ''}`} onClick={(e) => toggleDropdown('research', e)}>
-            <button className={`nav-dropdown-trigger${current === 'research' || current === 'facilities' || openDropdown === 'research' ? ' active' : ''}`}>
+            <button className={`nav-dropdown-trigger${current === 'research' || current === 'facilities' || current === 'publications' || openDropdown === 'research' ? ' active' : ''}`}>
               Research ▾
             </button>
             <div className="nav-dropdown-menu">
@@ -136,6 +136,12 @@ export default function Navbar({ current, onNav, onOpenSearch }) {
                 onClick={(e) => { e.stopPropagation(); handleNav('facilities'); }}
               >
                 Research Facilities
+              </button>
+              <button
+                className={current === 'publications' ? 'active' : ''}
+                onClick={(e) => { e.stopPropagation(); handleNav('publications'); }}
+              >
+                Recent Publications
               </button>
             </div>
           </div>
@@ -264,6 +270,7 @@ export default function Navbar({ current, onNav, onOpenSearch }) {
         </div>
         <button style={{ paddingLeft: '24px' }} className={current === 'research' ? 'active' : ''} onClick={() => handleNav('research')}>Research Areas</button>
         <button style={{ paddingLeft: '24px' }} className={current === 'facilities' ? 'active' : ''} onClick={() => handleNav('facilities')}>Research Facilities</button>
+        <button style={{ paddingLeft: '24px' }} className={current === 'publications' ? 'active' : ''} onClick={() => handleNav('publications')}>Recent Publications</button>
 
         <button className={current === 'programs' ? 'active' : ''} onClick={() => handleNav('programs')}>Programs</button>
         {NAV_ITEMS.slice(2).map(item => (

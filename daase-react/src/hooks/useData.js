@@ -6,8 +6,47 @@ import {
 } from '../data/fallback';
 import { loadPhotoManifest } from '../utils/photoResolver';
 
-const CACHE_KEY = 'daase_v11_data';
+const CACHE_KEY = 'daase_v12_data';
 const CACHE_TTL = 30 * 60 * 1000; // 30 min
+
+export function normalizePubUrl(raw) {
+  if (!raw) return null;
+  let trimmed = String(raw).trim();
+  trimmed = trimmed.replace(/^doi:\s*/i, '').trim();
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  if (/^10\.\d{4,9}\//i.test(trimmed)) return `https://doi.org/${trimmed}`;
+  if (trimmed.startsWith('doi.org/')) return `https://${trimmed}`;
+  if (trimmed.startsWith('www.')) return `https://${trimmed}`;
+  return null;
+}
+
+export function normalizePublication(p) {
+  if (!p) return null;
+  let rawText = typeof p === 'string' ? p : (p.citation || p.text || p.title || '');
+  let rawUrl = typeof p === 'string' ? '' : (p.link || p.url || p.doi || p.Link || p.URL || '');
+  if (!rawUrl) {
+    const m = rawText.match(/(https?:\/\/[^\s\]\)\,\;]+)/);
+    if (m) rawUrl = m[1];
+  }
+  const url = normalizePubUrl(rawUrl);
+  let text = rawText
+    .replace(/^\d+[\.\)]\s*/, '')
+    .replace(/\[\s*Link:?\s*https?:\/\/[^\]]+\]/gi, '')
+    .replace(/\(\s*Link:?\s*https?:\/\/[^\)]+\)/gi, '')
+    .replace(/\[\s*https?:\/\/[^\]]+\]/gi, '')
+    .replace(/https?:\/\/[^\s]+$/gi, '')
+    .trim()
+    .replace(/[;,]\s*$/, '')
+    .trim();
+
+  return {
+    citation: text,
+    text,
+    url: url || '',
+    date: p.date || '',
+    status: p.status || 'active'
+  };
+}
 
 function getCached(ignoreTTL = false) {
   try {
@@ -161,7 +200,13 @@ function resolveData(d) {
     interns:    has('interns')   ? d.interns      : INTERNS_FB,
     news:       has('news')      ? d.news         : NEWS_FB,
     outreach:   has('outreach')  ? d.outreach     : OUTREACH_FB,
-    publications: has('publications') ? d.publications : PUBLICATIONS_FB,
+    publications: (() => {
+      const raw = has('publications') ? d.publications : PUBLICATIONS_FB;
+      return (raw || [])
+        .filter(p => !p.status || p.status.toString().toLowerCase().trim() === 'active')
+        .map(normalizePublication)
+        .filter(Boolean);
+    })(),
     student_opportunities: has('student_opportunities')
       ? d.student_opportunities
       : (has('opportunities') ? d.opportunities : []),

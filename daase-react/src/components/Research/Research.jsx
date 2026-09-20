@@ -1,9 +1,10 @@
 import React from 'react';
 import { RESEARCH_AREAS } from '../../data/fallback';
+import Publications from './Publications';
 import Footer from '../Layout/Footer';
 import TiltCard from '../Layout/TiltCard';
 
-export default function Research({ onNav }) {
+export default function Research({ onNav, publications }) {
   return (
     <div className="research-page fade-in">
       <div style={{ width: '100%', padding: '48px clamp(20px, 5%, 80px) 32px', boxSizing: 'border-box' }}>
@@ -73,6 +74,9 @@ export default function Research({ onNav }) {
           ))}
         </div>
       </div>
+
+      {/* Publications Section */}
+      <Publications publications={publications} />
 
       <Footer onNav={onNav} />
     </div>

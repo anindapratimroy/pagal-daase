@@ -54,8 +54,14 @@ export function parseDate(raw) {
 
 export function extractPublicationYear(pub) {
   const text = typeof pub === 'string' ? pub : (pub.text || pub.title || pub.citation || '');
-  const match = text.match(/\b(19\d\d|20\d\d)\b/);
-  return match ? parseInt(match[1], 10) : 0;
+  const matches = text.match(/\b(19[5-9]\d|20[0-9]\d)\b/g);
+  if (!matches) return 0;
+  // Pick the most relevant year (highest plausible year <= next year + 1)
+  const currentYear = new Date().getFullYear();
+  const validYears = matches
+    .map(m => parseInt(m, 10))
+    .filter(y => y >= 1990 && y <= currentYear + 2);
+  return validYears.length > 0 ? Math.max(...validYears) : parseInt(matches[0], 10);
 }
 
 export function getPublicationTimestamp(pub) {

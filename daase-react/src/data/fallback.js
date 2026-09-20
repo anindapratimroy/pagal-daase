@@ -17,28 +17,249 @@ export function drivePhotoUrl(raw) {
 
 export const PUBLICATIONS_FB = [
   {
-    text: "Aggarwal, K., Choudhary, R. K., Datta, A., & Imamura, T. (2025). On the estimation of solar wind velocity under varying solar activity conditions using Akatsuki measurements. MNRAS.",
-    url: "https://doi.org/10.1093/mnras/staf001"
+    "citation": "Survival of ultraheavy nuclei in astrophysical sources: applications to PNS outflows; Ekanger N., Bhattacharya M., Murase K. & Horiuchi S., Phys. Rev. D., 114, 063031 (2026)",
+    "text": "Survival of ultraheavy nuclei in astrophysical sources: applications to PNS outflows; Ekanger N., Bhattacharya M., Murase K. & Horiuchi S., Phys. Rev. D., 114, 063031 (2026)",
+    "url": "https://doi.org/10.1103/p1n3-hc7k",
+    "date": "2026-09-14",
+    "status": "active"
   },
   {
-    text: "Datta, A., Choudhury, T. R., Majumdar, S., More, S., Mukherjee, S. (2025). Current status and prospects of cosmology research in India. J Earth Syst Sci.",
-    url: "https://doi.org/10.1007/s12040-025-02456-1"
+    "citation": "Ultraheavy Ultrahigh-Energy Cosmic Rays; Zhang B. T., Murase K., Ekanger N., Bhattacharya M. & Horiuchi S., Phys. Rev. Lett., 136, 181002 (2026)",
+    "text": "Ultraheavy Ultrahigh-Energy Cosmic Rays; Zhang B. T., Murase K., Ekanger N., Bhattacharya M. & Horiuchi S., Phys. Rev. Lett., 136, 181002 (2026)",
+    "url": "https://doi.org/10.1103/221m-gvs3",
+    "date": "2026-05-07",
+    "status": "active"
   },
   {
-    text: "Brawar, B., Datta, A., & Mangla, S. (2025). Imaging Ionosphere's Wave like Structure Using Interferometry Data. AdSpR.",
-    url: "https://doi.org/10.1016/j.asr.2025.01.012"
+    "citation": "Fragile, P. C., Middleton, M. J., Brasseur, B., Bollimpalli, D. A., Smith, Z., The nature of tilted supercritical accretion discs, MNRAS 548, Issue 3 (2026).",
+    "text": "Fragile, P. C., Middleton, M. J., Brasseur, B., Bollimpalli, D. A., Smith, Z., The nature of tilted supercritical accretion discs, MNRAS 548, Issue 3 (2026).",
+    "url": "https://doi.org/10.1093/mnras/stag711",
+    "date": "2026-04-15",
+    "status": "active"
   },
   {
-    text: "Bhaskar, D., Tripathi, R., Shrivastava, M. N. (2025). Lower Ionospheric Perturbations Associated with Lightning Activity over Low and Equatorial Regions. Atmosphere.",
-    url: "https://doi.org/10.3390/atmos16010001"
+    "citation": "Bollimpalli, D. A., Horak, J., Kluzniak, W., Fragile, P. C., Misalignment of the Lense-Thirring precession by an accretion torque, A & A 707, A246 (2026)",
+    "text": "Bollimpalli, D. A., Horak, J., Kluzniak, W., Fragile, P. C., Misalignment of the Lense-Thirring precession by an accretion torque, A & A 707, A246 (2026)",
+    "url": "https://doi.org/10.1051/0004-6361/202554646",
+    "date": "2026-03-09",
+    "status": "active"
   },
   {
-    text: "Saharan, S., Purohit, J., Shrivastava, M. N., Dube, A. (2025). Seasonal dependence of solar flare induced Total Electron Content over low latitude ionosphere. ApSS.",
-    url: "https://doi.org/10.1007/s10509-025-04312-4"
+    "citation": "Quasi-steady emission from repeating fast radio bursts can be explained by magnetar wind nebulae; Bhattacharya M., Murase K. & Kashiyama K., MNRAS, 547, 1 (2025)",
+    "text": "Quasi-steady emission from repeating fast radio bursts can be explained by magnetar wind nebulae; Bhattacharya M., Murase K. & Kashiyama K., MNRAS, 547, 1 (2025)",
+    "url": "https://doi.org/10.1093/mnras/staf2175",
+    "date": "2025-12-10",
+    "status": "active"
   },
   {
-    text: "Rana, P., Tarafdar, P., Nobleson, K., Dwivedi, C. (2025). Data-driven Analysis of Stellar Populations. Astronomy & Astrophysics.",
-    url: "https://doi.org/10.1051/0004-6361/202452001"
+    "citation": "Fragile, P. C., Bollimpalli, D. A., Schnittman, Jeremy D., Harvey, C., Polarization Signatures of Quasi-Periodic Oscillations in Simulated Tilted, Truncated Disks, ApJ 991, 80 (2025).",
+    "text": "Fragile, P. C., Bollimpalli, D. A., Schnittman, Jeremy D., Harvey, C., Polarization Signatures of Quasi-Periodic Oscillations in Simulated Tilted, Truncated Disks, ApJ 991, 80 (2025).",
+    "url": "https://doi.org/10.3847/1538-4357/adfde1",
+    "date": "2025-09-17",
+    "status": "active"
+  },
+  {
+    "citation": "Chakraborty, S., Mondal, S. K., Shukla, B. P., Kumar, R., Das, S., & Mitra, A. (2025). Nowcasting of rain with Doppler weather radar–A comparative strategy for complex orography. J Earth Syst Sci, 134(190).",
+    "text": "Chakraborty, S., Mondal, S. K., Shukla, B. P., Kumar, R., Das, S., & Mitra, A. (2025). Nowcasting of rain with Doppler weather radar–A comparative strategy for complex orography. J Earth Syst Sci, 134(190).",
+    "url": "https://doi.org/10.1007/s12040-025-02649-4",
+    "date": "2025-09-01",
+    "status": "active"
+  },
+  {
+    "citation": "Nasreen, I. ; Datta, K. K. ; Shaw, A. K. ; Noble, L. ; Ghara, R. ; Saiyad Ali, Sk. ; Mishra, A. ; Kamran, M. ; Majumdar, S.; Effects of Large Optical Depth on CD HI 21-cm Non-Gaussian Signal; Monthly Notices of the Royal Astronomical Society, September 2025",
+    "text": "Nasreen, I. ; Datta, K. K. ; Shaw, A. K. ; Noble, L. ; Ghara, R. ; Saiyad Ali, Sk. ; Mishra, A. ; Kamran, M. ; Majumdar, S.; Effects of Large Optical Depth on CD HI 21-cm Non-Gaussian Signal; Monthly Notices of the Royal Astronomical Society, September 2025",
+    "url": "https://doi.org/10.1093/mnras/staf1584",
+    "date": "2025-09-01",
+    "status": "active"
+  },
+  {
+    "citation": "Wasserman, J. ; Zackrisson, E. ; Dhandha, J. ; Fialkov, A. ; Noble, L. ; Majumdar, S.; Ultraviolet photon production rates of the first stars: Impact on the He II  λ 1640 Å emission line from primordial star clusters and the 21-cm signal from cosmic dawn;  \nMonthly Notices of the Royal Astronomical Society, Accepted in September 2025",
+    "text": "Wasserman, J. ; Zackrisson, E. ; Dhandha, J. ; Fialkov, A. ; Noble, L. ; Majumdar, S.; Ultraviolet photon production rates of the first stars: Impact on the He II  λ 1640 Å emission line from primordial star clusters and the 21-cm signal from cosmic dawn;  \nMonthly Notices of the Royal Astronomical Society, Accepted in September 2025",
+    "url": "https://doi.org/10.48550/arXiv.2507.21764",
+    "date": "2025-09-01",
+    "status": "active"
+  },
+  {
+    "citation": "Tyagi, V., & Das, S. (2025). A probabilistic algorithm for mitigating persistent ground clutter in Doppler weather radar. Journal of Geophysical Research: Atmospheres, 130(15), e2025JD043478.",
+    "text": "Tyagi, V., & Das, S. (2025). A probabilistic algorithm for mitigating persistent ground clutter in Doppler weather radar. Journal of Geophysical Research: Atmospheres, 130(15), e2025JD043478.",
+    "url": "https://doi.org/10.1029/2025JD043478",
+    "date": "2025-08-01",
+    "status": "active"
+  },
+  {
+    "citation": "Tripathi, A; Datta, A; Mazumder, A; Majumdar, S. (2025). Impact of Calibration and Position Errors on Astrophysical Parameters of the HI 21cm Signal; Journal of Cosmology and Astroparticle Physics, Accepted in August 2025",
+    "text": "Tripathi, A; Datta, A; Mazumder, A; Majumdar, S. (2025). Impact of Calibration and Position Errors on Astrophysical Parameters of the HI 21cm Signal; Journal of Cosmology and Astroparticle Physics, Accepted in August 2025",
+    "url": "https://doi.org/10.48550/arXiv.2502.20962",
+    "date": "2025-08-01",
+    "status": "active"
+  },
+  {
+    "citation": "Aggarwal, K., Choudhary, R.K., Datta, A. and Imamura, T., “On the estimation of solar wind velocity under varying solar activity conditions using Akatsuki measurements.”, 2025, MNRAS",
+    "text": "Aggarwal, K., Choudhary, R.K., Datta, A. and Imamura, T., “On the estimation of solar wind velocity under varying solar activity conditions using Akatsuki measurements.”, 2025, MNRAS",
+    "url": "https://doi.org/10.1093/mnras/staf1305",
+    "date": "2025-08-01",
+    "status": "active"
+  },
+  {
+    "citation": "Datta, A., Choudhury, T.R., Majumdar, S., More, S., Mukherjee, S., Souradeep, T., Das, S., Adhikari, S., Banerjee, A., Nadkarni-Ghosh, S. and Jain, R.K., “Current status and prospects of cosmology research in India”, 2025, JApA, 46(2), p.61",
+    "text": "Datta, A., Choudhury, T.R., Majumdar, S., More, S., Mukherjee, S., Souradeep, T., Das, S., Adhikari, S., Banerjee, A., Nadkarni-Ghosh, S. and Jain, R.K., “Current status and prospects of cosmology research in India”, 2025, JApA, 46(2), p.61",
+    "url": "https://doi.org/10.1007/s12036-025-10078-4",
+    "date": "2025-08-01",
+    "status": "active"
+  },
+  {
+    "citation": "Bagchi, M., Bera, P., Beri, A., Bhattacharya, D., Bhattacharyya, B., Bhattacharyya, S., Chakraborty, M., Chatterjee, D., Chatterjee, S., Chattopadhyay, I., Das, S., Konar, S., Majumdar, P., Misra, R., Mukherjee, A., Mukhopadhyay, B., Pahari, M., Singh, K.~K., Surnis, M., Sutaria, F., & Tendulkar, S., \"Astrophysics with compact objects: An Indian perspective, present status and future vision\", 2025, JApA, 46, 62.",
+    "text": "Bagchi, M., Bera, P., Beri, A., Bhattacharya, D., Bhattacharyya, B., Bhattacharyya, S., Chakraborty, M., Chatterjee, D., Chatterjee, S., Chattopadhyay, I., Das, S., Konar, S., Majumdar, P., Misra, R., Mukherjee, A., Mukhopadhyay, B., Pahari, M., Singh, K.~K., Surnis, M., Sutaria, F., & Tendulkar, S., \"Astrophysics with compact objects: An Indian perspective, present status and future vision\", 2025, JApA, 46, 62.",
+    "url": "https://doi.org/10.1007/s12036-025-10077-5",
+    "date": "2025-08-01",
+    "status": "active"
+  },
+  {
+    "citation": "Fragile, P. C., Bollimpalli, D. A., Schnittman, Jeremy D., Harvey, C., Polarization Signatures of Quasi-Periodic Oscillations in Simulated Tilted, Truncated Disks, (Accepted in ApJ)",
+    "text": "Fragile, P. C., Bollimpalli, D. A., Schnittman, Jeremy D., Harvey, C., Polarization Signatures of Quasi-Periodic Oscillations in Simulated Tilted, Truncated Disks, (Accepted in ApJ)",
+    "url": "https://arxiv.org/abs/2505.11446",
+    "date": "2025-08-01",
+    "status": "active"
+  },
+  {
+    "citation": "Bollimpalli, D. A., Horak, J., Kluzniak, W., P. C. Fragile Misalignment of the Lense-Thirring precession by an accretion torque (To appear in A & A)",
+    "text": "Bollimpalli, D. A., Horak, J., Kluzniak, W., P. C. Fragile Misalignment of the Lense-Thirring precession by an accretion torque (To appear in A & A)",
+    "url": "https://arxiv.org/abs/2503.20577",
+    "date": "2025-08-01",
+    "status": "active"
+  },
+  {
+    "citation": "Brawar, B., Datta, A. and Mangla, S.,“Imaging Ionosphere’s Wave like Structure Using Interferometry Data”. 2025, AdSpR",
+    "text": "Brawar, B., Datta, A. and Mangla, S.,“Imaging Ionosphere’s Wave like Structure Using Interferometry Data”. 2025, AdSpR",
+    "url": "https://doi.org/10.1016/j.asr.2025.07.059",
+    "date": "2025-07-01",
+    "status": "active"
+  },
+  {
+    "citation": "Bhaskar, D., Tripathi, R., Shrivastava, M.N., Singh, R., Sasmal, S., Datta, A. and Maurya, A.K., “Lower Ionospheric Perturbations Associated with Lightning Activity over Low and Equatorial Regions”, 2025, Atmosphere, 16(7), p.832.",
+    "text": "Bhaskar, D., Tripathi, R., Shrivastava, M.N., Singh, R., Sasmal, S., Datta, A. and Maurya, A.K., “Lower Ionospheric Perturbations Associated with Lightning Activity over Low and Equatorial Regions”, 2025, Atmosphere, 16(7), p.832.",
+    "url": "https://doi.org/10.3390/atmos16070832",
+    "date": "2025-07-01",
+    "status": "active"
+  },
+  {
+    "citation": "Saharan, S., Purohit, J., Shrivastava, M.N., Dube, A., Sasmal, S., Datta, A., Maurya, A.K. and Sharma, H., “Seasonal dependence of solar flare induced Total Electron Content over low latitude ionosphere.”, 2025, ApSS, 370(7), pp.1-13.",
+    "text": "Saharan, S., Purohit, J., Shrivastava, M.N., Dube, A., Sasmal, S., Datta, A., Maurya, A.K. and Sharma, H., “Seasonal dependence of solar flare induced Total Electron Content over low latitude ionosphere.”, 2025, ApSS, 370(7), pp.1-13.",
+    "url": "https://doi.org/10.1007/s10509-025-04464-1",
+    "date": "2025-07-01",
+    "status": "active"
+  },
+  {
+    "citation": "Rana, P., Tarafdar, P., Nobleson, K., Dwivedi, C., Chandra Joshi, B., Deb, D., Mondal, S., Krishnakumar, M.~A., Shukla, A., Singha, J., Grover, H., Tahbildar, H., Susobhanan, A., Surnis, M., Desai, S., Batra, N.~D., Srivastava, A., Bharambe, V., Jose, J., Vyasraj, V., Jose Jacob, S., Amarnath, Singh, M., Zuraiq, Z., Sengupta, S., Ogi, T., Kumar, D., Jagadeesh, S., Kareem, F., Maity, D., Rai, K., Vara, K., Chowdhury, S., Kato, R., Arumugam, S., Mamidipaka, P., Arul Pandian, B., Shaji, K., Thiagaraj, P., Arumugam, P., Bagchi, M., Chakraborty, M., Gopakumar, A., Gupta, Y., Maan, Y., Kumar Paladi, A., & Takahashi, K., \"The Indian Pulsar Timing Array data release 2: I. Dataset and timing analysis\", 2025, PASA, 42, pp. 108.",
+    "text": "Rana, P., Tarafdar, P., Nobleson, K., Dwivedi, C., Chandra Joshi, B., Deb, D., Mondal, S., Krishnakumar, M.~A., Shukla, A., Singha, J., Grover, H., Tahbildar, H., Susobhanan, A., Surnis, M., Desai, S., Batra, N.~D., Srivastava, A., Bharambe, V., Jose, J., Vyasraj, V., Jose Jacob, S., Amarnath, Singh, M., Zuraiq, Z., Sengupta, S., Ogi, T., Kumar, D., Jagadeesh, S., Kareem, F., Maity, D., Rai, K., Vara, K., Chowdhury, S., Kato, R., Arumugam, S., Mamidipaka, P., Arul Pandian, B., Shaji, K., Thiagaraj, P., Arumugam, P., Bagchi, M., Chakraborty, M., Gopakumar, A., Gupta, Y., Maan, Y., Kumar Paladi, A., & Takahashi, K., \"The Indian Pulsar Timing Array data release 2: I. Dataset and timing analysis\", 2025, PASA, 42, pp. 108.",
+    "url": "https://doi.org/10.1017/pasa.2025.10066",
+    "date": "2025-07-01",
+    "status": "active"
+  },
+  {
+    "citation": "Fragile, P. C., Middleton, M. J., Bollimpalli, D. A., Smith, Z., Long time-scale numerical simulations of large supercritical accretion discs, MNRAS 540, Issue 3, 2820–2829 (2025).",
+    "text": "Fragile, P. C., Middleton, M. J., Bollimpalli, D. A., Smith, Z., Long time-scale numerical simulations of large supercritical accretion discs, MNRAS 540, Issue 3, 2820–2829 (2025).",
+    "url": "https://doi.org/10.1093/mnras/staf890",
+    "date": "2025-07-01",
+    "status": "active"
+  },
+  {
+    "citation": "Fragile, P. C., Middleton, M. J., Bollimpalli, D. A., Smith, Z., Long time-scale numerical simulations of large supercritical accretion discs, MNRAS 540, Issue 3, 2820–2829 (2025).",
+    "text": "Fragile, P. C., Middleton, M. J., Bollimpalli, D. A., Smith, Z., Long time-scale numerical simulations of large supercritical accretion discs, MNRAS 540, Issue 3, 2820–2829 (2025).",
+    "url": "https://doi.org/10.1093/mnras/staf890",
+    "date": "2025-05-31",
+    "status": "active"
+  },
+  {
+    "citation": "Cocoon shock breakout emission from binary neutron star mergers; Gutierrez E., Bhattacharya M., Radice D., Murase K. & Bernuzzi S., Phys. Rev. D, 111, 063031 (2025)",
+    "text": "Cocoon shock breakout emission from binary neutron star mergers; Gutierrez E., Bhattacharya M., Radice D., Murase K. & Bernuzzi S., Phys. Rev. D, 111, 063031 (2025)",
+    "url": "https://doi.org/10.1103/PhysRevD.111.063031",
+    "date": "2025-03-11",
+    "status": "active"
+  },
+  {
+    "citation": "Two-component off-axis jet model for radio flares of tidal disruption events; Sato Y., Murase K., Bhattacharya M., Carpio J. A., Mukhopadhyay M. & Zhang B. T., Phys. Rev. D, 110, L061307 (2024)",
+    "text": "Two-component off-axis jet model for radio flares of tidal disruption events; Sato Y., Murase K., Bhattacharya M., Carpio J. A., Mukhopadhyay M. & Zhang B. T., Phys. Rev. D, 110, L061307 (2024)",
+    "url": "https://doi.org/10.1103/PhysRevD.110.L061307",
+    "date": "2024-09-23",
+    "status": "active"
+  },
+  {
+    "citation": "Bollimpalli, D. A., Fragile, P. C., J. W. Dewberry, Kluzniak, W., Truncated, Tilted Discs as a Possible Source of Quasi- Periodic Oscillations, MNRAS 528, Issue 2, 1142–1157 (2024).",
+    "text": "Bollimpalli, D. A., Fragile, P. C., J. W. Dewberry, Kluzniak, W., Truncated, Tilted Discs as a Possible Source of Quasi- Periodic Oscillations, MNRAS 528, Issue 2, 1142–1157 (2024).",
+    "url": "https://doi.org/10.1093/mnras/stad3975",
+    "date": "2023-12-23",
+    "status": "active"
+  },
+  {
+    "citation": "Comparison of models for the warm-hot circumgalactic medium around Milky-Way like galaxies, Singh, P., Lau, E., Faerman, Y., Stern, J., Nagai, D. 2024, MNRAS, 532, 3222",
+    "text": "Comparison of models for the warm-hot circumgalactic medium around Milky-Way like galaxies, Singh, P., Lau, E., Faerman, Y., Stern, J., Nagai, D. 2024, MNRAS, 532, 3222",
+    "url": "",
+    "date": "",
+    "status": "active"
+  },
+  {
+    "citation": "Probing the Circumgalactic Medium with Fast Radio Bursts: Insights from CAMELS, Medlock, I., Nagai, D., Singh, P., Oppenheimer, B., Daniel, A.-A., Villaescusa-Navarro, F. 2024, ApJ, 967, 32",
+    "text": "Probing the Circumgalactic Medium with Fast Radio Bursts: Insights from CAMELS, Medlock, I., Nagai, D., Singh, P., Oppenheimer, B., Daniel, A.-A., Villaescusa-Navarro, F. 2024, ApJ, 967, 32",
+    "url": "",
+    "date": "",
+    "status": "active"
+  },
+  {
+    "citation": "A multi-simulation study of relativistic SZ temperature scalings in galaxy clusters and groups, Lee, E., Anbajagane, D., Singh, P., Chluba, J., Nagai, D., Kay, S. T., Cui, W., Dolag, K., Yepes, G. 2022, MNRAS, 517, 5303",
+    "text": "A multi-simulation study of relativistic SZ temperature scalings in galaxy clusters and groups, Lee, E., Anbajagane, D., Singh, P., Chluba, J., Nagai, D., Kay, S. T., Cui, W., Dolag, K., Yepes, G. 2022, MNRAS, 517, 5303",
+    "url": "",
+    "date": "",
+    "status": "active"
+  },
+  {
+    "citation": "Constraints on precipitation limited hot halos from massive galaxies to galaxy clusters, Singh, P., Voit, G. M., Nath, B. B. 2021, MNRAS, 501, 2467",
+    "text": "Constraints on precipitation limited hot halos from massive galaxies to galaxy clusters, Singh, P., Voit, G. M., Nath, B. B. 2021, MNRAS, 501, 2467",
+    "url": "",
+    "date": "",
+    "status": "active"
+  },
+  {
+    "citation": "X-ray and SZ constraints on the properties of the hot CGM, Singh, P., Majumdar, S., Nath, B. B., Silk, J. 2018, MNRAS, 478, 2909",
+    "text": "X-ray and SZ constraints on the properties of the hot CGM, Singh, P., Majumdar, S., Nath, B. B., Silk, J. 2018, MNRAS, 478, 2909",
+    "url": "",
+    "date": "",
+    "status": "active"
+  },
+  {
+    "citation": "Evolution of bar-induced dark gaps in galaxy discs: evidence of strong bar-driven effects already at z>2, Chattopadhyay, Susnata ; Ghosh, Soumavo ; Gadotti, Dimitri A. ; Le Conte, Zoe A. ; Kim, Taehyun ; Cuomo, Virginia ; de Sá-Freitas, Camila ; Athanassoula, E., 2026, MNRAS (in press)",
+    "text": "Evolution of bar-induced dark gaps in galaxy discs: evidence of strong bar-driven effects already at z>2, Chattopadhyay, Susnata ; Ghosh, Soumavo ; Gadotti, Dimitri A. ; Le Conte, Zoe A. ; Kim, Taehyun ; Cuomo, Virginia ; de Sá-Freitas, Camila ; Athanassoula, E., 2026, MNRAS (in press)",
+    "url": "https://doi.org/10.1093/mnras/stag1670",
+    "date": "",
+    "status": "active"
+  },
+  {
+    "citation": "Quadrupole signature as a kinematic diagnostic to constrain bar properties: Implications for the Milky Way, Ghosh, Soumavo ; Kalda, Taavet ; Di Matteo, Paola; Green, Gregory M. ; Khoperskov, Sergey ; Katz, David ; Haywood, Misha 2025, A&A, 704, A 11",
+    "text": "Quadrupole signature as a kinematic diagnostic to constrain bar properties: Implications for the Milky Way, Ghosh, Soumavo ; Kalda, Taavet ; Di Matteo, Paola; Green, Gregory M. ; Khoperskov, Sergey ; Katz, David ; Haywood, Misha 2025, A&A, 704, A 11",
+    "url": "",
+    "date": "",
+    "status": "active"
+  },
+  {
+    "citation": "Closing the gap: secular evolution of bar-induced dark gaps in the presence of thick discs, Ghosh, Soumavo; Gadotti, Dimitri A; Fragkoudi, Francesca; Nagpal, Vighnesh ; Di Matteo, Paola ; Cuomo, Virginia, 2024, MNRAS, 532, 4570",
+    "text": "Closing the gap: secular evolution of bar-induced dark gaps in the presence of thick discs, Ghosh, Soumavo; Gadotti, Dimitri A; Fragkoudi, Francesca; Nagpal, Vighnesh ; Di Matteo, Paola ; Cuomo, Virginia, 2024, MNRAS, 532, 4570",
+    "url": "",
+    "date": "",
+    "status": "active"
+  },
+  {
+    "citation": "Bars and boxy/peanut bulges in thin and thick discs. III. Boxy/peanut bulge formation and evolution in the presence of thick discs, Ghosh, Soumavo; Fragkoudi, Francesca; Di Matteo, Paola ; Saha, Kanak, 2024, A&A, 683, A196",
+    "text": "Bars and boxy/peanut bulges in thin and thick discs. III. Boxy/peanut bulge formation and evolution in the presence of thick discs, Ghosh, Soumavo; Fragkoudi, Francesca; Di Matteo, Paola ; Saha, Kanak, 2024, A&A, 683, A196",
+    "url": "",
+    "date": "",
+    "status": "active"
+  },
+  {
+    "citation": "Looking for a needle in a haystack: Measuring the length of a stellar bar, Ghosh, Soumavo; Di Matteo, Paola, 2024, A&A, 683, A100",
+    "text": "Looking for a needle in a haystack: Measuring the length of a stellar bar, Ghosh, Soumavo; Di Matteo, Paola, 2024, A&A, 683, A100",
+    "url": "",
+    "date": "",
+    "status": "active"
   }
 ];
 
