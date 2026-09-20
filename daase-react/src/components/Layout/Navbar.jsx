@@ -41,7 +41,7 @@ export default function Navbar({ current, onNav, onOpenSearch }) {
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 40);
+      setIsScrolled(currentScrollY > 20);
 
       // Determine scroll direction for auto-hide
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
