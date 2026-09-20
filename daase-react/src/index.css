@@ -3282,6 +3282,15 @@ nav.nav-scrolled.nav-hidden {
   font-size: 15px;
 }
 
+.power-search-input::-webkit-search-decoration,
+.power-search-input::-webkit-search-cancel-button,
+.power-search-input::-webkit-search-results-button,
+.power-search-input::-webkit-search-results-decoration {
+  -webkit-appearance: none !important;
+  display: none !important;
+  margin: 0;
+}
+
 .power-search-clear-btn {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);

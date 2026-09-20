@@ -675,7 +675,7 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
 
           <input
             ref={inputRef}
-            type="search"
+            type="text"
             className="power-search-input"
             value={query}
             onChange={e => setQuery(e.target.value)}
