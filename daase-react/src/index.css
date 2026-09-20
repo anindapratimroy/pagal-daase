@@ -1751,6 +1751,8 @@ nav.nav-scrolled.nav-hidden {
   line-height: 1.7;
   margin: 0;
   font-weight: 400;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .hod-about-highlights {
@@ -1946,10 +1948,14 @@ nav.nav-scrolled.nav-hidden {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .hod-message-body p {
   margin: 0;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .hod-message-body strong {
