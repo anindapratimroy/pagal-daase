@@ -1484,13 +1484,13 @@ nav.nav-scrolled.nav-hidden {
 }
 
 .home-pub-marquee-container {
-  height: 275px;
+  height: 380px;
   overflow: hidden;
   position: relative;
   margin: 0 -14px;
   padding: 0 14px;
-  mask-image: linear-gradient(to bottom, transparent, black 5%, black 95%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 5%, black 95%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 6%, black 94%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 6%, black 94%, transparent);
   transform: translateZ(0);
 }
 
@@ -6435,7 +6435,11 @@ a.sc-email:hover {
 
   .news-feed-container,
   .home-pub-container {
-    padding: 20px 6px 12px 6px;
+    padding: 20px 14px 18px 14px;
+  }
+
+  .home-pub-marquee-container {
+    height: 360px;
   }
 }
 
@@ -6492,7 +6496,11 @@ a.sc-email:hover {
 
   .news-feed-container,
   .home-pub-container {
-    padding: 20px 10px 14px 10px;
+    padding: 20px 14px 16px 14px;
+  }
+
+  .home-pub-marquee-container {
+    height: 340px;
   }
 }
 
