@@ -14,7 +14,7 @@ const getLogoSrc = (imgName) => {
   return `./images/collaborators/${imgName}`;
 };
 
-// Using the 29 logos, plus names and official links
+// Using the 31 logos, plus names and official links
 const LOGOS = [
   { img: 'mcgill.png', name: 'McGill University', url: 'https://www.mcgill.ca/' },
   { img: 'unimelb.png', name: 'University of Melbourne', url: 'https://www.unimelb.edu.au/' },
@@ -44,7 +44,9 @@ const LOGOS = [
   { img: 'dtu.png', name: 'DTU Space', url: 'https://www.space.dtu.dk/english' },
   { img: 'ifpu.png', name: 'IFPU', url: 'https://www.ifpu.it/' },
   { img: 'colorado.png', name: 'University of Colorado', url: 'https://www.colorado.edu/' },
-  { img: 'torino.png', name: 'University of Turin', url: 'https://en.unito.it/' }
+  { img: 'torino.png', name: 'University of Turin', url: 'https://en.unito.it/' },
+  { img: 'psu.png', name: 'Pennsylvania State University', url: 'https://www.psu.edu/' },
+  { img: 'tohoku.png', name: 'Tohoku University', url: 'https://www.tohoku.ac.jp/en/' }
 ];
 
 export default function Collaborators() {
