@@ -156,9 +156,11 @@ function FacultyCard({ f, category = 'faculty' }) {
           const chamberVal = (f.chamber || f.chamber_no || f.office || '').toString().trim();
           const phoneExtVal = (f.phoneExt || f.extension || f.phone || '').toString().trim();
           if (!chamberVal && !phoneExtVal) return null;
-          const displayChamber = chamberVal.toLowerCase().startsWith('room') || chamberVal.toLowerCase().startsWith('chamber')
+          const displayChamber = chamberVal.toLowerCase().startsWith('office') || chamberVal.toLowerCase().startsWith('chamber')
             ? chamberVal
-            : `Room ${chamberVal}`;
+            : chamberVal.toLowerCase().startsWith('room')
+              ? chamberVal.replace(/^room\s*/i, 'Office ')
+              : `Office ${chamberVal}`;
           const displayExt = phoneExtVal.toLowerCase().startsWith('ext')
             ? phoneExtVal
             : `Ext. ${phoneExtVal}`;
@@ -166,7 +168,7 @@ function FacultyCard({ f, category = 'faculty' }) {
           return (
             <div className="fc-office-strip">
               {chamberVal && (
-                <span className="fc-office-item" title={`Office / Chamber: ${chamberVal}`}>
+                <span className="fc-office-item" title={`Office: ${chamberVal}`}>
                   <span className="fc-office-icon">🏢</span>
                   <span>{displayChamber}</span>
                 </span>
