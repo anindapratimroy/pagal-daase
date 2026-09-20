@@ -223,7 +223,7 @@ export default function App() {
     switch (view) {
       case 'home':       return <Home onNav={handleNav} news={data.news} events={data.events} publications={data.publications} />;
       case 'research':   return <Research onNav={handleNav} publications={data.publications} />;
-      case 'research-detail': return <ResearchAreaDetail areaId={researchAreaId} onNav={handleNav} />;
+      case 'research-detail': return <ResearchAreaDetail areaId={researchAreaId} onNav={handleNav} faculty={data.faculty} />;
       case 'programs':   return <Programs initialProg={progTab} onNav={handleNav} />;
       case 'people':     return (
         <Faculty

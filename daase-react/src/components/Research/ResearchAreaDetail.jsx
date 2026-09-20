@@ -4,15 +4,16 @@ import Footer from '../Layout/Footer';
 import './ResearchAreaDetail.css';
 
 /** Normalize name: strip "Dr." / "Prof." prefix for fuzzy matching */
-function findFaculty(memberName) {
+function findFaculty(memberName, facultyList = FACULTY_FB) {
   if (!memberName) return null;
+  const list = facultyList && facultyList.length > 0 ? facultyList : FACULTY_FB;
   // Try exact match first
-  let fac = FACULTY_FB.find(f => f.name === memberName);
+  let fac = list.find(f => f.name === memberName);
   if (fac) return fac;
   // Try matching by stripping prefix on both sides
   const normalize = s => s.replace(/^(Dr\.|Prof\.|Professor)\s+/i, '').trim().toLowerCase();
   const target = normalize(memberName);
-  return FACULTY_FB.find(f => {
+  return list.find(f => {
     const fn = normalize(f.name);
     return fn === target || fn.startsWith(target + ' ') || fn.endsWith(' ' + target);
   }) || null;
@@ -118,7 +119,7 @@ const ALIAS_MAP = {
   'communication-navigation-remote-sensing': 'instrumentation',
 };
 
-export default function ResearchAreaDetail({ areaId, onNav }) {
+export default function ResearchAreaDetail({ areaId, onNav, faculty }) {
   const resolvedId = ALIAS_MAP[areaId] || areaId;
   const area = RESEARCH_AREAS.find(r => r.id === resolvedId || r.id === areaId);
 
@@ -187,7 +188,7 @@ export default function ResearchAreaDetail({ areaId, onNav }) {
               <h3 className="rd-sidebar-title">FACULTY</h3>
               <ul className="rd-faculty-list">
                 {area.faculty.map((member, i) => {
-                  const fac = findFaculty(member);
+                  const fac = findFaculty(member, faculty);
                   const hasLink = fac && fac.url;
                   return (
                     <li key={i}>

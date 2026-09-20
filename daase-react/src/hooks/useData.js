@@ -6,7 +6,7 @@ import {
 } from '../data/fallback';
 import { loadPhotoManifest } from '../utils/photoResolver';
 
-const CACHE_KEY = 'daase_v13_data';
+const CACHE_KEY = 'daase_v14_data';
 const CACHE_TTL = 30 * 60 * 1000; // 30 min
 
 export function normalizePubUrl(raw) {
@@ -140,10 +140,8 @@ function resolveData(d) {
     faculty: has('faculty')
       ? (() => {
           let list = d.faculty.map(f => {
-            let research = (f.research || '').replace(/\s+/g, ' ').trim();
-            if (f.name && f.name.includes('Mukul')) {
-              research = 'Multi-messenger astrophysics, transient phenomena, compact objects (BH, NS), particle acceleration & relativistic outflows';
-            }
+            const rawResearch = f.research || f.research_interests || f.research_areas || '';
+            const research = rawResearch.replace(/\s+/g, ' ').trim();
             return {
               ...f,
               name: (f.name || '').replace(/\s+/g, ' ').trim(),
