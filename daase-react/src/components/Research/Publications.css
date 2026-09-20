@@ -27,7 +27,6 @@
 
 .publications-header h2 {
   margin: 0;
-  
   font-size: 1.55rem;
   font-weight: 700;
   color: var(--text-on-dark, #fff);
@@ -65,10 +64,18 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  animation: scrollUp 18s linear infinite;
+  /* 60s ÷ 35 items ≈ 1.7s per pub — comfortable reading pace on desktop */
+  animation: scrollUp 60s linear infinite;
 }
 
+/* Pause on hover (desktop) */
 .publications-scroller:hover .publications-content {
+  animation-play-state: paused;
+}
+
+/* Pause on touch / focus (mobile: tap to stop scrolling) */
+.publications-scroller:focus-within .publications-content,
+.publications-scroller:active .publications-content {
   animation-play-state: paused;
 }
 
@@ -180,5 +187,9 @@
   }
   .publications-scroller {
     height: 280px;
+  }
+  /* Slower on mobile — gives ~2.6s per item at 35 publications */
+  .publications-content {
+    animation-duration: 90s !important;
   }
 }
