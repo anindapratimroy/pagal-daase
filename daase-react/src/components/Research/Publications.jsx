@@ -49,7 +49,7 @@ export default function Publications({ publications: propPubs }) {
         <div className="publications-header">
           <div>
             <span className="pub-eyebrow">✦ Latest Research</span>
-            <h2>Department Publications</h2>
+            <h2>Research Publications</h2>
           </div>
           <div className="pub-title-bar" />
 

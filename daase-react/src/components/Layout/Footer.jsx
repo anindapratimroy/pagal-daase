@@ -7,6 +7,7 @@ const QUICK_LINKS = [
   { id: 'programs',       label: 'Programs' },
   { id: 'research',       label: 'Research Areas' },
   { id: 'facilities',     label: 'Research Facilities' },
+  { id: 'publications',   label: 'Research Publications' },
   { id: 'events',         label: 'Events' },
   { id: 'opportunities',  label: 'Opportunities' },
 ];
@@ -44,7 +45,9 @@ export default function Footer({ onNav }) {
     } else {
       window.location.hash = id;
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (id !== 'publications') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   return (

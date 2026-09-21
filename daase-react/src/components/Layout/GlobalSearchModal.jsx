@@ -675,7 +675,7 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
       return '🔬 Explore Research Domain';
     }
     if (item.category === 'Publications') {
-      return item.url ? '📄 Open Research Paper ↗' : '📚 View in Publications';
+      return item.url ? '📄 Open Research Paper ↗' : '📚 View in Research Publications';
     }
     if (item.category === 'Facilities') {
       return '🔭 View Research Facility';

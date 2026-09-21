@@ -141,7 +141,7 @@ export default function Navbar({ current, onNav, onOpenSearch }) {
                 className={current === 'publications' ? 'active' : ''}
                 onClick={(e) => { e.stopPropagation(); handleNav('publications'); }}
               >
-                Recent Publications
+                Research Publications
               </button>
             </div>
           </div>
@@ -270,7 +270,7 @@ export default function Navbar({ current, onNav, onOpenSearch }) {
         </div>
         <button style={{ paddingLeft: '24px' }} className={current === 'research' ? 'active' : ''} onClick={() => handleNav('research')}>Research Areas</button>
         <button style={{ paddingLeft: '24px' }} className={current === 'facilities' ? 'active' : ''} onClick={() => handleNav('facilities')}>Research Facilities</button>
-        <button style={{ paddingLeft: '24px' }} className={current === 'publications' ? 'active' : ''} onClick={() => handleNav('publications')}>Recent Publications</button>
+        <button style={{ paddingLeft: '24px' }} className={current === 'publications' ? 'active' : ''} onClick={() => handleNav('publications')}>Research Publications</button>
 
         <button className={current === 'programs' ? 'active' : ''} onClick={() => handleNav('programs')}>Programs</button>
         {NAV_ITEMS.slice(2).map(item => (
