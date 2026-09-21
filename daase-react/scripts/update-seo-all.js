@@ -484,8 +484,8 @@ ${JSON.stringify(comprehensiveJsonLd, null, 2)}
 `;
   modified = modified.replace('</head>', `${jsonLdTag}\n  </head>`);
 
-  // 4. Inject semantic HTML directory right after <body>
-  modified = modified.replace('<body>', `<body>\n${htmlDirectory}`);
+  // 4. Inject semantic HTML directory right before </body> (keeping <div id="root"></div> at top of body)
+  modified = modified.replace('</body>', `${htmlDirectory}\n  </body>`);
 
   return modified;
 }

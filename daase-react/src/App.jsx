@@ -22,6 +22,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 import { useData } from './hooks/useData';
+import { FACULTY_FB, VISITING_FB, STAFF_FB, PHD_FB, PG_FB, UG_FB } from './data/fallback';
 
 // Map People dropdown IDs → Faculty component tab IDs
 const PEOPLE_TAB_MAP = {
@@ -45,39 +46,35 @@ const PEOPLE_TAB_MAP = {
 function findPersonDetails(slug, data) {
   const norm = (name) => `person-${(name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
 
+  const facultyList = data?.faculty?.length ? data.faculty : FACULTY_FB;
+  const visitingList = data?.visiting?.length ? data.visiting : VISITING_FB;
+  const staffList = data?.staff ? (Array.isArray(data.staff) ? data.staff : Object.values(data.staff).flat()) : STAFF_FB;
+  const phdObj = (data?.phd && Object.keys(data.phd).length) ? data.phd : PHD_FB;
+  const pgObj = (data?.pg && Object.keys(data.pg).length) ? data.pg : PG_FB;
+  const ugObj = (data?.ug && Object.keys(data.ug).length) ? data.ug : UG_FB;
+
   // 1. Faculty & Visiting
-  const foundFac = (data?.faculty || []).find(f => norm(f.name) === slug);
+  const foundFac = facultyList.find(f => norm(f.name) === slug);
   if (foundFac) return { tab: 'faculty', person: foundFac, title: `${foundFac.name} | Faculty | DAASE, IIT Indore` };
 
-  const foundVis = (data?.visiting || []).find(f => norm(f.name) === slug);
+  const foundVis = visitingList.find(f => norm(f.name) === slug);
   if (foundVis) return { tab: 'faculty', person: foundVis, title: `${foundVis.name} | Visiting Faculty | DAASE, IIT Indore` };
 
   // 2. Staff
-  let foundStaff = null;
-  if (Array.isArray(data?.staff)) {
-    foundStaff = data.staff.find(s => norm(s.name) === slug);
-  } else if (typeof data?.staff === 'object') {
-    foundStaff = Object.values(data.staff || {}).flat().find(s => norm(s?.name) === slug);
-  }
+  const foundStaff = staffList.find(s => norm(s.name) === slug);
   if (foundStaff) return { tab: 'staff', person: foundStaff, title: `${foundStaff.name} | Staff | DAASE, IIT Indore` };
 
   // 3. PhD
-  if (typeof data?.phd === 'object') {
-    const foundPhd = Object.values(data.phd || {}).flat().find(s => norm(s?.name) === slug);
-    if (foundPhd) return { tab: 'phd', person: foundPhd, title: `${foundPhd.name} | PhD Research Scholar | DAASE, IIT Indore` };
-  }
+  const foundPhd = Object.values(phdObj).flat().find(s => norm(s?.name) === slug);
+  if (foundPhd) return { tab: 'phd', person: foundPhd, title: `${foundPhd.name} | PhD Research Scholar | DAASE, IIT Indore` };
 
   // 4. PG
-  if (typeof data?.pg === 'object') {
-    const foundPg = Object.values(data.pg || {}).flat().find(s => norm(s?.name) === slug);
-    if (foundPg) return { tab: 'pg', person: foundPg, title: `${foundPg.name} | Postgraduate Student | DAASE, IIT Indore` };
-  }
+  const foundPg = Object.values(pgObj).flat().find(s => norm(s?.name) === slug);
+  if (foundPg) return { tab: 'pg', person: foundPg, title: `${foundPg.name} | Postgraduate Student | DAASE, IIT Indore` };
 
   // 5. UG
-  if (typeof data?.ug === 'object') {
-    const foundUg = Object.values(data.ug || {}).flat().find(s => norm(s?.name) === slug);
-    if (foundUg) return { tab: 'ug', person: foundUg, title: `${foundUg.name} | Undergraduate Student | DAASE, IIT Indore` };
-  }
+  const foundUg = Object.values(ugObj).flat().find(s => norm(s?.name) === slug);
+  if (foundUg) return { tab: 'ug', person: foundUg, title: `${foundUg.name} | Undergraduate Student | DAASE, IIT Indore` };
 
   return { tab: 'faculty', person: null, title: 'People | DAASE, IIT Indore' };
 }
@@ -104,6 +101,8 @@ export default function App() {
   const mainRef = useRef(null);
 
   const data = useData();
+  const dataRef = useRef(data);
+  dataRef.current = data;
 
   // Global search keyboard shortcuts (Cmd+K / Ctrl+K or '/')
   useEffect(() => {
@@ -153,7 +152,7 @@ export default function App() {
       const hash = window.location.hash.replace('#', '') || 'home';
       
       if (hash.startsWith('person-')) {
-        const { tab, title } = findPersonDetails(hash, data);
+        const { tab, title } = findPersonDetails(hash, dataRef.current);
         setPeopleTab(tab);
         setView('people');
         document.title = title;
@@ -195,12 +194,12 @@ export default function App() {
       window.scrollTo(0, 0);
     };
 
-    // Sync on initial load & data change
+    // Sync on initial load
     syncHashToState();
 
     window.addEventListener('hashchange', syncHashToState);
     return () => window.removeEventListener('hashchange', syncHashToState);
-  }, [data]);
+  }, []);
 
   // Dynamic Title & Meta Description Sync for route views
   useEffect(() => {
