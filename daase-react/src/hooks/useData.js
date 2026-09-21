@@ -117,7 +117,8 @@ export function useData() {
   }, []);
 
   const resolved = resolveData(data);
-  return { ...resolved, loading };
+  const isCached = Boolean(getCached(false));
+  return { ...resolved, loading, isCached };
 }
 
 async function fetchFresh() {

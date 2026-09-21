@@ -57,7 +57,6 @@ export default function App() {
   const [peopleTab, setPeopleTab] = useState('faculty'); // active tab inside People page
   const [progTab, setProgTab] = useState('btech'); // active tab inside Programs page
   const [researchAreaId, setResearchAreaId] = useState(null); // active research area
-  const [minTimePassed, setMinTimePassed] = useState(false);
   const [showBackTop, setShowTop] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const mainRef = useRef(null);
@@ -87,8 +86,7 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleGlobalKeyDown);
   }, []);
 
-  // Preloader: strictly wait 1.8s minimum for animation to finish.
-  // We no longer wait for data fetch to complete so the page loads blazing fast.
+  // Initialize AOS scroll reveals
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -96,12 +94,16 @@ export default function App() {
       offset: 100,
       easing: 'ease-out-cubic'
     });
-
-    const t = setTimeout(() => setMinTimePassed(true), 1800);
-    return () => clearTimeout(t);
   }, []);
-  
-  const isLoading = !minTimePassed;
+
+  const handlePreloaderComplete = () => {
+    // Refresh AOS once preloader reveals content
+    setTimeout(() => {
+      try {
+        AOS.refresh();
+      } catch { /* ignore */ }
+    }, 100);
+  };
 
   // Hash Routing Listener
   useEffect(() => {
@@ -268,7 +270,11 @@ export default function App() {
   return (
     <>
       <InteractiveBackground />
-      <Preloader visible={isLoading} />
+      <Preloader
+        loading={data.loading}
+        isCached={data.isCached}
+        onComplete={handlePreloaderComplete}
+      />
 
       <Navbar current={navCurrent} onNav={handleNav} onOpenSearch={() => setSearchModalOpen(true)} />
 
