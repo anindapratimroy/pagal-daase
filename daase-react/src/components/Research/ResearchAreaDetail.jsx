@@ -13,9 +13,16 @@ function findFaculty(memberName, facultyList = FACULTY_FB) {
   // Try matching by stripping prefix on both sides
   const normalize = s => s.replace(/^(Dr\.|Prof\.|Professor)\s+/i, '').trim().toLowerCase();
   const target = normalize(memberName);
-  return list.find(f => {
+  fac = list.find(f => {
     const fn = normalize(f.name);
     return fn === target || fn.startsWith(target + ' ') || fn.endsWith(' ' + target);
+  });
+  if (fac) return fac;
+  // Also check if key words match (e.g. unmesh and khati)
+  const targetWords = target.split(/\s+/).filter(w => w.length > 2);
+  return list.find(f => {
+    const fn = normalize(f.name);
+    return targetWords.length > 0 && targetWords.every(w => fn.includes(w));
   }) || null;
 }
 
@@ -194,7 +201,21 @@ export default function ResearchAreaDetail({ areaId, onNav, faculty }) {
                     <li key={i}>
                       {hasLink ? (
                         <a href={fac.url} target="_blank" rel="noopener noreferrer" className="faculty-member-link" title={`Open ${member}'s profile`}>
-                          <div className="faculty-avatar">👤</div>
+                          <div className="faculty-avatar">
+                            {fac && fac.photo ? (
+                              <img
+                                src={fac.photo}
+                                alt={member}
+                                style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
+                                onError={(e) => {
+                                  e.target.style.display = 'none';
+                                  if (e.target.parentElement) e.target.parentElement.textContent = '👤';
+                                }}
+                              />
+                            ) : (
+                              '👤'
+                            )}
+                          </div>
                           <div className="faculty-info">
                             <span className="faculty-name">{member}</span>
                             <span className="faculty-link-hint">View profile ↗</span>
@@ -202,7 +223,21 @@ export default function ResearchAreaDetail({ areaId, onNav, faculty }) {
                         </a>
                       ) : (
                         <div className="faculty-member-link faculty-no-link">
-                          <div className="faculty-avatar">👤</div>
+                          <div className="faculty-avatar">
+                            {fac && fac.photo ? (
+                              <img
+                                src={fac.photo}
+                                alt={member}
+                                style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
+                                onError={(e) => {
+                                  e.target.style.display = 'none';
+                                  if (e.target.parentElement) e.target.parentElement.textContent = '👤';
+                                }}
+                              />
+                            ) : (
+                              '👤'
+                            )}
+                          </div>
                           <span className="faculty-name">{member}</span>
                         </div>
                       )}

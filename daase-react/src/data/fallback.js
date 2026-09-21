@@ -326,7 +326,21 @@ export const RESEARCH_AREAS = [
     section_title: 'AREAS OF INTEREST',
     full_description: "• Big data\n• Bayesian Machine Learning\n• Deep Learning\n• Quantum Machine Learning\n• Data Visualization",
     image: 'images/research/Data_Science_ML_in_Astrophysics.png',
-    faculty: ['Dr. Mukul Bhattacharya']
+    faculty: [
+      'Dr. Saurabh Das',
+      'Prof. Abhirup Datta',
+      'Dr. Bhargav Vaidya',
+      'Dr. Narendra Nath Patra',
+      'Dr. Manoneeta Chakraborty',
+      'Dr. Soumavo Ghosh',
+      'Dr. Prakash Gaikwad',
+      'Dr. Suman Majumdar',
+      'Dr. Deepika Bollimpalli',
+      'Dr. Priyanka Singh',
+      'Dr. Unmesh Govind Khati',
+      'Dr. Amit Shukla',
+      'Dr. Mukul Bhattacharya'
+    ]
   }
 ];
 
