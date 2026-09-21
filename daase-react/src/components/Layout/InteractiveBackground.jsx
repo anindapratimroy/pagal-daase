@@ -116,6 +116,9 @@ const InteractiveBackground = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
     const getIsTouchDevice = () => {
       if (typeof window === 'undefined') return false;
       const hasCoarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
@@ -162,7 +165,7 @@ const InteractiveBackground = () => {
         resizeTimer = setTimeout(() => {
           const W = window.innerWidth;
           const H = window.innerHeight;
-          starsRef.current   = Array.from({ length: counts.stars },   (_, i) => createStar(W, H));
+          starsRef.current   = Array.from({ length: counts.stars },   () => createStar(W, H));
           nebulasRef.current = Array.from({ length: counts.nebulas }, (_, i) => createNebula(W, H, i));
           aurorasRef.current = Array.from({ length: counts.auroras }, ()    => createAurora(W, H));
         }, 250);
@@ -174,7 +177,7 @@ const InteractiveBackground = () => {
     const W = window.innerWidth;
     const H = window.innerHeight;
 
-    starsRef.current   = Array.from({ length: counts.stars },   (_, i) => createStar(W, H));
+    starsRef.current   = Array.from({ length: counts.stars },   () => createStar(W, H));
     nebulasRef.current = Array.from({ length: counts.nebulas }, (_, i) => createNebula(W, H, i));
     aurorasRef.current = Array.from({ length: counts.auroras }, ()    => createAurora(W, H));
 
@@ -442,6 +445,7 @@ const InteractiveBackground = () => {
 
     return () => {
       cancelAnimationFrame(animRef.current);
+      clearTimeout(resizeTimer);
       window.removeEventListener('resize',     resize);
       window.removeEventListener('mousemove',  onMove);
       window.removeEventListener('mouseleave', onLeave);
