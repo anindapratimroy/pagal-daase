@@ -95,6 +95,21 @@
   opacity: 0.85;
 }
 
+.pub-date-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: rgba(255, 217, 122, 0.12);
+  color: #ffd97a;
+  border: 1px solid rgba(255, 217, 122, 0.3);
+  border-radius: 6px;
+  padding: 2px 7px;
+  margin-left: 8px;
+  vertical-align: middle;
+  display: inline-block;
+  line-height: 1.2;
+}
+
 .pub-badge-archived {
   font-size: 10px;
   font-weight: 700;

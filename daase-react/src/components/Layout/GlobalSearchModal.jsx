@@ -3,6 +3,7 @@ import { drivePhotoUrl, RESEARCH_AREAS } from '../../data/fallback';
 import { imageMap } from '../../data/imageMap';
 import { resolvePhoto } from '../../utils/photoResolver';
 import { classifyOpportunity } from '../../utils/opportunityClassifier';
+import { formatPublicationDate } from '../../utils/dateUtils';
 
 const PROGRAMS_DATA = [
   {
@@ -414,12 +415,13 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
     (data.publications || []).forEach((pub, idx) => {
       const text = typeof pub === 'string' ? pub : (pub.text || pub.citation || pub.title || '');
       const isArchived = pub.status === 'archived' || pub.stage === 'archived';
+      const displayDate = pub.displayDate || formatPublicationDate(pub.date, text);
       items.push({
         id: `pub-${idx}`,
         title: text,
         category: 'Publications',
         badge: isArchived ? 'Archived Publication' : 'Active Publication',
-        sub: `${isArchived ? 'Archived Stage' : 'Active Stage'}${pub.date ? ` · ${pub.date}` : ''}`,
+        sub: `${isArchived ? 'Archived Stage' : 'Active Stage'}${displayDate ? ` · ${displayDate}` : ''}`,
         url: pub.url,
         status: pub.status || (isArchived ? 'archived' : 'active'),
         icon: '📄',

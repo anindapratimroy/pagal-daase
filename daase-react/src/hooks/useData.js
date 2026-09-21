@@ -5,8 +5,9 @@ import {
   ALUMNI_FB, EVENTS_FB, PHD_FB, INTERNS_FB, NEWS_FB, OUTREACH_FB, STAFF_FB
 } from '../data/fallback';
 import { loadPhotoManifest } from '../utils/photoResolver';
+import { formatPublicationDate } from '../utils/dateUtils';
 
-const CACHE_KEY = 'daase_v15_data';
+const CACHE_KEY = 'daase_v16_data';
 const CACHE_TTL = 30 * 60 * 1000; // 30 min
 
 export function normalizePubUrl(raw) {
@@ -47,12 +48,15 @@ export function normalizePublication(p) {
 
   const isArchived = rawStage.includes('archive') || Boolean(p && (p.isArchived || p.archived));
   const status = isArchived ? 'archived' : 'active';
+  const rawDate = typeof p === 'object' && p !== null ? (p.date || p.Date || '') : '';
+  const displayDate = formatPublicationDate(rawDate, text);
 
   return {
     citation: text,
     text,
     url: url || '',
-    date: (typeof p === 'object' && p !== null ? (p.date || p.Date || '') : ''),
+    date: rawDate,
+    displayDate,
     status,
     stage: status
   };

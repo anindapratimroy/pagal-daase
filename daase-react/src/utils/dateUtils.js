@@ -1,62 +1,158 @@
-/**
- * Universal Date Parser & Sorting Utilities for DAASE
- * Handles all Google Sheets date formats resiliently:
- *  - Standard ISO (YYYY-MM-DD)
- *  - DD/MM/YYYY, DD-MM-YYYY
- *  - Text format ("15 March 2025", "May 2025")
- *  - Ranges ("July 7–18, 2025", "December 15-17, 2025")
- *  - Year extraction from citation text ("... (2025). ...")
- */
+const MONTH_NAMES = {
+  jan: 1, january: 1,
+  feb: 2, february: 2,
+  mar: 3, march: 3,
+  apr: 4, april: 4,
+  may: 5,
+  jun: 6, june: 6,
+  jul: 7, july: 7,
+  aug: 8, august: 8,
+  sep: 9, sept: 9, september: 9,
+  oct: 10, october: 10,
+  nov: 11, november: 11,
+  dec: 12, december: 12,
+};
 
+function expandYear(yr) {
+  const y = parseInt(yr, 10);
+  if (isNaN(y)) return new Date().getFullYear();
+  if (y < 100) {
+    // 2-digit year: 25 -> 2025, 98 -> 1998
+    return y < 60 ? 2000 + y : 1900 + y;
+  }
+  return y;
+}
+
+/**
+ * Robust date parser supporting:
+ * - DD-MM-YYYY, DD/MM/YYYY, DD.MM.YYYY
+ * - DD-MM-YY, DD/MM/YY
+ * - YYYY-MM-DD, YYYY/MM/DD
+ * - Month DD, YYYY / DD Month YYYY (e.g. "December 10, 2025", "10 Dec 2025")
+ * - MM/YY, MM/YYYY, MM-YY (e.g. "09/25", "9/25", "09/2025")
+ * - Month YYYY (e.g. "December 2025", "May 2025")
+ * - Excel/Sheets date serial numbers (e.g. 45914)
+ * - Single 4-digit year (e.g. 2025)
+ * Never throws an error or crashes.
+ */
 export function parseDate(raw) {
-  if (!raw) return 0;
+  if (raw === null || raw === undefined) return 0;
+
+  // 1. Numeric Excel / Google Sheets serial date number
+  if (typeof raw === 'number' && raw > 30000 && raw < 70000) {
+    return new Date(Math.round((raw - 25569) * 86400 * 1000)).getTime();
+  }
+
   const str = String(raw).trim();
   if (!str) return 0;
 
-  // 1. Direct standard parseable (e.g. YYYY-MM-DD or standard Date strings)
-  const d = new Date(str);
-  if (!isNaN(d.getTime())) return d.getTime();
-
-  // 2. DD/MM/YYYY or DD-MM-YYYY
-  const dmy = str.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
-  if (dmy) {
-    const [, day, month, year] = dmy;
-    const parsed = new Date(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`);
-    if (!isNaN(parsed.getTime())) return parsed.getTime();
+  // Check if string is a numeric Excel serial
+  if (/^\d{5}$/.test(str)) {
+    const num = parseInt(str, 10);
+    if (num > 30000 && num < 70000) {
+      return new Date(Math.round((num - 25569) * 86400 * 1000)).getTime();
+    }
   }
 
-  // 3. Date ranges like "July 7–18, 2025" or "December 15–17, 2025"
-  const normalized = str.replace(/[–—]/g, '-');
-  const rangeMatch = normalized.match(/([a-zA-Z]+)\s+(\d+)(?:\s*-\s*\d+)?(?:,\s*(\d{4}))?/);
-  if (rangeMatch) {
-    const month = rangeMatch[1];
-    const day = rangeMatch[2];
-    const year = rangeMatch[3] || new Date().getFullYear();
-    const parsed = new Date(`${month} ${day}, ${year}`);
-    if (!isNaN(parsed.getTime())) return parsed.getTime();
-  }
-
-  // 4. "Month Year" e.g. "May 2025"
-  const myMatch = str.match(/([a-zA-Z]+)\s+(\d{4})/);
+  // 2. Two-part Month/Year: e.g. "09/25", "9/25", "09-25", "09/2025", "9/2025"
+  const myMatch = str.match(/^(\d{1,2})[\/\-](\d{2}|\d{4})$/);
   if (myMatch) {
-    const parsed = new Date(`${myMatch[1]} 1, ${myMatch[2]}`);
-    if (!isNaN(parsed.getTime())) return parsed.getTime();
+    const m = parseInt(myMatch[1], 10);
+    const y = expandYear(myMatch[2]);
+    if (m >= 1 && m <= 12 && y >= 1970 && y <= 2100) {
+      return new Date(Date.UTC(y, m - 1, 1)).getTime();
+    }
   }
 
-  // 5. 4-digit Year fallback (e.g. 2025)
-  const yMatch = str.match(/\b(20\d\d)\b/);
+  // 3. Three-part ISO format (YYYY-MM-DD or YYYY/MM/DD)
+  const isoMatch = str.match(/^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})$/);
+  if (isoMatch) {
+    const y = parseInt(isoMatch[1], 10);
+    const m = parseInt(isoMatch[2], 10);
+    const d = parseInt(isoMatch[3], 10);
+    if (m >= 1 && m <= 12 && d >= 1 && d <= 31) {
+      return new Date(Date.UTC(y, m - 1, d)).getTime();
+    }
+  }
+
+  // 4. Three-part DD-MM-YYYY, DD/MM/YYYY, DD.MM.YYYY, DD-MM-YY
+  const dmyMatch = str.match(/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{2,4})$/);
+  if (dmyMatch) {
+    let p1 = parseInt(dmyMatch[1], 10);
+    let p2 = parseInt(dmyMatch[2], 10);
+    const y = expandYear(dmyMatch[3]);
+    let day = p1;
+    let month = p2;
+    // If second number > 12 and first <= 12, input is MM/DD/YYYY
+    if (p2 > 12 && p1 <= 12) {
+      month = p1;
+      day = p2;
+    }
+    if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+      return new Date(Date.UTC(y, month - 1, day)).getTime();
+    }
+  }
+
+  // 5. Date ranges like "July 7–18, 2025" or "December 15–17, 2025"
+  const normalizedRange = str.replace(/[–—]/g, '-');
+  const rangeMatch = normalizedRange.match(/([a-zA-Z]+)\s+(\d+)(?:\s*-\s*\d+)?(?:,\s*(\d{4}))?/);
+  if (rangeMatch) {
+    const monthStr = rangeMatch[1].toLowerCase();
+    const day = parseInt(rangeMatch[2], 10);
+    const year = parseInt(rangeMatch[3] || new Date().getFullYear(), 10);
+    const m = MONTH_NAMES[monthStr];
+    if (m) {
+      return new Date(Date.UTC(year, m - 1, day)).getTime();
+    }
+  }
+
+  // 6. Text month with day and year: e.g. "December 10, 2025", "10 December 2025", "14-Sep-2026", "Sep 14 2026"
+  const textDateMatch = str.match(/(?:([a-zA-Z]+)[,\s\-]+(\d{1,2})|(\d{1,2})[,\s\-]+([a-zA-Z]+))[,\s\-]+(\d{2,4})/);
+  if (textDateMatch) {
+    const monthStr = (textDateMatch[1] || textDateMatch[4] || '').toLowerCase();
+    const dayStr = textDateMatch[2] || textDateMatch[3] || '1';
+    const yearStr = textDateMatch[5];
+    const m = MONTH_NAMES[monthStr];
+    if (m) {
+      const day = parseInt(dayStr, 10);
+      const y = expandYear(yearStr);
+      return new Date(Date.UTC(y, m - 1, day)).getTime();
+    }
+  }
+
+  // 7. Text month with year: e.g. "December 2025", "Dec 2025", "September 25"
+  const textMonthYear = str.match(/^([a-zA-Z]+)[,\s\-]+(\d{2,4})$/);
+  if (textMonthYear) {
+    const m = MONTH_NAMES[textMonthYear[1].toLowerCase()];
+    if (m) {
+      const y = expandYear(textMonthYear[2]);
+      return new Date(Date.UTC(y, m - 1, 1)).getTime();
+    }
+  }
+
+  // 8. Native Date parse fallback
+  const nativeParsed = new Date(str);
+  if (!isNaN(nativeParsed.getTime())) {
+    return nativeParsed.getTime();
+  }
+
+  // 9. Single 4-digit year fallback (e.g. "2025")
+  const yMatch = str.match(/\b(19\d{2}|20\d{2})\b/);
   if (yMatch) {
-    return new Date(`${yMatch[1]}-01-01`).getTime();
+    return new Date(Date.UTC(parseInt(yMatch[1], 10), 0, 1)).getTime();
   }
 
   return 0;
 }
 
+export function parsePublicationDate(raw) {
+  return parseDate(raw);
+}
+
 export function extractPublicationYear(pub) {
-  const text = typeof pub === 'string' ? pub : (pub.text || pub.title || pub.citation || '');
+  const text = typeof pub === 'string' ? pub : (pub?.text || pub?.title || pub?.citation || '');
   const matches = text.match(/\b(19[5-9]\d|20[0-9]\d)\b/g);
   if (!matches) return 0;
-  // Pick the most relevant year (highest plausible year <= next year + 1)
   const currentYear = new Date().getFullYear();
   const validYears = matches
     .map(m => parseInt(m, 10))
@@ -64,22 +160,61 @@ export function extractPublicationYear(pub) {
   return validYears.length > 0 ? Math.max(...validYears) : parseInt(matches[0], 10);
 }
 
+/**
+ * Formats a publication date for clean, elegant human display:
+ * - "14-09-2026" -> "Sep 14, 2026"
+ * - "09/25" -> "Sep 2025"
+ * - "December 10, 2025" -> "Dec 10, 2025"
+ * - If date missing, falls back to year from citation text (e.g. "2026")
+ * Never throws an error or crashes.
+ */
+export function formatPublicationDate(dateRaw, citationRaw = '') {
+  if (dateRaw) {
+    const str = String(dateRaw).trim();
+    const parsedTs = parseDate(str);
+    if (parsedTs > 0) {
+      const d = new Date(parsedTs);
+      // If original input was MM/YY, MM/YYYY or Month Year
+      if (/^(\d{1,2})[\/\-](\d{2}|\d{4})$/.test(str) || /^[a-zA-Z]+[,\s\-]+\d{2,4}$/.test(str)) {
+        return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+      }
+      // If only year
+      if (/^\d{4}$/.test(str)) {
+        return String(d.getUTCFullYear());
+      }
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+    }
+  }
+
+  const year = extractPublicationYear(citationRaw || dateRaw);
+  if (year > 0) {
+    return String(year);
+  }
+
+  return '';
+}
+
 export function getPublicationTimestamp(pub) {
-  if (pub && typeof pub === 'object' && pub.date) {
+  if (!pub) return 0;
+  if (typeof pub === 'object' && pub.date) {
     const ts = parseDate(pub.date);
+    if (ts > 0) return ts;
+  }
+  if (typeof pub === 'string') {
+    const ts = parseDate(pub);
     if (ts > 0) return ts;
   }
   const year = extractPublicationYear(pub);
   if (year > 0) {
-    return new Date(`${year}-01-01`).getTime();
+    return new Date(Date.UTC(year, 0, 1)).getTime();
   }
   return 0;
 }
 
 /**
  * Sorts publications newest first.
- * Priority 1: Date column from sheet
- * Priority 2: Year in citation text (e.g. 2025 > 2024 > 2023)
+ * Priority 1: Date column from sheet (parsed resiliently)
+ * Priority 2: Year in citation text (e.g. 2026 > 2025 > 2024)
  * Priority 3: Stable relative tie-breaker
  */
 export function sortPublications(pubs) {

@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { useData, normalizePubUrl } from '../../hooks/useData';
-import { sortPublications } from '../../utils/dateUtils';
+import { sortPublications, formatPublicationDate } from '../../utils/dateUtils';
 import './Publications.css';
 
 function getPubText(pub) {
@@ -91,6 +91,7 @@ export default function Publications({ publications: propPubs }) {
                 const text = getPubText(pub);
                 const url = getPubUrl(pub);
                 const isArchived = pub.status === 'archived';
+                const pubDateBadge = pub.displayDate || formatPublicationDate(pub.date, text);
 
                 // Split the display text to avoid showing raw URLs inline
                 const displayText = text
@@ -111,6 +112,7 @@ export default function Publications({ publications: propPubs }) {
                         <a href={url} target="_blank" rel="noopener noreferrer" className="pub-link" title="Open paper">
                           <span className="pub-text">
                             {displayText || text}
+                            {pubDateBadge && <span className="pub-date-badge">{pubDateBadge}</span>}
                             {isArchived && <span className="pub-badge-archived">Archived</span>}
                           </span>
                           <span className="pub-arrow">↗</span>
@@ -118,6 +120,7 @@ export default function Publications({ publications: propPubs }) {
                       ) : (
                         <span className="pub-text">
                           {displayText || text}
+                          {pubDateBadge && <span className="pub-date-badge">{pubDateBadge}</span>}
                           {isArchived && <span className="pub-badge-archived">Archived</span>}
                         </span>
                       )}
