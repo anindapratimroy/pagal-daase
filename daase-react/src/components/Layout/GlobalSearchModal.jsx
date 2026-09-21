@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { drivePhotoUrl, RESEARCH_AREAS } from '../../data/fallback';
 import { imageMap } from '../../data/imageMap';
 import { resolvePhoto } from '../../utils/photoResolver';
+import { classifyOpportunity } from '../../utils/opportunityClassifier';
 
 const PROGRAMS_DATA = [
   {
@@ -352,17 +353,18 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
 
     studentOpps.forEach((opp, idx) => {
       const deadline = opp.lastDate || opp.deadline;
+      const tierInfo = classifyOpportunity(opp);
       items.push({
         id: `opp-s-${idx}-${opp.title}`,
         title: opp.title,
         category: 'Opportunities',
-        badge: opp.tag || 'Student Opportunity',
+        badge: opp.tag ? `${tierInfo.shortLabel} · ${opp.tag}` : tierInfo.label,
         sub: `${deadline ? `Deadline: ${deadline}` : 'Open Application'}${opp.eligibility ? ` · ${opp.eligibility}` : ''}`,
         deadline,
         overview: opp.desc || opp.description,
         url: opp.applyLink || opp.link || opp.url,
-        icon: '🎓',
-        keywords: `${opp.title} ${opp.tag || ''} ${opp.desc || ''} ${opp.eligibility || ''} student opportunity admission phd internship research`,
+        icon: tierInfo.icon || '🎓',
+        keywords: `${opp.title} ${opp.tag || ''} ${opp.desc || ''} ${opp.eligibility || ''} ${tierInfo.label} ${tierInfo.shortLabel} phd jrf pg ug internship fellowship student opportunity admission research`,
         action: () => onNav('opportunities'),
       });
     });

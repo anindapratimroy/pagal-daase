@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Footer from '../Layout/Footer';
 import TiltCard from '../Layout/TiltCard';
+import { classifyOpportunity, sortOpportunitiesByTier, OPP_TIER_CONFIG } from '../../utils/opportunityClassifier';
 
 const TABS = [
   { id: 'students', label: 'Prospective Students', icon: '🎓' },
@@ -9,6 +10,7 @@ const TABS = [
 
 export default function Opportunities({ studentOpportunities, teacherOpportunities, opportunities = [], onNav }) {
   const [activeTab, setActiveTab] = useState('students');
+  const [selectedLevel, setSelectedLevel] = useState('all');
 
   const isActive = (o) => {
     if (!o) return false;
@@ -24,7 +26,23 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
         const t = (o.type || o.audience || '').toString().toLowerCase().trim();
         return t === '' || t === 'student' || t === 'students';
       });
-  const studentOpps = rawStudentList.filter(isActive);
+  
+  // Sort strictly by academic hierarchy: PhD -> JRF -> PG -> UG -> Other
+  const allSortedStudentOpps = sortOpportunitiesByTier(rawStudentList.filter(isActive));
+
+  // Compute counts for sub-level filter pills
+  const levelCounts = {
+    all: allSortedStudentOpps.length,
+    phd: allSortedStudentOpps.filter(o => classifyOpportunity(o).id === 'phd').length,
+    jrf: allSortedStudentOpps.filter(o => classifyOpportunity(o).id === 'jrf').length,
+    pg:  allSortedStudentOpps.filter(o => classifyOpportunity(o).id === 'pg').length,
+    ug:  allSortedStudentOpps.filter(o => classifyOpportunity(o).id === 'ug').length,
+  };
+
+  // Filter based on selected academic level
+  const studentOpps = selectedLevel === 'all'
+    ? allSortedStudentOpps
+    : allSortedStudentOpps.filter(o => classifyOpportunity(o).id === selectedLevel);
 
   // Derive Teacher / Faculty Opportunities
   const rawTeacherList = Array.isArray(teacherOpportunities) && teacherOpportunities.length > 0
@@ -36,7 +54,7 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
   const teacherOpps = rawTeacherList.filter(isActive);
 
   const tabs = [
-    { id: 'students', label: 'Prospective Students', icon: '🎓', count: studentOpps.length },
+    { id: 'students', label: 'Prospective Students', icon: '🎓', count: allSortedStudentOpps.length },
     { id: 'faculty',  label: 'Prospective Faculty',  icon: '👨‍🏫', count: teacherOpps.length },
   ];
 
@@ -51,22 +69,54 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
   };
 
   const renderOppCards = (list, defaultTag, isFaculty = false) => {
+    let lastTierId = null;
+
     return list.map((opp, idx) => {
-      const tagText = opp.tag || opp.category || defaultTag;
+      const tierInfo = isFaculty ? null : classifyOpportunity(opp);
+      const isNewTier = !isFaculty && selectedLevel === 'all' && tierInfo && tierInfo.id !== lastTierId;
+      if (!isFaculty && tierInfo) {
+        lastTierId = tierInfo.id;
+      }
+
+      const tagText = opp.tag || opp.category || (tierInfo ? tierInfo.shortLabel : defaultTag);
       const applyUrl = opp.applyLink || opp.link || opp.url;
       const deadline = opp.lastDate || opp.deadline;
       const descText = opp.desc || opp.description;
       const eligibility = opp.eligibility || opp.qualifications;
 
       return (
-        <TiltCard key={idx} className="opp-card anim-fadeup" style={{ animationDelay: `${0.08 * idx}s` }}>
-          {tagText && (
-            <div className="opp-badge">
-              {isFaculty ? '👨‍🏫' : '🎓'}&nbsp;&nbsp;{tagText}
+        <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {isNewTier && (
+            <div className="opp-tier-section-header">
+              <span className="opp-tier-section-icon">{tierInfo.icon}</span>
+              <span className="opp-tier-section-title">{tierInfo.label}</span>
+              <span className="opp-tier-section-badge">
+                {levelCounts[tierInfo.id] || 1} {levelCounts[tierInfo.id] === 1 ? 'Position' : 'Positions'}
+              </span>
             </div>
           )}
-          <h3 className="opp-title">{opp.title}</h3>
-          {descText && <p className="opp-desc">{descText}</p>}
+          <TiltCard className="opp-card anim-fadeup" style={{ animationDelay: `${0.08 * (idx % 8)}s` }}>
+            {tierInfo ? (
+              <div
+                className="opp-badge"
+                style={{
+                  background: tierInfo.bgColor,
+                  borderColor: tierInfo.borderColor,
+                  color: tierInfo.color,
+                }}
+              >
+                <span>{tierInfo.icon}</span>&nbsp;&nbsp;{tierInfo.label}
+                {opp.tag && opp.tag.toLowerCase() !== tierInfo.shortLabel.toLowerCase() && (
+                  <span style={{ opacity: 0.85, fontWeight: 500, marginLeft: '6px' }}>• {opp.tag}</span>
+                )}
+              </div>
+            ) : tagText ? (
+              <div className="opp-badge">
+                👨‍🏫&nbsp;&nbsp;{tagText}
+              </div>
+            ) : null}
+            <h3 className="opp-title">{opp.title}</h3>
+            {descText && <p className="opp-desc">{descText}</p>}
           
           {eligibility && (
             <div className="opp-eligibility">
@@ -112,6 +162,7 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
             </div>
           )}
         </TiltCard>
+      </div>
       );
     });
   };
@@ -150,6 +201,57 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
             </button>
           ))}
         </div>
+
+        {/* ── Academic Level Filter Bar (PhD -> JRF -> PG -> UG) ── */}
+        {activeTab === 'students' && allSortedStudentOpps.length > 0 && (
+          <div className="opp-tier-filter-wrap anim-fadeup">
+            <div className="opp-tier-filter-label">
+              Academic Level Hierarchy:
+            </div>
+            <div className="opp-tier-pill-group">
+              <button
+                type="button"
+                className={`opp-tier-pill${selectedLevel === 'all' ? ' opp-tier-pill--active' : ''}`}
+                onClick={() => setSelectedLevel('all')}
+              >
+                <span>All Levels (PhD → JRF → PG → UG)</span>
+                <span className="opp-tier-count">{levelCounts.all}</span>
+              </button>
+              <button
+                type="button"
+                className={`opp-tier-pill${selectedLevel === 'phd' ? ' opp-tier-pill--active' : ''}`}
+                onClick={() => setSelectedLevel('phd')}
+              >
+                <span>🎓 Ph.D.</span>
+                <span className="opp-tier-count">{levelCounts.phd}</span>
+              </button>
+              <button
+                type="button"
+                className={`opp-tier-pill${selectedLevel === 'jrf' ? ' opp-tier-pill--active' : ''}`}
+                onClick={() => setSelectedLevel('jrf')}
+              >
+                <span>🔬 JRF</span>
+                <span className="opp-tier-count">{levelCounts.jrf}</span>
+              </button>
+              <button
+                type="button"
+                className={`opp-tier-pill${selectedLevel === 'pg' ? ' opp-tier-pill--active' : ''}`}
+                onClick={() => setSelectedLevel('pg')}
+              >
+                <span>📚 PG / Master's</span>
+                <span className="opp-tier-count">{levelCounts.pg}</span>
+              </button>
+              <button
+                type="button"
+                className={`opp-tier-pill${selectedLevel === 'ug' ? ' opp-tier-pill--active' : ''}`}
+                onClick={() => setSelectedLevel('ug')}
+              >
+                <span>💻 UG / Internships</span>
+                <span className="opp-tier-count">{levelCounts.ug}</span>
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* ── Opportunity Content ── */}
         <div className="opp-grid">

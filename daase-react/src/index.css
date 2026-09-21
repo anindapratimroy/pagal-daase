@@ -5844,6 +5844,109 @@ a.sc-email:hover {
   font-size: 18px;
 }
 
+/* ── Academic Level Filter Bar ── */
+.opp-tier-filter-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: -10px auto 32px;
+  text-align: center;
+}
+
+.opp-tier-filter-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.opp-tier-pill-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.opp-tier-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 13.5px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(6px);
+}
+
+.opp-tier-pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.opp-tier-pill--active {
+  background: rgba(255, 217, 122, 0.18);
+  border-color: rgba(255, 217, 122, 0.5);
+  color: #ffd97a;
+  box-shadow: 0 0 16px rgba(255, 217, 122, 0.18);
+}
+
+.opp-tier-count {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.opp-tier-pill--active .opp-tier-count {
+  background: #0b1528;
+  color: #ffd97a;
+}
+
+/* ── Section Divider Header for Academic Levels ── */
+.opp-tier-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 4px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.opp-tier-section-icon {
+  font-size: 22px;
+}
+
+.opp-tier-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+}
+
+.opp-tier-section-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(255, 217, 122, 0.12);
+  border: 1px solid rgba(255, 217, 122, 0.3);
+  color: #ffd97a;
+}
+
 /* ── Opportunity List Container ── */
 .opp-list-container {
   display: flex;
