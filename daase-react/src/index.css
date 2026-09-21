@@ -7561,8 +7561,6 @@ a.sc-email:hover {
 }
 
 /* ── Heading & text visibility inside cards ───────────────────── */
-.sc-name,
-.fc-name,
 .rc-title,
 .event-title,
 .prog-card h3,
@@ -7574,6 +7572,15 @@ a.sc-email:hover {
   color: #ffffff !important;
   font-size: 1.1rem !important;
   font-weight: 700 !important;
+}
+
+@media (min-width: 641px) {
+  .sc-name,
+  .fc-name {
+    color: #ffffff !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+  }
 }
 
 .sc-supervisor,
@@ -7734,17 +7741,19 @@ a.sc-email:hover {
 }
 
 /* ── Global font-size increases ─────────────────────────────── */
-.sc-name,
-.fc-name {
-  font-size: 1.1rem !important;
-}
+@media (min-width: 641px) {
+  .sc-name,
+  .fc-name {
+    font-size: 1.1rem !important;
+  }
 
-.sc-supervisor {
-  font-size: 0.95rem !important;
-}
+  .sc-supervisor {
+    font-size: 0.95rem !important;
+  }
 
-.sc-research {
-  font-size: 0.93rem !important;
+  .sc-research {
+    font-size: 0.93rem !important;
+  }
 }
 
 .rc-title {
@@ -7840,39 +7849,41 @@ a.sc-email:hover {
   font-size: 1.15rem !important;
 }
 
-/* Faculty card descriptions */
-.fc-title {
-  font-size: 1rem !important;
-  color: rgba(255, 255, 255, 0.82) !important;
-  line-height: 1.55 !important;
-}
+@media (min-width: 641px) {
+  /* Faculty card descriptions */
+  .fc-title {
+    font-size: 1rem !important;
+    color: rgba(255, 255, 255, 0.82) !important;
+    line-height: 1.55 !important;
+  }
 
-.fc-name {
-  font-size: 1.2rem !important;
-  font-weight: 800 !important;
-  color: #fff !important;
-}
+  .fc-name {
+    font-size: 1.2rem !important;
+    font-weight: 800 !important;
+    color: #fff !important;
+  }
 
-.fc-email {
-  font-size: 15px !important;
-  color: #ffd97a !important;
-  font-weight: 700 !important;
-}
+  .fc-email {
+    font-size: 15px !important;
+    color: #ffd97a !important;
+    font-weight: 700 !important;
+  }
 
-/* Student cards */
-.sc-name {
-  font-size: 1.1rem !important;
-  font-weight: 700 !important;
-}
+  /* Student cards */
+  .sc-name {
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+  }
 
-.sc-supervisor {
-  font-size: 0.98rem !important;
-  color: rgba(255, 255, 255, 0.78) !important;
-}
+  .sc-supervisor {
+    font-size: 0.98rem !important;
+    color: rgba(255, 255, 255, 0.78) !important;
+  }
 
-.sc-research {
-  font-size: 0.95rem !important;
-  color: rgba(255, 255, 255, 0.68) !important;
+  .sc-research {
+    font-size: 0.95rem !important;
+    color: rgba(255, 255, 255, 0.68) !important;
+  }
 }
 
 /* batch divider title */
@@ -8068,4 +8079,230 @@ a.sc-email:hover {
 @keyframes slideUpFade {
   0% { opacity: 0; transform: translateY(16px); }
   100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   NARROW SCREEN OPTIMIZATION: PEOPLE (FACULTY & STUDENTS)
+   Fixes: No mid-word breaking, no text overflow/underflow,
+   proper sizing & complete space utilization in 2-column grid.
+============================================================ */
+@media (max-width: 640px) {
+  /* Page & Section Container Spacing */
+  .section-inner,
+  .people-section-inner {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    padding-top: 24px !important;
+    padding-bottom: 48px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .people-tab-content {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* 2-column grid with optimized gaps */
+  .faculty-grid,
+  .students-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    margin-bottom: 24px !important;
+    width: 100% !important;
+  }
+
+  /* Cards */
+  .faculty-card,
+  .student-card {
+    min-width: 0 !important;
+    width: 100% !important;
+    border-radius: 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  .student-card {
+    padding: 10px 8px 12px !important;
+  }
+
+  .fc-photo {
+    height: 155px !important;
+    width: 100% !important;
+  }
+
+  .fc-photo img {
+    object-fit: cover !important;
+    object-position: center 18% !important;
+  }
+
+  /* Designation Badge on Photo */
+  .fc-designation-badge {
+    font-size: 8.5px !important;
+    padding: 3px 6px !important;
+    letter-spacing: 0.03em !important;
+    bottom: 5px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: max-content !important;
+    max-width: 92% !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    line-height: 1.2 !important;
+    border-radius: 4px !important;
+  }
+
+  .hod-badge {
+    font-size: 8.5px !important;
+    padding: 3px 6px !important;
+    letter-spacing: 0.02em !important;
+    margin-bottom: 6px !important;
+    border-radius: 4px !important;
+  }
+
+  .fc-body {
+    padding: 10px 8px 12px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Name Typography: NEVER BREAK MID-WORD */
+  .fc-name,
+  .sc-name {
+    font-size: clamp(12.5px, 3.5vw, 14.5px) !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important;
+    color: #ffffff !important;
+    margin-bottom: 5px !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    word-wrap: normal !important;
+    hyphens: none !important;
+    -webkit-hyphens: none !important;
+    min-width: 0 !important;
+  }
+
+  /* Office & Extension Box */
+  .fc-office-strip {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 3px !important;
+    width: 100% !important;
+    margin: 4px 0 8px 0 !important;
+    padding: 5px 7px !important;
+    background: rgba(255, 217, 122, 0.08) !important;
+    border: 1px solid rgba(255, 217, 122, 0.22) !important;
+    border-radius: 8px !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .fc-office-item {
+    font-size: 10.5px !important;
+    line-height: 1.3 !important;
+    color: #ffd97a !important;
+    font-weight: 600 !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    max-width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+  }
+
+  .fc-office-icon {
+    font-size: 11px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .fc-office-dot {
+    display: none !important;
+  }
+
+  /* Research description & supervisor */
+  .fc-research,
+  .sc-research,
+  .sc-supervisor,
+  .fc-title {
+    font-size: 11px !important;
+    line-height: 1.38 !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    margin-bottom: 8px !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    hyphens: none !important;
+    -webkit-hyphens: none !important;
+    flex: 1 !important;
+  }
+
+  /* Email */
+  .fc-email,
+  .sc-email {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: #ffd97a !important;
+    word-break: break-word !important;
+    margin-top: auto !important;
+    padding-top: 4px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* Faculty Section Divider */
+  .faculty-divider {
+    font-size: 14.5px !important;
+    margin-bottom: 12px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 2px !important;
+  }
+
+  .email-id-hint {
+    font-size: 11px !important;
+    margin-left: 0 !important;
+    opacity: 0.8 !important;
+  }
+}
+
+/* Extra narrow screens (≤ 380px) */
+@media (max-width: 380px) {
+  .section-inner,
+  .people-section-inner {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+
+  .faculty-grid,
+  .students-grid {
+    gap: 6px !important;
+  }
+
+  .fc-photo {
+    height: 140px !important;
+  }
+
+  .fc-name,
+  .sc-name {
+    font-size: 12px !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  .fc-designation-badge {
+    font-size: 7.5px !important;
+    padding: 2px 4px !important;
+  }
+
+  .fc-office-item,
+  .fc-research,
+  .sc-research,
+  .sc-supervisor,
+  .fc-email,
+  .sc-email {
+    font-size: 10px !important;
+  }
 }

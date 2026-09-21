@@ -156,11 +156,11 @@ function FacultyCard({ f, category = 'faculty' }) {
           const chamberVal = (f.chamber || f.chamber_no || f.office || '').toString().trim();
           const phoneExtVal = (f.phoneExt || f.extension || f.phone || '').toString().trim();
           if (!chamberVal && !phoneExtVal) return null;
-          const displayChamber = chamberVal.toLowerCase().startsWith('office') || chamberVal.toLowerCase().startsWith('chamber')
-            ? chamberVal
-            : chamberVal.toLowerCase().startsWith('room')
-              ? chamberVal.replace(/^room\s*/i, 'Office ')
-              : `Office ${chamberVal}`;
+          const chamberCleaned = chamberVal
+            .replace(/^(room|office|chamber)\s*/i, '')
+            .replace(/FC-\s+/i, 'FC-')
+            .trim();
+          const displayChamber = chamberCleaned || chamberVal;
           const displayExt = phoneExtVal.toLowerCase().startsWith('ext')
             ? phoneExtVal
             : `Ext. ${phoneExtVal}`;
