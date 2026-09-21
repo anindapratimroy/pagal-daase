@@ -30,14 +30,13 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
   // Sort strictly by academic hierarchy: PhD -> JRF -> PG -> UG -> Other
   const allSortedStudentOpps = sortOpportunitiesByTier(rawStudentList.filter(isActive));
 
-  // Compute counts for sub-level filter pills
-  const levelCounts = {
-    all: allSortedStudentOpps.length,
-    phd: allSortedStudentOpps.filter(o => classifyOpportunity(o).id === 'phd').length,
-    jrf: allSortedStudentOpps.filter(o => classifyOpportunity(o).id === 'jrf').length,
-    pg:  allSortedStudentOpps.filter(o => classifyOpportunity(o).id === 'pg').length,
-    ug:  allSortedStudentOpps.filter(o => classifyOpportunity(o).id === 'ug').length,
-  };
+  // Available distinct tiers present with active openings
+  const availableTiers = [
+    { id: 'phd', label: 'Ph.D.', icon: '🎓', count: allSortedStudentOpps.filter(o => classifyOpportunity(o).id === 'phd').length },
+    { id: 'jrf', label: 'JRF',  icon: '🔬', count: allSortedStudentOpps.filter(o => classifyOpportunity(o).id === 'jrf').length },
+    { id: 'pg',  label: 'PG',   icon: '📚', count: allSortedStudentOpps.filter(o => classifyOpportunity(o).id === 'pg').length },
+    { id: 'ug',  label: 'UG',   icon: '💻', count: allSortedStudentOpps.filter(o => classifyOpportunity(o).id === 'ug').length },
+  ].filter(t => t.count > 0);
 
   // Filter based on selected academic level
   const studentOpps = selectedLevel === 'all'
@@ -73,7 +72,7 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
 
     return list.map((opp, idx) => {
       const tierInfo = isFaculty ? null : classifyOpportunity(opp);
-      const isNewTier = !isFaculty && selectedLevel === 'all' && tierInfo && tierInfo.id !== lastTierId;
+      const isNewTier = !isFaculty && availableTiers.length > 1 && selectedLevel === 'all' && tierInfo && tierInfo.id !== lastTierId;
       if (!isFaculty && tierInfo) {
         lastTierId = tierInfo.id;
       }
@@ -91,7 +90,7 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
               <span className="opp-tier-section-icon">{tierInfo.icon}</span>
               <span className="opp-tier-section-title">{tierInfo.label}</span>
               <span className="opp-tier-section-badge">
-                {levelCounts[tierInfo.id] || 1} {levelCounts[tierInfo.id] === 1 ? 'Position' : 'Positions'}
+                {list.filter(o => classifyOpportunity(o).id === tierInfo.id).length} Open
               </span>
             </div>
           )}
@@ -202,53 +201,29 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
           ))}
         </div>
 
-        {/* ── Academic Level Filter Bar (PhD -> JRF -> PG -> UG) ── */}
-        {activeTab === 'students' && allSortedStudentOpps.length > 0 && (
+        {/* ── Filter Pills (only when multiple active categories exist) ── */}
+        {activeTab === 'students' && availableTiers.length > 1 && (
           <div className="opp-tier-filter-wrap anim-fadeup">
-            <div className="opp-tier-filter-label">
-              Academic Level Hierarchy:
-            </div>
             <div className="opp-tier-pill-group">
               <button
                 type="button"
                 className={`opp-tier-pill${selectedLevel === 'all' ? ' opp-tier-pill--active' : ''}`}
                 onClick={() => setSelectedLevel('all')}
               >
-                <span>All Levels (PhD → JRF → PG → UG)</span>
-                <span className="opp-tier-count">{levelCounts.all}</span>
+                <span>All</span>
+                <span className="opp-tier-count">{allSortedStudentOpps.length}</span>
               </button>
-              <button
-                type="button"
-                className={`opp-tier-pill${selectedLevel === 'phd' ? ' opp-tier-pill--active' : ''}`}
-                onClick={() => setSelectedLevel('phd')}
-              >
-                <span>🎓 Ph.D.</span>
-                <span className="opp-tier-count">{levelCounts.phd}</span>
-              </button>
-              <button
-                type="button"
-                className={`opp-tier-pill${selectedLevel === 'jrf' ? ' opp-tier-pill--active' : ''}`}
-                onClick={() => setSelectedLevel('jrf')}
-              >
-                <span>🔬 JRF</span>
-                <span className="opp-tier-count">{levelCounts.jrf}</span>
-              </button>
-              <button
-                type="button"
-                className={`opp-tier-pill${selectedLevel === 'pg' ? ' opp-tier-pill--active' : ''}`}
-                onClick={() => setSelectedLevel('pg')}
-              >
-                <span>📚 PG / Master's</span>
-                <span className="opp-tier-count">{levelCounts.pg}</span>
-              </button>
-              <button
-                type="button"
-                className={`opp-tier-pill${selectedLevel === 'ug' ? ' opp-tier-pill--active' : ''}`}
-                onClick={() => setSelectedLevel('ug')}
-              >
-                <span>💻 UG / Internships</span>
-                <span className="opp-tier-count">{levelCounts.ug}</span>
-              </button>
+              {availableTiers.map(tier => (
+                <button
+                  key={tier.id}
+                  type="button"
+                  className={`opp-tier-pill${selectedLevel === tier.id ? ' opp-tier-pill--active' : ''}`}
+                  onClick={() => setSelectedLevel(tier.id)}
+                >
+                  <span>{tier.icon}&nbsp;&nbsp;{tier.label}</span>
+                  <span className="opp-tier-count">{tier.count}</span>
+                </button>
+              ))}
             </div>
           </div>
         )}
