@@ -1,54 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  <!-- Home Page -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://daase.iiti.ac.in/</loc>
-    <lastmod>2026-05-28</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
-  </url>
-  
-  <!-- Main Sections (Anchors in single-page React app) -->
-  <url>
-    <loc>https://daase.iiti.ac.in/#research</loc>
-    <lastmod>2026-05-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://daase.iiti.ac.in/#people</loc>
-    <lastmod>2026-05-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://daase.iiti.ac.in/#faculty</loc>
-    <lastmod>2026-05-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://daase.iiti.ac.in/#programs</loc>
-    <lastmod>2026-05-28</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://daase.iiti.ac.in/#opportunities</loc>
-    <lastmod>2026-05-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://daase.iiti.ac.in/#students</loc>
-    <lastmod>2026-05-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://daase.iiti.ac.in/#facilities</loc>
-    <lastmod>2026-05-28</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/images/IITI_Logo.svg</image:loc>
+      <image:title>DAASE IIT Indore Official Logo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/images/daase.png</image:loc>
+      <image:title>Department of Astronomy, Astrophysics and Space Engineering Emblem</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/people_images/Staff/Swapnil_Dasharath_Sankhe,_Senior_Assistant_(HoD_Staff).jpg</image:loc>
+      <image:title>Swapnil Dasharath Sankhe - Senior Assistant, HoD Office, DAASE, IIT Indore</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/people_images/Faculty/Dr._Saurabh_Das.jpg</image:loc>
+      <image:title>Dr. Saurabh Das - Associate Professor, DAASE, IIT Indore</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/people_images/Faculty/Prof._Abhirup_Datta.jpg</image:loc>
+      <image:title>Prof. Abhirup Datta - Professor, DAASE, IIT Indore</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/people_images/Faculty/Dr._Bhargav_Vaidya.jpg</image:loc>
+      <image:title>Dr. Bhargav Vaidya - Associate Professor, DAASE, IIT Indore</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/people_images/Faculty/Dr._Narendra_Nath_Patra.jpg</image:loc>
+      <image:title>Dr. Narendra Nath Patra - Assistant Professor, DAASE, IIT Indore</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/people_images/Faculty/Dr._Manoneeta_Chakraborty.jpg</image:loc>
+      <image:title>Dr. Manoneeta Chakraborty - Associate Professor, DAASE, IIT Indore</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/people_images/Faculty/soumavo_ghosh.png</image:loc>
+      <image:title>Dr. Soumavo Ghosh - Assistant Professor, DAASE, IIT Indore</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/people_images/Faculty/Dr._Prakash_Suryakant_Gaikwad.jpg</image:loc>
+      <image:title>Dr. Prakash Gaikwad - Assistant Professor, DAASE, IIT Indore</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/people_images/Faculty/Dr._Suman_Majumdar.jpg</image:loc>
+      <image:title>Dr. Suman Majumdar - Associate Professor, DAASE, IIT Indore</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/people_images/Faculty/Dr._Deepika_Bollimpalli.jpeg</image:loc>
+      <image:title>Dr. Deepika Bollimpalli - Assistant Professor, DAASE, IIT Indore</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/people_images/Faculty/Dr._Priyanka_Singh.png</image:loc>
+      <image:title>Dr. Priyanka Singh - Assistant Professor, DAASE, IIT Indore</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/people_images/Faculty/Dr._Unmesh.png</image:loc>
+      <image:title>Dr. Unmesh Govind Khati - Associate Professor, DAASE, IIT Indore</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/people_images/Faculty/Dr._Amit_Shukla.png</image:loc>
+      <image:title>Dr. Amit Shukla - Associate Professor, DAASE, IIT Indore</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/people_images/Faculty/Dr._Mukul_Bhattacharya.jpg</image:loc>
+      <image:title>Dr. Mukul Bhattacharya - Assistant Professor, DAASE, IIT Indore</image:title>
+    </image:image>
   </url>
 </urlset>

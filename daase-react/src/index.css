@@ -8306,3 +8306,17 @@ a.sc-email:hover {
     font-size: 10px !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   SEO CRAWLER DIRECTORY & ACCESSIBILITY
+   ═══════════════════════════════════════════════════════════ */
+.seo-crawler-index {
+  position: absolute;
+  left: -99999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}

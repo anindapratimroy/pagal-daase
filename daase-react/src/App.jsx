@@ -38,7 +38,49 @@ const PEOPLE_TAB_MAP = {
   'ug':             'ug',
   'alumni':         'alumni',
   'people':         'faculty',
+  'students':       'phd',
 };
+
+// Disambiguate individual person slugs to their designated People sub-tab
+function findPersonDetails(slug, data) {
+  const norm = (name) => `person-${(name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
+
+  // 1. Faculty & Visiting
+  const foundFac = (data?.faculty || []).find(f => norm(f.name) === slug);
+  if (foundFac) return { tab: 'faculty', person: foundFac, title: `${foundFac.name} | Faculty | DAASE, IIT Indore` };
+
+  const foundVis = (data?.visiting || []).find(f => norm(f.name) === slug);
+  if (foundVis) return { tab: 'faculty', person: foundVis, title: `${foundVis.name} | Visiting Faculty | DAASE, IIT Indore` };
+
+  // 2. Staff
+  let foundStaff = null;
+  if (Array.isArray(data?.staff)) {
+    foundStaff = data.staff.find(s => norm(s.name) === slug);
+  } else if (typeof data?.staff === 'object') {
+    foundStaff = Object.values(data.staff || {}).flat().find(s => norm(s?.name) === slug);
+  }
+  if (foundStaff) return { tab: 'staff', person: foundStaff, title: `${foundStaff.name} | Staff | DAASE, IIT Indore` };
+
+  // 3. PhD
+  if (typeof data?.phd === 'object') {
+    const foundPhd = Object.values(data.phd || {}).flat().find(s => norm(s?.name) === slug);
+    if (foundPhd) return { tab: 'phd', person: foundPhd, title: `${foundPhd.name} | PhD Research Scholar | DAASE, IIT Indore` };
+  }
+
+  // 4. PG
+  if (typeof data?.pg === 'object') {
+    const foundPg = Object.values(data.pg || {}).flat().find(s => norm(s?.name) === slug);
+    if (foundPg) return { tab: 'pg', person: foundPg, title: `${foundPg.name} | Postgraduate Student | DAASE, IIT Indore` };
+  }
+
+  // 5. UG
+  if (typeof data?.ug === 'object') {
+    const foundUg = Object.values(data.ug || {}).flat().find(s => norm(s?.name) === slug);
+    if (foundUg) return { tab: 'ug', person: foundUg, title: `${foundUg.name} | Undergraduate Student | DAASE, IIT Indore` };
+  }
+
+  return { tab: 'faculty', person: null, title: 'People | DAASE, IIT Indore' };
+}
 
 const PROG_TAB_MAP = {
   'programs-btech': 'btech',
@@ -110,6 +152,24 @@ export default function App() {
     const syncHashToState = () => {
       const hash = window.location.hash.replace('#', '') || 'home';
       
+      if (hash.startsWith('person-')) {
+        const { tab, title } = findPersonDetails(hash, data);
+        setPeopleTab(tab);
+        setView('people');
+        document.title = title;
+        setTimeout(() => {
+          const el = document.getElementById(hash);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.classList.remove('target-highlight-pulse');
+            void el.offsetWidth;
+            el.classList.add('target-highlight-pulse');
+            setTimeout(() => el.classList.remove('target-highlight-pulse'), 3500);
+          }
+        }, 300);
+        return;
+      }
+
       if (hash.startsWith('research-detail/')) {
         setResearchAreaId(hash.split('/')[1]);
         setView('research-detail');
@@ -135,12 +195,46 @@ export default function App() {
       window.scrollTo(0, 0);
     };
 
-    // Sync on initial load
+    // Sync on initial load & data change
     syncHashToState();
 
     window.addEventListener('hashchange', syncHashToState);
     return () => window.removeEventListener('hashchange', syncHashToState);
-  }, []);
+  }, [data]);
+
+  // Dynamic Title & Meta Description Sync for route views
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '') || 'home';
+    if (hash.startsWith('person-')) return; // Handled dynamically in person routing
+
+    const SEO_TITLES = {
+      'home': 'DAASE — Dept. of Astronomy, Astrophysics & Space Engineering | IIT Indore',
+      'research': 'Research Areas & Publications | DAASE, IIT Indore',
+      'programs': 'Academic Programs (B.Tech, M.Tech, M.Sc, PhD) | DAASE, IIT Indore',
+      'facilities': 'Advanced Research Facilities & Observatories | DAASE, IIT Indore',
+      'opportunities': 'Opportunities & Admissions (PhD, JRF, Internships, Faculty) | DAASE, IIT Indore',
+      'events': 'Events, Seminars & Outreach | DAASE, IIT Indore',
+      'gallery': 'Department Gallery | DAASE, IIT Indore',
+    };
+
+    const PEOPLE_TITLES = {
+      'faculty': 'Faculty Directory | DAASE, IIT Indore',
+      'staff': 'Administrative & Technical Staff | Swapnil Dasharath Sankhe & Team | DAASE, IIT Indore',
+      'phd': 'Doctoral Research Scholars (Ph.D.) | DAASE, IIT Indore',
+      'pg': 'Postgraduate Students (M.Tech, M.Sc, MS) | DAASE, IIT Indore',
+      'ug': 'Undergraduate Students (B.Tech Space Sciences) | DAASE, IIT Indore',
+      'alumni': 'Alumni Directory | DAASE, IIT Indore',
+    };
+
+    let title = SEO_TITLES[view] || 'DAASE — IIT Indore';
+    if (view === 'people') {
+      title = PEOPLE_TITLES[peopleTab] || 'People at DAASE | IIT Indore';
+    } else if (view === 'research-detail') {
+      title = 'Research Area Detail | DAASE, IIT Indore';
+    }
+
+    document.title = title;
+  }, [view, peopleTab]);
 
   // Back-to-top visibility (Optimized to prevent forced reflows / layout thrashing)
   useEffect(() => {
