@@ -186,6 +186,8 @@ export const imageMap =
   "Mayukh Mandal": "./people_images/Post_Graduate_Students/MAYUKH_MANDAL.jpg",
   "Soumya Gupta": "./people_images/Post_Graduate_Students/Soumya_Gupta.jpg",
   "Swapnil Dasharath Sankhe": "./people_images/Staff/Swapnil_Dasharath_Sankhe,_Senior_Assistant_(HoD_Staff).jpg",
+  "Swapnil Sankhe": "./people_images/Staff/Swapnil_Dasharath_Sankhe,_Senior_Assistant_(HoD_Staff).jpg",
+  "Swapnil": "./people_images/Staff/Swapnil_Dasharath_Sankhe,_Senior_Assistant_(HoD_Staff).jpg",
   "Abhijeet Dutta": "./people_images/Staff/Abhijeet_Dutta,.jpg",
   "Durgesh Chouhan": "./people_images/Staff/Durgesh_Chouhan.jpg",
   "Rahul Khare": "./people_images/Staff/Rahul_Khare,.jpg",

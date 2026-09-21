@@ -1193,7 +1193,7 @@ export const NEWS_FB = [];
 export const OUTREACH_FB = [];
 
 export const STAFF_FB = [
-  { sortOrder: 1, name: 'Swapnil Dasharath Sankhe', designation: 'Senior Assistant (HoD Staff)', email: 'aase-office' },
+  { sortOrder: 1, name: 'Swapnil Dasharath Sankhe', designation: 'Senior Assistant (HoD Staff)', email: 'aase-office', photo: './people_images/Staff/Swapnil_Dasharath_Sankhe,_Senior_Assistant_(HoD_Staff).jpg' },
   { sortOrder: 2, name: 'Rahul Khare', designation: 'Technical/Administrative Staff', email: 'aase-office' },
   { sortOrder: 3, name: 'Varunesh Shukla', designation: 'Technical/Administrative Staff', email: 'aase-office' },
   { sortOrder: 4, name: 'Abhijeet Dutta', designation: 'Technical/Administrative Staff', email: 'aase-office' },
