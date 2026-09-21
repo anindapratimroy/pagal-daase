@@ -51,6 +51,73 @@
   margin-bottom: 9px;
 }
 
+/* ── Active / Archived Filter Tabs ── */
+.pub-filter-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.pub-filter-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+}
+
+.pub-filter-pill:hover {
+  background: rgba(255, 217, 122, 0.15);
+  border-color: rgba(255, 217, 122, 0.4);
+  color: #ffd97a;
+}
+
+.pub-filter-pill.active {
+  background: #ffd97a;
+  border-color: #ffd97a;
+  color: #0b1528;
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(255, 217, 122, 0.35);
+}
+
+.pub-pill-count {
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+.pub-badge-archived {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(148, 163, 184, 0.18);
+  color: #cbd5e1;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 6px;
+  padding: 2px 7px;
+  margin-left: 8px;
+  vertical-align: middle;
+  display: inline-block;
+  line-height: 1.2;
+}
+
+.pub-empty-note {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  padding: 42px 0;
+}
+
 /* ── Scroller ────────────────────────────────────────────────── */
 .publications-scroller {
   height: 340px;

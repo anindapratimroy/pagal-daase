@@ -6,7 +6,7 @@ import {
 } from '../data/fallback';
 import { loadPhotoManifest } from '../utils/photoResolver';
 
-const CACHE_KEY = 'daase_v14_data';
+const CACHE_KEY = 'daase_v15_data';
 const CACHE_TTL = 30 * 60 * 1000; // 30 min
 
 export function normalizePubUrl(raw) {
@@ -39,12 +39,22 @@ export function normalizePublication(p) {
     .replace(/[;,]\s*$/, '')
     .trim();
 
+  const rawStage = (
+    (typeof p === 'object' && p !== null)
+      ? (p.status || p.stage || p.state || p.Stage || p.Status || p.State || '')
+      : ''
+  ).toString().toLowerCase().trim();
+
+  const isArchived = rawStage.includes('archive') || Boolean(p && (p.isArchived || p.archived));
+  const status = isArchived ? 'archived' : 'active';
+
   return {
     citation: text,
     text,
     url: url || '',
-    date: p.date || '',
-    status: p.status || 'active'
+    date: (typeof p === 'object' && p !== null ? (p.date || p.Date || '') : ''),
+    status,
+    stage: status
   };
 }
 
@@ -204,7 +214,6 @@ function resolveData(d) {
     publications: (() => {
       const raw = has('publications') ? d.publications : PUBLICATIONS_FB;
       return (raw || [])
-        .filter(p => !p.status || p.status.toString().toLowerCase().trim() === 'active')
         .map(normalizePublication)
         .filter(Boolean);
     })(),

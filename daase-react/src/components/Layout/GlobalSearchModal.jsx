@@ -408,6 +408,30 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
       addAlumList(yearData.msc, 'M.Sc.');
     });
 
+    // 11. Publications (with Active / Archived stage)
+    (data.publications || []).forEach((pub, idx) => {
+      const text = typeof pub === 'string' ? pub : (pub.text || pub.citation || pub.title || '');
+      const isArchived = pub.status === 'archived' || pub.stage === 'archived';
+      items.push({
+        id: `pub-${idx}`,
+        title: text,
+        category: 'Publications',
+        badge: isArchived ? 'Archived Publication' : 'Active Publication',
+        sub: `${isArchived ? 'Archived Stage' : 'Active Stage'}${pub.date ? ` · ${pub.date}` : ''}`,
+        url: pub.url,
+        status: pub.status || (isArchived ? 'archived' : 'active'),
+        icon: '📄',
+        keywords: `${text} ${pub.date || ''} publication paper citation journal ${isArchived ? 'archived' : 'active'}`,
+        action: () => {
+          if (pub.url) {
+            window.open(pub.url, '_blank', 'noopener,noreferrer');
+          } else {
+            onNav('publications');
+          }
+        },
+      });
+    });
+
     return items;
   }, [data, onNav]);
 
@@ -622,6 +646,7 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
     'Faculty',
     'Programs',
     'Research',
+    'Publications',
     'Facilities',
     'Opportunities',
     'Students',
@@ -644,6 +669,9 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
     }
     if (item.category === 'Research') {
       return '🔬 Explore Research Domain';
+    }
+    if (item.category === 'Publications') {
+      return item.url ? '📄 Open Research Paper ↗' : '📚 View in Publications';
     }
     if (item.category === 'Facilities') {
       return '🔭 View Research Facility';

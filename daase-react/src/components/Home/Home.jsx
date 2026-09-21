@@ -59,7 +59,9 @@ export default function Home({ onNav, news, events, publications = [] }) {
 
   const rawPubs = (publications && publications.length > 0) ? publications : PUBLICATIONS_FB;
   const pubsList = useMemo(() => {
-    return sortPublications(rawPubs).slice(0, 10);
+    const active = (rawPubs || []).filter(p => !p.status || p.status.toLowerCase() !== 'archived');
+    const targetList = active.length > 0 ? active : rawPubs;
+    return sortPublications(targetList).slice(0, 10);
   }, [rawPubs]);
 
   return (

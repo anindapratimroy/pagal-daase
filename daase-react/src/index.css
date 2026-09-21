@@ -3674,6 +3674,12 @@ nav.nav-scrolled.nav-hidden {
   border-color: rgba(244, 114, 182, 0.3);
 }
 
+.row-badge.badge-publications {
+  background: rgba(255, 217, 122, 0.14);
+  color: #ffd97a;
+  border-color: rgba(255, 217, 122, 0.35);
+}
+
 .row-badge.badge-programs {
   background: rgba(251, 191, 36, 0.14);
   color: #fbbf24;
