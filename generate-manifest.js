@@ -18,6 +18,7 @@ const path = require('path');
 const PHOTOS_DIR  = path.join(__dirname, 'daase-static-website', 'people_images');
 const OUTPUT_FILE = path.join(__dirname, 'daase-static-website', 'photos_manifest.json');
 const REACT_PUBLIC_OUTPUT = path.join(__dirname, 'daase-react', 'public', 'photos_manifest.json');
+const REACT_DATA_OUTPUT   = path.join(__dirname, 'daase-react', 'src', 'data', 'photos_manifest.json');
 
 const IMAGE_EXTS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.bmp', '.avif']);
 
@@ -57,11 +58,19 @@ function generate() {
   } catch (e) {
     // ignore
   }
+  try {
+    const dataDir = path.dirname(REACT_DATA_OUTPUT);
+    if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+    fs.writeFileSync(REACT_DATA_OUTPUT, jsonStr, 'utf-8');
+  } catch (e) {
+    // ignore
+  }
 
   console.log('\n✅ photos_manifest.json generated successfully!');
   console.log(`   Total: ${totalPhotos} photos across ${categories.length} categories`);
   console.log(`   Saved to: ${OUTPUT_FILE}`);
   console.log(`   Saved to: ${REACT_PUBLIC_OUTPUT}`);
+  console.log(`   Saved to: ${REACT_DATA_OUTPUT}`);
   console.log('\n   Upload this file to your server via CloudPanel.');
   console.log('   Or visit: aase.iiti.ac.in/update_manifest.php?key=daase2025\n');
 }

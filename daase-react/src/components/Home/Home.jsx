@@ -4,7 +4,7 @@ import Footer from '../Layout/Footer';
 import NewsTicker from './NewsTicker';
 import Collaborators from './Collaborators';
 import { PUBLICATIONS_FB } from '../../data/fallback';
-import { sortHomeUpdates, sortPublications } from '../../utils/dateUtils';
+import { sortHomeUpdates } from '../../utils/dateUtils';
 import { normalizePubUrl } from '../../hooks/useData';
 
 // Ensure link has protocol prefix for external, but respect internal links
@@ -64,7 +64,7 @@ export default function Home({ onNav, news, events, publications = [] }) {
   const pubsList = useMemo(() => {
     const active = (rawPubs || []).filter(p => !p.status || p.status.toLowerCase() !== 'archived');
     const targetList = active.length > 0 ? active : rawPubs;
-    return sortPublications(targetList).slice(0, 10);
+    return targetList.slice(0, 10);
   }, [rawPubs]);
 
   return (

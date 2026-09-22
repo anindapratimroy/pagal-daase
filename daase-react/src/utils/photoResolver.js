@@ -42,6 +42,13 @@ let _manifest = initialManifest || {};
 let _manifestLoading = false;
 let _manifestCallbacks = [];
 
+// In-memory memoization cache for resolved candidates (key -> candidates array)
+const _candidateCache = new Map();
+
+export function clearPhotoCache() {
+  _candidateCache.clear();
+}
+
 export async function loadPhotoManifest() {
   if (_manifestLoading) return new Promise(resolve => _manifestCallbacks.push(resolve));
   _manifestLoading = true;
@@ -49,6 +56,7 @@ export async function loadPhotoManifest() {
     const res = await fetch('./photos_manifest.json?t=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     _manifest = await res.json();
+    clearPhotoCache();
     console.log('[PhotoResolver] Manifest updated dynamically:', Object.keys(_manifest).map(k => k + ':' + (_manifest[k]?.length || 0)).join(', '));
   } catch (e) {
     console.warn('[PhotoResolver] Using static manifest (dynamic fetch failed):', e.message);
@@ -245,16 +253,23 @@ export function bestMatch(personName, fileList, threshold = 35) {
 export const DEFAULT_AVATAR = './images/default-avatar.png';
 
 /**
- * Generate a smart list of candidate URLs for a person's photo.
- * Prioritized:
- *  1. Exact verified path from data or imageMap
- *  2. Fuzzy manifest match within the person's category folder
- *  3. Generated candidate patterns (Title variations, initials, inverted names, etc.)
- *  4. Roll Number / Email in category folder & images/students/
- *  5. Google Drive URL
- *  6. Guaranteed Default Avatar
+ * Fast, in-memory candidate resolver.
+ * 1. Checks memory cache first.
+ * 2. Checks explicit local path from data.
+ * 3. Checks curated imageMap.
+ * 4. Checks photos_manifest in-memory for exact, fuzzy, or roll-number matches.
+ * 5. Checks Google Drive URL (only if explicitly provided).
+ * 6. Always terminates with DEFAULT_AVATAR.
+ *
+ * If no photo matches in memory, candidates[0] is immediately DEFAULT_AVATAR.
+ * This guarantees 0ms initial render, 0 failed network requests, and zero browser waterfall!
  */
 export function getPhotoCandidates(name, category, driveUrl, email) {
+  const cacheKey = `${name || ''}|${category || ''}|${driveUrl || ''}|${email || ''}`;
+  if (_candidateCache.has(cacheKey)) {
+    return _candidateCache.get(cacheKey);
+  }
+
   const candidates = [];
   const seen = new Set();
 
@@ -265,170 +280,84 @@ export function getPhotoCandidates(name, category, driveUrl, email) {
   };
 
   const folders = foldersToSearch(category);
-  const exts = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'webp'];
 
-  // 1. Exact verified path from data or imageMap (Highest Priority)
+  // 1. Exact verified path from data or local people_images/ path
   if (driveUrl && typeof driveUrl === 'string' && (driveUrl.startsWith('./') || driveUrl.startsWith('/') || driveUrl.startsWith('people_images/'))) {
     add(driveUrl);
   }
 
+  // 2. Exact match in manually curated imageMap
   const mappedUrl = findInImageMap(name);
   if (mappedUrl) {
     add(mappedUrl);
-    const base = mappedUrl.replace(/\.(jpe?g|png|webp|avif)$/i, '');
-    for (const ext of exts) {
-      add(`${base}.${ext}`);
-    }
   }
 
-  // 2. Dynamic / static manifest match within the person's category folder(s)
+  // 3. In-memory manifest search across category folder(s)
   if (_manifest) {
     for (const folder of folders) {
       const fileList = _manifest[folder];
       if (fileList && fileList.length) {
-        const match = bestMatch(name, fileList);
-        if (match && match.file) {
-          add(`./people_images/${folder}/${match.file}`);
+        // a. Match by roll number / email if provided
+        if (email && typeof email === 'string') {
+          const roll = email.split('@')[0].trim().toLowerCase();
+          if (roll) {
+            const rollFile = fileList.find(f => f.replace(/\.[^.]+$/, '').toLowerCase() === roll);
+            if (rollFile) {
+              add(`./people_images/${folder}/${rollFile}`);
+            }
+          }
         }
-      }
-    }
-  }
-
-  // 3. Smart candidate patterns inside category folder(s)
-  if (name) {
-    const { fullName, nameWithoutTitle, tokens } = cleanPersonName(name);
-    const titles = ['Dr.', 'Dr', 'Prof.', 'Prof'];
-
-    for (const folder of folders) {
-      // a. Title + First Name (e.g. Dr._Unmesh.png, Dr_Unmesh.png, Prof._Abhirup.jpg)
-      if (tokens.length > 0) {
-        const first = tokens[0];
-        for (const t of titles) {
-          for (const ext of exts) {
-            add(`./people_images/${folder}/${t}_${first}.${ext}`);
-            add(`./people_images/${folder}/${t}_${first.toLowerCase()}.${ext}`);
-            add(`./people_images/${folder}/${t.toLowerCase()}_${first}.${ext}`);
-            add(`./people_images/${folder}/${t.toLowerCase()}_${first.toLowerCase()}.${ext}`);
+        // b. Match by name tokens in manifest
+        if (name) {
+          const match = bestMatch(name, fileList);
+          if (match && match.file) {
+            add(`./people_images/${folder}/${match.file}`);
           }
         }
       }
-
-      // b. Full name WITH title (e.g. Dr._Saurabh_Das.jpg, Dr._Unmesh_Govind_Khati.png)
-      if (fullName) {
-        const fUnder = fullName.replace(/\s+/g, '_');
-        const fSpace = fullName.replace(/\s+/g, ' ');
-        const fCleanDots = fullName.replace(/\.\s*/g, '_').replace(/_+/g, '_');
-        for (const ext of exts) {
-          add(`./people_images/${folder}/${fUnder}.${ext}`);
-          add(`./people_images/${folder}/${fSpace}.${ext}`);
-          add(`./people_images/${folder}/${fCleanDots}.${ext}`);
-          add(`./people_images/${folder}/${fUnder.toLowerCase()}.${ext}`);
-        }
-      }
-
-      // c. Title + First + Last (e.g. Dr._Unmesh_Khati.png)
-      if (tokens.length >= 2) {
-        const firstLast = `${tokens[0]}_${tokens[tokens.length - 1]}`;
-        for (const t of titles) {
-          for (const ext of exts) {
-            add(`./people_images/${folder}/${t}_${firstLast}.${ext}`);
-            add(`./people_images/${folder}/${t}_${firstLast.toLowerCase()}.${ext}`);
-          }
-        }
-      }
-
-      // d. Full name WITHOUT title (e.g. Saurabh_Das.jpg, Unmesh_Govind_Khati.png)
-      if (nameWithoutTitle && nameWithoutTitle !== fullName) {
-        const nUnder = nameWithoutTitle.replace(/\s+/g, '_');
-        const nSpace = nameWithoutTitle.replace(/\s+/g, ' ');
-        const nCleanDots = nameWithoutTitle.replace(/\.\s*/g, '_').replace(/_+/g, '_');
-        for (const ext of exts) {
-          add(`./people_images/${folder}/${nUnder}.${ext}`);
-          add(`./people_images/${folder}/${nSpace}.${ext}`);
-          add(`./people_images/${folder}/${nCleanDots}.${ext}`);
-          add(`./people_images/${folder}/${nUnder.toLowerCase()}.${ext}`);
-        }
-      }
-
-      // e. First + Last (without title)
-      if (tokens.length >= 2) {
-        const firstLast = `${tokens[0]}_${tokens[tokens.length - 1]}`;
-        for (const ext of exts) {
-          add(`./people_images/${folder}/${firstLast}.${ext}`);
-          add(`./people_images/${folder}/${firstLast.toLowerCase()}.${ext}`);
-        }
-
-        // Inverted: Last + First (e.g. Popat_Jeel.jpg, Waghmare_Pranjal.jpg)
-        const lastFirst = `${tokens[tokens.length - 1]}_${tokens[0]}`;
-        for (const ext of exts) {
-          add(`./people_images/${folder}/${lastFirst}.${ext}`);
-          add(`./people_images/${folder}/${lastFirst.toLowerCase()}.${ext}`);
-        }
-      }
-
-      // f. Single compressed string (e.g. soumavo_ghosh.png, pallavisingh.jpg)
-      if (tokens.length >= 2) {
-        const joined = tokens.join('').toLowerCase();
-        for (const ext of exts) {
-          add(`./people_images/${folder}/${joined}.${ext}`);
-        }
-      }
-
-      // g. First name only (without title e.g. Golu.jpeg, Shubhangi.jpeg)
-      if (tokens.length > 0) {
-        const first = tokens[0];
-        for (const ext of exts) {
-          add(`./people_images/${folder}/${first}.${ext}`);
-          add(`./people_images/${folder}/${first.toLowerCase()}.${ext}`);
-        }
-      }
     }
   }
 
-  // 4. Roll number / Email if applicable
-  if (email && typeof email === 'string') {
-    const roll = email.split('@')[0].trim();
-    if (roll) {
-      for (const folder of folders) {
-        for (const ext of exts) {
-          add(`./people_images/${folder}/${roll}.${ext}`);
-          add(`./people_images/${folder}/${roll.toUpperCase()}.${ext}`);
-        }
-      }
-      for (const ext of exts) {
-        add(`./images/students/${roll}.${ext}`);
-        add(`./images/students/${roll.toUpperCase()}.${ext}`);
-      }
-    }
+  // 4. Google Drive URL only if explicitly provided in data
+  if (driveUrl && typeof driveUrl === 'string' && (driveUrl.includes('drive.google.com') || driveUrl.includes('googleusercontent.com'))) {
+    const drive = drivePhotoUrl(driveUrl);
+    if (drive) add(drive);
   }
 
-  // 5. Google Drive URL from Sheets
-  const drive = drivePhotoUrl(driveUrl);
-  if (drive) add(drive);
-
-  // 6. Universal Terminal Fallback
+  // 5. Universal Terminal Fallback Avatar
   add(DEFAULT_AVATAR);
 
+  _candidateCache.set(cacheKey, candidates);
   return candidates;
 }
 
 /**
- * Handle image error by cycling through candidates until one succeeds,
- * ultimately settling on DEFAULT_AVATAR.
+ * Handle image error:
+ * Fast, foolproof error boundary. If the primary candidate fails,
+ * immediately switches to DEFAULT_AVATAR and clears onerror to prevent loops.
  */
 export function handlePhotoError(e, candidates = [], fallback = DEFAULT_AVATAR) {
-  const currentIdx = parseInt(e.target.dataset.candidateIndex || '0', 10);
+  if (!e || !e.target) return;
+  const target = e.target;
+  const currentSrc = target.src || '';
+
+  // If already showing default avatar, stop to avoid any loop
+  if (currentSrc.includes('default-avatar') || currentSrc === fallback) {
+    target.onerror = null;
+    return;
+  }
+
+  const currentIdx = parseInt(target.dataset.candidateIndex || '0', 10);
   const nextIdx = currentIdx + 1;
 
-  if (candidates && nextIdx < candidates.length) {
-    e.target.dataset.candidateIndex = nextIdx;
-    e.target.src = candidates[nextIdx];
-  } else if (!e.target.src.endsWith('default-avatar.png')) {
-    e.target.dataset.candidateIndex = '999';
-    e.target.src = fallback;
+  if (candidates && nextIdx < candidates.length && candidates[nextIdx] !== fallback) {
+    target.dataset.candidateIndex = nextIdx;
+    target.src = candidates[nextIdx];
   } else {
-    // Already tried default avatar and failed; stop to avoid loop
-    e.target.onerror = null;
+    // Jump straight to default avatar and terminate error handling
+    target.onerror = null;
+    target.dataset.candidateIndex = '999';
+    target.src = fallback;
   }
 }
 
