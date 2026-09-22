@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://daase.iiti.ac.in/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -69,6 +69,10 @@
     <image:image>
       <image:loc>https://daase.iiti.ac.in/people_images/Faculty/Dr._Mukul_Bhattacharya.jpg</image:loc>
       <image:title>Dr. Mukul Bhattacharya - Assistant Professor, DAASE, IIT Indore</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://daase.iiti.ac.in/people_images/Staff/Swapnil_Dasharath_Sankhe,_Senior_Assistant_(HoD_Staff).jpg</image:loc>
+      <image:title>Swapnil Dasharath Sankhe - Senior Assistant (HoD Staff), DAASE, IIT Indore</image:title>
     </image:image>
   </url>
 </urlset>

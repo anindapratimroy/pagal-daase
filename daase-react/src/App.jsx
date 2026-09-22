@@ -24,6 +24,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 import { useData } from './hooks/useData';
+import { updateDynamicSEO } from './utils/dynamicSeo';
 import { FACULTY_FB, VISITING_FB, STAFF_FB, PHD_FB, PG_FB, UG_FB } from './data/fallback';
 
 // Map People dropdown IDs → Faculty component tab IDs
@@ -165,10 +166,10 @@ export default function App() {
       const hash = window.location.hash.replace('#', '') || 'home';
       
       if (hash.startsWith('person-')) {
-        const { tab, title } = findPersonDetails(hash, dataRef.current);
+        const { tab } = findPersonDetails(hash, dataRef.current);
         setPeopleTab(tab);
         setView('people');
-        document.title = title;
+        updateDynamicSEO(dataRef.current, 'people', tab, hash);
         setTimeout(() => {
           const el = document.getElementById(hash);
           if (el) {
@@ -214,39 +215,11 @@ export default function App() {
     return () => window.removeEventListener('hashchange', syncHashToState);
   }, []);
 
-  // Dynamic Title & Meta Description Sync for route views
+  // Dynamic SEO, Structured Data Knowledge Graph, OpenGraph & Meta Tag Sync
+  // Automatically re-hydrates whenever data updates from Google Sheets or when routes change
   useEffect(() => {
-    const hash = window.location.hash.replace('#', '') || 'home';
-    if (hash.startsWith('person-')) return; // Handled dynamically in person routing
-
-    const SEO_TITLES = {
-      'home': 'DAASE — Dept. of Astronomy, Astrophysics & Space Engineering | IIT Indore',
-      'research': 'Research Areas & Publications | DAASE, IIT Indore',
-      'programs': 'Academic Programs (B.Tech, M.Tech, M.Sc, PhD) | DAASE, IIT Indore',
-      'facilities': 'Advanced Research Facilities & Observatories | DAASE, IIT Indore',
-      'opportunities': 'Opportunities & Admissions (PhD, JRF, Internships, Faculty) | DAASE, IIT Indore',
-      'events': 'Events, Seminars & Outreach | DAASE, IIT Indore',
-      'gallery': 'Department Gallery | DAASE, IIT Indore',
-    };
-
-    const PEOPLE_TITLES = {
-      'faculty': 'Faculty Directory | DAASE, IIT Indore',
-      'staff': 'Administrative & Technical Staff | Swapnil Dasharath Sankhe & Team | DAASE, IIT Indore',
-      'phd': 'Doctoral Research Scholars (Ph.D.) | DAASE, IIT Indore',
-      'pg': 'Postgraduate Students (M.Tech, M.Sc, MS) | DAASE, IIT Indore',
-      'ug': 'Undergraduate Students (B.Tech Space Sciences) | DAASE, IIT Indore',
-      'alumni': 'Alumni Directory | DAASE, IIT Indore',
-    };
-
-    let title = SEO_TITLES[view] || 'DAASE — IIT Indore';
-    if (view === 'people') {
-      title = PEOPLE_TITLES[peopleTab] || 'People at DAASE | IIT Indore';
-    } else if (view === 'research-detail') {
-      title = 'Research Area Detail | DAASE, IIT Indore';
-    }
-
-    document.title = title;
-  }, [view, peopleTab]);
+    updateDynamicSEO(data, view, peopleTab, window.location.hash);
+  }, [data, view, peopleTab]);
 
   // Back-to-top visibility (Optimized to prevent forced reflows / layout thrashing)
   useEffect(() => {

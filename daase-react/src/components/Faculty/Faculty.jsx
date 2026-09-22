@@ -137,22 +137,25 @@ function FacultyCard({ f, category = 'faculty' }) {
   const anchorId = `person-${(f.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 
   const inner = (
-    <div className="glass-card">
+    <div className="glass-card" itemScope itemType="https://schema.org/Person">
+      <meta itemProp="worksFor" content="Department of Astronomy, Astrophysics and Space Engineering (DAASE), IIT Indore" />
+      <meta itemProp="affiliation" content="Indian Institute of Technology Indore" />
       <div className="fc-photo">
         <img
           src={photoSrc}
           alt={f.name}
+          itemProp="image"
           loading="lazy"
           decoding="async"
           data-candidate-index="0"
           onError={e => handlePhotoError(e, candidates, DEFAULT_AVATAR)}
         />
         <div className="fc-photo-overlay" />
-        <div className="fc-designation-badge">{f.designation}</div>
+        <div className="fc-designation-badge" itemProp="jobTitle">{f.designation}</div>
       </div>
       <div className="fc-body">
         {f.isHOD && <div className="hod-badge">Head of Department</div>}
-        <div className="fc-name">{f.name}</div>
+        <div className="fc-name" itemProp="name">{f.name}</div>
 
         {(f.chamber || f.phoneExt || f.office || f.phone) && (() => {
           const chamberVal = (f.chamber || f.chamber_no || f.office || '').toString().trim();
@@ -331,7 +334,9 @@ function StudentBatch({ batch, list, onImageClick, category = 'phd' }) {
           const sAnchorId = `person-${(s.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
           return (
             <div id={sAnchorId} key={i} style={{ height: '100%' }}>
-              <TiltCard className="student-card anim-fadeup glass-card" style={{ animationDelay: `${0.04 + i * 0.03}s`, height: '100%' }}>
+              <TiltCard className="student-card anim-fadeup glass-card" style={{ animationDelay: `${0.04 + i * 0.03}s`, height: '100%' }} itemScope itemType="https://schema.org/Person">
+                <meta itemProp="worksFor" content="Department of Astronomy, Astrophysics and Space Engineering (DAASE), IIT Indore" />
+                <meta itemProp="affiliation" content="Indian Institute of Technology Indore" />
                 <div
                   className="sc-avatar"
                   onClick={(e) => {
@@ -342,15 +347,16 @@ function StudentBatch({ batch, list, onImageClick, category = 'phd' }) {
                   <img
                     src={photoSrc}
                     alt={s.name}
+                    itemProp="image"
                     loading="lazy"
                     decoding="async"
                     data-candidate-index="0"
                     onError={e => handlePhotoError(e, candidates)}
                   />
                 </div>
-                <div className="sc-name">{s.name}</div>
-                {s.supervisor && <div className="sc-supervisor">{s.supervisor}</div>}
-                {(s.research || s.research_interests) && <div className="sc-research">{s.research || s.research_interests}</div>}
+                <div className="sc-name" itemProp="name">{s.name}</div>
+                {s.supervisor && <div className="sc-supervisor">Supervisor: {s.supervisor}</div>}
+                {(s.research || s.research_interests) && <div className="sc-research" itemProp="knowsAbout">{s.research || s.research_interests}</div>}
                 {s.email && <div className="sc-email">{s.email}</div>}
               </TiltCard>
             </div>

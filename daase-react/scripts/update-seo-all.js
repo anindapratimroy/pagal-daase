@@ -531,6 +531,28 @@ for (const f of fb.FACULTY_FB) {
   }
 }
 
+for (const s of fb.STAFF_FB) {
+  if (s.photo) {
+    const photoUrl = s.photo.startsWith('./') ? `https://daase.iiti.ac.in/${s.photo.replace(/^\.\//, '')}` : s.photo;
+    sitemapXml += `    <image:image>
+      <image:loc>${photoUrl}</image:loc>
+      <image:title>${s.name} - ${s.designation || 'Staff'}, DAASE, IIT Indore</image:title>
+    </image:image>\n`;
+  }
+}
+
+for (const [batch, list] of Object.entries(fb.PHD_FB)) {
+  for (const s of list) {
+    if (s.photo) {
+      const photoUrl = s.photo.startsWith('./') ? `https://daase.iiti.ac.in/${s.photo.replace(/^\.\//, '')}` : s.photo;
+      sitemapXml += `    <image:image>
+        <image:loc>${photoUrl}</image:loc>
+        <image:title>${s.name} - PhD Research Scholar (${batch}), DAASE, IIT Indore</image:title>
+      </image:image>\n`;
+    }
+  }
+}
+
 sitemapXml += `  </url>
 </urlset>
 `;
