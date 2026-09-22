@@ -68,11 +68,11 @@ export default function Publications({ publications: propPubs }) {
     <div id="publications-section" className="publications-section" data-aos="fade-up">
       <div style={{ width: '100%', padding: '0 clamp(20px, 5%, 80px)', boxSizing: 'border-box' }}>
         <div className="publications-header">
-          <div>
+          <div className="pub-title-group">
             <span className="pub-eyebrow">✦ Latest Research</span>
             <h2>Research Publications</h2>
+            <div className="pub-title-bar" />
           </div>
-          <div className="pub-title-bar" />
 
           {/* ── Inline Publications Search ── */}
           <div className="pub-search-wrap">
@@ -102,8 +102,8 @@ export default function Publications({ publications: propPubs }) {
         {/* ── SEARCH MODE: Filtered Interactive List ── */}
         {isSearching ? (
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-              <span style={{ fontSize: '13px', color: '#ffd97a', fontWeight: 600 }}>
+            <div className="pub-search-status-bar">
+              <span className="pub-search-status-text">
                 {filteredPubs.length === 0
                   ? `No papers found matching "${searchQuery}"`
                   : `Showing ${filteredPubs.length} ${filteredPubs.length === 1 ? 'paper' : 'papers'} matching "${searchQuery}"`}
