@@ -63,6 +63,7 @@ export default function Collaborators() {
                   src={getLogoSrc(logo.img)}
                   alt={logo.name}
                   loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     // Fallback to static folder paths if bundled asset failed
                     if (!e.target.dataset.retried) {

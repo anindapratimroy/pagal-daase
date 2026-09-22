@@ -56,6 +56,7 @@ export default function Facilities({ facilities, onNav }) {
             <img 
               src={selectedImage} 
               alt="Facility" 
+              decoding="async"
               style={{ maxWidth: '100%', maxHeight: '90vh', objectFit: 'contain', borderRadius: '4px', cursor: 'default' }}
               onClick={(e) => e.stopPropagation()} 
             />
@@ -82,6 +83,8 @@ export default function Facilities({ facilities, onNav }) {
                     <img
                       src={imgSrc}
                       alt={f.name}
+                      loading="lazy"
+                      decoding="async"
                       style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s ease', cursor: 'zoom-in', display: 'block' }}
                       onError={e => { e.target.style.display = 'none'; e.target.parentElement.style.display = 'none'; }}
                       onMouseOver={e => { e.target.style.transform = 'scale(1.07)'; }}

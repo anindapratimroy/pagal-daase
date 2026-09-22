@@ -171,6 +171,7 @@ export default function ResearchAreaDetail({ areaId, onNav, faculty }) {
           <img 
             src={`./${area.image}`} 
             alt={area.title} 
+            decoding="async"
             style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'cover', borderRadius: 'var(--r)', marginBottom: area.image_caption ? '12px' : '32px', boxShadow: 'var(--shadow-md)' }} 
           />
           {area.image_caption && (
@@ -206,6 +207,8 @@ export default function ResearchAreaDetail({ areaId, onNav, faculty }) {
                               <img
                                 src={fac.photo}
                                 alt={member}
+                                loading="lazy"
+                                decoding="async"
                                 style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
                                 onError={(e) => {
                                   e.target.style.display = 'none';
@@ -229,6 +232,8 @@ export default function ResearchAreaDetail({ areaId, onNav, faculty }) {
                               <img
                                 src={fac.photo}
                                 alt={member}
+                                loading="lazy"
+                                decoding="async"
                                 style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
                                 onError={(e) => {
                                   e.target.style.display = 'none';

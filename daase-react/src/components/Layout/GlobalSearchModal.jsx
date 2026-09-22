@@ -969,6 +969,8 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
                             <img
                               src={item.photo}
                               alt={item.title}
+                              loading="lazy"
+                              decoding="async"
                               onError={e => {
                                 e.target.style.display = 'none';
                                 if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
@@ -1107,6 +1109,7 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
                       <img
                         src={selectedItem.photo}
                         alt={selectedItem.title}
+                        decoding="async"
                         onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
                       />
                       <div className="preview-photo-fallback" style={{ display: 'none' }}>

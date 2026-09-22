@@ -252,6 +252,8 @@ export default function Home({ onNav, news, events, publications = [] }) {
                   <img
                     src="people_images/Faculty/Dr._Saurabh_Das.jpg"
                     alt="Dr. Saurabh Das"
+                    loading="lazy"
+                    decoding="async"
                     className="hod-message-avatar-img"
                     onError={e => { e.target.style.display = 'none'; if (e.target.nextSibling) e.target.nextSibling.style.display = 'inline'; }}
                   />

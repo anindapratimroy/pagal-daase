@@ -214,12 +214,30 @@ const InteractiveBackground = () => {
       }
     };
 
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        if (animRef.current) {
+          cancelAnimationFrame(animRef.current);
+          animRef.current = null;
+        }
+      } else {
+        if (!animRef.current) {
+          animRef.current = requestAnimationFrame(animate);
+        }
+      }
+    };
+
     window.addEventListener('mousemove', onMove, { passive: true });
     window.addEventListener('mouseleave', onLeave, { passive: true });
     window.addEventListener('touchstart', onTouchStart, { passive: true });
     window.addEventListener('click', onClick);
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     const animate = () => {
+      if (document.hidden) {
+        animRef.current = null;
+        return;
+      }
       const W2 = window.innerWidth;
       const H2 = window.innerHeight;
       timeRef.current++;
@@ -292,16 +310,20 @@ const InteractiveBackground = () => {
 
       // ── Stars ───────────────────────────────────────────
       const stars = starsRef.current;
+      const hasActiveMouse = !isTouch && mouse.x > 0 && mouse.y > 0;
       for (const s of stars) {
-        const dx   = mouse.x - s.x;
-        const dy   = mouse.y - s.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+        let dist = 9999;
+        if (hasActiveMouse) {
+          const dx   = mouse.x - s.x;
+          const dy   = mouse.y - s.y;
+          dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (!isTouch && mouse.x > 0 && mouse.y > 0 && dist < ATTRACT_R && dist > 1) {
-          const force = (1 - dist / ATTRACT_R) * ATTRACT_STR;
-          // REPEL strongly away from mouse instead of attract
-          s.vx -= (dx / dist) * force * 6;
-          s.vy -= (dy / dist) * force * 6;
+          if (dist < ATTRACT_R && dist > 1) {
+            const force = (1 - dist / ATTRACT_R) * ATTRACT_STR;
+            // REPEL strongly away from mouse instead of attract
+            s.vx -= (dx / dist) * force * 6;
+            s.vy -= (dy / dist) * force * 6;
+          }
         }
         s.vx *= FRICTION;
         s.vy *= FRICTION;
@@ -316,7 +338,7 @@ const InteractiveBackground = () => {
         const tw     = Math.sin(t * s.twinkleSpeed + s.twinkleOff);
         const base   = s.opacity + tw * (s.isBeacon ? 0.35 : 0.25);
         const clamp  = Math.max(0.05, Math.min(1, base));
-        const prox   = (!isTouch && mouse.x > 0 && mouse.y > 0 && dist < GLOW_R) ? (1 - dist / GLOW_R) * 0.45 : 0;
+        const prox   = (hasActiveMouse && dist < GLOW_R) ? (1 - dist / GLOW_R) * 0.45 : 0;
         const alpha  = Math.min(1, clamp + prox);
 
         if (s.isBeacon) {
@@ -451,6 +473,7 @@ const InteractiveBackground = () => {
       window.removeEventListener('mouseleave', onLeave);
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('click',      onClick);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
     };
   }, [createStar, createShooting, createNebula, createAurora, createRipple]);
 

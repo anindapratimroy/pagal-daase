@@ -80,7 +80,7 @@ export default function Navbar({ current, onNav, onOpenSearch }) {
     <>
       <nav className={`${isScrolled ? 'nav-scrolled' : 'nav-top'} ${scrollDirection === 'down' ? 'nav-hidden' : ''}`}>
         <div className="nav-logos" onClick={() => handleNav('home')}>
-          <img src="images/IITI_Logo.svg" alt="IIT Indore" className="nav-logo-img"
+          <img src="images/IITI_Logo.svg" alt="IIT Indore" className="nav-logo-img" decoding="async"
             onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
           <div className="logo-placeholder" style={{ display: 'none' }}>IITI</div>
         </div>

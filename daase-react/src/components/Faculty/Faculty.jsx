@@ -142,6 +142,8 @@ function FacultyCard({ f, category = 'faculty' }) {
         <img
           src={photoSrc}
           alt={f.name}
+          loading="lazy"
+          decoding="async"
           data-candidate-index="0"
           onError={e => handlePhotoError(e, candidates, DEFAULT_AVATAR)}
         />
@@ -340,6 +342,8 @@ function StudentBatch({ batch, list, onImageClick, category = 'phd' }) {
                   <img
                     src={photoSrc}
                     alt={s.name}
+                    loading="lazy"
+                    decoding="async"
                     data-candidate-index="0"
                     onError={e => handlePhotoError(e, candidates)}
                   />
@@ -1036,6 +1040,7 @@ export default function Faculty({ initialTab = 'faculty', onNav, faculty, visiti
             <img
               src={modalImg}
               alt={modalName}
+              decoding="async"
               onError={e => {
                 e.target.onerror = null;
                 e.target.src = DEFAULT_AVATAR;

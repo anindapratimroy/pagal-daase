@@ -64,6 +64,8 @@ export default function Footer({ onNav }) {
                 <img 
                   src="images/IITI_Logo.svg" 
                   alt="IIT Indore Logo" 
+                  loading="lazy"
+                  decoding="async"
                   className="footer-iiti-logo"
                   onError={(e) => { e.target.style.display = 'none'; }}
                 />

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import './index.css';
 
 import Navbar from './components/Layout/Navbar';
@@ -7,16 +7,18 @@ import InteractiveBackground from './components/Layout/InteractiveBackground';
 
 import Home from './components/Home/Home';
 import Research from './components/Research/Research';
-import ResearchAreaDetail from './components/Research/ResearchAreaDetail';
 import Programs from './components/Programs/Programs';
 import Faculty from './components/Faculty/Faculty';
-import Students from './components/Students/Students';
-import Facilities from './components/Facilities/Facilities';
-import Events from './components/Events/Events';
-import Alumni from './components/Alumni/Alumni';
-import Gallery from './components/Gallery/Gallery';
-import Opportunities from './components/Opportunities/Opportunities';
-import GlobalSearchModal from './components/Layout/GlobalSearchModal';
+
+// Lazy-loaded secondary view components for high-speed initial paint
+const ResearchAreaDetail = lazy(() => import('./components/Research/ResearchAreaDetail'));
+const Students           = lazy(() => import('./components/Students/Students'));
+const Facilities         = lazy(() => import('./components/Facilities/Facilities'));
+const Events             = lazy(() => import('./components/Events/Events'));
+const Alumni             = lazy(() => import('./components/Alumni/Alumni'));
+const Gallery            = lazy(() => import('./components/Gallery/Gallery'));
+const Opportunities      = lazy(() => import('./components/Opportunities/Opportunities'));
+const GlobalSearchModal  = lazy(() => import('./components/Layout/GlobalSearchModal'));
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -135,6 +137,17 @@ export default function App() {
       offset: 100,
       easing: 'ease-out-cubic'
     });
+  }, []);
+
+  // Idle prefetching of secondary routes and modal chunks after main thread settles
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      import('./components/Layout/GlobalSearchModal');
+      import('./components/Facilities/Facilities');
+      import('./components/Events/Events');
+      import('./components/Alumni/Alumni');
+    }, 2000);
+    return () => clearTimeout(timer);
   }, []);
 
   const handlePreloaderComplete = () => {
@@ -371,16 +384,22 @@ export default function App() {
 
       <Navbar current={navCurrent} onNav={handleNav} onOpenSearch={() => setSearchModalOpen(true)} />
 
-      <GlobalSearchModal
-        isOpen={searchModalOpen}
-        onClose={() => setSearchModalOpen(false)}
-        onNav={handleNav}
-        data={data}
-      />
+      {searchModalOpen && (
+        <Suspense fallback={null}>
+          <GlobalSearchModal
+            isOpen={searchModalOpen}
+            onClose={() => setSearchModalOpen(false)}
+            onNav={handleNav}
+            data={data}
+          />
+        </Suspense>
+      )}
 
       <main id="main-content" ref={mainRef}
         style={{ paddingTop: 'var(--nav-h)', minHeight: '100vh', overflowX: 'hidden' }}>
-        {renderView()}
+        <Suspense fallback={<div style={{ minHeight: '70vh' }} />}>
+          {renderView()}
+        </Suspense>
       </main>
 
       <button

@@ -24,6 +24,8 @@ function GalleryItem({ item, i, onOpen }) {
       <img
         src={item.src}
         alt={item.label}
+        loading="lazy"
+        decoding="async"
         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
         onError={() => setHidden(true)}
       />
@@ -57,7 +59,7 @@ export default function Gallery() {
         <div className="student-modal-overlay" onClick={() => setModalSrc(null)}>
           <div className="student-modal-content" onClick={e => e.stopPropagation()}>
             <div className="close-hint">Click outside to close</div>
-            <img src={modalSrc} alt={modalLabel} style={{ borderRadius: 'var(--r)', maxHeight: '85vh', maxWidth: '90vw', objectFit: 'contain' }} />
+            <img src={modalSrc} alt={modalLabel} decoding="async" style={{ borderRadius: 'var(--r)', maxHeight: '85vh', maxWidth: '90vw', objectFit: 'contain' }} />
             {modalLabel && (
               <div style={{ color: '#fff', marginTop: '12px', fontSize: '15px', fontWeight: 600 }}>{modalLabel}</div>
             )}

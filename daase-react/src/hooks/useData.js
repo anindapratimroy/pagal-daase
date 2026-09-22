@@ -122,23 +122,21 @@ export function useData() {
 }
 
 async function fetchFresh() {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 6500);
   try {
     // Added refresh=true to explicitly force the Apps Script to bypass its 5-minute CacheService
     const url = SHEETS_URL + (SHEETS_URL.includes('?') ? '&' : '?') + 'refresh=true&t=' + Date.now();
-    const res = await fetch(url, { cache: 'no-store' });
+    const res = await fetch(url, { cache: 'no-store', signal: controller.signal });
+    clearTimeout(timeoutId);
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const json = await res.json();
     if (json.error) throw new Error(json.error);
     setCached(json);
-    
-    // DEBUG LOGS ADDED TO INSPECT RAW API RESPONSE
-    console.log('[DEBUG] RAW API RESPONSE RECEIVED:');
-    console.log('[DEBUG] RAW EVENTS from API:', JSON.parse(JSON.stringify(json.events || [])));
-    console.log('[DEBUG] RAW NEWS from API:', JSON.parse(JSON.stringify(json.news || [])));
-    
     return json;
   } catch (e) {
-    console.warn('[DAASE] Sheets fetch failed, using fallback:', e.message);
+    clearTimeout(timeoutId);
+    console.warn('[DAASE] Sheets fetch completed or timed out, using fallback/cache:', e.message);
     return null;
   }
 }

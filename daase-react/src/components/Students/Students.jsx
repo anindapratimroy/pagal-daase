@@ -30,6 +30,8 @@ function StudentBatch({ batch, list, onImageClick, type }) {
                 <img
                   src={photoSrc}
                   alt={s.name}
+                  loading="lazy"
+                  decoding="async"
                   data-candidate-index="0"
                   onError={e => handlePhotoError(e, candidates)}
                 />
@@ -168,6 +170,7 @@ export default function Students({ pg, ug, phd, interns }) {
             <img
               src={modalImg}
               alt={modalName}
+              decoding="async"
               onError={e => {
                 e.target.onerror = null;
                 e.target.src = DEFAULT_AVATAR;
