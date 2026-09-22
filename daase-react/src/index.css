@@ -59,6 +59,8 @@
 html {
   font-size: 19px;
   background: #020617;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -67,6 +69,14 @@ body {
   color: var(--text-body);
   line-height: 1.75;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
 }
 
 a {
@@ -1967,6 +1977,20 @@ nav.nav-scrolled.nav-hidden {
 }
 
 
+.hod-about-body-extra {
+  display: block;
+}
+
+.hod-message-body-extra {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hod-mobile-toggle-btn {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .hod-about-section {
     grid-template-columns: 1fr;
@@ -1974,7 +1998,56 @@ nav.nav-scrolled.nav-hidden {
     padding: 40px clamp(16px, 4%, 48px);
   }
   .hod-message-card {
-    max-height: 520px;
+    max-height: none !important;
+    height: auto !important;
+  }
+  .hod-message-scroll-area {
+    overflow-y: visible !important;
+    max-height: none !important;
+    padding-right: 0 !important;
+    margin-right: 0 !important;
+  }
+  .hod-about-body-extra {
+    display: none;
+  }
+  .hod-about-body-extra.is-expanded {
+    display: block;
+    animation: fadeUp 0.3s ease both;
+  }
+  .hod-message-body-extra {
+    display: none;
+  }
+  .hod-message-body-extra.is-expanded {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeUp 0.3s ease both;
+  }
+  .hod-mobile-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: rgba(255, 217, 122, 0.12);
+    border: 1px solid rgba(255, 217, 122, 0.35);
+    color: #ffd97a;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 14px;
+    transition: all 0.2s ease;
+    width: fit-content;
+    align-self: flex-start;
+  }
+  .hod-mobile-toggle-btn:hover {
+    background: rgba(255, 217, 122, 0.22);
+    border-color: #ffd97a;
+    transform: translateY(-1px);
+  }
+  .hod-mobile-toggle-btn:active {
+    transform: scale(0.98);
   }
 }
 
@@ -4961,6 +5034,12 @@ nav.nav-scrolled.nav-hidden {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 1px 1px 1px rgba(255, 255, 255, 0.15);
+  max-width: calc(100% - 24px);
+  white-space: normal;
+  line-height: 1.3;
+  word-break: normal;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
 }
 
 
@@ -6982,15 +7061,21 @@ a.sc-email:hover {
 
   /* Shrink badges so they don't force minimum width */
   .fc-designation-badge {
-    font-size: 8.5px !important;
+    font-size: 8px !important;
     padding: 3px 6px !important;
     letter-spacing: 0.02em !important;
-    bottom: 4px !important;
-    left: 4px !important;
-    white-space: normal !important; /* allow breaking into two lines if needed */
-    text-align: center;
-    max-width: 92%;
-    line-height: 1.2;
+    bottom: 5px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: auto !important;
+    max-width: calc(100% - 10px) !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    text-align: center !important;
+    line-height: 1.25 !important;
+    border-radius: 4px !important;
+    box-sizing: border-box !important;
   }
 
   .hod-badge {
@@ -7067,8 +7152,59 @@ a.sc-email:hover {
     padding: 22px 18px;
   }
 
+  /* Programs Tab Bar - Mobile Horizontal Scrollable Segmented Bar */
+  .programs-tabs {
+    gap: 6px !important;
+    margin-bottom: 24px !important;
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    padding-bottom: 8px !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  }
+  .programs-tabs::-webkit-scrollbar {
+    display: none !important;
+  }
+  .prog-tab {
+    font-size: 14px !important;
+    padding: 8px 14px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    border-radius: 8px 8px 0 0 !important;
+  }
+  .prog-title {
+    font-size: clamp(20px, 5.5vw, 26px) !important;
+    line-height: 1.25 !important;
+  }
+  .prog-desc {
+    font-size: 15px !important;
+    line-height: 1.65 !important;
+  }
+
   .opp-card {
     padding: 22px 18px;
+  }
+
+  /* Opportunities Tabs - Mobile */
+  .opp-tabs-row {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    margin-bottom: 24px !important;
+  }
+  .opp-tab-btn {
+    padding: 8px 16px !important;
+    font-size: 13.5px !important;
+  }
+  .opp-tier-pill-group {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 6px !important;
+  }
+  .opp-tier-pill {
+    padding: 6px 12px !important;
+    font-size: 12px !important;
   }
 
   nav {
@@ -8150,18 +8286,21 @@ a.sc-email:hover {
 
   /* Designation Badge on Photo */
   .fc-designation-badge {
-    font-size: 8.5px !important;
+    font-size: 8px !important;
     padding: 3px 6px !important;
-    letter-spacing: 0.03em !important;
+    letter-spacing: 0.02em !important;
     bottom: 5px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
-    width: max-content !important;
-    max-width: 92% !important;
+    width: auto !important;
+    max-width: calc(100% - 10px) !important;
     text-align: center !important;
-    white-space: nowrap !important;
-    line-height: 1.2 !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    line-height: 1.25 !important;
     border-radius: 4px !important;
+    box-sizing: border-box !important;
   }
 
   .hod-badge {
@@ -8308,6 +8447,11 @@ a.sc-email:hover {
   .fc-designation-badge {
     font-size: 7.5px !important;
     padding: 2px 4px !important;
+    max-width: calc(100% - 6px) !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    line-height: 1.2 !important;
   }
 
   .fc-office-item,

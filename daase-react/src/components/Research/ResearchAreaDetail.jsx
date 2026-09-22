@@ -218,6 +218,7 @@ export default function ResearchAreaDetail({ areaId, onNav, faculty }) {
                           </div>
                           <div className="faculty-info">
                             <span className="faculty-name">{member}</span>
+                            {fac?.designation && <span className="faculty-designation-hint">{fac.designation}</span>}
                             <span className="faculty-link-hint">View profile ↗</span>
                           </div>
                         </a>
@@ -238,7 +239,10 @@ export default function ResearchAreaDetail({ areaId, onNav, faculty }) {
                               '👤'
                             )}
                           </div>
-                          <span className="faculty-name">{member}</span>
+                          <div className="faculty-info">
+                            <span className="faculty-name">{member}</span>
+                            {fac?.designation && <span className="faculty-designation-hint">{fac.designation}</span>}
+                          </div>
                         </div>
                       )}
                     </li>

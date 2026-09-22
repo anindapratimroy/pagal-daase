@@ -53,6 +53,9 @@ function getPubUrl(pub) {
 }
 
 export default function Home({ onNav, news, events, publications = [] }) {
+  const [expandAboutMobile, setExpandAboutMobile] = useState(false);
+  const [expandHodMobile, setExpandHodMobile] = useState(false);
+
   const combinedUpdates = useMemo(() => {
     return sortHomeUpdates(news, events).slice(0, 10);
   }, [news, events]);
@@ -220,12 +223,23 @@ export default function Home({ onNav, news, events, publications = [] }) {
               <p className="hod-about-body" style={{ marginBottom: '16px' }}>
                 DAASE’s teaching and research activities concentrate on four core domains: Astronomy &amp; Astrophysics, Space Science and Instrumentation, Remote Sensing and Atmospheric Physics, and Data Science and Data-Driven Techniques. Our bachelor’s and master’s curricula integrate these domains, providing students with rigorous theoretical knowledge and hands-on experience to promote both academic achievement and innovation.
               </p>
-              <p className="hod-about-body" style={{ marginBottom: '16px' }}>
-                Faculty members pursue research across a broad spectrum —from Earth observations to black holes and neutron stars; from galaxies and interstellar medium to solar physics; from drone and cubesat technologies to radio astronomical instrumentation; from early universe and observational cosmology to atmospheric and ionospheric modeling; and from computational and high-energy astrophysics to climate modelling. Advanced numerical modelling and statistical inference unite these diverse research areas and drive scientific innovation.
-              </p>
-              <p className="hod-about-body" style={{ marginBottom: '0' }}>
-                DAASE supports research and learning with state-of-the-art cutting-edge facilities for experimental and applied research. Since 2022, the department has participated in the Indian research contingent to the Arctic, maintaining advanced facilities at the Indian Research Station Himadri for atmospheric and space science investigations. National and international agencies, including MoE, UGC, ANRF/SERB, DST, MoES, CSIR, SPARC, DAE, ISRO, Max Planck Partner Group, and ASEM-DUO, provide critical support for our pursuit of research excellence that advances both science and society. DAASE faculty and students also represent the department as core members of various professional organizations, including GRSS-IEEE, APS-IEEE, ASI, and IAU as well as involved in outreach activities targeting the school and college students.
-              </p>
+              <div className={`hod-about-body-extra${expandAboutMobile ? ' is-expanded' : ''}`}>
+                <p className="hod-about-body" style={{ marginBottom: '16px' }}>
+                  Faculty members pursue research across a broad spectrum —from Earth observations to black holes and neutron stars; from galaxies and interstellar medium to solar physics; from drone and cubesat technologies to radio astronomical instrumentation; from early universe and observational cosmology to atmospheric and ionospheric modeling; and from computational and high-energy astrophysics to climate modelling. Advanced numerical modelling and statistical inference unite these diverse research areas and drive scientific innovation.
+                </p>
+                <p className="hod-about-body" style={{ marginBottom: '0' }}>
+                  DAASE supports research and learning with state-of-the-art cutting-edge facilities for experimental and applied research. Since 2022, the department has participated in the Indian research contingent to the Arctic, maintaining advanced facilities at the Indian Research Station Himadri for atmospheric and space science investigations. National and international agencies, including MoE, UGC, ANRF/SERB, DST, MoES, CSIR, SPARC, DAE, ISRO, Max Planck Partner Group, and ASEM-DUO, provide critical support for our pursuit of research excellence that advances both science and society. DAASE faculty and students also represent the department as core members of various professional organizations, including GRSS-IEEE, APS-IEEE, ASI, and IAU as well as involved in outreach activities targeting the school and college students.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                className="hod-mobile-toggle-btn"
+                onClick={() => setExpandAboutMobile(prev => !prev)}
+                aria-expanded={expandAboutMobile}
+              >
+                {expandAboutMobile ? 'Show Less ▴' : 'Read Full Department Overview ▾'}
+              </button>
             </div>
           </div>
         </div>
@@ -260,21 +274,33 @@ export default function Home({ onNav, news, events, publications = [] }) {
                 <p>
                   We are a young and dynamic department, uniquely positioned within the IIT system, with a distinctive vision to advance our understanding of the universe while contributing to the technologies that will shape the future of space exploration. Our faculty, students, researchers, and collaborators share a deep curiosity about the cosmos and a collective commitment to scientific excellence, innovation, and interdisciplinary research.
                 </p>
-                <p>
-                  Since 2015, DAASE has been a founding member of the Square Kilometre Array – India Consortium (SKA-IC), contributing to one of the world’s most ambitious international astronomical initiatives. Our faculty and researchers are actively involved in major ISRO and NASA missions and collaborate with leading universities and research institutions across the globe. These engagements provide our students and researchers with opportunities to participate in cutting-edge science and technology at both national and international levels.
-                </p>
-                <p>
-                  As the only dedicated department of its kind among the IITs, DAASE offers a specialized academic and research ecosystem spanning astronomy, astrophysics, remote sensing, space sciences, and space engineering. Through our undergraduate and postgraduate programs, we strive to nurture the next generation of scientists, engineers, and innovators equipped to address some of the most challenging questions facing humanity.
-                </p>
-                <p>
-                  Our commitment extends beyond research and education. Through outreach and engagement initiatives, we seek to communicate the excitement of science and inspire young minds to explore careers in astronomy, astrophysics, and space science and technology.
-                </p>
-                <p>
-                  At DAASE, we are committed to fostering an environment where <strong>curiosity drives discovery</strong>, <strong>collaboration enables innovation</strong>, and <strong>excellence creates impact</strong>. As India advances toward becoming a leading global space economy, we aspire to contribute meaningfully to this national vision through world-class research, education, and technological innovation.
-                </p>
-                <p>
-                  We warmly invite you to explore our department, engage with our academic community, and join us in our journey of discovering the universe and engineering the future of space exploration.
-                </p>
+
+                <div className={`hod-message-body-extra${expandHodMobile ? ' is-expanded' : ''}`}>
+                  <p>
+                    Since 2015, DAASE has been a founding member of the Square Kilometre Array – India Consortium (SKA-IC), contributing to one of the world’s most ambitious international astronomical initiatives. Our faculty and researchers are actively involved in major ISRO and NASA missions and collaborate with leading universities and research institutions across the globe. These engagements provide our students and researchers with opportunities to participate in cutting-edge science and technology at both national and international levels.
+                  </p>
+                  <p>
+                    As the only dedicated department of its kind among the IITs, DAASE offers a specialized academic and research ecosystem spanning astronomy, astrophysics, remote sensing, space sciences, and space engineering. Through our undergraduate and postgraduate programs, we strive to nurture the next generation of scientists, engineers, and innovators equipped to address some of the most challenging questions facing humanity.
+                  </p>
+                  <p>
+                    Our commitment extends beyond research and education. Through outreach and engagement initiatives, we seek to communicate the excitement of science and inspire young minds to explore careers in astronomy, astrophysics, and space science and technology.
+                  </p>
+                  <p>
+                    At DAASE, we are committed to fostering an environment where <strong>curiosity drives discovery</strong>, <strong>collaboration enables innovation</strong>, and <strong>excellence creates impact</strong>. As India advances toward becoming a leading global space economy, we aspire to contribute meaningfully to this national vision through world-class research, education, and technological innovation.
+                  </p>
+                  <p>
+                    We warmly invite you to explore our department, engage with our academic community, and join us in our journey of discovering the universe and engineering the future of space exploration.
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  className="hod-mobile-toggle-btn"
+                  onClick={() => setExpandHodMobile(prev => !prev)}
+                  aria-expanded={expandHodMobile}
+                >
+                  {expandHodMobile ? 'Show Less ▴' : 'Read Full Welcome Message ▾'}
+                </button>
               </div>
             </div>
           </div>
