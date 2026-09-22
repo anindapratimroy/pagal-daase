@@ -106,6 +106,70 @@ const getDisplayFullTel = (rawExt) => {
   return `+91-731-660-${digits || rawExt}`;
 };
 
+const SYNONYMS = {
+  'hod': ['bhargav', 'vaidya', 'head of department', 'head'],
+  'head': ['bhargav', 'vaidya', 'hod', 'head of department'],
+  'btech': ['b.tech', 'space science & engineering', 'space science', 'undergraduate', 'bachelor'],
+  'b.tech': ['btech', 'space science & engineering', 'space science', 'undergraduate'],
+  'msc': ['m.sc', 'astronomy', 'postgraduate', 'masters', 'jam'],
+  'm.sc': ['msc', 'astronomy', 'postgraduate', 'masters'],
+  'mtech': ['m.tech', 'space engineering', 'satellite', 'payload', 'spacecraft'],
+  'm.tech': ['mtech', 'space engineering', 'satellite', 'payload'],
+  'ms': ['m.s.', 'research', 'thesis'],
+  'phd': ['ph.d', 'doctoral', 'doctorate', 'scholar', 'fellowship'],
+  'ph.d': ['phd', 'doctoral', 'doctorate', 'scholar'],
+  'telescope': ['observatory', 'astronomical', 'instrumentation', 'himadri', 'optical', 'radio'],
+  'observatory': ['telescope', 'himadri', 'observatories', 'facility'],
+  'arctic': ['himadri', 'svalbard', 'ny-alesund', 'station'],
+  'himadri': ['arctic', 'svalbard', 'ny-alesund', 'station', 'observatory'],
+  'ska': ['square kilometre', 'radio astronomy', 'consortium', 'interferometry'],
+  'cubesat': ['satellite', 'calsat', 'spacecraft', 'payload'],
+  'calsat': ['cubesat', 'satellite', 'payload'],
+  'admission': ['admissions', 'apply', 'opportunities', 'b.tech', 'm.sc', 'ph.d'],
+  'admissions': ['admission', 'apply', 'opportunities', 'b.tech', 'm.sc', 'ph.d'],
+  'internship': ['interns', 'intern', 'opportunities', 'summer'],
+  'internships': ['interns', 'intern', 'opportunities', 'summer'],
+  'job': ['opportunities', 'faculty', 'positions', 'recruitment', 'hiring'],
+  'jobs': ['opportunities', 'faculty', 'positions', 'recruitment', 'hiring'],
+  'hiring': ['opportunities', 'faculty recruitment', 'positions'],
+  'alumni': ['graduates', 'batch', 'class of'],
+};
+
+function levenshteinDistance(a, b) {
+  if (a === b) return 0;
+  if (!a.length) return b.length;
+  if (!b.length) return a.length;
+  const v0 = new Array(b.length + 1);
+  const v1 = new Array(b.length + 1);
+  for (let i = 0; i <= b.length; i++) v0[i] = i;
+  for (let i = 0; i < a.length; i++) {
+    v1[0] = i + 1;
+    for (let j = 0; j < b.length; j++) {
+      const cost = a[i] === b[j] ? 0 : 1;
+      v1[j + 1] = Math.min(v1[j] + 1, v0[j + 1] + 1, v0[j] + cost);
+    }
+    for (let j = 0; j <= b.length; j++) v0[j] = v1[j];
+  }
+  return v1[b.length];
+}
+
+function termMatchesTarget(term, targetStr) {
+  if (!targetStr) return false;
+  if (targetStr.includes(term)) return true;
+  const syns = SYNONYMS[term];
+  if (syns && syns.some(s => targetStr.includes(s))) return true;
+  if (term.length >= 4) {
+    const words = targetStr.split(/[\s,._/()\-:]+/);
+    const maxDist = term.length >= 7 ? 2 : 1;
+    for (const w of words) {
+      if (w.length >= 3 && Math.abs(w.length - term.length) <= maxDist) {
+        if (levenshteinDistance(term, w) <= maxDist) return true;
+      }
+    }
+  }
+  return false;
+}
+
 function HighlightMatch({ text, query }) {
   if (!query || !text) return text;
   const terms = query.trim().split(/\s+/).filter(Boolean);
@@ -131,6 +195,14 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [mobileTab, setMobileTab] = useState('list'); // 'list' | 'preview'
+  const [recentSearches, setRecentSearches] = useState(() => {
+    try {
+      const raw = localStorage.getItem('daase_recent_searches');
+      return raw ? JSON.parse(raw) : [];
+    } catch {
+      return [];
+    }
+  });
   const inputRef = useRef(null);
   const listRef = useRef(null);
 
@@ -439,7 +511,7 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
     return items;
   }, [data, onNav]);
 
-  // Scoring and filtering
+  // Scoring and filtering with Synonyms & Typo Tolerance
   const searchResults = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return [];
@@ -451,28 +523,31 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
       const titleLower = item.title.toLowerCase();
       const keywordsLower = item.keywords.toLowerCase();
       const subLower = item.sub.toLowerCase();
+      const catLower = item.category.toLowerCase();
+      const badgeLower = (item.badge || '').toLowerCase();
+      const searchable = `${titleLower} ${keywordsLower} ${subLower} ${catLower} ${badgeLower}`;
 
-      // Must match all entered terms
-      const matchesAll = terms.every(
-        term =>
-          titleLower.includes(term) ||
-          keywordsLower.includes(term) ||
-          subLower.includes(term) ||
-          item.category.toLowerCase().includes(term) ||
-          (item.badge && item.badge.toLowerCase().includes(term))
-      );
+      // Must match all entered terms (either directly, via synonym, or fuzzy)
+      const matchesAll = terms.every(term => termMatchesTarget(term, searchable));
 
       if (!matchesAll) continue;
 
       let score = 0;
-      if (titleLower === q) score += 150;
-      else if (titleLower.startsWith(q)) score += 100;
-      else if (titleLower.includes(q)) score += 70;
+      if (titleLower === q) score += 180;
+      else if (titleLower.startsWith(q)) score += 110;
+      else if (titleLower.includes(q)) score += 75;
 
       terms.forEach(term => {
-        if (titleLower.includes(term)) score += 30;
+        if (titleLower.includes(term)) score += 35;
         if (subLower.includes(term)) score += 15;
-        if (item.category.toLowerCase().includes(term)) score += 20;
+        if (catLower.includes(term)) score += 20;
+
+        // Synonym bonus
+        const syns = SYNONYMS[term];
+        if (syns && syns.some(s => searchable.includes(s))) score += 45;
+
+        // Head of Department special spotlight
+        if ((term === 'hod' || term === 'head') && item.isHOD) score += 250;
       });
 
       // Priority boost for core categories
@@ -480,6 +555,7 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
       if (item.category === 'Research') score += 20;
       if (item.category === 'Programs') score += 18;
       if (item.category === 'Students') score += 15;
+      if (item.category === 'Alumni') score += 12;
 
       scored.push({ item, score });
     }
@@ -628,7 +704,30 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
     }
   };
 
+  const saveRecent = (val) => {
+    if (!val || val.trim().length < 2) return;
+    try {
+      const trimmed = val.trim();
+      setRecentSearches(prev => {
+        const next = [trimmed, ...prev.filter(s => s.toLowerCase() !== trimmed.toLowerCase())].slice(0, 5);
+        localStorage.setItem('daase_recent_searches', JSON.stringify(next));
+        return next;
+      });
+    } catch {}
+  };
+
+  const clearRecentSearches = (e) => {
+    if (e) e.stopPropagation();
+    try {
+      localStorage.removeItem('daase_recent_searches');
+      setRecentSearches([]);
+    } catch {}
+  };
+
   const handleSelectItem = (item) => {
+    if (query && query.trim().length >= 2) {
+      saveRecent(query.trim());
+    }
     onClose();
     if (item.action) {
       item.action();
@@ -656,6 +755,7 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
     'Students',
     'Events',
     'Staff',
+    'Alumni',
     'Pages'
   ];
 
@@ -804,6 +904,53 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
                     {displayItems.length} {displayItems.length === 1 ? 'item' : 'items'}
                   </span>
                 </div>
+
+                {/* Recent Searches Pills when query is empty */}
+                {!query.trim() && recentSearches.length > 0 && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap', marginBottom: '14px', padding: '0 2px' }}>
+                    <span style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.45)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
+                      Recent:
+                    </span>
+                    {recentSearches.map((s, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        className="search-filter-pill"
+                        style={{
+                          fontSize: '12px',
+                          padding: '3px 10px',
+                          height: 'auto',
+                          background: 'rgba(255, 217, 122, 0.08)',
+                          borderColor: 'rgba(255, 217, 122, 0.25)',
+                          color: '#ffd97a',
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => {
+                          setQuery(s);
+                          if (inputRef.current) inputRef.current.focus();
+                        }}
+                      >
+                        🕒 {s}
+                      </button>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={clearRecentSearches}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: 'rgba(255, 255, 255, 0.4)',
+                        fontSize: '11px',
+                        cursor: 'pointer',
+                        marginLeft: 'auto',
+                        textDecoration: 'underline',
+                      }}
+                      title="Clear search history"
+                    >
+                      Clear
+                    </button>
+                  </div>
+                )}
 
                 <div className="power-results-list" role="listbox">
                   {displayItems.map((item, idx) => {

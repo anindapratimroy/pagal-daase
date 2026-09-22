@@ -54,21 +54,38 @@ function formatEventDate(rawDate) {
   return trimmed;
 }
 
-function matchesEvent(ev, q) {
-  if (!ev) return false;
-  const match = (str) => Boolean(str && String(str).toLowerCase().includes(q));
+function HighlightMatch({ text, query }) {
+  if (!query || !text) return text;
+  const terms = query.trim().split(/\s+/).filter(Boolean);
+  if (!terms.length) return text;
+
+  const escapedTerms = terms.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  const regex = new RegExp(`(${escapedTerms.join('|')})`, 'gi');
+  const parts = String(text).split(regex);
+
   return (
-    match(ev.title) ||
-    match(ev.date) ||
-    match(ev.type) ||
-    match(ev.desc) ||
-    match(ev.description) ||
-    match(ev.venue) ||
-    match(ev.speaker)
+    <span>
+      {parts.map((part, i) =>
+        terms.some((term) => term.toLowerCase() === part.toLowerCase()) ? (
+          <mark key={i} className="search-highlight">
+            {part}
+          </mark>
+        ) : (
+          part
+        )
+      )}
+    </span>
   );
 }
 
-function EventCard({ ev, i, badgeClass, badgeLabel }) {
+function matchesEvent(ev, q) {
+  if (!ev) return false;
+  const terms = q.split(/\s+/).filter(Boolean);
+  const searchableText = `${ev.title || ''} ${ev.date || ''} ${ev.type || ''} ${ev.desc || ''} ${ev.description || ''} ${ev.venue || ''} ${ev.speaker || ''}`.toLowerCase();
+  return terms.every(term => searchableText.includes(term));
+}
+
+function EventCard({ ev, i, badgeClass, badgeLabel, query }) {
   const rawLink = ev.link || ev.url || ev.Link || ev.URL || ev.href || '';
   const href = normalizeLink(rawLink);
   const displayDate = formatEventDate(ev.date);
@@ -76,8 +93,24 @@ function EventCard({ ev, i, badgeClass, badgeLabel }) {
   const cardContent = (
     <>
       <div className={`event-type ${badgeClass}`}>{badgeLabel}</div>
-      <h3 className="event-title">{ev.title}</h3>
-      {displayDate && <div className="event-date">📅 &nbsp;{displayDate}</div>}
+      <h3 className="event-title">
+        <HighlightMatch text={ev.title} query={query} />
+      </h3>
+      {displayDate && (
+        <div className="event-date">
+          📅 &nbsp;<HighlightMatch text={displayDate} query={query} />
+        </div>
+      )}
+      {ev.speaker && (
+        <div className="event-speaker" style={{ fontSize: '13px', color: 'var(--gold)', marginTop: '4px' }}>
+          🎤 <HighlightMatch text={ev.speaker} query={query} />
+        </div>
+      )}
+      {ev.venue && (
+        <div className="event-venue" style={{ fontSize: '12.5px', color: 'var(--text-muted)', marginTop: '2px' }}>
+          📍 <HighlightMatch text={ev.venue} query={query} />
+        </div>
+      )}
       {href && (
         <div style={{ marginTop: 'auto', paddingTop: '12px' }}>
           <span style={{
@@ -126,10 +159,9 @@ function EventCard({ ev, i, badgeClass, badgeLabel }) {
 
   return (
     <TiltCard
-      className="event-card past-card anim-fadeup"
+      className={`event-card${badgeClass === 'upcoming' ? ' upcoming-card' : ' past-card'} anim-fadeup`}
       style={{
         animationDelay: `${0.06 + i * 0.07}s`,
-        cursor: 'default',
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
@@ -142,7 +174,22 @@ function EventCard({ ev, i, badgeClass, badgeLabel }) {
 
 export default function Events({ events = [], outreach = [], onNav }) {
   const [searchQuery, setSearchQuery] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('all'); // 'all' | 'upcoming' | 'past' | 'outreach'
+  const [selectedYear, setSelectedYear] = useState('all');
+
   const allEvents = Array.isArray(events) ? events : [];
+
+  // Extract available years across all events
+  const availableYears = useMemo(() => {
+    const years = new Set();
+    [...allEvents, ...(outreach || [])].forEach(ev => {
+      if (ev.date) {
+        const m = String(ev.date).match(/\b(20\d{2})\b/);
+        if (m) years.add(m[1]);
+      }
+    });
+    return Array.from(years).sort().reverse();
+  }, [allEvents, outreach]);
 
   // Filter into Upcoming and Past
   const upcomingEvents = allEvents.filter(ev => {
@@ -181,25 +228,49 @@ export default function Events({ events = [], outreach = [], onNav }) {
 
   const q = searchQuery.trim().toLowerCase();
   const isSearching = q.length > 0;
+  const isFiltering = isSearching || categoryFilter !== 'all' || selectedYear !== 'all';
+
+  const matchesYear = (ev) => {
+    if (selectedYear === 'all') return true;
+    return ev.date && String(ev.date).includes(selectedYear);
+  };
 
   // Filtered lists
   const filteredUpcoming = useMemo(() => {
-    if (!q) return sortedUpcoming;
-    return sortedUpcoming.filter(ev => matchesEvent(ev, q));
-  }, [sortedUpcoming, q]);
+    if (categoryFilter === 'past' || categoryFilter === 'outreach') return [];
+    return sortedUpcoming.filter(ev => {
+      if (!matchesYear(ev)) return false;
+      if (!q) return true;
+      return matchesEvent(ev, q);
+    });
+  }, [sortedUpcoming, q, categoryFilter, selectedYear]);
 
   const filteredPast = useMemo(() => {
-    if (!q) return sortedPast;
-    return sortedPast.filter(ev => matchesEvent(ev, q));
-  }, [sortedPast, q]);
+    if (categoryFilter === 'upcoming' || categoryFilter === 'outreach') return [];
+    return sortedPast.filter(ev => {
+      if (!matchesYear(ev)) return false;
+      if (!q) return true;
+      return matchesEvent(ev, q);
+    });
+  }, [sortedPast, q, categoryFilter, selectedYear]);
 
   const filteredOutreach = useMemo(() => {
     if (!outreach || !Array.isArray(outreach)) return [];
-    if (!q) return outreach;
-    return outreach.filter(ev => matchesEvent(ev, q));
-  }, [outreach, q]);
+    if (categoryFilter === 'upcoming' || categoryFilter === 'past') return [];
+    return outreach.filter(ev => {
+      if (!matchesYear(ev)) return false;
+      if (!q) return true;
+      return matchesEvent(ev, q);
+    });
+  }, [outreach, q, categoryFilter, selectedYear]);
 
   const totalEventMatches = filteredUpcoming.length + filteredPast.length + filteredOutreach.length;
+
+  const handleClear = () => {
+    setSearchQuery('');
+    setCategoryFilter('all');
+    setSelectedYear('all');
+  };
 
   return (
     <div style={{ background: 'transparent' }}>
@@ -215,26 +286,70 @@ export default function Events({ events = [], outreach = [], onNav }) {
         <SearchBar
           value={searchQuery}
           onChange={setSearchQuery}
-          onClear={() => setSearchQuery('')}
-          placeholder="Search events by title, keyword, year, or date..."
+          onClear={handleClear}
+          placeholder="Search events by title, keyword, speaker, year, or venue..."
           resultCount={isSearching ? totalEventMatches : null}
           id="events-search-input"
         />
 
+        {/* ── Event Category Filter Pills ── */}
+        <div className="people-search-filter-pills" style={{ marginBottom: '16px', justifyContent: 'center' }}>
+          {[
+            { key: 'all',      label: 'All Events' },
+            { key: 'upcoming', label: 'Upcoming' },
+            { key: 'past',     label: 'Past Events' },
+            { key: 'outreach', label: 'Outreach Initiatives' },
+          ].map(tab => (
+            <button
+              key={tab.key}
+              type="button"
+              className={`search-filter-pill${categoryFilter === tab.key ? ' active' : ''}`}
+              onClick={() => setCategoryFilter(tab.key)}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* ── Year Filter Chips ── */}
+        {availableYears.length > 0 && (
+          <div style={{ display: 'flex', gap: '6px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '28px' }}>
+            <button
+              type="button"
+              className={`opp-tier-pill${selectedYear === 'all' ? ' active' : ''}`}
+              onClick={() => setSelectedYear('all')}
+              style={{ fontSize: '12px', padding: '4px 12px' }}
+            >
+              All Years
+            </button>
+            {availableYears.map(yr => (
+              <button
+                key={yr}
+                type="button"
+                className={`opp-tier-pill${selectedYear === yr ? ' active' : ''}`}
+                onClick={() => setSelectedYear(yr)}
+                style={{ fontSize: '12px', padding: '4px 12px' }}
+              >
+                {yr}
+              </button>
+            ))}
+          </div>
+        )}
+
         {/* If searching and zero results anywhere */}
-        {isSearching && totalEventMatches === 0 ? (
+        {isFiltering && totalEventMatches === 0 ? (
           <div className="search-no-results">
             <div className="search-no-results-icon">📅</div>
             <div className="search-no-results-title">No events found</div>
             <p className="search-no-results-desc">
-              No upcoming, past, or outreach events matched "{searchQuery}". Try searching with a different keyword, event title, or year (e.g. "2025" or "workshop").
+              No events matched "{searchQuery}" with the current filters. Try selecting "All Events" or "All Years".
             </p>
             <button
               type="button"
               className="search-switch-pill"
-              onClick={() => setSearchQuery('')}
+              onClick={handleClear}
             >
-              Clear Search
+              Reset Search &amp; Filters
             </button>
           </div>
         ) : (
@@ -258,6 +373,7 @@ export default function Events({ events = [], outreach = [], onNav }) {
                         i={i}
                         badgeClass="upcoming"
                         badgeLabel="⬤ &nbsp;Upcoming"
+                        query={q}
                       />
                     ))
                   ) : (
@@ -289,6 +405,7 @@ export default function Events({ events = [], outreach = [], onNav }) {
                         i={i}
                         badgeClass="past"
                         badgeLabel="✦ &nbsp;Past Event"
+                        query={q}
                       />
                     ))
                   ) : (
@@ -319,6 +436,7 @@ export default function Events({ events = [], outreach = [], onNav }) {
                       i={i}
                       badgeClass="past"
                       badgeLabel="✦ &nbsp;Outreach"
+                      query={q}
                     />
                   ))}
                 </div>
