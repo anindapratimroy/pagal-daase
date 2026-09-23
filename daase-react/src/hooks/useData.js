@@ -7,8 +7,8 @@ import {
 import { loadPhotoManifest } from '../utils/photoResolver';
 import { formatPublicationDate } from '../utils/dateUtils';
 
-const CACHE_KEY = 'daase_v16_data';
-const CACHE_TTL = 30 * 60 * 1000; // 30 min
+const CACHE_KEY = 'daase_v17_data';
+const CACHE_TTL = 5 * 60 * 1000; // 5 min
 
 export function normalizePubUrl(raw) {
   if (!raw) return null;
@@ -123,9 +123,10 @@ export function useData() {
 
 async function fetchFresh() {
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 6500);
+  // 20s timeout ensures Google Apps Script cold-start & full Sheet re-reads never get aborted prematurely
+  const timeoutId = setTimeout(() => controller.abort(), 20000);
   try {
-    // Added refresh=true to explicitly force the Apps Script to bypass its 5-minute CacheService
+    // refresh=true forces the Apps Script to bypass any internal CacheService
     const url = SHEETS_URL + (SHEETS_URL.includes('?') ? '&' : '?') + 'refresh=true&t=' + Date.now();
     const res = await fetch(url, { cache: 'no-store', signal: controller.signal });
     clearTimeout(timeoutId);
@@ -139,6 +140,63 @@ async function fetchFresh() {
     console.warn('[DAASE] Sheets fetch completed or timed out, using fallback/cache:', e.message);
     return null;
   }
+}
+
+export function normalizeStudent(s) {
+  if (!s || typeof s !== 'object') return null;
+  const name = (s.name || s.Name || s['Student Name'] || s.student_name || '').toString().trim();
+  if (!name) return null;
+  const email = (s.email || s.Email || s['Email ID'] || s.email_id || s.emailId || s['Roll No'] || s.roll_no || '').toString().trim();
+  const supervisor = (s.supervisor || s.Supervisor || s['Supervisor(s)'] || s.guide || s.Guide || s.advisor || s.Advisor || '').toString().trim();
+  const research = (s.research || s.research_interests || s.Research || s['Research Interests'] || s['Area of Research'] || s.research_interest || '').toString().trim();
+  const photo = s.photo || s.Photo || s.image || s.Image || '';
+  return {
+    ...s,
+    name,
+    email,
+    supervisor,
+    research,
+    research_interests: research,
+    photo: drivePhotoUrl(photo) || photo,
+  };
+}
+
+export function normalizeStudentBatch(batchList) {
+  if (!Array.isArray(batchList)) return [];
+  const normalized = batchList.map(normalizeStudent).filter(Boolean);
+
+  // Deduplicate identical students in the same batch while preserving non-empty details
+  const map = new Map();
+  for (const s of normalized) {
+    const key = s.name.toLowerCase();
+    if (!map.has(key)) {
+      map.set(key, s);
+    } else {
+      const existing = map.get(key);
+      map.set(key, {
+        ...existing,
+        ...s,
+        email: s.email || existing.email,
+        supervisor: s.supervisor || existing.supervisor,
+        research: s.research || existing.research,
+        research_interests: s.research_interests || existing.research_interests,
+        photo: s.photo || existing.photo,
+      });
+    }
+  }
+  return Array.from(map.values());
+}
+
+export function normalizeStudentBatches(batchesObj) {
+  if (!batchesObj || typeof batchesObj !== 'object') return {};
+  const res = {};
+  for (const [batch, list] of Object.entries(batchesObj)) {
+    const cleaned = normalizeStudentBatch(list);
+    if (cleaned.length > 0) {
+      res[batch] = cleaned;
+    }
+  }
+  return res;
 }
 
 function resolveData(d) {
@@ -183,30 +241,40 @@ function resolveData(d) {
         }))
       : VISITING_FB,
     pg: (() => {
-      if (!has('pg_students')) return PG_FB;
-      const filtered = {};
-      let hasPg = false;
-      for (const [key, val] of Object.entries(d.pg_students)) {
-        if (!/ph\.?\s*d\.?/i.test(key)) {
-          filtered[key] = val;
-          hasPg = true;
+      let rawObj = null;
+      if (has('pg_students')) {
+        const filtered = {};
+        for (const [key, val] of Object.entries(d.pg_students)) {
+          if (!/ph\.?\s*d\.?/i.test(key)) {
+            filtered[key] = val;
+          }
         }
+        if (Object.keys(filtered).length > 0) rawObj = filtered;
+      } else if (has('pg')) {
+        rawObj = d.pg;
       }
-      return hasPg ? filtered : PG_FB;
+      return rawObj ? normalizeStudentBatches(rawObj) : normalizeStudentBatches(PG_FB);
     })(),
-    ug:         has('ug_students') ? d.ug_students : UG_FB,
+    ug: (() => {
+      const rawObj = has('ug_students') ? d.ug_students : (has('ug') ? d.ug : UG_FB);
+      return normalizeStudentBatches(rawObj);
+    })(),
     phd: (() => {
-      if (has('phd_students')) return d.phd_students;
-      if (!has('pg_students')) return PHD_FB;
-      const filtered = {};
-      let hasPhd = false;
-      for (const [key, val] of Object.entries(d.pg_students)) {
-        if (/ph\.?\s*d\.?/i.test(key)) {
-          filtered[key] = val;
-          hasPhd = true;
+      let rawObj = null;
+      if (has('phd_students')) {
+        rawObj = d.phd_students;
+      } else if (has('phd')) {
+        rawObj = d.phd;
+      } else if (has('pg_students')) {
+        const filtered = {};
+        for (const [key, val] of Object.entries(d.pg_students)) {
+          if (/ph\.?\s*d\.?/i.test(key)) {
+            filtered[key] = val;
+          }
         }
+        if (Object.keys(filtered).length > 0) rawObj = filtered;
       }
-      return hasPhd ? filtered : PHD_FB;
+      return rawObj ? normalizeStudentBatches(rawObj) : normalizeStudentBatches(PHD_FB);
     })(),
     alumni:     has('alumni')    ? d.alumni       : ALUMNI_FB,
     facilities: FACILITIES_FB,

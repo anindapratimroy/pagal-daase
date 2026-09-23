@@ -354,6 +354,22 @@ export const VISITING_FB = [
 ];
 
 export const PG_FB = {
+  "M.Sc. Astronomy \u2014 Batch 2026": [
+    {
+      "name": "Arnav Sharma",
+      "email": "msc2603121003",
+      "supervisor": "",
+      "research_interests": "Radio Astronomy"
+    }
+  ],
+  "M.S. (Research) \u2014 Batch 2026": [
+    {
+      "name": "Aashvik B",
+      "email": "",
+      "supervisor": "Dr. Unmesh Khati",
+      "research_interests": ""
+    }
+  ],
   "M.Sc. Astronomy \u2014 Batch 2025": [
     {
       "name": "Aman Kumar Jha",
@@ -1159,10 +1175,28 @@ export const PHD_FB = {
   ],
   "Ph.D. \u2014 Batch 2026": [
     {
+      "name": "Riya",
+      "email": "ms2404121003",
+      "supervisor": "Prof. Abhirup Datta",
+      "research_interests": ""
+    },
+    {
+      "name": "Ankur Sinha",
+      "email": "msrphd2404121004",
+      "supervisor": "Dr. Narendra Nath Patra",
+      "research_interests": ""
+    },
+    {
       "name": "Nithyapriya S",
       "email": "phd2501221003",
       "supervisor": "Prof. Abhirup Datta",
       "research_interests": "Cosmology, Galaxy Cluster"
+    },
+    {
+      "name": "Najah Saleem",
+      "email": "phd2601121007",
+      "supervisor": "Dr. Mukul Bhattacharya",
+      "research_interests": ""
     }
   ]
 };

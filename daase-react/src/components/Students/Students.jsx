@@ -40,7 +40,7 @@ function StudentBatch({ batch, list, onImageClick, type }) {
               {s.supervisor && <div className="sc-supervisor">{s.supervisor}</div>}
               {(s.research || s.research_interests) && <div className="sc-research">{s.research || s.research_interests}</div>}
               {s.email && <div className="sc-email">{s.email}</div>}
-              
+
               {type === 'interns' && (
                 <div style={{ marginTop: '12px', fontSize: '1rem', color: 'var(--text-on-dark-body)', lineHeight: '1.5' }}>
                   {(() => {
@@ -50,10 +50,10 @@ function StudentBatch({ batch, list, onImageClick, type }) {
                     const bat = s.batch || s.Batch;
                     return (
                       <>
-                        {inst && <div><strong style={{color: 'var(--text-on-dark)'}}>Institution:</strong> {inst}</div>}
-                        {iType && <div><strong style={{color: 'var(--text-on-dark)'}}>Type:</strong> {iType}</div>}
-                        {per && <div><strong style={{color: 'var(--text-on-dark)'}}>Period:</strong> {per}</div>}
-                        {bat && <div><strong style={{color: 'var(--text-on-dark)'}}>Batch:</strong> {bat}</div>}
+                        {inst && <div><strong style={{ color: 'var(--text-on-dark)' }}>Institution:</strong> {inst}</div>}
+                        {iType && <div><strong style={{ color: 'var(--text-on-dark)' }}>Type:</strong> {iType}</div>}
+                        {per && <div><strong style={{ color: 'var(--text-on-dark)' }}>Period:</strong> {per}</div>}
+                        {bat && <div><strong style={{ color: 'var(--text-on-dark)' }}>Batch:</strong> {bat}</div>}
                       </>
                     );
                   })()}
@@ -124,40 +124,40 @@ export default function Students({ pg, ug, phd, interns }) {
         {tab === 'phd' && (
           phd
             ? Object.entries(phd).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
-                <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
-              ))
+              <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
+            ))
             : <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px' }}>Ph.D. student data will appear here once added to the database.</p>
         )}
         {tab === 'pg' && (
           pg
             ? Object.entries(pg).sort(([a], [b]) => {
-                const lA = a.toLowerCase();
-                const lB = b.toLowerCase();
-                const getPriority = str => {
-                  if (str.includes('space engineering')) return 1;
-                  if (str.includes('aolt')) return 3;
-                  return 2;
-                };
-                const diff = getPriority(lA) - getPriority(lB);
-                if (diff !== 0) return diff;
-                return b.localeCompare(a);
-              }).map(([batch, list]) => (
-                <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
-              ))
+              const lA = a.toLowerCase();
+              const lB = b.toLowerCase();
+              const getPriority = str => {
+                if (str.includes('space engineering')) return 1;
+                if (str.includes('aolt')) return 3;
+                return 2;
+              };
+              const diff = getPriority(lA) - getPriority(lB);
+              if (diff !== 0) return diff;
+              return b.localeCompare(a);
+            }).map(([batch, list]) => (
+              <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
+            ))
             : <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px' }}>Post Graduate student data will appear here once added to the database.</p>
         )}
         {tab === 'ug' && (
           ug
             ? Object.entries(ug).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
-                <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
-              ))
+              <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
+            ))
             : <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px' }}>Under Graduate student data will appear here once added to the database.</p>
         )}
         {tab === 'interns' && (
           interns
             ? Object.entries(interns).sort(([a], [b]) => b.localeCompare(a)).map(([batch, list]) => (
-                <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
-              ))
+              <StudentBatch key={batch} batch={batch} list={list} onImageClick={handleImageClick} type={tab} />
+            ))
             : <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginTop: '60px' }}>Intern data will appear here once added to the database.</p>
         )}
       </div>
