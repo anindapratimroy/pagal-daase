@@ -317,7 +317,7 @@ export const RESEARCH_AREAS = [
     section_title: 'AREAS OF INTEREST',
     full_description: "Satellite Based Navigation\n• GNSS/GPS/NavIC\n• Drone navigation\n\nSatellite Communication\n• V/Ka/Ku band channel modelling\n• Cubesat communication\n\nIoT\n• Rural technology\n• Space based systems\n\nSmall Satellite\n• Payload, Navigation, Control\n\nDetector Simulation and Calibration\n• Gamma Ray Detectors",
     image: 'images/research/Communication_Navigation_and_Remote_Sensing.png',
-    faculty: ['Prof. Abhirup Datta', 'Dr. Saurabh Das', 'Dr. Amit Shukla']
+    faculty: ['Prof. Abhirup Datta', 'Dr. Saurabh Das', 'Dr. Amit Shukla', 'Dr. Narendra Nath Patra']
   },
   {
     id: 'data-science',
@@ -325,22 +325,7 @@ export const RESEARCH_AREAS = [
     desc: 'Big data, Bayesian machine learning, deep learning, quantum machine learning, and data visualization.',
     section_title: 'AREAS OF INTEREST',
     full_description: "• Big data\n• Bayesian Machine Learning\n• Deep Learning\n• Quantum Machine Learning\n• Data Visualization",
-    image: 'images/research/Data_Science_ML_in_Astrophysics.png',
-    faculty: [
-      'Dr. Saurabh Das',
-      'Prof. Abhirup Datta',
-      'Dr. Bhargav Vaidya',
-      'Dr. Narendra Nath Patra',
-      'Dr. Manoneeta Chakraborty',
-      'Dr. Soumavo Ghosh',
-      'Dr. Prakash Gaikwad',
-      'Dr. Suman Majumdar',
-      'Dr. Deepika Bollimpalli',
-      'Dr. Priyanka Singh',
-      'Dr. Unmesh Govind Khati',
-      'Dr. Amit Shukla',
-      'Dr. Mukul Bhattacharya'
-    ]
+    image: 'images/research/Data_Science_ML_in_Astrophysics.png'
   }
 ];
 

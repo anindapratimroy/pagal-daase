@@ -111,6 +111,13 @@
   box-sizing: border-box;
 }
 
+.rd-content-container.rd-no-sidebar {
+  grid-template-columns: 1fr;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ── Main Content Card ──────────────────────────────────────── */
 .rd-main-content {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);

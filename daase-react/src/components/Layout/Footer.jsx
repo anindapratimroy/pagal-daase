@@ -242,7 +242,7 @@ export default function Footer({ onNav }) {
                 <span className="credits-link-arrow">↗</span>
               </a>
             </div>
-            <div className="credits-list">
+            <div className="credits-list" style={{ "paddingTop": "20px" }}>
               <a
                 href="https://www.linkedin.com/in/vidhan-thakur27"
                 target="_blank"

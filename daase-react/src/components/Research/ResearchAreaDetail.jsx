@@ -150,6 +150,9 @@ export default function ResearchAreaDetail({ areaId, onNav, faculty }) {
     );
   }
 
+  const isDataScience = (area?.id === 'data-science') || resolvedId === 'data-science' || areaId === 'data-science';
+  const hasFaculty = !isDataScience && Array.isArray(area?.faculty) && area.faculty.length > 0;
+
   return (
     <div className="research-detail-page fade-in">
       {/* Hero Section */}
@@ -166,20 +169,20 @@ export default function ResearchAreaDetail({ areaId, onNav, faculty }) {
         </div>
       </div>
 
-      <div className="container rd-content-container">
+      <div className={`container rd-content-container${!hasFaculty ? ' rd-no-sidebar' : ''}`}>
         <div className="rd-main-content anim-fadeup" style={{ animationDelay: '0.1s' }}>
-          <img 
-            src={`./${area.image}`} 
-            alt={area.title} 
+          <img
+            src={`./${area.image}`}
+            alt={area.title}
             decoding="async"
-            style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'cover', borderRadius: 'var(--r)', marginBottom: area.image_caption ? '12px' : '32px', boxShadow: 'var(--shadow-md)' }} 
+            style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'cover', borderRadius: 'var(--r)', marginBottom: area.image_caption ? '12px' : '32px', boxShadow: 'var(--shadow-md)' }}
           />
           {area.image_caption && (
-            <p className="rd-image-caption" style={{ 
-              color: 'var(--text-muted, #94a3b8)', 
-              fontSize: '0.85rem', 
-              marginTop: '0', 
-              marginBottom: '32px', 
+            <p className="rd-image-caption" style={{
+              color: 'var(--text-muted, #94a3b8)',
+              fontSize: '0.85rem',
+              marginTop: '0',
+              marginBottom: '32px',
               textAlign: 'center',
               fontStyle: 'italic'
             }}>
@@ -190,8 +193,8 @@ export default function ResearchAreaDetail({ areaId, onNav, faculty }) {
           <RichText text={area.full_description || area.desc} />
         </div>
 
-        <div className="rd-sidebar">
-          {area.faculty && area.faculty.length > 0 && (
+        {hasFaculty && (
+          <div className="rd-sidebar">
             <div className="rd-card anim-fadeup" style={{ animationDelay: '0.2s' }}>
               <h3 className="rd-sidebar-title">FACULTY</h3>
               <ul className="rd-faculty-list">
@@ -255,8 +258,8 @@ export default function ResearchAreaDetail({ areaId, onNav, faculty }) {
                 })}
               </ul>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
       <Footer onNav={onNav} />
