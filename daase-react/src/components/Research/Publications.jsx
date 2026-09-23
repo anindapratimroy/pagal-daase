@@ -67,6 +67,20 @@ export default function Publications({ onNav, publications: propPubs }) {
     return sortedYears.map(yr => ({ year: yr, count: yearCounts[yr] }));
   }, [activePubs]);
 
+  // Histogram data: chronologically ascending (earliest year to newest year)
+  const histogramData = useMemo(() => {
+    if (!availableYears.length) return { list: [], max: 1 };
+    const chronological = [...availableYears].sort((a, b) => a.year.localeCompare(b.year));
+    const max = Math.max(...chronological.map(d => d.count), 1);
+    return {
+      list: chronological.map(d => ({
+        ...d,
+        percentage: Math.max(Math.round((d.count / max) * 100), 14)
+      })),
+      max
+    };
+  }, [availableYears]);
+
   const q = searchQuery.trim().toLowerCase();
   const isSearching = q.length > 0;
   const isYearFiltered = selectedYear !== 'all';
@@ -112,6 +126,85 @@ export default function Publications({ onNav, publications: propPubs }) {
           </p>
           <div className="title-bar" />
         </div>
+
+        {/* ── Annual Research Output Histogram ── */}
+        {histogramData.list.length > 0 && (
+          <div className="pub-histogram-card" data-aos="fade-up" data-aos-delay="60">
+            <div className="pub-histogram-header">
+              <div className="pub-histogram-title-wrap">
+                <span className="pub-histogram-icon" aria-hidden="true">📊</span>
+                <div>
+                  <h3 className="pub-histogram-title">Publication Output by Year</h3>
+                  <p className="pub-histogram-subtitle">
+                    Distribution of peer-reviewed articles across academic years · Live dataset ({activePubs.length} total papers)
+                  </p>
+                </div>
+              </div>
+
+              <div className="pub-histogram-actions">
+                {selectedYear !== 'all' ? (
+                  <button
+                    type="button"
+                    className="pub-hist-reset-btn"
+                    onClick={() => setSelectedYear('all')}
+                    title="Reset to all years"
+                  >
+                    Showing Year <strong>{selectedYear}</strong> · Reset ✕
+                  </button>
+                ) : (
+                  <span className="pub-hist-hint">
+                    Click any bar to filter papers
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Chart Area */}
+            <div className="pub-histogram-chart-area">
+              {/* Reference Grid Lines */}
+              <div className="pub-histogram-grid" aria-hidden="true">
+                <div className="pub-grid-line" style={{ bottom: '100%' }}><span>{histogramData.max}</span></div>
+                <div className="pub-grid-line" style={{ bottom: '66%' }}><span>{Math.round(histogramData.max * 0.66)}</span></div>
+                <div className="pub-grid-line" style={{ bottom: '33%' }}><span>{Math.round(histogramData.max * 0.33)}</span></div>
+                <div className="pub-grid-line" style={{ bottom: '0%' }}><span>0</span></div>
+              </div>
+
+              {/* Bars Row */}
+              <div className="pub-histogram-bars" role="group" aria-label="Publications per year chart">
+                {histogramData.list.map(({ year, count, percentage }) => {
+                  const isSelected = selectedYear === year;
+                  return (
+                    <div
+                      key={year}
+                      className={`pub-hist-col${isSelected ? ' active' : ''}`}
+                      onClick={() => setSelectedYear(selectedYear === year ? 'all' : year)}
+                      role="button"
+                      tabIndex={0}
+                      title={`${year}: ${count} publication${count === 1 ? '' : 's'}. Click to filter.`}
+                      aria-label={`${year}: ${count} publications`}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setSelectedYear(selectedYear === year ? 'all' : year);
+                        }
+                      }}
+                    >
+                      <div className="pub-hist-bar-track">
+                        <div
+                          className="pub-hist-bar-fill"
+                          style={{ height: `${percentage}%` }}
+                        >
+                          <span className="pub-hist-count-val">{count}</span>
+                        </div>
+                      </div>
+                      <span className="pub-hist-year-label">{year}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* ── Search & Filter Controls ── */}
         <div className="pub-controls-card" data-aos="fade-up" data-aos-delay="100">

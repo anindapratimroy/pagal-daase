@@ -30,7 +30,6 @@ const USEFUL_LINKS = [
 const isPeopleActive = (current) => current.startsWith('people-');
 
 export default function Navbar({ current, onNav, onOpenSearch }) {
-  const isMac = typeof navigator !== 'undefined' && /Mac|iPod|iPhone|iPad/.test(navigator.platform);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -175,7 +174,7 @@ export default function Navbar({ current, onNav, onOpenSearch }) {
             type="button"
             className="nav-search-btn"
             onClick={onOpenSearch}
-            title={`Search across DAASE (${isMac ? '⌘K' : 'Ctrl+K'})`}
+            title="Search across DAASE"
             aria-label="Search DAASE website"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -183,7 +182,6 @@ export default function Navbar({ current, onNav, onOpenSearch }) {
               <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
             <span className="nav-search-btn-label">Search</span>
-            <kbd className="nav-search-kbd">{isMac ? '⌘K' : 'Ctrl+K'}</kbd>
           </button>
 
           {/* Opportunities CTA */}
@@ -245,7 +243,6 @@ export default function Navbar({ current, onNav, onOpenSearch }) {
           }}
         >
           <span>🔍 Search DAASE...</span>
-          <span className="mobile-search-badge">{isMac ? '⌘K' : 'Ctrl+K'}</span>
         </button>
 
         <button className={current === 'home' ? 'active' : ''} onClick={() => handleNav('home')}>Home</button>

@@ -6,8 +6,7 @@ const PROGRAMS = {
     label: 'B.Tech.',
     duration: '4 Years',
     type: 'Undergraduate',
-    year: 'Started July 2023',
-    admission: 'JEE (Advanced)',
+
     title: 'B.Tech. in Space Science & Engineering',
     desc: "A dedicated bachelor's program in astronomy has started in July 2023. IIT Indore is the only IIT to offer such a unique program. The entrance to this program is through the JEE (Advance) examination.",
     sections: [
@@ -49,8 +48,6 @@ const PROGRAMS = {
     label: 'M.Sc.',
     duration: '2 Years',
     type: 'Postgraduate',
-    year: 'Started July 2018',
-    admission: 'JAM (Physics)',
     title: 'M.Sc. in Astronomy',
     desc: "A dedicated master's program in astronomy started in July 2018. IIT Indore is the only IIT to offer such a unique program. The entrance to this program is through the JAM (physics) examination.",
     sections: [
@@ -77,7 +74,7 @@ const PROGRAMS = {
       { num: 'July 2018', text: "Dedicated master's program started" },
       { num: 'Only IIT', text: 'Only IIT to offer this unique program' },
       { num: 'JAM (Physics)', text: 'Entrance through JAM (physics) examination' },
-      { num: '15h + 8h', text: 'Weekly contact: 15h lectures and 8h laboratory' },
+      { num: 'Dual Degree', text: 'M.Sc. + Ph.D. dual degree option' },
     ],
     curriculumUrl: 'https://academic.iiti.ac.in/app/storage/app/coursecurriculum/nNtSYVKA46yp2B1AeqiovacZ6xEjUWdcndKMWxsO.pdf',
     email: 'pc-mscse@iiti.ac.in',
@@ -86,8 +83,6 @@ const PROGRAMS = {
     label: 'M.Tech.',
     duration: '2 Years',
     type: 'Postgraduate',
-    year: 'Full-Time',
-    admission: 'GATE / Interview',
     title: 'M.Tech. in Space Engineering',
     desc: "In today’s world, Space is not just about human curiosity in knowing what’s beyond. Space has turned out to be a frontier essential to address a plethora of current issues as well as future prosperity.",
     sections: [
@@ -131,10 +126,8 @@ const PROGRAMS = {
       },
     ],
     highlights: [
-      { num: '2 Years', text: 'Duration of the Program (Full-time)' },
-      { num: 'GATE / Interview', text: 'Selection criteria for eligible applicants' },
-      { num: 'TA / SW / DF', text: 'Multiple admission categories including Defence & Industry' },
-      { num: 'Specialized', text: 'Space Systems Engineering, Operations & Techniques' },
+      { num: 'GATE', text: 'Selection criteria for eligible applicants Gates Score and Interview' },
+      { num: 'Dual Degree', text: 'MS (Research) + Ph.D. dual degree option' },
     ],
     curriculumUrl: 'https://academic.iiti.ac.in/app/storage/app/coursecurriculum/nNtSYVKA46yp2B1AeqiovacZ6xEjUWdcndKMWxsO.pdf',
     email: 'pc-se@iiti.ac.in',
@@ -143,8 +136,6 @@ const PROGRAMS = {
     label: 'MS Research',
     duration: '2 Years',
     type: "Master's & Dual Degree",
-    year: 'Full-Time',
-    admission: 'GATE / Interview',
     title: 'MS (Research), MS (Research) + Ph.D. dual degree in Space Sciences and Engineering',
     desc: "In today’s world, Space is not just about human curiosity in knowing what’s beyond. Space has turned out to be a frontier essential to address a plethora of current issues as well as future prosperity.",
     sections: [
@@ -186,20 +177,16 @@ const PROGRAMS = {
       },
     ],
     highlights: [
-      { num: '2 Years', text: 'Full-time with max extension of one semester' },
-      { num: 'AE/EC/EE/PH/XE', text: 'Relevant GATE papers for Indian students' },
+      { num: 'GATE', text: 'Selection criteria for eligible applicants Gates Score and Interview' },
       { num: 'Dual Degree', text: 'MS (Research) + Ph.D. dual degree option' },
-      { num: 'Research-First', text: 'Specialized field exposure & foundational domain knowledge' },
     ],
     curriculumUrl: 'https://academic.iiti.ac.in/app/course_curriculum_list_pg',
     email: 'pc-ms-sse@iiti.ac.in',
   },
   phd: {
     label: 'Ph.D.',
-    duration: 'Doctoral',
+    duration: 'Upto 5 Years',
     type: 'Doctoral',
-    year: 'Est. 2015',
-    admission: 'CSIR-NET / GATE',
     title: 'Ph.D. in Astronomy, Astrophysics & Space Engineering',
     desc: "The PhD program at DAASE, IIT Indore, is aimed at developing skilled researchers and innovators in the rapidly evolving fields of astronomy, astrophysics, and space engineering.",
     sections: [
@@ -233,9 +220,9 @@ const PROGRAMS = {
       },
     ],
     highlights: [
+      { num: 'July 2018', text: "Dedicated master's program started" },
       { num: 'Doctoral', text: 'Skilled researchers & innovators in astronomy & space' },
-      { num: 'NET / GATE', text: 'Qualifying exam: CSIR-NET / UGC-NET / GATE' },
-      { num: 'TA / SW / DF', text: 'TA, Sponsored (ISRO/DRDO/BHEL), DF, and IS' },
+      { num: 'NET / GATE', text: 'Qualifying exam: CSIR-NET / UGC-NET / GATE and Interview' },
       { num: 'Frontier Labs', text: 'Specialized facilities & cutting-edge research collaborations' },
     ],
     curriculumUrl: 'https://academic.iiti.ac.in/app/course_curriculum_list_pg',
@@ -290,8 +277,8 @@ export default function Programs({ initialProg = 'btech', onNav }) {
               <div className="prog-meta-row">
                 <span className="prog-meta-pill prog-meta-type">{prog.type}</span>
                 <span className="prog-meta-pill prog-meta-dur">⏱ {prog.duration}</span>
-                <span className="prog-meta-pill prog-meta-yr">📅 {prog.year}</span>
-                <span className="prog-meta-pill prog-meta-adm">🎓 {prog.admission}</span>
+                {prog.year && <span className="prog-meta-pill prog-meta-yr">📅 {prog.year}</span>}
+                {prog.admission && <span className="prog-meta-pill prog-meta-adm">🎓 {prog.admission}</span>}
               </div>
 
               {/* Title & description */}

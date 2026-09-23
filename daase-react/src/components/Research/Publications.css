@@ -40,6 +40,262 @@
   margin-bottom: 8px;
 }
 
+/* ── Publication Output Histogram ───────────────────────────── */
+.pub-histogram-card {
+  background: rgba(12, 24, 52, 0.52);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1.5px solid rgba(255, 217, 122, 0.45);
+  border-radius: 18px;
+  padding: 24px 28px 20px;
+  margin: 28px 0 0 0;
+  box-shadow: 0 16px 44px -8px rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.pub-histogram-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(255, 217, 122, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.pub-histogram-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+  position: relative;
+  z-index: 2;
+}
+
+.pub-histogram-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pub-histogram-icon {
+  font-size: 24px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(255, 217, 122, 0.1);
+  border: 1px solid rgba(255, 217, 122, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.pub-histogram-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.pub-histogram-subtitle {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.62);
+  margin: 3px 0 0 0;
+}
+
+.pub-histogram-actions {
+  display: flex;
+  align-items: center;
+}
+
+.pub-hist-hint {
+  font-size: 0.8rem;
+  color: rgba(255, 217, 122, 0.85);
+  background: rgba(255, 217, 122, 0.08);
+  border: 1px dashed rgba(255, 217, 122, 0.3);
+  padding: 5px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+}
+
+.pub-hist-reset-btn {
+  background: rgba(255, 217, 122, 0.15);
+  border: 1px solid rgba(255, 217, 122, 0.45);
+  color: #ffd97a;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pub-hist-reset-btn:hover {
+  background: rgba(255, 217, 122, 0.28);
+  border-color: #ffd97a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(255, 217, 122, 0.25);
+}
+
+/* ── Chart Canvas ── */
+.pub-histogram-chart-area {
+  position: relative;
+  height: 190px;
+  margin-top: 10px;
+  padding: 18px 10px 0 34px;
+  box-sizing: border-box;
+}
+
+/* Background reference grid lines */
+.pub-histogram-grid {
+  position: absolute;
+  left: 0;
+  top: 18px;
+  right: 10px;
+  bottom: 26px; /* space for year labels */
+  pointer-events: none;
+}
+
+.pub-grid-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.09);
+}
+
+.pub-grid-line span {
+  position: absolute;
+  left: -28px;
+  top: -7px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: monospace;
+}
+
+/* Bars row */
+.pub-histogram-bars {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 12px;
+  height: calc(100% - 26px);
+  width: 100%;
+}
+
+.pub-hist-col {
+  flex: 1;
+  max-width: 76px;
+  min-width: 32px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.25s ease;
+}
+
+.pub-hist-col:hover {
+  transform: translateY(-3px);
+}
+
+.pub-hist-bar-track {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+}
+
+.pub-hist-bar-fill {
+  width: 72%;
+  min-width: 22px;
+  max-width: 44px;
+  background: linear-gradient(180deg, #f0c84a 0%, #b5862a 55%, rgba(181, 134, 42, 0.35) 100%);
+  border: 1px solid rgba(255, 217, 122, 0.5);
+  border-bottom: none;
+  border-radius: 7px 7px 2px 2px;
+  box-shadow: 0 4px 16px rgba(181, 134, 42, 0.28);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pub-hist-col:hover .pub-hist-bar-fill {
+  background: linear-gradient(180deg, #ffe68f 0%, #f0c84a 45%, #b5862a 100%);
+  border-color: #ffd97a;
+  box-shadow: 0 6px 22px rgba(255, 217, 122, 0.45);
+}
+
+.pub-hist-col.active .pub-hist-bar-fill {
+  background: linear-gradient(180deg, #ffffff 0%, #ffd97a 40%, #b5862a 100%);
+  border-color: #ffffff;
+  box-shadow: 0 0 24px rgba(255, 217, 122, 0.75), 0 6px 20px rgba(181, 134, 42, 0.6);
+}
+
+.pub-hist-count-val {
+  position: absolute;
+  top: -24px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffd97a;
+  letter-spacing: -0.01em;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.pub-hist-col:hover .pub-hist-count-val {
+  color: #fff;
+  transform: scale(1.12);
+  text-shadow: 0 0 10px rgba(255, 217, 122, 0.8);
+}
+
+.pub-hist-col.active .pub-hist-count-val {
+  color: #fff;
+  font-size: 13px;
+  transform: scale(1.18);
+  text-shadow: 0 0 12px rgba(255, 217, 122, 0.95);
+}
+
+.pub-hist-year-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.72);
+  margin-top: 10px;
+  letter-spacing: 0.02em;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.pub-hist-col:hover .pub-hist-year-label {
+  color: #ffd97a;
+}
+
+.pub-hist-col.active .pub-hist-year-label {
+  color: #ffd97a;
+  font-weight: 800;
+  text-shadow: 0 0 8px rgba(255, 217, 122, 0.5);
+}
+
 /* ── Interactive Controls Card ── */
 .pub-controls-card {
   background: rgba(15, 30, 60, 0.45);
@@ -530,5 +786,97 @@
   .pub-full-list .pub-item {
     padding: 12px 10px;
     font-size: 13px;
+  }
+
+  .pub-histogram-card {
+    padding: 14px 12px 12px;
+  }
+
+  .pub-histogram-chart-area {
+    height: 130px;
+    padding-left: 18px;
+  }
+
+  .pub-histogram-bars {
+    gap: 4px;
+  }
+
+  .pub-hist-year-label {
+    font-size: 9.5px;
+  }
+}
+
+@media (max-width: 820px) {
+  .pub-histogram-card {
+    padding: 20px 20px 16px;
+    border-radius: 14px;
+    margin-top: 24px;
+  }
+  .pub-histogram-chart-area {
+    height: 165px;
+    padding-left: 28px;
+  }
+  .pub-hist-col {
+    max-width: 58px;
+  }
+  .pub-hist-bar-fill {
+    width: 78%;
+    min-width: 18px;
+  }
+  .pub-hist-year-label {
+    font-size: 11.5px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pub-histogram-card {
+    padding: 16px 14px 14px;
+    border-radius: 12px;
+    margin-top: 18px;
+  }
+  .pub-histogram-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .pub-histogram-title {
+    font-size: 1.02rem;
+  }
+  .pub-histogram-subtitle {
+    font-size: 0.75rem;
+  }
+  .pub-histogram-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 18px;
+  }
+  .pub-histogram-chart-area {
+    height: 140px;
+    padding-left: 22px;
+    padding-right: 4px;
+  }
+  .pub-histogram-bars {
+    gap: 6px;
+  }
+  .pub-hist-col {
+    min-width: 22px;
+  }
+  .pub-hist-bar-fill {
+    width: 86%;
+    min-width: 14px;
+    border-radius: 5px 5px 2px 2px;
+  }
+  .pub-hist-count-val {
+    font-size: 10px;
+    top: -19px;
+  }
+  .pub-hist-year-label {
+    font-size: 10px;
+    margin-top: 6px;
+  }
+  .pub-grid-line span {
+    font-size: 9px;
+    left: -20px;
   }
 }
