@@ -2354,6 +2354,13 @@ nav.nav-scrolled.nav-hidden {
   gap: 28px;
 }
 
+@media (min-width: 601px) and (max-width: 1024px) {
+  .research-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
 .rc {
   background: var(--white);
   border: 1px solid var(--border);

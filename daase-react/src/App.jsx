@@ -18,6 +18,7 @@ const Events             = lazy(() => import('./components/Events/Events'));
 const Alumni             = lazy(() => import('./components/Alumni/Alumni'));
 const Gallery            = lazy(() => import('./components/Gallery/Gallery'));
 const Opportunities      = lazy(() => import('./components/Opportunities/Opportunities'));
+const Publications       = lazy(() => import('./components/Research/Publications'));
 const GlobalSearchModal  = lazy(() => import('./components/Layout/GlobalSearchModal'));
 
 import AOS from 'aos';
@@ -144,6 +145,7 @@ export default function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       import('./components/Layout/GlobalSearchModal');
+      import('./components/Research/Publications');
       import('./components/Facilities/Facilities');
       import('./components/Events/Events');
       import('./components/Alumni/Alumni');
@@ -196,12 +198,7 @@ export default function App() {
         setPeopleTab(PEOPLE_TAB_MAP[hash]);
         setView('people');
       } else if (hash === 'publications') {
-        setView('research');
-        setTimeout(() => {
-          const el = document.getElementById('publications-section');
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }, 150);
-        return;
+        setView('publications');
       } else {
         setView(hash);
       }
@@ -256,13 +253,8 @@ export default function App() {
       setView('people');
       window.location.hash = id.startsWith('people-') ? id : `people-${id}`;
     } else if (id === 'publications') {
-      setView('research');
+      setView('publications');
       window.location.hash = 'publications';
-      setTimeout(() => {
-        const el = document.getElementById('publications-section');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 150);
-      return;
     } else {
       setView(id);
       window.location.hash = id;
@@ -303,7 +295,8 @@ export default function App() {
   const renderView = () => {
     switch (view) {
       case 'home':       return <Home onNav={handleNav} news={data.news} events={data.events} publications={data.publications} />;
-      case 'research':   return <Research onNav={handleNav} publications={data.publications} />;
+      case 'research':   return <Research onNav={handleNav} />;
+      case 'publications': return <Publications onNav={handleNav} publications={data.publications} />;
       case 'research-detail': return <ResearchAreaDetail areaId={researchAreaId} onNav={handleNav} faculty={data.faculty} />;
       case 'programs':   return <Programs initialProg={progTab} onNav={handleNav} />;
       case 'people':     return (

@@ -2,22 +2,22 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 const QUICK_LINKS = [
-  { id: 'home',           label: 'Home' },
+  { id: 'home', label: 'Home' },
   { id: 'people-faculty', label: 'Faculty' },
-  { id: 'programs',       label: 'Programs' },
-  { id: 'research',       label: 'Research Areas' },
-  { id: 'facilities',     label: 'Research Facilities' },
-  { id: 'publications',   label: 'Research Publications' },
-  { id: 'events',         label: 'Events' },
-  { id: 'opportunities',  label: 'Opportunities' },
+  { id: 'programs', label: 'Programs' },
+  { id: 'research', label: 'Research Areas' },
+  { id: 'facilities', label: 'Research Facilities' },
+  { id: 'publications', label: 'Research Publications' },
+  { id: 'events', label: 'Events' },
+  { id: 'opportunities', label: 'Opportunities' },
 ];
 
 const INSTITUTE_LINKS = [
-  { href: 'https://www.iiti.ac.in',               label: 'IIT Indore Main Portal' },
-  { href: 'https://academic.iiti.ac.in',          label: 'Academic Affairs Portal' },
+  { href: 'https://www.iiti.ac.in', label: 'IIT Indore Main Portal' },
+  { href: 'https://academic.iiti.ac.in', label: 'Academic Affairs Portal' },
   { href: 'https://academic.iiti.ac.in/phdadvt.php', label: 'PhD Admissions Portal' },
-  { href: 'https://library.iiti.ac.in',           label: 'Learning Resource Center' },
-  { href: 'https://placement.iiti.ac.in',         label: 'Training & Placements Portal' },
+  { href: 'https://library.iiti.ac.in', label: 'Learning Resource Center' },
+  { href: 'https://placement.iiti.ac.in', label: 'Training & Placements Portal' },
 ];
 
 export default function Footer({ onNav }) {
@@ -45,25 +45,23 @@ export default function Footer({ onNav }) {
     } else {
       window.location.hash = id;
     }
-    if (id !== 'publications') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <>
       <footer className="main-site-footer">
         <div className="site-footer-inner">
-          
+
           {/* ── Top Main Grid (4 Columns) ── */}
           <div className="site-footer-grid">
-            
+
             {/* Column 1: Department Identity */}
             <div className="footer-section-col brand-col">
               <div className="footer-logo-row">
-                <img 
-                  src="images/IITI_Logo.svg" 
-                  alt="IIT Indore Logo" 
+                <img
+                  src="images/IITI_Logo.svg"
+                  alt="IIT Indore Logo"
                   loading="lazy"
                   decoding="async"
                   className="footer-iiti-logo"
@@ -74,11 +72,11 @@ export default function Footer({ onNav }) {
                   <div className="footer-brand-subheading">IIT Indore</div>
                 </div>
               </div>
-              
+
               <p className="footer-dept-full-name">
                 Department of Astronomy, Astrophysics &amp; Space Engineering
               </p>
-              
+
               <div className="footer-address-box">
                 <div className="footer-address-icon">📍</div>
                 <div className="footer-address-text">
@@ -120,7 +118,7 @@ export default function Footer({ onNav }) {
             {/* Column 4: Contact & Office */}
             <div className="footer-section-col contact-col">
               <h4 className="footer-heading">Contact Us</h4>
-              
+
               <div className="footer-contact-item">
                 <div className="footer-contact-icon">✉️</div>
                 <div>
@@ -183,25 +181,25 @@ export default function Footer({ onNav }) {
               © {new Date().getFullYear()} Department of Astronomy, Astrophysics and Space Engineering (AASE), IIT Indore. All rights reserved.
             </div>
             <div className="footer-credits-text">
-              <button 
-                type="button" 
-                className="footer-credits-trigger" 
-                onClick={(e) => { 
-                  e.preventDefault(); 
-                  e.stopPropagation(); 
-                  setShowWebmaster(true); 
+              <button
+                type="button"
+                className="footer-credits-trigger"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setShowWebmaster(true);
                 }}
               >
                 Webmaster
               </button>
               <span className="footer-credits-sep">|</span>
-              <button 
-                type="button" 
-                className="footer-credits-trigger" 
-                onClick={(e) => { 
-                  e.preventDefault(); 
-                  e.stopPropagation(); 
-                  setShowCredits(true); 
+              <button
+                type="button"
+                className="footer-credits-trigger"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setShowCredits(true);
                 }}
               >
                 Credits
@@ -214,19 +212,19 @@ export default function Footer({ onNav }) {
 
       {/* ── Webmaster Modal via createPortal ── */}
       {showWebmaster && typeof document !== 'undefined' && createPortal(
-        <div 
-          className="credits-modal-overlay" 
+        <div
+          className="credits-modal-overlay"
           onClick={() => setShowWebmaster(false)}
         >
-          <div 
-            className="credits-modal-content" 
+          <div
+            className="credits-modal-content"
             onClick={e => e.stopPropagation()}
             onMouseDown={e => e.stopPropagation()}
           >
-            <button 
-              type="button" 
-              className="credits-modal-close-icon" 
-              onClick={() => setShowWebmaster(false)} 
+            <button
+              type="button"
+              className="credits-modal-close-icon"
+              onClick={() => setShowWebmaster(false)}
               aria-label="Close"
             >
               &times;
@@ -234,36 +232,47 @@ export default function Footer({ onNav }) {
             <h3 className="credits-modal-title">Webmaster</h3>
             <p className="credits-modal-subtitle">Website Designed &amp; Developed by</p>
             <div className="credits-list">
-              <a 
-                href="https://www.linkedin.com/in/aninda-pratim-roy" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.linkedin.com/in/aninda-pratim-roy"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="credits-link"
               >
                 <span>Aninda Pratim Roy</span>
                 <span className="credits-link-arrow">↗</span>
               </a>
             </div>
+            <div className="credits-list">
+              <a
+                href="https://www.linkedin.com/in/vidhan-thakur27"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="credits-link"              >
+                <span>Vidhan Thakur</span>
+                <span className="credits-link-arrow">↗</span>
+              </a>
+            </div>
           </div>
-        </div>,
+        </div>
+        ,
         document.body
       )}
 
       {/* ── Credits Modal via createPortal ── */}
       {showCredits && typeof document !== 'undefined' && createPortal(
-        <div 
-          className="credits-modal-overlay" 
+        <div
+          className="credits-modal-overlay"
           onClick={() => setShowCredits(false)}
         >
-          <div 
-            className="credits-modal-content" 
+          <div
+            className="credits-modal-content"
             onClick={e => e.stopPropagation()}
             onMouseDown={e => e.stopPropagation()}
           >
-            <button 
-              type="button" 
-              className="credits-modal-close-icon" 
-              onClick={() => setShowCredits(false)} 
+            <button
+              type="button"
+              className="credits-modal-close-icon"
+              onClick={() => setShowCredits(false)}
               aria-label="Close"
             >
               &times;
@@ -271,10 +280,10 @@ export default function Footer({ onNav }) {
             <h3 className="credits-modal-title">Credits</h3>
             <p className="credits-modal-subtitle">Additional Acknowledgments</p>
             <div className="credits-list">
-              <a 
-                href="https://www.linkedin.com/in/chitrashri-bhargava" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.linkedin.com/in/chitrashri-bhargava"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="credits-link"
               >
                 <span>Chitrashri Bhargava</span>

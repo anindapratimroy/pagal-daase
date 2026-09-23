@@ -13,24 +13,24 @@ function normalizeLink(link) {
   if (typeof link !== 'string') return null;
   const trimmed = link.trim();
   if (!trimmed) return null;
-  
+
   // Internal or relative links (e.g. /events, #section, ?query)
   if (trimmed.startsWith('/') || trimmed.startsWith('#') || trimmed.startsWith('?')) {
     return trimmed;
   }
-  
+
   // Known URLs missing protocol
   if (trimmed.startsWith('www.') || trimmed.includes('.ac.in') || trimmed.includes('.edu') || trimmed.includes('.org') || trimmed.includes('.com') || trimmed.includes('.in/')) {
     if (!trimmed.startsWith('http://') && !trimmed.startsWith('https://')) {
       return 'https://' + trimmed;
     }
   }
-  
+
   // Already has protocol or is a generic external
   if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
     return trimmed;
   }
-  
+
   // Fallback for everything else, treat as relative/internal
   return trimmed;
 }
@@ -288,7 +288,7 @@ export default function Home({ onNav, news, events, publications = [] }) {
                     Our commitment extends beyond research and education. Through outreach and engagement initiatives, we seek to communicate the excitement of science and inspire young minds to explore careers in astronomy, astrophysics, and space science and technology.
                   </p>
                   <p>
-                    At DAASE, we are committed to fostering an environment where <strong>curiosity drives discovery</strong>, <strong>collaboration enables innovation</strong>, and <strong>excellence creates impact</strong>. As India advances toward becoming a leading global space economy, we aspire to contribute meaningfully to this national vision through world-class research, education, and technological innovation.
+                    At DAASE, we are committed to fostering an environment where curiosity drives discovery, collaboration enables innovation, and excellence creates impact. As India advances toward becoming a leading global space economy, we aspire to contribute meaningfully to this national vision through world-class research, education, and technological innovation.
                   </p>
                   <p>
                     We warmly invite you to explore our department, engage with our academic community, and join us in our journey of discovering the universe and engineering the future of space exploration.

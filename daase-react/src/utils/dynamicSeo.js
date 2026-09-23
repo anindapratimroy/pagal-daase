@@ -392,9 +392,13 @@ export function updateDynamicSEO(data, view = 'home', peopleTab = 'faculty', has
     pageTitle = PEOPLE_TITLES[peopleTab] || 'People Directory | DAASE, IIT Indore';
     pageDesc = `Explore faculty, research scholars, students, and staff of the Department of Astronomy, Astrophysics and Space Engineering (DAASE) at IIT Indore.`;
     pageUrl = `${BASE_URL}/#people-${peopleTab}`;
-  } else if (view === 'research' || cleanHash === 'publications') {
-    pageTitle = 'Research Areas & Publications | DAASE, IIT Indore';
-    pageDesc = 'Discover cutting-edge research in radio astronomy, planetary science, space weather, space engineering, CubeSats, and recent peer-reviewed publications from DAASE, IIT Indore.';
+  } else if (view === 'publications' || cleanHash === 'publications') {
+    pageTitle = 'Research Publications | DAASE, IIT Indore';
+    pageDesc = 'Discover peer-reviewed publications, journal papers, conference proceedings, and scientific breakthroughs from the Department of Astronomy, Astrophysics and Space Engineering (DAASE), IIT Indore.';
+    pageUrl = `${BASE_URL}/#publications`;
+  } else if (view === 'research') {
+    pageTitle = 'Research Areas & Specializations | DAASE, IIT Indore';
+    pageDesc = 'Explore research domains in radio astronomy, planetary science, space weather, space engineering, CubeSats, and cosmology at DAASE, IIT Indore.';
     pageUrl = `${BASE_URL}/#research`;
   } else if (view === 'programs') {
     pageTitle = 'Academic Programs (B.Tech, M.Tech, M.Sc, PhD) | DAASE, IIT Indore';

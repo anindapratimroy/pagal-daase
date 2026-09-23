@@ -472,7 +472,9 @@ function injectIntoHtml(rawHtml) {
   // 1. Remove existing comprehensive graph script if present
   modified = modified.replace(/<script type="application\/ld\+json" id="daase-kg-graph">[\s\S]*?<\/script>\n?/g, '');
   // 2. Remove existing crawler directory if present
-  modified = modified.replace(/<!-- ═════[\s\S]*?<\/section>\n?/g, '');
+  modified = modified.replace(/<!-- ═+\s+DAASE SEARCH ENGINE OPTIMIZATION & ACCESSIBILITY DIRECTORY[\s\S]*?<\/section>\n?/g, '');
+  modified = modified.replace(/<section id="daase-crawler-index"[\s\S]*?<\/section>\n?/g, '');
+  modified = modified.replace(/<!-- Fallback for JavaScript-disabled crawlers -->[\s\S]*?<\/noscript>\n?/g, '');
   modified = modified.replace(/<noscript>[\s\S]*?<\/noscript>\n?/g, '');
 
   // 3. Inject new JSON-LD into <head>
