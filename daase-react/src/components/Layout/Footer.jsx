@@ -290,6 +290,28 @@ export default function Footer({ onNav }) {
                 <span className="credits-link-arrow">↗</span>
               </a>
             </div>
+            <div className="credits-list">
+              <a
+                href="https://www.linkedin.com/in/arpan-dawn-373613177"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="credits-link"
+              >
+                <span>Arpan Dawn</span>
+                <span className="credits-link-arrow">↗</span>
+              </a>
+            </div>
+            <div className="credits-list">
+              <a
+                href="https://www.linkedin.com/in/aashvik-balaji-b3412528b"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="credits-link"
+              >
+                <span>Aashvik Balaji</span>
+                <span className="credits-link-arrow">↗</span>
+              </a>
+            </div>
           </div>
         </div>,
         document.body

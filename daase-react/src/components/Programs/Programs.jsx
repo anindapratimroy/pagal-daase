@@ -42,6 +42,7 @@ const PROGRAMS = {
       { num: '4 Domains', text: 'Specializations in Instrumentation, Imaging, Remote Sensing & Astrophysics' },
     ],
     curriculumUrl: 'https://academic.iiti.ac.in/app/storage/app/coursecurriculum/ogfpapmREdLJjZF4rFgqJbw8KS9CMo6wFolOCXTn.pdf',
+    placement_Coordinator: 'dugc-aase@iiti.ac.in',
     email: 'naren@iiti.ac.in',
   },
   msc: {
@@ -77,7 +78,7 @@ const PROGRAMS = {
       { num: 'Dual Degree', text: 'M.Sc. + Ph.D. dual degree option' },
     ],
     curriculumUrl: 'https://academic.iiti.ac.in/app/storage/app/coursecurriculum/nNtSYVKA46yp2B1AeqiovacZ6xEjUWdcndKMWxsO.pdf',
-    email: 'pc-mscse@iiti.ac.in',
+    email: 'coord.msc.astro@iiti.ac.in',
   },
   mtech: {
     label: 'M.Tech.',
@@ -126,11 +127,12 @@ const PROGRAMS = {
       },
     ],
     highlights: [
+      { num: 'July 2021', text: "Dedicated bachelor's program started" },
       { num: 'GATE', text: 'Selection criteria for eligible applicants Gates Score and Interview' },
-      { num: 'Dual Degree', text: 'MS (Research) + Ph.D. dual degree option' },
+      { num: 'Dual Degree', text: 'M.Tech. + Ph.D. dual degree option' },
     ],
     curriculumUrl: 'https://academic.iiti.ac.in/app/storage/app/coursecurriculum/nNtSYVKA46yp2B1AeqiovacZ6xEjUWdcndKMWxsO.pdf',
-    email: 'pc-se@iiti.ac.in',
+    email: 'pc-mtech-se@iiti.ac.in',
   },
   ms: {
     label: 'MS Research',
@@ -177,6 +179,7 @@ const PROGRAMS = {
       },
     ],
     highlights: [
+      { num: 'July 2021', text: "Dedicated bachelor's program started" },
       { num: 'GATE', text: 'Selection criteria for eligible applicants Gates Score and Interview' },
       { num: 'Dual Degree', text: 'MS (Research) + Ph.D. dual degree option' },
     ],
@@ -220,13 +223,14 @@ const PROGRAMS = {
       },
     ],
     highlights: [
-      { num: 'July 2018', text: "Dedicated master's program started" },
+      { num: 'July 2015', text: "Dedicated master's program started" },
       { num: 'Doctoral', text: 'Skilled researchers & innovators in astronomy & space' },
       { num: 'NET / GATE', text: 'Qualifying exam: CSIR-NET / UGC-NET / GATE and Interview' },
       { num: 'Frontier Labs', text: 'Specialized facilities & cutting-edge research collaborations' },
     ],
     curriculumUrl: 'https://academic.iiti.ac.in/app/course_curriculum_list_pg',
     email: 'pc-phd-aase@iiti.ac.in',
+    placement_Coordinator: 'dpgc-aase@iiti.ac.in'
   },
 };
 
@@ -370,6 +374,7 @@ export default function Programs({ initialProg = 'btech', onNav }) {
               {/* Contact card */}
               <div className="prog-contact-card">
                 <div className="prog-contact-label">Program Coordinator</div>
+                <a href={`mailto:${prog.placement_Coordinator}`} className="prog-contact-email">{prog.placement_Coordinator}</a>
                 <a href={`mailto:${prog.email}`} className="prog-contact-email">{prog.email}</a>
               </div>
             </div>

@@ -15,7 +15,9 @@ import {
 } from '../data/fallback';
 import { getPhotoCandidates, DEFAULT_AVATAR } from './photoResolver';
 
-const BASE_URL = 'https://daase.iiti.ac.in';
+const BASE_URL = typeof window !== 'undefined' && window.location.origin && window.location.origin.includes('iiti.ac.in')
+  ? window.location.origin
+  : 'https://aase.iiti.ac.in';
 const ORG_NAME = 'Department of Astronomy, Astrophysics and Space Engineering (DAASE), IIT Indore';
 const INST_NAME = 'Indian Institute of Technology Indore';
 

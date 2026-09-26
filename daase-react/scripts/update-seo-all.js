@@ -22,13 +22,13 @@ const facultyEntities = fb.FACULTY_FB.map(f => {
 
   return {
     "@type": "Person",
-    "@id": `https://daase.iiti.ac.in/#person-${slug}`,
+    "@id": `https://aase.iiti.ac.in/#person-${slug}`,
     "name": f.name,
     "jobTitle": f.designation || "Faculty Member",
     "worksFor": {
       "@type": "EducationalOrganization",
       "name": "Department of Astronomy, Astrophysics and Space Engineering (DAASE), IIT Indore",
-      "url": "https://daase.iiti.ac.in/"
+      "url": "https://aase.iiti.ac.in/"
     },
     "affiliation": {
       "@type": "CollegeOrUniversity",
@@ -41,7 +41,7 @@ const facultyEntities = fb.FACULTY_FB.map(f => {
       "@type": "Place",
       "name": `Chamber ${f.chamber}, POD 1D, DAASE, IIT Indore, Khandwa Road, Simrol, Indore 453552, Madhya Pradesh, India`
     } : undefined,
-    "url": `https://daase.iiti.ac.in/#person-${slug}`,
+    "url": `https://aase.iiti.ac.in/#person-${slug}`,
     "sameAs": sameAs,
     "knowsAbout": f.research ? f.research.split(',').map(s => s.trim()) : ["Astronomy", "Astrophysics", "Space Engineering"]
   };
@@ -52,15 +52,15 @@ const visitingEntities = fb.VISITING_FB.map(f => {
   const slug = cleanSlug(f.name);
   return {
     "@type": "Person",
-    "@id": `https://daase.iiti.ac.in/#person-${slug}`,
+    "@id": `https://aase.iiti.ac.in/#person-${slug}`,
     "name": f.name,
     "jobTitle": f.designation || "Visiting Professor",
     "worksFor": {
       "@type": "EducationalOrganization",
       "name": "Department of Astronomy, Astrophysics and Space Engineering (DAASE), IIT Indore",
-      "url": "https://daase.iiti.ac.in/"
+      "url": "https://aase.iiti.ac.in/"
     },
-    "url": `https://daase.iiti.ac.in/#person-${slug}`,
+    "url": `https://aase.iiti.ac.in/#person-${slug}`,
     "knowsAbout": f.research ? f.research.split(',').map(s => s.trim()) : ["Space Engineering", "Astrophysics"]
   };
 });
@@ -71,16 +71,16 @@ const staffEntities = fb.STAFF_FB.map(s => {
   const email = s.email ? (s.email.includes('@') ? s.email : `${s.email}@iiti.ac.in`) : undefined;
   return {
     "@type": "Person",
-    "@id": `https://daase.iiti.ac.in/#person-${slug}`,
+    "@id": `https://aase.iiti.ac.in/#person-${slug}`,
     "name": s.name,
     "jobTitle": s.designation || "Staff Member",
     "worksFor": {
       "@type": "EducationalOrganization",
       "name": "Department of Astronomy, Astrophysics and Space Engineering (DAASE), IIT Indore",
-      "url": "https://daase.iiti.ac.in/"
+      "url": "https://aase.iiti.ac.in/"
     },
     "email": email,
-    "url": `https://daase.iiti.ac.in/#person-${slug}`
+    "url": `https://aase.iiti.ac.in/#person-${slug}`
   };
 });
 
@@ -91,20 +91,20 @@ for (const [batch, list] of Object.entries(fb.PHD_FB)) {
     const slug = cleanSlug(s.name);
     phdEntities.push({
       "@type": "Person",
-      "@id": `https://daase.iiti.ac.in/#person-${slug}`,
+      "@id": `https://aase.iiti.ac.in/#person-${slug}`,
       "name": s.name,
       "jobTitle": `PhD Research Scholar (${batch})`,
       "worksFor": {
         "@type": "EducationalOrganization",
         "name": "Department of Astronomy, Astrophysics and Space Engineering (DAASE), IIT Indore",
-        "url": "https://daase.iiti.ac.in/"
+        "url": "https://aase.iiti.ac.in/"
       },
       "sponsor": s.supervisor ? {
         "@type": "Person",
         "name": s.supervisor
       } : undefined,
       "knowsAbout": s.research || s.research_interests || "Astronomy, Astrophysics and Space Engineering",
-      "url": `https://daase.iiti.ac.in/#person-${slug}`
+      "url": `https://aase.iiti.ac.in/#person-${slug}`
     });
   }
 }
@@ -120,7 +120,7 @@ const academicPrograms = [
     "provider": {
       "@type": "EducationalOrganization",
       "name": "DAASE, IIT Indore",
-      "url": "https://daase.iiti.ac.in/"
+      "url": "https://aase.iiti.ac.in/"
     }
   },
   {
@@ -132,7 +132,7 @@ const academicPrograms = [
     "provider": {
       "@type": "EducationalOrganization",
       "name": "DAASE, IIT Indore",
-      "url": "https://daase.iiti.ac.in/"
+      "url": "https://aase.iiti.ac.in/"
     }
   },
   {
@@ -144,7 +144,7 @@ const academicPrograms = [
     "provider": {
       "@type": "EducationalOrganization",
       "name": "DAASE, IIT Indore",
-      "url": "https://daase.iiti.ac.in/"
+      "url": "https://aase.iiti.ac.in/"
     }
   },
   {
@@ -156,7 +156,7 @@ const academicPrograms = [
     "provider": {
       "@type": "EducationalOrganization",
       "name": "DAASE, IIT Indore",
-      "url": "https://daase.iiti.ac.in/"
+      "url": "https://aase.iiti.ac.in/"
     }
   },
   {
@@ -167,7 +167,7 @@ const academicPrograms = [
     "provider": {
       "@type": "EducationalOrganization",
       "name": "DAASE, IIT Indore",
-      "url": "https://daase.iiti.ac.in/"
+      "url": "https://aase.iiti.ac.in/"
     }
   }
 ];
@@ -181,7 +181,7 @@ const jobPostings = [
     "hiringOrganization": {
       "@type": "EducationalOrganization",
       "name": "Department of Astronomy, Astrophysics and Space Engineering (DAASE), IIT Indore",
-      "url": "https://daase.iiti.ac.in/"
+      "url": "https://aase.iiti.ac.in/"
     },
     "jobLocation": {
       "@type": "Place",
@@ -204,7 +204,7 @@ const jobPostings = [
     "hiringOrganization": {
       "@type": "EducationalOrganization",
       "name": "DAASE, IIT Indore",
-      "url": "https://daase.iiti.ac.in/"
+      "url": "https://aase.iiti.ac.in/"
     },
     "jobLocation": {
       "@type": "Place",
@@ -226,7 +226,7 @@ const jobPostings = [
     "hiringOrganization": {
       "@type": "EducationalOrganization",
       "name": "DAASE, IIT Indore",
-      "url": "https://daase.iiti.ac.in/"
+      "url": "https://aase.iiti.ac.in/"
     },
     "jobLocation": {
       "@type": "Place",
@@ -279,7 +279,7 @@ for (const f of fb.FACULTY_FB) {
   const email = f.email ? (f.email.includes('@') ? f.email : `${f.email}@iiti.ac.in`) : 'aase-office@iiti.ac.in';
   htmlDirectory += `
           <div class="seo-person-entry" id="seo-person-${slug}">
-            <h3><a href="https://daase.iiti.ac.in/#person-${slug}">${f.name}</a></h3>
+            <h3><a href="https://aase.iiti.ac.in/#person-${slug}">${f.name}</a></h3>
             <p><strong>Designation:</strong> ${f.designation || 'Faculty'}${f.isHOD ? ' (Head of Department)' : ''}</p>
             <p><strong>Department:</strong> Department of Astronomy, Astrophysics and Space Engineering (DAASE), IIT Indore</p>
             ${f.chamber ? `<p><strong>Office / Chamber:</strong> ${f.chamber}, POD 1D, IIT Indore</p>` : ''}
@@ -294,7 +294,7 @@ for (const f of fb.VISITING_FB) {
   const slug = cleanSlug(f.name);
   htmlDirectory += `
           <div class="seo-person-entry" id="seo-person-${slug}">
-            <h3><a href="https://daase.iiti.ac.in/#person-${slug}">${f.name}</a></h3>
+            <h3><a href="https://aase.iiti.ac.in/#person-${slug}">${f.name}</a></h3>
             <p><strong>Designation:</strong> ${f.designation || 'Visiting Professor'}</p>
             <p><strong>Department:</strong> DAASE, IIT Indore</p>
             ${f.research ? `<p><strong>Specialization:</strong> ${f.research}</p>` : ''}
@@ -315,7 +315,7 @@ for (const s of fb.STAFF_FB) {
   const email = s.email ? (s.email.includes('@') ? s.email : `${s.email}@iiti.ac.in`) : 'aase-office@iiti.ac.in';
   htmlDirectory += `
           <div class="seo-person-entry" id="seo-person-${slug}">
-            <h3><a href="https://daase.iiti.ac.in/#person-${slug}">${s.name}</a></h3>
+            <h3><a href="https://aase.iiti.ac.in/#person-${slug}">${s.name}</a></h3>
             <p><strong>Role &amp; Designation:</strong> ${s.designation || 'Administrative Staff'}</p>
             <p><strong>Department:</strong> Department of Astronomy, Astrophysics and Space Engineering (DAASE), IIT Indore</p>
             <p><strong>Contact Email:</strong> <a href="mailto:${email}">${email}</a></p>
@@ -339,7 +339,7 @@ for (const [batch, list] of Object.entries(fb.PHD_FB)) {
     const slug = cleanSlug(s.name);
     htmlDirectory += `
             <li class="seo-student-entry" id="seo-person-${slug}">
-              <strong><a href="https://daase.iiti.ac.in/#person-${slug}">${s.name}</a></strong>
+              <strong><a href="https://aase.iiti.ac.in/#person-${slug}">${s.name}</a></strong>
               — Ph.D. Scholar, DAASE, IIT Indore.
               ${s.supervisor ? `<span>Supervisor: <em>${s.supervisor}</em>.</span>` : ''}
               ${(s.research || s.research_interests) ? `<span>Research: ${s.research || s.research_interests}.</span>` : ''}
@@ -366,7 +366,7 @@ for (const [batch, list] of Object.entries(fb.PG_FB)) {
     const slug = cleanSlug(s.name);
     htmlDirectory += `
             <li class="seo-student-entry" id="seo-person-${slug}">
-              <strong><a href="https://daase.iiti.ac.in/#person-${slug}">${s.name}</a></strong>
+              <strong><a href="https://aase.iiti.ac.in/#person-${slug}">${s.name}</a></strong>
               ${s.email ? `(${s.email}@iiti.ac.in)` : ''}
               ${s.supervisor ? `— Supervisor: ${s.supervisor}` : ''}
             </li>`;
@@ -392,7 +392,7 @@ for (const [batch, list] of Object.entries(fb.UG_FB)) {
     const slug = cleanSlug(s.name);
     htmlDirectory += `
             <li class="seo-student-entry" id="seo-person-${slug}">
-              <strong><a href="https://daase.iiti.ac.in/#person-${slug}">${s.name}</a></strong>
+              <strong><a href="https://aase.iiti.ac.in/#person-${slug}">${s.name}</a></strong>
               ${s.email ? `(${s.email}@iiti.ac.in)` : ''}
             </li>`;
   }
@@ -411,7 +411,7 @@ htmlDirectory += `
 for (const area of fb.RESEARCH_AREAS) {
   htmlDirectory += `
         <div class="seo-research-area">
-          <h3><a href="https://daase.iiti.ac.in/#research-detail/${area.id}">${area.title}</a></h3>
+          <h3><a href="https://aase.iiti.ac.in/#research-detail/${area.id}">${area.title}</a></h3>
           <p>${area.desc}</p>
           <p><strong>Contributing Faculty:</strong> ${area.faculty ? area.faculty.join(', ') : 'DAASE Faculty'}</p>
         </div>`;
@@ -469,8 +469,8 @@ htmlDirectory += `
 function injectIntoHtml(rawHtml) {
   let modified = rawHtml;
 
-  // 1. Remove existing comprehensive graph script if present
-  modified = modified.replace(/<script type="application\/ld\+json" id="daase-kg-graph">[\s\S]*?<\/script>\n?/g, '');
+  // 1. Remove existing comprehensive graph script and comment if present
+  modified = modified.replace(/(<!--\s*5\.\s*Comprehensive Department Knowledge Graph[^\n]*-->\s*)*<script type="application\/ld\+json" id="daase-kg-graph">[\s\S]*?<\/script>\n?/g, '');
   // 2. Remove existing crawler directory if present
   modified = modified.replace(/<!-- ═+\s+DAASE SEARCH ENGINE OPTIMIZATION & ACCESSIBILITY DIRECTORY[\s\S]*?<\/section>\n?/g, '');
   modified = modified.replace(/<section id="daase-crawler-index"[\s\S]*?<\/section>\n?/g, '');
@@ -505,27 +505,27 @@ let sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://daase.iiti.ac.in/</loc>
+    <loc>https://aase.iiti.ac.in/</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://daase.iiti.ac.in/images/IITI_Logo.svg</image:loc>
+      <image:loc>https://aase.iiti.ac.in/images/IITI_Logo.svg</image:loc>
       <image:title>DAASE IIT Indore Official Logo</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://daase.iiti.ac.in/images/daase.png</image:loc>
+      <image:loc>https://aase.iiti.ac.in/images/daase.png</image:loc>
       <image:title>Department of Astronomy, Astrophysics and Space Engineering Emblem</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://daase.iiti.ac.in/people_images/Staff/Swapnil_Dasharath_Sankhe,_Senior_Assistant_(HoD_Staff).jpg</image:loc>
+      <image:loc>https://aase.iiti.ac.in/people_images/Staff/Swapnil_Dasharath_Sankhe,_Senior_Assistant_(HoD_Staff).jpg</image:loc>
       <image:title>Swapnil Dasharath Sankhe - Senior Assistant, HoD Office, DAASE, IIT Indore</image:title>
     </image:image>
 `;
 
 for (const f of fb.FACULTY_FB) {
   if (f.photo) {
-    const photoUrl = f.photo.startsWith('./') ? `https://daase.iiti.ac.in/${f.photo.replace(/^\.\//, '')}` : f.photo;
+    const photoUrl = f.photo.startsWith('./') ? `https://aase.iiti.ac.in/${f.photo.replace(/^\.\//, '')}` : f.photo;
     sitemapXml += `    <image:image>
       <image:loc>${photoUrl}</image:loc>
       <image:title>${f.name} - ${f.designation || 'Faculty'}, DAASE, IIT Indore</image:title>
@@ -535,7 +535,7 @@ for (const f of fb.FACULTY_FB) {
 
 for (const s of fb.STAFF_FB) {
   if (s.photo) {
-    const photoUrl = s.photo.startsWith('./') ? `https://daase.iiti.ac.in/${s.photo.replace(/^\.\//, '')}` : s.photo;
+    const photoUrl = s.photo.startsWith('./') ? `https://aase.iiti.ac.in/${s.photo.replace(/^\.\//, '')}` : s.photo;
     sitemapXml += `    <image:image>
       <image:loc>${photoUrl}</image:loc>
       <image:title>${s.name} - ${s.designation || 'Staff'}, DAASE, IIT Indore</image:title>
@@ -546,7 +546,7 @@ for (const s of fb.STAFF_FB) {
 for (const [batch, list] of Object.entries(fb.PHD_FB)) {
   for (const s of list) {
     if (s.photo) {
-      const photoUrl = s.photo.startsWith('./') ? `https://daase.iiti.ac.in/${s.photo.replace(/^\.\//, '')}` : s.photo;
+      const photoUrl = s.photo.startsWith('./') ? `https://aase.iiti.ac.in/${s.photo.replace(/^\.\//, '')}` : s.photo;
       sitemapXml += `    <image:image>
         <image:loc>${photoUrl}</image:loc>
         <image:title>${s.name} - PhD Research Scholar (${batch}), DAASE, IIT Indore</image:title>

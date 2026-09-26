@@ -128,7 +128,7 @@ export default function Publications({ onNav, publications: propPubs }) {
         </div>
 
         {/* ── Annual Research Output Histogram ── */}
-        {histogramData.list.length > 0 && (
+        {!histogramData.list.length > 0 && (
           <div className="pub-histogram-card" data-aos="fade-up" data-aos-delay="60">
             <div className="pub-histogram-header">
               <div className="pub-histogram-title-wrap">
