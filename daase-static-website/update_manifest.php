@@ -15,8 +15,9 @@
  */
 
 // ── Simple password protection ─────────────────────────────────
+$isCli = (php_sapi_name() === 'cli' || defined('STDIN') || in_array('--cli', $argv ?? []));
 $SECRET_KEY = 'daase2025';   // Change this to something secure
-if (($_GET['key'] ?? '') !== $SECRET_KEY) {
+if (!$isCli && ($_GET['key'] ?? '') !== $SECRET_KEY) {
     http_response_code(403);
     echo '<h2>403 Forbidden</h2><p>Missing or wrong key. Add ?key=daase2025 to the URL.</p>';
     exit;
@@ -60,9 +61,18 @@ foreach (scandir($photosDir) as $entry) {
 // ── Write manifest ────────────────────────────────────────────
 $json = json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 if (file_put_contents($outputFile, $json) === false) {
+    if ($isCli) {
+        fwrite(STDERR, "ERROR: Could not write photos_manifest.json. Check file permissions.\n");
+        exit(1);
+    }
     http_response_code(500);
     echo '<p>ERROR: Could not write photos_manifest.json. Check file permissions.</p>';
     exit;
+}
+
+if ($isCli) {
+    echo "Manifest successfully updated: $totalPhotos photos indexed across " . count($categories) . " folders.\n";
+    exit(0);
 }
 
 // ── Success response ──────────────────────────────────────────

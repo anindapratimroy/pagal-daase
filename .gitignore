@@ -9,3 +9,5 @@ daase-react/dist/
 daase-static-website.zip
 daase-static-website/*.zip
 *.zip
+*.tar.gz
+

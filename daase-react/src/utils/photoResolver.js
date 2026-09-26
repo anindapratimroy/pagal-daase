@@ -318,13 +318,40 @@ export function getPhotoCandidates(name, category, driveUrl, email) {
     }
   }
 
-  // 4. Google Drive URL only if explicitly provided in data
+  // 4. Direct Category Folder Candidate Fallback (Instant support for newly uploaded photos)
+  if (name && typeof name === 'string') {
+    const rawTrim = name.trim();
+    const underscore = rawTrim.replace(/\s+/g, '_');
+    const { nameWithoutTitle } = cleanPersonName(rawTrim);
+    const cleanUnderscore = nameWithoutTitle ? nameWithoutTitle.replace(/\s+/g, '_') : null;
+
+    const prioritizedNames = [underscore, rawTrim];
+    if (cleanUnderscore && cleanUnderscore !== underscore) prioritizedNames.push(cleanUnderscore);
+    if (nameWithoutTitle && nameWithoutTitle !== rawTrim) prioritizedNames.push(nameWithoutTitle);
+
+    for (const folder of folders) {
+      for (const n of prioritizedNames) {
+        add(`./people_images/${folder}/${n}.jpg`);
+        add(`./people_images/${folder}/${n}.jpeg`);
+        add(`./people_images/${folder}/${n}.png`);
+      }
+      if (email && typeof email === 'string') {
+        const roll = email.split('@')[0].trim().toLowerCase();
+        if (roll) {
+          add(`./people_images/${folder}/${roll}.jpg`);
+          add(`./people_images/${folder}/${roll}.png`);
+        }
+      }
+    }
+  }
+
+  // 5. Google Drive URL only if explicitly provided in data
   if (driveUrl && typeof driveUrl === 'string' && (driveUrl.includes('drive.google.com') || driveUrl.includes('googleusercontent.com'))) {
     const drive = drivePhotoUrl(driveUrl);
     if (drive) add(drive);
   }
 
-  // 5. Universal Terminal Fallback Avatar
+  // 6. Universal Terminal Fallback Avatar
   add(DEFAULT_AVATAR);
 
   _candidateCache.set(cacheKey, candidates);
