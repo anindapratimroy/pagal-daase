@@ -10,4 +10,6 @@ daase-static-website.zip
 daase-static-website/*.zip
 *.zip
 *.tar.gz
+daase-update-upload/
+
 
