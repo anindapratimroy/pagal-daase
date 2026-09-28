@@ -353,7 +353,7 @@ export default function Programs({ initialProg = 'btech', onNav }) {
                 )}
                 {prog.email && (
                   <a href={`mailto:${prog.email}`} className="btn-outline prog-btn">
-                    Contact Coordinator ✉
+                    Contact Coordinator ↗
                   </a>
                 )}
               </div>

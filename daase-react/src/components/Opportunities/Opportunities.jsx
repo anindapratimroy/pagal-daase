@@ -156,7 +156,7 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
                 className="btn-outline"
                 style={{ fontSize: '13.5px', padding: '8px 18px' }}
               >
-                Contact Dept. Office for Inquiries ✉
+                Contact Dept. Office for Inquiries ↗
               </a>
             </div>
           )}
@@ -257,7 +257,7 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
                   </div>
                   <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
                     <a href="mailto:aase-office@iiti.ac.in" className="btn-primary" style={{ padding: '10px 22px', fontSize: '14.5px' }}>
-                      Connect with AASE Office ✉
+                      Connect with AASE Office ↗
                     </a>
                     <a href="https://www.iiti.ac.in/careers" target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ padding: '10px 22px', fontSize: '14.5px' }}>
                       IIT Indore Careers Portal ↗
@@ -280,7 +280,7 @@ export default function Opportunities({ studentOpportunities, teacherOpportuniti
                 </p>
                 <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
                   <a href="mailto:aase-office@iiti.ac.in" className="btn-primary" style={{ padding: '10px 22px', fontSize: '14.5px' }}>
-                    Connect with AASE Office ✉
+                    Connect with AASE Office ↗
                   </a>
                   <a href="https://academic.iiti.ac.in" target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ padding: '10px 22px', fontSize: '14.5px' }}>
                     IIT Indore Academic Portal ↗

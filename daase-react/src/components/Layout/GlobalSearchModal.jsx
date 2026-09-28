@@ -1208,7 +1208,7 @@ export default function GlobalSearchModal({ isOpen, onClose, onNav, data = {} })
                             className="preview-mini-btn primary"
                             title="Send email"
                           >
-                            ✉ Send
+                            Send ↗
                           </a>
                         </div>
                       </div>
